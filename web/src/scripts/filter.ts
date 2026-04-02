@@ -1,0 +1,190 @@
+interface Event {
+  id: string;
+  venue_id: string;
+  venue_name: string;
+  title: string;
+  date: string;
+  time: string | null;
+  conductor: string | null;
+  cast: string[] | null;
+  location: string | null;
+  url: string | null;
+}
+
+interface Venue {
+  id: string;
+  name: string;
+  city_id: string;
+  city_name: string;
+}
+
+interface City {
+  id: string;
+  name: string;
+}
+
+interface PageData {
+  cities: City[];
+  venues: Venue[];
+  events: Event[];
+  dataAge: Record<string, string | null>;
+}
+
+const data: PageData = JSON.parse(
+  document.getElementById('event-data')!.textContent!
+);
+
+const citySelect = document.getElementById('filter-city') as HTMLSelectElement;
+const venueSelect = document.getElementById('filter-venue') as HTMLSelectElement;
+const daysSelect = document.getElementById('filter-days') as HTMLSelectElement;
+const searchInput = document.getElementById('filter-search') as HTMLInputElement;
+const eventList = document.getElementById('event-list')!;
+const eventCount = document.getElementById('event-count')!;
+
+function initFiltersFromUrl(): void {
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('city')) citySelect.value = params.get('city')!;
+  if (params.has('venue')) venueSelect.value = params.get('venue')!;
+  if (params.has('days')) daysSelect.value = params.get('days')!;
+  if (params.has('q')) searchInput.value = params.get('q')!;
+}
+
+function updateUrl(): void {
+  const params = new URLSearchParams();
+  if (citySelect.value) params.set('city', citySelect.value);
+  if (venueSelect.value) params.set('venue', venueSelect.value);
+  if (daysSelect.value !== '30') params.set('days', daysSelect.value);
+  if (searchInput.value) params.set('q', searchInput.value);
+  const qs = params.toString();
+  history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname);
+}
+
+function populateVenueDropdown(): void {
+  const city = citySelect.value;
+  const currentVenue = venueSelect.value;
+  const filtered = city
+    ? data.venues.filter((v) => v.city_id === city)
+    : data.venues;
+
+  venueSelect.innerHTML = '<option value="">All Venues</option>';
+  for (const v of filtered) {
+    const opt = document.createElement('option');
+    opt.value = v.id;
+    opt.textContent = v.name;
+    venueSelect.appendChild(opt);
+  }
+
+  // Restore selection if still valid
+  if (filtered.some((v) => v.id === currentVenue)) {
+    venueSelect.value = currentVenue;
+  }
+}
+
+function filterEvents(): Event[] {
+  const city = citySelect.value;
+  const venue = venueSelect.value;
+  const days = parseInt(daysSelect.value, 10);
+  const query = searchInput.value.toLowerCase().trim();
+
+  const today = new Date();
+  const until = new Date();
+  until.setDate(today.getDate() + days);
+  const todayStr = today.toISOString().slice(0, 10);
+  const untilStr = until.toISOString().slice(0, 10);
+
+  return data.events.filter((e) => {
+    if (e.date < todayStr || e.date > untilStr) return false;
+    if (venue && e.venue_id !== venue) return false;
+    if (city && !venue) {
+      const v = data.venues.find((v) => v.id === e.venue_id);
+      if (v && v.city_id !== city) return false;
+    }
+    if (query) {
+      const haystack = [
+        e.title,
+        e.venue_name,
+        e.conductor,
+        e.location,
+        ...(e.cast ?? []),
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      if (!haystack.includes(query)) return false;
+    }
+    return true;
+  });
+}
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr + 'T00:00:00');
+  return date.toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+function render(): void {
+  const events = filterEvents();
+  updateUrl();
+
+  eventCount.textContent = `${events.length} event${events.length !== 1 ? 's' : ''}`;
+
+  if (events.length === 0) {
+    eventList.innerHTML = '<p class="no-results">No events found</p>';
+    return;
+  }
+
+  // Group by date
+  const groups = new Map<string, Event[]>();
+  for (const e of events) {
+    const list = groups.get(e.date) ?? [];
+    list.push(e);
+    groups.set(e.date, list);
+  }
+
+  let html = '';
+  for (const [date, evts] of groups) {
+    html += `<div class="date-group">`;
+    html += `<h3 class="date-header">${formatDate(date)}</h3>`;
+    for (const e of evts) {
+      const time = e.time ?? '';
+      const details = [e.venue_name, e.conductor].filter(Boolean).join(' · ');
+      const tag = e.url ? 'a' : 'div';
+      const href = e.url ? ` href="${e.url}" target="_blank" rel="noopener"` : '';
+      html += `<${tag} class="event-row"${href}>`;
+      html += `<span class="event-time">${time}</span>`;
+      html += `<div class="event-info">`;
+      html += `<span class="event-title">${e.title}</span>`;
+      html += `<span class="event-details">${details}</span>`;
+      html += `</div>`;
+      html += `</${tag}>`;
+    }
+    html += `</div>`;
+  }
+  eventList.innerHTML = html;
+}
+
+// Debounce helper
+function debounce(fn: () => void, ms: number): () => void {
+  let timer: ReturnType<typeof setTimeout>;
+  return () => {
+    clearTimeout(timer);
+    timer = setTimeout(fn, ms);
+  };
+}
+
+// Wire up event listeners
+citySelect.addEventListener('change', () => {
+  populateVenueDropdown();
+  render();
+});
+venueSelect.addEventListener('change', render);
+daysSelect.addEventListener('change', render);
+searchInput.addEventListener('input', debounce(render, 200));
+
+// Initialize
+populateVenueDropdown();
+initFiltersFromUrl();
+render();
