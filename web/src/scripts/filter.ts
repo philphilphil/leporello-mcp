@@ -21,6 +21,7 @@ interface Venue {
 interface City {
   id: string;
   name: string;
+  country: string;
 }
 
 interface PageData {
@@ -38,6 +39,7 @@ function esc(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+const countrySelect = document.getElementById('filter-country') as HTMLSelectElement;
 const citySelect = document.getElementById('filter-city') as HTMLSelectElement;
 const venueSelect = document.getElementById('filter-venue') as HTMLSelectElement;
 const daysSelect = document.getElementById('filter-days') as HTMLSelectElement;
@@ -47,6 +49,7 @@ const eventCount = document.getElementById('event-count')!;
 
 function initFiltersFromUrl(): void {
   const params = new URLSearchParams(window.location.search);
+  if (params.has('country')) countrySelect.value = params.get('country')!;
   if (params.has('city')) citySelect.value = params.get('city')!;
   if (params.has('venue')) venueSelect.value = params.get('venue')!;
   if (params.has('days')) daysSelect.value = params.get('days')!;
@@ -55,6 +58,7 @@ function initFiltersFromUrl(): void {
 
 function updateUrl(): void {
   const params = new URLSearchParams();
+  if (countrySelect.value) params.set('country', countrySelect.value);
   if (citySelect.value) params.set('city', citySelect.value);
   if (venueSelect.value) params.set('venue', venueSelect.value);
   if (daysSelect.value !== '30') params.set('days', daysSelect.value);
@@ -63,12 +67,38 @@ function updateUrl(): void {
   history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname);
 }
 
+function populateCityDropdown(): void {
+  const country = countrySelect.value;
+  const currentCity = citySelect.value;
+  const filtered = country
+    ? data.cities.filter((c) => c.country === country)
+    : data.cities;
+
+  citySelect.innerHTML = '<option value="">All Cities</option>';
+  for (const c of filtered) {
+    const opt = document.createElement('option');
+    opt.value = c.id;
+    opt.textContent = c.name;
+    citySelect.appendChild(opt);
+  }
+
+  if (filtered.some((c) => c.id === currentCity)) {
+    citySelect.value = currentCity;
+  }
+}
+
 function populateVenueDropdown(): void {
+  const country = countrySelect.value;
   const city = citySelect.value;
   const currentVenue = venueSelect.value;
-  const filtered = city
-    ? data.venues.filter((v) => v.city_id === city)
-    : data.venues;
+
+  let filtered = data.venues;
+  if (city) {
+    filtered = filtered.filter((v) => v.city_id === city);
+  } else if (country) {
+    const countryCityIds = new Set(data.cities.filter((c) => c.country === country).map((c) => c.id));
+    filtered = filtered.filter((v) => countryCityIds.has(v.city_id));
+  }
 
   venueSelect.innerHTML = '<option value="">All Venues</option>';
   for (const v of filtered) {
@@ -78,13 +108,13 @@ function populateVenueDropdown(): void {
     venueSelect.appendChild(opt);
   }
 
-  // Restore selection if still valid
   if (filtered.some((v) => v.id === currentVenue)) {
     venueSelect.value = currentVenue;
   }
 }
 
 function filterEvents(): Event[] {
+  const country = countrySelect.value;
   const city = citySelect.value;
   const venue = venueSelect.value;
   const days = parseInt(daysSelect.value, 10);
@@ -96,12 +126,20 @@ function filterEvents(): Event[] {
   const todayStr = today.toISOString().slice(0, 10);
   const untilStr = until.toISOString().slice(0, 10);
 
+  const countryCityIds = country
+    ? new Set(data.cities.filter((c) => c.country === country).map((c) => c.id))
+    : null;
+
   return data.events.filter((e) => {
     if (e.date < todayStr || e.date > untilStr) return false;
     if (venue && e.venue_id !== venue) return false;
     if (city && !venue) {
       const v = data.venues.find((v) => v.id === e.venue_id);
       if (v && v.city_id !== city) return false;
+    }
+    if (countryCityIds && !city && !venue) {
+      const v = data.venues.find((v) => v.id === e.venue_id);
+      if (v && !countryCityIds.has(v.city_id)) return false;
     }
     if (query) {
       const haystack = [
@@ -180,6 +218,11 @@ function debounce(fn: () => void, ms: number): () => void {
 }
 
 // Wire up event listeners
+countrySelect.addEventListener('change', () => {
+  populateCityDropdown();
+  populateVenueDropdown();
+  render();
+});
 citySelect.addEventListener('change', () => {
   populateVenueDropdown();
   render();
@@ -189,6 +232,7 @@ daysSelect.addEventListener('change', render);
 searchInput.addEventListener('input', debounce(render, 200));
 
 // Initialize
-populateVenueDropdown();
 initFiltersFromUrl();
+populateCityDropdown();
+populateVenueDropdown();
 render();
