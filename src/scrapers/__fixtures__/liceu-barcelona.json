@@ -1,0 +1,4990 @@
+{
+  "productions": [{
+    "main_image": "\/sites\/default\/files\/2024-01\/Front_Web_Ballo2.jpg",
+    "categories": [],
+    "first_session": 1707499800,
+    "last_session": 1708450200,
+    "sessions": [{
+      "id": "5327",
+      "turns": [{
+        "id": "2916",
+        "name": {
+          "ca": "Liceu+ LIVE",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1707327000,
+      "artists": []
+    }, {
+      "id": "5280",
+      "turns": [{
+        "id": "36",
+        "name": {
+          "ca": "E",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1707499800,
+      "artists": [{
+        "id": 13208,
+        "name": "Anna Pirozzi "
+      }]
+    }, {
+      "id": "5286",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1707584400,
+      "artists": []
+    }, {
+      "id": "5287",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1707663600,
+      "artists": [{
+        "id": 13208,
+        "name": "Anna Pirozzi "
+      }]
+    }, {
+      "id": "5288",
+      "turns": [{
+        "id": "2959",
+        "name": {
+          "ca": "G",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1707759000,
+      "artists": []
+    }, {
+      "id": "5289",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1707931800,
+      "artists": [{
+        "id": 13208,
+        "name": "Anna Pirozzi "
+      }]
+    }, {
+      "id": "5290",
+      "turns": [{
+        "id": "2960",
+        "name": {
+          "ca": "P",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1708018200,
+      "artists": []
+    }, {
+      "id": "5291",
+      "turns": [{
+        "id": "2962",
+        "name": {
+          "ca": "PD",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1708185600,
+      "artists": [{
+        "id": 13208,
+        "name": "Anna Pirozzi "
+      }]
+    }, {
+      "id": "5292",
+      "turns": [{
+        "id": "2958",
+        "name": {
+          "ca": "F",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1708272000,
+      "artists": []
+    }, {
+      "id": "5293",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1708450200,
+      "artists": [{
+        "id": 13208,
+        "name": "Anna Pirozzi "
+      }]
+    }],
+    "sponsors": [{
+      "id": "5271",
+      "logo": "\/sites\/default\/files\/media\/sponsor\/logo_idealista_empresesok.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/un-ballo-maschera-0",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Un ballo in maschera",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Giuseppe Verdi",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Lady-Macbeth-2.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5368",
+      "turns": [],
+      "date": 1727278200,
+      "artists": []
+    }, {
+      "id": "5369",
+      "turns": [{
+        "id": "36",
+        "name": {
+          "ca": "E",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1727451000,
+      "artists": []
+    }, {
+      "id": "5370",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1727535600,
+      "artists": []
+    }, {
+      "id": "5371",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1727796600,
+      "artists": []
+    }, {
+      "id": "5372",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1727969400,
+      "artists": []
+    }, {
+      "id": "5373",
+      "turns": [{
+        "id": "2958",
+        "name": {
+          "ca": "F",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1728136800,
+      "artists": []
+    }, {
+      "id": "5374",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1728219600,
+      "artists": []
+    }, {
+      "id": "5375",
+      "turns": [{
+        "id": "3018",
+        "name": {
+          "ca": "LiceUnder35",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1728315000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5377",
+      "logo": "\/sites\/default\/files\/2024-01\/Telefonica%20100%20Endoso%20ES%20Blue%20Horizontal.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/lady-macbeth-de-mtsensk",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Lady Macbeth de Mtsensk",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Dimitri Xostak\u00f3vitx ",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-02\/Cap%C3%A7alera_Afanador.jpg",
+    "categories": {
+      "7": {
+        "ca": "Dansa",
+        "es": "Danza",
+        "en": "Ballet"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6682",
+      "turns": [{
+        "id": "3018",
+        "name": {
+          "ca": "LiceUnder35",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1728747000,
+      "artists": []
+    }, {
+      "id": "5385",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1728824400,
+      "artists": []
+    }, {
+      "id": "5386",
+      "turns": [{
+        "id": "2742",
+        "name": {
+          "ca": "Dansa",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1728919800,
+      "artists": []
+    }, {
+      "id": "5387",
+      "turns": [{
+        "id": "2964",
+        "name": {
+          "ca": "PC",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1729006200,
+      "artists": []
+    }, {
+      "id": "5388",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1729092600,
+      "artists": []
+    }, {
+      "id": "5389",
+      "turns": [{
+        "id": "36",
+        "name": {
+          "ca": "E",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1729179000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5391",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/ballet-nacional-de-espana",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Ballet Nacional de Espa\u00f1a",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Afanador",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-02\/Cap%C3%A7alera_William-Kentridge.jpg",
+    "categories": {
+      "10": {
+        "ca": "Concerts i recitals",
+        "es": "Conciertos y recitales",
+        "en": "Concerts & recitals"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5394",
+      "turns": [],
+      "date": 1729265400,
+      "artists": []
+    }, {
+      "id": "5395",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1729350000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5398",
+      "logo": "\/sites\/default\/files\/2023-04\/logo_santanderfundacion_fitxa.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/oh-believe-another-world",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Oh to Believe in Another World",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "William Kentridge",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-04\/Cap%C3%A7alera_Sondra-Pitor.jpg",
+    "categories": {
+      "10": {
+        "ca": "Concerts i recitals",
+        "es": "Conciertos y recitales",
+        "en": "Concerts & recitals"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5405",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1729783800,
+      "artists": [{
+        "id": 10962,
+        "name": "Sondra Radvanovsky"
+      }, {
+        "id": 10027,
+        "name": "Piotr Becza\u0142a"
+      }]
+    }, {
+      "id": "5406",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1730041200,
+      "artists": [{
+        "id": 10962,
+        "name": "Sondra Radvanovsky"
+      }, {
+        "id": 10027,
+        "name": "Piotr Becza\u0142a"
+      }]
+    }],
+    "sponsors": [{
+      "id": "5408",
+      "logo": "\/sites\/default\/files\/2023-04\/logo_santanderfundacion_fitxa.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": "Con el apoyo de:",
+        "en": "With the support of:"
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/concert-sondra-radvanovsky-i-piotr-beczala",
+      "es": "\/es\/concierto-sondra-radvanovsky-y-piotr-beczal",
+      "en": "\/en\/sondra-radvanovsky-and-piotr-beczala-concert"
+    },
+    "title": {
+      "ca": "Concert Sondra Radvanovsky i Piotr Becza\u0142a",
+      "es": "Concierto Sondra Radvanovsky y Piotr Becza\u0142",
+      "en": "Sondra Radvanovsky and Piotr Becza\u0142a concert"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_La-Forza.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5432",
+      "turns": [{
+        "id": "36",
+        "name": {
+          "ca": "E",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1731171600,
+      "artists": []
+    }, {
+      "id": "5433",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1731250800,
+      "artists": []
+    }, {
+      "id": "5434",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1731432600,
+      "artists": []
+    }, {
+      "id": "5435",
+      "turns": [{
+        "id": "2963",
+        "name": {
+          "ca": "PE",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1731519000,
+      "artists": []
+    }, {
+      "id": "5436",
+      "turns": [{
+        "id": "35",
+        "name": {
+          "ca": "D-H",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1731691800,
+      "artists": []
+    }, {
+      "id": "5437",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1731776400,
+      "artists": []
+    }, {
+      "id": "5438",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1731951000,
+      "artists": []
+    }, {
+      "id": "5439",
+      "turns": [{
+        "id": "2960",
+        "name": {
+          "ca": "P",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1732037400,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5429",
+      "logo": "\/sites\/default\/files\/2023-05\/Logo_Repsol.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/la-forza-del-destino",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "La forza del destino ",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Giuseppe Verdi",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-07\/Front-Web-Cuina-Rossini.jpg",
+    "categories": {
+      "16": {
+        "ca": "Petit Liceu",
+        "es": null,
+        "en": null
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5445",
+      "turns": [],
+      "date": 1731747600,
+      "artists": []
+    }, {
+      "id": "5446",
+      "turns": [],
+      "date": 1731834000,
+      "artists": []
+    }, {
+      "id": "5447",
+      "turns": [],
+      "date": 1734944400,
+      "artists": []
+    }, {
+      "id": "5448",
+      "turns": [],
+      "date": 1735290000,
+      "artists": []
+    }, {
+      "id": "5449",
+      "turns": [],
+      "date": 1735376400,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5462",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/la-cuina-de-rossini",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "La Cuina de Rossini",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Al Gran Teatre del Liceu",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-02\/Cap%C3%A7alera_Elina-Garanca.jpg",
+    "categories": {
+      "10": {
+        "ca": "Concerts i recitals",
+        "es": "Conciertos y recitales",
+        "en": "Concerts & recitals"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5465",
+      "turns": [{
+        "id": "36",
+        "name": {
+          "ca": "E",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1732296600,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5469",
+      "logo": "\/sites\/default\/files\/2023-01\/logo_ey_empreses.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/recital-elina-garanca",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Recital El\u012bna Garan\u010da",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-02\/Cap%C3%A7alera_Amazonia.jpg",
+    "categories": {
+      "10": {
+        "ca": "Concerts i recitals",
+        "es": "Conciertos y recitales",
+        "en": "Concerts & recitals"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5472",
+      "turns": [{
+        "id": "35",
+        "name": {
+          "ca": "D-H",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1732642200,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5478",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/amazonia",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Amaz\u00f4nia",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Heitor Villa-Lobos i Philip Glass",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Butterfly.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5482",
+      "turns": [{
+        "id": "3018",
+        "name": {
+          "ca": "LiceUnder35",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1733673600,
+      "artists": []
+    }, {
+      "id": "5483",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1733765400,
+      "artists": []
+    }, {
+      "id": "5484",
+      "turns": [{
+        "id": "2960",
+        "name": {
+          "ca": "P",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1733851800,
+      "artists": []
+    }, {
+      "id": "5485",
+      "turns": [{
+        "id": "2963",
+        "name": {
+          "ca": "PE",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1733938200,
+      "artists": []
+    }, {
+      "id": "5486",
+      "turns": [{
+        "id": "36",
+        "name": {
+          "ca": "E",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1734111000,
+      "artists": []
+    }, {
+      "id": "5487",
+      "turns": [{
+        "id": "2962",
+        "name": {
+          "ca": "PD",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1734192000,
+      "artists": []
+    }, {
+      "id": "5488",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1734274800,
+      "artists": []
+    }, {
+      "id": "5489",
+      "turns": [{
+        "id": "2959",
+        "name": {
+          "ca": "G",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1734370200,
+      "artists": []
+    }, {
+      "id": "5490",
+      "turns": [{
+        "id": "2964",
+        "name": {
+          "ca": "PC",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1734456600,
+      "artists": []
+    }, {
+      "id": "5491",
+      "turns": [],
+      "date": 1734715800,
+      "artists": []
+    }, {
+      "id": "5492",
+      "turns": [{
+        "id": "2958",
+        "name": {
+          "ca": "F",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1734796800,
+      "artists": []
+    }, {
+      "id": "5493",
+      "turns": [{
+        "id": "2961",
+        "name": {
+          "ca": "PB",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1734883200,
+      "artists": []
+    }, {
+      "id": "5494",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1734975000,
+      "artists": []
+    }, {
+      "id": "5495",
+      "turns": [{
+        "id": "35",
+        "name": {
+          "ca": "D-H",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1735320600,
+      "artists": []
+    }, {
+      "id": "5496",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1735405200,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5498",
+      "logo": "\/sites\/default\/files\/media\/production\/sponsor\/logo_fundacionbbva_portada.png",
+      "intro": {
+        "ca": "Amb el patrocini en exclusiva de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/madama-butterfly",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Madama Butterfly",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Giacomo Puccini",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-07\/Front-Web-Nadal.jpg",
+    "categories": {
+      "16": {
+        "ca": "Petit Liceu",
+        "es": null,
+        "en": null
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5522",
+      "turns": [],
+      "date": 1734771600,
+      "artists": []
+    }, {
+      "id": "5523",
+      "turns": [],
+      "date": 1734858000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5532",
+      "logo": "\/sites\/default\/files\/2023-09\/renfe.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/el-conte-de-nadal",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "El conte de Nadal ",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Albert Guinovart",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-02\/Cap%C3%A7alera_Ratpenat.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5535",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1734543000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5549",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/die-fledermaus-el-ratpenat",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Die Fledermaus (El ratpenat) ",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Johan Strauss",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/media\/production\/front_web_mahler_2.jpg",
+    "categories": {
+      "10": {
+        "ca": "Concerts i recitals",
+        "es": "Conciertos y recitales",
+        "en": "Concerts & recitals"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5551",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1736010000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5554",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/univers-mahler-iv",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Univers Mahler IV ",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Simfonia n\u00fam. 6 ",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Traviata_2.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5558",
+      "turns": [{
+        "id": "36",
+        "name": {
+          "ca": "E",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1737135000,
+      "artists": []
+    }, {
+      "id": "5559",
+      "turns": [{
+        "id": "2962",
+        "name": {
+          "ca": "PD",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1737216000,
+      "artists": []
+    }, {
+      "id": "5560",
+      "turns": [{
+        "id": "35",
+        "name": {
+          "ca": "D-H",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1737394200,
+      "artists": []
+    }, {
+      "id": "5561",
+      "turns": [{
+        "id": "2964",
+        "name": {
+          "ca": "PC",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1737480600,
+      "artists": []
+    }, {
+      "id": "5562",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1737567000,
+      "artists": []
+    }, {
+      "id": "5563",
+      "turns": [{
+        "id": "2959",
+        "name": {
+          "ca": "G",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1737653400,
+      "artists": []
+    }, {
+      "id": "5564",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1737999000,
+      "artists": []
+    }, {
+      "id": "5565",
+      "turns": [{
+        "id": "2963",
+        "name": {
+          "ca": "PE",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1738085400,
+      "artists": []
+    }, {
+      "id": "5566",
+      "turns": [{
+        "id": "2960",
+        "name": {
+          "ca": "P",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1738258200,
+      "artists": []
+    }, {
+      "id": "5567",
+      "turns": [{
+        "id": "2958",
+        "name": {
+          "ca": "F",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1738344600,
+      "artists": []
+    }, {
+      "id": "5568",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1738429200,
+      "artists": []
+    }, {
+      "id": "5569",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1738508400,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5557",
+      "logo": "\/sites\/default\/files\/2023-04\/Logo-Caixabank-i-Fundacio-OK.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/la-traviata-1",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "La traviata",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Giuseppe Verdi",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-04\/Front_Web_Torre-Somnis.jpg",
+    "categories": {
+      "16": {
+        "ca": "Petit Liceu",
+        "es": null,
+        "en": null
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5590",
+      "turns": [],
+      "date": 1737822600,
+      "artists": []
+    }, {
+      "id": "5597",
+      "turns": [],
+      "date": 1738400400,
+      "artists": []
+    }, {
+      "id": "5598",
+      "turns": [],
+      "date": 1738486800,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5595",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/la-torre-dels-somnis",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "La torre dels somnis",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Amb m\u00fasica de Giacomo Puccini ",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-02\/Cap%C3%A7alera_Concurs-Vi%C3%B1as-2.jpg",
+    "categories": {
+      "10": {
+        "ca": "Concerts i recitals",
+        "es": "Conciertos y recitales",
+        "en": "Concerts & recitals"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5600",
+      "turns": [],
+      "date": 1737723600,
+      "artists": []
+    }, {
+      "id": "5602",
+      "turns": [],
+      "date": 1737907200,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5605",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/62e-concurs-tenor-vinas",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "62\u00e8 Concurs Tenor Vi\u00f1as\u202f   ",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-02\/Cap%C3%A7alera_Rene-Jacobs.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5610",
+      "turns": [{
+        "id": "35",
+        "name": {
+          "ca": "D-H",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1738171800,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5622",
+      "logo": "\/sites\/default\/files\/2023-03\/Logo_Aena_2023_CA.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/idomeneo",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Idomeneo",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Wolfgang Amadeus Mozart",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-02\/Cap%C3%A7alera_Ermonela-Jaho.jpg",
+    "categories": {
+      "10": {
+        "ca": "Concerts i recitals",
+        "es": "Conciertos y recitales",
+        "en": "Concerts & recitals"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5624",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1739718000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5629",
+      "logo": "\/sites\/default\/files\/media\/production\/sponsor\/fundaciopuig_portada.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/recital-ermonela-jaho",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Recital Ermonela Jaho",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Requiem-3.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5631",
+      "turns": [{
+        "id": "3018",
+        "name": {
+          "ca": "LiceUnder35",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1739813400,
+      "artists": []
+    }, {
+      "id": "5632",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1739899800,
+      "artists": []
+    }, {
+      "id": "5633",
+      "turns": [{
+        "id": "35",
+        "name": {
+          "ca": "D-H",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1739986200,
+      "artists": []
+    }, {
+      "id": "5634",
+      "turns": [{
+        "id": "2959",
+        "name": {
+          "ca": "G",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1740159000,
+      "artists": []
+    }, {
+      "id": "5635",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1740243600,
+      "artists": []
+    }, {
+      "id": "5636",
+      "turns": [{
+        "id": "2958",
+        "name": {
+          "ca": "F",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1740326400,
+      "artists": []
+    }, {
+      "id": "5637",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1740504600,
+      "artists": []
+    }, {
+      "id": "5638",
+      "turns": [{
+        "id": "2960",
+        "name": {
+          "ca": "P",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1740591000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5640",
+      "logo": "\/sites\/default\/files\/media\/production\/sponsor\/logo_naturgy_portada.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/requiem",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Requiem ",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Wolfgang Amadeus Mozart",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-05\/Front-Web-Messies.jpg",
+    "categories": [],
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5843",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1710608400,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5832",
+      "logo": "\/sites\/default\/files\/media\/production\/sponsor\/naturgy.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/el-messies-0",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "El Messies",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "H\u00e4ndel \/ Mozart",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-02\/Front_Web_Macbeth2.png",
+    "categories": [],
+    "first_session": 1676566800,
+    "last_session": 1677862800,
+    "sessions": [],
+    "sponsors": [{
+      "id": "5862",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/lunivers-iconografic-de-jaume-plensa-en-lobra-de-verdi",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "L'univers iconogr\u00e0fic de Jaume Plensa en l'obra de Verdi",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Lohengrin-3.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5869",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1742144400,
+      "artists": []
+    }, {
+      "id": "5870",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1742403600,
+      "artists": []
+    }, {
+      "id": "5871",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1742576400,
+      "artists": []
+    }, {
+      "id": "5872",
+      "turns": [{
+        "id": "2959",
+        "name": {
+          "ca": "G",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1742835600,
+      "artists": []
+    }, {
+      "id": "5873",
+      "turns": [{
+        "id": "35",
+        "name": {
+          "ca": "D-H",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1743094800,
+      "artists": []
+    }, {
+      "id": "5874",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1743339600,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5876",
+      "logo": "\/sites\/default\/files\/media\/production\/sponsor\/logo_fundacionbbva_portada.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/lohengrin",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Lohengrin",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Richard Wagner",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Sonnambula.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5877",
+      "turns": [{
+        "id": "3018",
+        "name": {
+          "ca": "LiceUnder35",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1744817400,
+      "artists": []
+    }, {
+      "id": "5878",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1745335800,
+      "artists": []
+    }, {
+      "id": "5879",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1745595000,
+      "artists": []
+    }, {
+      "id": "5880",
+      "turns": [{
+        "id": "2959",
+        "name": {
+          "ca": "G",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1745854200,
+      "artists": []
+    }, {
+      "id": "5881",
+      "turns": [{
+        "id": "2961",
+        "name": {
+          "ca": "PB",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1746199800,
+      "artists": []
+    }, {
+      "id": "5882",
+      "turns": [{
+        "id": "2960",
+        "name": {
+          "ca": "P",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1746459000,
+      "artists": []
+    }, {
+      "id": "5883",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1746718200,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5885",
+      "logo": "\/sites\/default\/files\/media\/production\/sponsor\/logo_fundacionmutuamadrilena_empreses.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/la-sonnambula",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "La sonnambula",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Vincenzo Bellini",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Giulio.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5886",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1748178000,
+      "artists": []
+    }, {
+      "id": "5887",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1748446200,
+      "artists": []
+    }, {
+      "id": "5888",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1748703600,
+      "artists": []
+    }, {
+      "id": "5889",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1748964600,
+      "artists": []
+    }, {
+      "id": "5890",
+      "turns": [{
+        "id": "36",
+        "name": {
+          "ca": "E",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1749137400,
+      "artists": []
+    }, {
+      "id": "5891",
+      "turns": [{
+        "id": "2962",
+        "name": {
+          "ca": "PD",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1749304800,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5893",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/giulio-cesare",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Giulio Cesare",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Georg Friedrich H\u00e4ndel",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Rusalka.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5894",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1750597200,
+      "artists": []
+    }, {
+      "id": "5895",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1750865400,
+      "artists": []
+    }, {
+      "id": "5896",
+      "turns": [{
+        "id": "2961",
+        "name": {
+          "ca": "PB",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1751119200,
+      "artists": []
+    }, {
+      "id": "5897",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1751383800,
+      "artists": []
+    }, {
+      "id": "5898",
+      "turns": [{
+        "id": "3022",
+        "name": {
+          "ca": "\u00d2pera entre generacions",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1751810400,
+      "artists": []
+    }, {
+      "id": "5899",
+      "turns": [{
+        "id": "35",
+        "name": {
+          "ca": "D-H",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1751902200,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5901",
+      "logo": "\/sites\/default\/files\/2024-03\/logo_bankinter_portad.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/rusalka",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Rusalka",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Anton\u00edn Dvo\u0159\u00e1k",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Semiramis.jpg",
+    "categories": {
+      "7": {
+        "ca": "Dansa",
+        "es": "Danza",
+        "en": "Ballet"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5902",
+      "turns": [{
+        "id": "2742",
+        "name": {
+          "ca": "Dansa",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1743010200,
+      "artists": []
+    }, {
+      "id": "5903",
+      "turns": [{
+        "id": "36",
+        "name": {
+          "ca": "E",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1743183000,
+      "artists": []
+    }, {
+      "id": "5904",
+      "turns": [{
+        "id": "2961",
+        "name": {
+          "ca": "PB",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1743267600,
+      "artists": []
+    }, {
+      "id": "5905",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1743435000,
+      "artists": []
+    }, {
+      "id": "5906",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1743521400,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5908",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/ballet-du-capitole-de-toulouse",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Ballet Du Capitole de Toulouse",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "S\u00e9miramis \/ Don Juan - Jordi Savall",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Hammer.jpg",
+    "categories": {
+      "7": {
+        "ca": "Dansa",
+        "es": "Danza",
+        "en": "Ballet"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5909",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1751202000,
+      "artists": []
+    }, {
+      "id": "5910",
+      "turns": [{
+        "id": "35",
+        "name": {
+          "ca": "D-H",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1751297400,
+      "artists": []
+    }, {
+      "id": "5911",
+      "turns": [{
+        "id": "2742",
+        "name": {
+          "ca": "Dansa",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1751556600,
+      "artists": []
+    }, {
+      "id": "5912",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1751727600,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5914",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/hammer-alexander-ekman",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Hammer by Alexander Ekman",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "G\u00f6teborgsOperans Danskompani",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Pretty-Nadine.jpg",
+    "categories": {
+      "10": {
+        "ca": "Concerts i recitals",
+        "es": "Conciertos y recitales",
+        "en": "Concerts & recitals"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5915",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1743948000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5917",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/concert-nadine-sierra-i-pretty-yende",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Concert Nadine Sierra i Pretty Yende",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Lise-Matthias.jpg",
+    "categories": {
+      "10": {
+        "ca": "Concerts i recitals",
+        "es": "Conciertos y recitales",
+        "en": "Concerts & recitals"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5919",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1751470200,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5918",
+      "logo": "\/sites\/default\/files\/2023-04\/logo_santanderfundacion_fitxa.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/concert-lise-davidsen-i-matthias-goerne",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Concert Lise Davidsen i Matthias Goerne",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-02\/Front_Web_Macbeth2.png",
+    "categories": [],
+    "first_session": 1676566800,
+    "last_session": 1677776400,
+    "sessions": [{
+      "id": "5927",
+      "turns": [{
+        "id": "35",
+        "name": {
+          "ca": "D-H",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1708102800,
+      "artists": []
+    }, {
+      "id": "5928",
+      "turns": [{
+        "id": "2961",
+        "name": {
+          "ca": "PB",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1708275600,
+      "artists": []
+    }, {
+      "id": "5929",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1708354800,
+      "artists": []
+    }, {
+      "id": "5930",
+      "turns": [{
+        "id": "2960",
+        "name": {
+          "ca": "P",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1708448400,
+      "artists": []
+    }, {
+      "id": "5933",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1677085200,
+      "artists": []
+    }, {
+      "id": "5934",
+      "turns": [{
+        "id": "38",
+        "name": {
+          "ca": "H",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1677171600,
+      "artists": []
+    }, {
+      "id": "5935",
+      "turns": [{
+        "id": "36",
+        "name": {
+          "ca": "E",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1677344400,
+      "artists": []
+    }, {
+      "id": "5936",
+      "turns": [{
+        "id": "2958",
+        "name": {
+          "ca": "F",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1677427200,
+      "artists": []
+    }, {
+      "id": "5937",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1677603600,
+      "artists": []
+    }, {
+      "id": "5938",
+      "turns": [{
+        "id": "2963",
+        "name": {
+          "ca": "PE",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1677690000,
+      "artists": []
+    }, {
+      "id": "5939",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1677862800,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5932",
+      "logo": "\/sites\/default\/files\/2023-04\/logo_santanderfundacion_fitxa.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": "Con el apoyo de:",
+        "en": "With the support of:"
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/macbeth-0",
+      "es": "\/es\/macbeth-0",
+      "en": "\/en\/macbeth"
+    },
+    "title": {
+      "ca": "Macbeth",
+      "es": "Macbeth",
+      "en": "Macbeth"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Giuseppe Verdi i Jaume Plensa",
+      "es": "Giuseppe Verdi y Jaume Plensa",
+      "en": "Giuseppe Verdi and Jaume Plensa"
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Merope.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5982",
+      "turns": [{
+        "id": "36",
+        "name": {
+          "ca": "E",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1740072600,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5981",
+      "logo": "\/sites\/default\/files\/2023-03\/Logo_Aena_2023_CA.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/la-merope",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "La Merope",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Domingo Terradellas",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-02\/Front-Web-Calamaro.jpg",
+    "categories": [],
+    "first_session": null,
+    "last_session": 1685813400,
+    "sessions": [{
+      "id": "5985",
+      "turns": [],
+      "date": 1685813400,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5984",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/andres-calamaro",
+      "es": "\/es\/28040",
+      "en": "\/en\/andres-calamaro"
+    },
+    "title": {
+      "ca": "Andr\u00e9s Calamaro",
+      "es": "Andr\u00e9s Calamaro",
+      "en": "Andr\u00e9s Calamaro"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Guitar BCN 23",
+      "es": "Guitar BCN 23",
+      "en": "Guitar BCN 23"
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-03\/Front-Web-Castell.jpg",
+    "categories": [],
+    "first_session": 1712935800,
+    "last_session": 1712935800,
+    "sessions": [{
+      "id": "6013",
+      "turns": [{
+        "id": "2959",
+        "name": {
+          "ca": "G",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1712935800,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "5987",
+      "logo": "\/sites\/default\/files\/2024-01\/Telefonica%20100%20Endoso%20ES%20Blue%20Horizontal.png",
+      "intro": {
+        "ca": "Amb el suport de",
+        "es": "Con el apoyo de",
+        "en": "With the support of:"
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/castell-de-barbablava",
+      "es": "\/es\/el-castillo-de-barbablava",
+      "en": "\/en\/bluebeards-castle"
+    },
+    "title": {
+      "ca": "Castell de Barbablava",
+      "es": "El castillo de Barbablava",
+      "en": "Bluebeard's Castle"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "B\u00e9la Bart\u00f3k",
+      "es": "B\u00e9la Bart\u00f3k",
+      "en": "B\u00e9la Bart\u00f3k"
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-07\/Front-Web-Nit-Sant-Joan.jpg",
+    "categories": {
+      "16": {
+        "ca": "Petit Liceu",
+        "es": null,
+        "en": null
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "5993",
+      "turns": [],
+      "date": 1740214800,
+      "artists": []
+    }, {
+      "id": "5994",
+      "turns": [],
+      "date": 1740301200,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6011",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/la-nit-de-sant-joan-0",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "La Nit de Sant Joan",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Antonio Ruz",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-06\/Front_Web_Orgia3.jpg",
+    "categories": [],
+    "first_session": 1712849400,
+    "last_session": 1713020400,
+    "sessions": [{
+      "id": "6032",
+      "turns": [{
+        "id": "35",
+        "name": {
+          "ca": "D-H",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1712849400,
+      "artists": []
+    }, {
+      "id": "6033",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1713020400,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6021",
+      "logo": "\/sites\/default\/files\/media\/production\/sponsor\/logo_idealista_portada4.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": "Con el apoyo de:",
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/orgia",
+      "es": "\/es\/orgia-0",
+      "en": null
+    },
+    "title": {
+      "ca": "Orgia",
+      "es": "Orgia",
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "H\u00e8ctor Parra",
+      "es": "H\u00e8ctor Parra",
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-02\/Front-Web-Ara-Malikian.jpg",
+    "categories": [],
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6056",
+      "turns": [],
+      "date": 1677783600,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6058",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/ara-malikian",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "ARA MALIKIAN",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "SUITE FESTIVAL",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": null,
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6756",
+      "turns": [],
+      "date": 1715873400,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6061",
+      "logo": "\/sites\/default\/files\/2023-04\/Logo-Caixabank-i-Fundacio-OK.png",
+      "intro": {
+        "ca": "Amb la col\u00b7laboraci\u00f3 de",
+        "es": "Con la colaboraci\u00f3n de",
+        "en": "With the collaboration of"
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/la-cenerentola",
+      "es": "\/es\/la-cenerentola",
+      "en": "\/en\/la-cenerentola"
+    },
+    "title": {
+      "ca": "La Cenerentola",
+      "es": "La Cenerentola",
+      "en": "La Cenerentola"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "GIOACHINO ROSSINO",
+      "es": "GIOACHINO ROSSINO",
+      "en": "GIOACHINO ROSSINO"
+    }
+  }, {
+    "main_image": null,
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6455",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1718546400,
+      "artists": []
+    }, {
+      "id": "6456",
+      "turns": [{
+        "id": "35",
+        "name": {
+          "ca": "D-H",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1718638200,
+      "artists": []
+    }, {
+      "id": "6457",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1718811000,
+      "artists": []
+    }, {
+      "id": "6458",
+      "turns": [{
+        "id": "36",
+        "name": {
+          "ca": "E",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1718897400,
+      "artists": []
+    }, {
+      "id": "6459",
+      "turns": [],
+      "date": 1719068400,
+      "artists": []
+    }, {
+      "id": "6460",
+      "turns": [{
+        "id": "2960",
+        "name": {
+          "ca": "P",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1722007800,
+      "artists": []
+    }, {
+      "id": "6461",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1719673200,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6089",
+      "logo": "\/sites\/default\/files\/2024-03\/logo_bankinter_portad.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": "Con el apoyo de:",
+        "en": "With the support of:"
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/adriana-lecouvreur",
+      "es": "\/es\/adriana-lecouvreur",
+      "en": "\/en\/adriana-lecouvreur"
+    },
+    "title": {
+      "ca": "Adriana Lecouvreur",
+      "es": "Adriana Lecouvreur",
+      "en": "Adriana Lecouvreur"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Francesco Cil\u00e8a",
+      "es": "Francesco Cil\u00e8a",
+      "en": "Francesco Cil\u00e8a"
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Monstre-Laberint.jpg",
+    "categories": {
+      "16": {
+        "ca": "Petit Liceu",
+        "es": null,
+        "en": null
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6185",
+      "turns": [],
+      "date": 1745938800,
+      "artists": []
+    }, {
+      "id": "6186",
+      "turns": [],
+      "date": 1746025200,
+      "artists": []
+    }, {
+      "id": "6187",
+      "turns": [],
+      "date": 1748271600,
+      "artists": []
+    }, {
+      "id": "6188",
+      "turns": [],
+      "date": 1748358000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6199",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/el-monstre-al-laberint",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "El monstre al laberint",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Jonathan Dove",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Front-Web-Castell.jpg",
+    "categories": {
+      "10": {
+        "ca": "Concerts i recitals",
+        "es": "Conciertos y recitales",
+        "en": "Concerts & recitals"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6202",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1748178000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6206",
+      "logo": "\/sites\/default\/files\/2023-04\/logo_santanderfundacion_fitxa.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/una-nit-paris-amb-debussy-i-ravel",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Una nit a Par\u00eds amb Debussy i Ravel",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera-Madrigals-4.jpg",
+    "categories": [],
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6208",
+      "turns": [],
+      "date": 1747236600,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6213",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/els-madrigals-de-monteverdi-vi",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Els madrigals de Monteverdi VI",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera-gala-l%C3%ADrica.jpg",
+    "categories": [],
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6242",
+      "turns": [{
+        "id": "2958",
+        "name": {
+          "ca": "F",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1749223800,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6249",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/gala-lirica-del-gran-teatre-del-liceu",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Gala l\u00edrica del Gran Teatre del Liceu ",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-03\/Front-Web-Valquiria.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6475",
+      "turns": [{
+        "id": "36",
+        "name": {
+          "ca": "E",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1719502200,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6463",
+      "logo": "\/sites\/default\/files\/media\/production\/sponsor\/logo_amicsliceu.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": "Con el apoyo de:",
+        "en": "With the support of:"
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/concert-la-valquiria",
+      "es": "\/es\/concierto-la-valquiria",
+      "en": "\/en\/valkyrie-concert"
+    },
+    "title": {
+      "ca": "Concert La Valqu\u00edria",
+      "es": "Concierto La Valqu\u00edria",
+      "en": "The Valkyrie concert"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "RICHARD WAGNER | Acte I",
+      "es": "Richard Wagner | Acto I",
+      "en": "RICHARD WAGNER | Act I"
+    }
+  }, {
+    "main_image": null,
+    "categories": {
+      "7": {
+        "ca": "Dansa",
+        "es": "Danza",
+        "en": "Ballet"
+      }
+    },
+    "first_session": 1721403000,
+    "last_session": 1721748600,
+    "sessions": [{
+      "id": "6492",
+      "turns": [{
+        "id": "2742",
+        "name": {
+          "ca": "Dansa",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1721403000,
+      "artists": []
+    }, {
+      "id": "6493",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1721487600,
+      "artists": []
+    }, {
+      "id": "6494",
+      "turns": [],
+      "date": 1721570400,
+      "artists": []
+    }, {
+      "id": "6495",
+      "turns": [{
+        "id": "2964",
+        "name": {
+          "ca": "PC",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1721662200,
+      "artists": []
+    }, {
+      "id": "6496",
+      "turns": [{
+        "id": "33",
+        "name": {
+          "ca": "B",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1721748600,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6479",
+      "logo": "\/sites\/default\/files\/2023-04\/logo_santanderfundacion_fitxa.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": "Con el apoyo de:",
+        "en": "With the support of:"
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/el-llac-dels-cignes",
+      "es": "\/es\/el-lago-de-los-cisnes",
+      "en": "\/en\/swan-lake"
+    },
+    "title": {
+      "ca": "El llac dels cignes",
+      "es": "El lago de los cisnes",
+      "en": "The Swan Lake"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "BALLET DEL TEATRO DELL'OPERA DI ROMA",
+      "es": "Ballet del Teatro Dell'Opera di Roma",
+      "en": "BALLET DEL TEATRO DELL'OPERA DI ROMA"
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-03\/Front-Web-Fidelio.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6503",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1716728400,
+      "artists": []
+    }, {
+      "id": "6504",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1716823800,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6500",
+      "logo": "\/sites\/default\/files\/2023-04\/logo_santanderfundacion_fitxa.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": "Con el apoyo de:",
+        "en": "With the support of:"
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/fidelio",
+      "es": "\/es\/fidelio",
+      "en": "\/en\/fidelio"
+    },
+    "title": {
+      "ca": "FIDELIO",
+      "es": "FIDELIO",
+      "en": "FIDELIO"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "LUDWIG VAN BEETHOVEN | Versi\u00f3 concert",
+      "es": "LUDWIG VAN BEETHOVEN | Versi\u00f3n concierto",
+      "en": "LUDWIG VAN BEETHOVEN | Concert version"
+    }
+  }, {
+    "main_image": null,
+    "categories": [],
+    "first_session": 1714059000,
+    "last_session": null,
+    "sessions": [{
+      "id": "6534",
+      "turns": [],
+      "date": null,
+      "artists": []
+    }, {
+      "id": "6535",
+      "turns": [{
+        "id": "2742",
+        "name": {
+          "ca": "Dansa",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1714059000,
+      "artists": []
+    }, {
+      "id": "6536",
+      "turns": [{
+        "id": "36",
+        "name": {
+          "ca": "E",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1714145400,
+      "artists": []
+    }, {
+      "id": "6537",
+      "turns": [{
+        "id": "2958",
+        "name": {
+          "ca": "F",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1714222800,
+      "artists": []
+    }, {
+      "id": "6538",
+      "turns": [{
+        "id": "2958",
+        "name": {
+          "ca": "F",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1714222800,
+      "artists": []
+    }, {
+      "id": "6539",
+      "turns": [{
+        "id": "34",
+        "name": {
+          "ca": "C",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1714239000,
+      "artists": []
+    }, {
+      "id": "6540",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1714309200,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6524",
+      "logo": "\/sites\/default\/files\/2023-05\/Logo_Repsol.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": "Con el apoyo de:",
+        "en": "With the support of:"
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/midsummers-night-dream",
+      "es": "\/es\/midsummer-nights-dream",
+      "en": "\/en\/midsummer-nights-dream"
+    },
+    "title": {
+      "ca": "A midsummer's night dream",
+      "es": "A MIDSUMMER NIGHT\u2019S DREAM",
+      "en": "A MIDSUMMER NIGHT\u2019S DREAM"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Ballet Portmund | Alexander Ekman",
+      "es": "BALLET DORTMUND | ALEXANDER EKMAN",
+      "en": "BALLET DORTMUND | ALEXANDER EKMAN"
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-03\/Front-Web-Gala.jpg",
+    "categories": [],
+    "first_session": 1716219000,
+    "last_session": null,
+    "sessions": [{
+      "id": "6560",
+      "turns": [],
+      "date": 1714663800,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6546",
+      "logo": "\/sites\/default\/files\/media\/production\/sponsor\/logo_mutuamadrilena_portada.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": "Con el apoyo de:",
+        "en": "With the support:"
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/gala-lirica-del-gran-teatre-del-liceu-0",
+      "es": "\/es\/gala-lirica-del-gran-teatre-del-liceu",
+      "en": "\/en\/lyrical-gala-of-the-gran-teatre-del-liceu-0"
+    },
+    "title": {
+      "ca": "GALA L\u00cdRICA DEL GRAN TEATRE DEL LICEU",
+      "es": "GALA L\u00cdRICA DEL GRAN TEATRE DEL LICEU",
+      "en": "LYRICAL GALA OF THE GRAN TEATRE DEL LICEU"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-03\/Front-Web-Mahler-1.jpg",
+    "categories": {
+      "10": {
+        "ca": "Concerts i recitals",
+        "es": "Conciertos y recitales",
+        "en": "Concerts & recitals"
+      }
+    },
+    "first_session": 1714914000,
+    "last_session": null,
+    "sessions": [{
+      "id": "6565",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1714914000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6564",
+      "logo": "\/sites\/default\/files\/2023-04\/logo_santanderfundacion_fitxa.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": "Con el apoyo de:",
+        "en": "With the support of:"
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/univers-mahler-iii-simfonia-num-5",
+      "es": "\/es\/universo-mahler-iii-sinfonia-num-5",
+      "en": "\/en\/mahlers-univers-iii-symphony-no-5"
+    },
+    "title": {
+      "ca": "Univers Mahler (III): Simfonia N\u00famero 5",
+      "es": "UNIVERSO MAHLER (III): SINFON\u00cdA N\u00daM. 5",
+      "en": "MAHLER'S UNIVERS (III): SYMPHONY NO. 5"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Gustav Mahler",
+      "es": "GUSTAV MAHLER",
+      "en": "GUSTAV MAHLER"
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-07\/Front-Web-Torre-Somnis.jpg",
+    "categories": [],
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6597",
+      "turns": [],
+      "date": 1717225200,
+      "artists": []
+    }, {
+      "id": "6598",
+      "turns": [],
+      "date": null,
+      "artists": []
+    }, {
+      "id": "6600",
+      "turns": [],
+      "date": 1719039600,
+      "artists": []
+    }, {
+      "id": "6601",
+      "turns": [],
+      "date": 1719126000,
+      "artists": []
+    }, {
+      "id": "6602",
+      "turns": [],
+      "date": 1719644400,
+      "artists": []
+    }, {
+      "id": "6603",
+      "turns": [],
+      "date": 1716534000,
+      "artists": []
+    }, {
+      "id": "6604",
+      "turns": [],
+      "date": 1719558000,
+      "artists": []
+    }, {
+      "id": "6605",
+      "turns": [],
+      "date": 1716966000,
+      "artists": []
+    }, {
+      "id": "6606",
+      "turns": [],
+      "date": 1717052400,
+      "artists": []
+    }, {
+      "id": "6607",
+      "turns": [],
+      "date": 1717138800,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6592",
+      "logo": "\/sites\/default\/files\/2023-01\/logo_fundaciolacaixa_empreses_v.png",
+      "intro": {
+        "ca": "Amb la col\u00b7laboraci\u00f3 de:",
+        "es": "Con la colaboraci\u00f3n de:",
+        "en": "With the collaboration of:"
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/la-torre-dels-somnis-0",
+      "es": "\/es\/la-torre-dels-somnis",
+      "en": "\/en\/la-torre-dels-somnis"
+    },
+    "title": {
+      "ca": "La torre dels somnis",
+      "es": "La torre dels somnis",
+      "en": "La torre dels somnis"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "AL GRAN TEATRE DEL LICEU amb m\u00fasica de Giacomo Puccini",
+      "es": "AL GRAN TEATRE DEL LICEU con m\u00fasica de Giacomo Puccini",
+      "en": "AT THE GRAN TEATRE DEL LICEU with music by Giacomo Puccini"
+    }
+  }, {
+    "main_image": null,
+    "categories": [],
+    "first_session": 1720278000,
+    "last_session": 1720625400,
+    "sessions": [{
+      "id": "6644",
+      "turns": [{
+        "id": "2742",
+        "name": {
+          "ca": "Dansa",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1720278000,
+      "artists": []
+    }, {
+      "id": "6645",
+      "turns": [{
+        "id": "37",
+        "name": {
+          "ca": "T",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1717765200,
+      "artists": []
+    }, {
+      "id": "6646",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1720452600,
+      "artists": []
+    }, {
+      "id": "6647",
+      "turns": [{
+        "id": "2960",
+        "name": {
+          "ca": "P",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1720539000,
+      "artists": []
+    }, {
+      "id": "6648",
+      "turns": [{
+        "id": "35",
+        "name": {
+          "ca": "D-H",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1720625400,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6634",
+      "logo": "\/sites\/default\/files\/media\/production\/sponsor\/logo_fundacio_damm_portada.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": "Con el apoyo de:",
+        "en": "With the support of:"
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/sacre",
+      "es": "\/es\/sacre",
+      "en": "\/en\/sacre"
+    },
+    "title": {
+      "ca": "SACRE",
+      "es": "SACRE",
+      "en": "SACRE"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "BALLET SASHA WALTZ & GUESTS (LA CONSAGRACI\u00d3 DE LA PRIMAVERA)",
+      "es": "BALLET SASHA WALTZ & GUESTS (LA CONSAGRACI\u00d3N DE LA PRIMAVERA)",
+      "en": "BALLET SASHA WALTZ & GUESTS (THE RITE OF SPRING)"
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-04\/Cap%C3%A7alera-Ohpera.jpg",
+    "categories": [],
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6659",
+      "turns": [],
+      "date": 1720792800,
+      "artists": []
+    }, {
+      "id": "6660",
+      "turns": [],
+      "date": 1720798200,
+      "artists": []
+    }, {
+      "id": "6661",
+      "turns": [],
+      "date": 1686670200,
+      "artists": []
+    }, {
+      "id": "6662",
+      "turns": [],
+      "date": 1718373600,
+      "artists": []
+    }, {
+      "id": "6663",
+      "turns": [],
+      "date": 1718379000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6655",
+      "logo": "\/sites\/default\/files\/2024-04\/Logo-Grec-24.png",
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/ohpera",
+      "es": null,
+      "en": "\/en\/ohpera"
+    },
+    "title": {
+      "ca": "\u00d2h!pera  ",
+      "es": null,
+      "en": "\u00d2H!PERA"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Micro\u00f2peres de nova creaci\u00f3",
+      "es": null,
+      "en": "Micro-opera project"
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-03\/Front-Web-Cambra-2.jpg",
+    "categories": [],
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6674",
+      "turns": [],
+      "date": 1713972600,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6673",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/cicle-constellacions-concert-iii",
+      "es": "\/es\/ciclo-constelaciones-concierto-iii",
+      "en": "\/en\/constellations-series-concert-iii"
+    },
+    "title": {
+      "ca": "CICLE CONSTEL\u00b7LACIONS: CONCERT III",
+      "es": "CICLO CONSTELACIONES: CONCIERTO III",
+      "en": "CONSTELLATIONS SERIES: CONCERT III"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "SOLISTES DE L\u2019ORQUESTRA DEL LICEU",
+      "es": "SOLISTAS DE LA ORQUESTA DEL LICEU",
+      "en": "SOLOISTS OF THE ORCHESTRA OF THE LICEU"
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-07\/Front-Web-Barcarola.jpg",
+    "categories": [],
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6688",
+      "turns": [],
+      "date": 1714978800,
+      "artists": []
+    }, {
+      "id": "6689",
+      "turns": [],
+      "date": 1715065200,
+      "artists": []
+    }, {
+      "id": "6690",
+      "turns": [],
+      "date": 1715238000,
+      "artists": []
+    }, {
+      "id": "6691",
+      "turns": [],
+      "date": 1715324400,
+      "artists": []
+    }, {
+      "id": "6692",
+      "turns": [],
+      "date": 1715670000,
+      "artists": []
+    }, {
+      "id": "6693",
+      "turns": [],
+      "date": 1715756400,
+      "artists": []
+    }, {
+      "id": "6694",
+      "turns": [],
+      "date": 1715842800,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6684",
+      "logo": "\/sites\/default\/files\/2023-01\/logo_fundaciolacaixa_empreses_v.png",
+      "intro": {
+        "ca": "Amb la col\u00b7laboraci\u00f3 de",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/la-barcarola",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "LA BARCAROLA",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "A LA SALA FOYER DEL GRAN TEATRE DEL LICEU",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-04\/Forms_02.png",
+    "categories": [],
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6722",
+      "turns": [],
+      "date": 1721314800,
+      "artists": []
+    }, {
+      "id": "6723",
+      "turns": [],
+      "date": 1721919600,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6713",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/pppfff-forms-quartet-de-corda",
+      "es": "\/es\/pppfff-forms-quartet-de-corda",
+      "en": "\/en\/pppfff-forms-quartet-de-corda"
+    },
+    "title": {
+      "ca": "PPPFFF + FORMS QUARTET DE CORDA",
+      "es": "PPPFFF + FORMS QUARTET DE CORDA",
+      "en": "PPPFFF + FORMS QUARTET DE CORDA"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Instal\u00b7laci\u00f3 + concert",
+      "es": "Instalaci\u00f3n + concierto",
+      "en": "Installation + concert"
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-03\/Cap%C3%A7alera_Benjamin.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6733",
+      "turns": [{
+        "id": "2958",
+        "name": {
+          "ca": "F",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1752933600,
+      "artists": []
+    }, {
+      "id": "6734",
+      "turns": [{
+        "id": "32",
+        "name": {
+          "ca": "A",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1753111800,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6732",
+      "logo": "\/sites\/default\/files\/media\/production\/sponsor\/logo_amicsliceu.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/benjamin-portbou",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Benjamin a Portbou",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Antoni Ros-Marb\u00e0",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-04\/Front%20Web%20Beethoven%207.jpg",
+    "categories": [],
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6753",
+      "turns": [],
+      "date": 1688580000,
+      "artists": []
+    }, {
+      "id": "6755",
+      "turns": [],
+      "date": 1688666400,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6748",
+      "logo": "\/sites\/default\/files\/2023-04\/Logo-Grec-23.png",
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/beethoven-7",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Beethoven 7",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "SASHA WALTZ & GUESTS \/ ORQUESTRA DEL LICEU",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-07\/Front_Web_Abrazo2.jpg",
+    "categories": [],
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6762",
+      "turns": [],
+      "date": 1718982000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6760",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/abrazo-tango-flamenco",
+      "es": "\/es\/abrazo-tango-flamenco",
+      "en": "\/en\/abrazo-tango-flamenco"
+    },
+    "title": {
+      "ca": "Abrazo Tango & Flamenco",
+      "es": "Abrazo Tango & Flamenco",
+      "en": "Abrazo Tango & Flamenco"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-07\/Front-Web-Pastora-Soler.jpg",
+    "categories": [],
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6768",
+      "turns": [],
+      "date": 1718992800,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6767",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/pastora-soler-i-lucas-sugo",
+      "es": "\/es\/pastora-soler-y-lucas-sugo",
+      "en": "\/en\/pastora-soler-and-lucas-sugo"
+    },
+    "title": {
+      "ca": "Pastora Soler i Lucas Sugo",
+      "es": "Pastora Soler y Lucas Sugo",
+      "en": "Pastora Soler and Lucas Sugo"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-12\/Front-Web-Rozalen.jpg",
+    "categories": {
+      "12": {
+        "ca": "Altres concerts i festivals",
+        "es": "Otros conciertos y festivales",
+        "en": "Other concerts & festivals"
+      }
+    },
+    "first_session": 1716483600,
+    "last_session": null,
+    "sessions": [{
+      "id": "6812",
+      "turns": [],
+      "date": 1716483600,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6808",
+      "logo": "\/sites\/default\/files\/2023-10\/Logo%20Guitar%20BCN.png",
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/rozalen",
+      "es": "\/es\/rozalen",
+      "en": "\/en\/rozalen"
+    },
+    "title": {
+      "ca": "Rozal\u00e9n",
+      "es": "Rozal\u00e9n",
+      "en": "Rozal\u00e9n"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": "Guitar BCN 2024",
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-12\/Front-Web-Raphael.jpg",
+    "categories": {
+      "12": {
+        "ca": "Altres concerts i festivals",
+        "es": "Otros conciertos y festivales",
+        "en": "Other concerts & festivals"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6817",
+      "turns": [],
+      "date": 1727625600,
+      "artists": []
+    }, {
+      "id": "6818",
+      "turns": [],
+      "date": 1727712000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6816",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/raphael",
+      "es": "\/es\/raphael",
+      "en": "\/en\/raphael"
+    },
+    "title": {
+      "ca": "Raphael",
+      "es": "Raphael",
+      "en": "Raphael"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Raphael Tour Victoria 2024",
+      "es": "Raphael Tour Victoria 2024",
+      "en": "Raphael Tour Victoria 2024"
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-01\/Fron-Web-Loquillo.jpg",
+    "categories": [],
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "6823",
+      "turns": [],
+      "date": 1715965200,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "6822",
+      "logo": "\/sites\/default\/files\/2024-01\/Logo-25-festival-Millenni.png",
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/loquillo",
+      "es": "\/es\/loquillo",
+      "en": "\/en\/loquillo"
+    },
+    "title": {
+      "ca": "Loquillo",
+      "es": "Loquillo",
+      "en": "Loquillo"
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "25\u00e8 Banco Mediolanum Festival Mil\u00b7lenni",
+      "es": "25\u00e8 Banco Mediolanum Festival Mil\u00b7lenni",
+      "en": "25\u00e8 Banco Mediolanum Festival Mil\u00b7lenni"
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-04\/AAFF_WestSideStory.jpg",
+    "categories": {
+      "9": {
+        "ca": "\u00d2pera",
+        "es": "\u00d3pera",
+        "en": "Opera"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "7409",
+      "turns": [],
+      "date": 1753803000,
+      "artists": []
+    }, {
+      "id": "7410",
+      "turns": [],
+      "date": 1753975800,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "7425",
+      "logo": "\/sites\/default\/files\/2023-04\/Logo-Caixabank-i-Fundacio-OK.png",
+      "intro": {
+        "ca": "Amb el suport de:",
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/west-side-story",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "West Side Story",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Leonard Bernstein",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-04\/Cap%C3%A7alera-micro%C3%B2peres.jpg",
+    "categories": {
+      "2743": {
+        "ca": "Micro\u00f2peres",
+        "es": "Micro\u00f3peras",
+        "en": "Micro-Operas"
+      }
+    },
+    "first_session": 1738965600,
+    "last_session": 1739138340,
+    "sessions": [],
+    "sponsors": [{
+      "id": "7576",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/microoperes-davui-musica-art-i-pensament",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Micro\u00f2peres d'avui (M\u00fasica, art i pensament)",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Un projecte de CCCB, Liceu i MACBA",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-04\/Cap%C3%A7alera_Sagrada-Familia.jpg",
+    "categories": {
+      "10": {
+        "ca": "Concerts i recitals",
+        "es": "Conciertos y recitales",
+        "en": "Concerts & recitals"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "7620",
+      "turns": [{
+        "id": "3018",
+        "name": {
+          "ca": "LiceUnder35",
+          "es": null,
+          "en": null
+        }
+      }],
+      "date": 1739813400,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "7614",
+      "logo": "\/sites\/default\/files\/2024-04\/Logo-Under35-Cap%C3%A7alera.png",
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/requiem-0",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Requiem",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Wolfgang Amadeus Mozart",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-02\/Cap%C3%A7alera_Dudamel_4.jpg",
+    "categories": {
+      "10": {
+        "ca": "Concerts i recitals",
+        "es": "Conciertos y recitales",
+        "en": "Concerts & recitals"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "7720",
+      "turns": [],
+      "date": 1746889200,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "7722",
+      "logo": "\/sites\/default\/files\/2024-02\/BCN-Cl%C3%A0ssics-Logo-Portada.png",
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/london-symphony-orchestra-gustavo-dudamel-marina-rebeka",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "London Symphony Orchestra  & Gustavo Dudamel & Marina Rebeka",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": "https:\/\/bcnclassics.koobin.events\/extra-Dudamel?referer=YGdgYHBicHxzUWFoe3V1c2d9amhmSWt3cmtxbmdJKCY%3D",
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": null,
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2024-04\/Cap%C3%A7alera-ohpera.jpg",
+    "categories": {
+      "2743": {
+        "ca": "Micro\u00f2peres",
+        "es": "Micro\u00f3peras",
+        "en": "Micro-Operas"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "7897",
+      "turns": [],
+      "date": 1753452000,
+      "artists": []
+    }, {
+      "id": "7898",
+      "turns": [],
+      "date": 1753457400,
+      "artists": []
+    }, {
+      "id": "7899",
+      "turns": [],
+      "date": 1753538400,
+      "artists": []
+    }, {
+      "id": "7900",
+      "turns": [],
+      "date": 1753543800,
+      "artists": []
+    }, {
+      "id": "7901",
+      "turns": [],
+      "date": 1753624800,
+      "artists": []
+    }, {
+      "id": "7902",
+      "turns": [],
+      "date": 1753630200,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "7894",
+      "logo": "\/sites\/default\/files\/2024-04\/Logo-Grec-24.png",
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/ohpera-0",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "\u00d2h!pera ",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Micro\u00f2peres de nova creaci\u00f3",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-07\/Front-Web-Petita-Flauta.jpg",
+    "categories": {
+      "16": {
+        "ca": "Petit Liceu",
+        "es": null,
+        "en": null
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "7970",
+      "turns": [],
+      "date": 1727506800,
+      "artists": []
+    }, {
+      "id": "7971",
+      "turns": [],
+      "date": 1728111600,
+      "artists": []
+    }, {
+      "id": "7972",
+      "turns": [],
+      "date": 1728198000,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "7975",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/la-petita-flauta-magica",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "La petita flauta m\u00e0gica",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "A la Sala Gran",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-07\/Front-Web-Trencanous.jpg",
+    "categories": {
+      "16": {
+        "ca": "Petit Liceu",
+        "es": null,
+        "en": null
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [{
+      "id": "7998",
+      "turns": [],
+      "date": 1732957200,
+      "artists": []
+    }, {
+      "id": "7999",
+      "turns": [],
+      "date": 1733043600,
+      "artists": []
+    }, {
+      "id": "8000",
+      "turns": [],
+      "date": 1736586000,
+      "artists": []
+    }, {
+      "id": "8001",
+      "turns": [],
+      "date": 1736672400,
+      "artists": []
+    }],
+    "sponsors": [{
+      "id": "8003",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/trencanous-jazz",
+      "es": null,
+      "en": null
+    },
+    "title": {
+      "ca": "Trencanous-jazz",
+      "es": null,
+      "en": null
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Al Foyer del Liceu ",
+      "es": null,
+      "en": null
+    }
+  }, {
+    "main_image": "\/sites\/default\/files\/2023-03\/Front-Web-Patera.jpg",
+    "categories": {
+      "2826": {
+        "ca": "Liceu de les arts",
+        "es": "Liceu de las artes",
+        "en": "LIceu Of The Arts"
+      }
+    },
+    "first_session": null,
+    "last_session": null,
+    "sessions": [],
+    "sponsors": [{
+      "id": "8056",
+      "logo": null,
+      "intro": {
+        "ca": null,
+        "es": null,
+        "en": null
+      }
+    }],
+    "url": {
+      "ca": "\/ca\/patera-un-artefacte-silencios",
+      "es": "\/es\/patera-un-artefacto-silencioso",
+      "en": "\/en\/patera-silent-artifact"
+    },
+    "title": {
+      "ca": "Patera. Un artefacte silenci\u00f3s",
+      "es": "Patera. Un artefacto silencioso",
+      "en": "\"Patera. A silent artifact.\""
+    },
+    "sale_url": {
+      "ca": null,
+      "es": null,
+      "en": null
+    },
+    "subtitle": {
+      "ca": "Exposici\u00f3",
+      "es": "Exposici\u00f3",
+      "en": "Exposici\u00f3"
+    }
+  }],
+  "subscriptions": []
+}
