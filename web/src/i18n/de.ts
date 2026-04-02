@@ -20,6 +20,8 @@ const de: Record<string, string> = {
   "footer.updated_never": "nie",
   "footer.note":
     "Leporello sammelt öffentlich verfügbare Konzertprogramme. Alle Veranstaltungsdaten gehören den jeweiligen Spielstätten.",
+  "event.conductor": "Dirigent",
+  "event.cast": "Solisten",
   "mcp.badge": "MCP Server",
   "mcp.text":
     "Verbinde diese Daten mit Claude, ChatGPT oder einem anderen MCP-kompatiblen KI-Assistenten",

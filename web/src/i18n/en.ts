@@ -20,6 +20,8 @@ const en: Record<string, string> = {
   "footer.updated_never": "never",
   "footer.note":
     "Leporello aggregates publicly available concert schedules. All event data belongs to the respective venues.",
+  "event.conductor": "Conductor",
+  "event.cast": "Soloists",
   "mcp.badge": "MCP Server",
   "mcp.text":
     "Connect this data to Claude, ChatGPT, or any MCP-compatible AI assistant",

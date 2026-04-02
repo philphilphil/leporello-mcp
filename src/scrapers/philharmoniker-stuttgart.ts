@@ -64,14 +64,18 @@ export class PhilharmonikerStuttgartScraper implements Scraper {
         const location = parseLocation(rawTime);
         const url = href ? new URL(href, BASE_URL + '/').href : null;
 
+        const details = $(el).find('.item-details p').first().text().trim();
+        const conductor = parseConductor(details);
+        const cast = parseCast(details);
+
         events.push({
           id: generateEventId(this.venueId, date, time, title),
           venue_id: this.venueId,
           title,
           date,
           time,
-          conductor: null,
-          cast: null,
+          conductor,
+          cast,
           location,
           url,
           scraped_at: now,
@@ -121,4 +125,24 @@ function parseTime(raw: string): string | null {
 function parseLocation(raw: string): string | null {
   const parts = raw.split(' | ');
   return parts.length > 1 ? parts[1].trim() || null : null;
+}
+
+// "unter der Leitung von Dirigentin Holly Hyun Choe" → "Holly Hyun Choe"
+function parseConductor(details: string): string | null {
+  const m = details.match(/unter der Leitung von\s+(?:Dirigentin?\s+|Festspieldirektor\s+)?(.+)/i);
+  return m ? m[1].trim() || null : null;
+}
+
+// "mit Clara & Marie Becker unter der Leitung von ..." → ["Clara & Marie Becker"]
+// "mit Andreas Kersten, Stefan Balle und Bernhard Lörcher" → ["Andreas Kersten", "Stefan Balle", "Bernhard Lörcher"]
+function parseCast(details: string): string[] | null {
+  const m = details.match(/[Mm]it\s+(.+?)(?:\s+unter der Leitung von|$)/);
+  if (!m) return null;
+  const raw = m[1].trim();
+  if (!raw) return null;
+  const names = raw
+    .split(/,\s*|\s+und\s+/)
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0);
+  return names.length > 0 ? names : null;
 }

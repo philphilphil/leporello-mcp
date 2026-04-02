@@ -111,16 +111,24 @@
     text-overflow: ellipsis;
   }
 
-  .event-conductor {
+  .event-people {
     font-family: var(--sans);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--text-muted);
     font-weight: 400;
-    width: 12rem;
+    width: 16rem;
     text-align: right;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    line-height: 1.4;
+  }
+
+  .people-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    opacity: 0.6;
+    margin-right: 0.25em;
   }
 
   /* ── No results ── */
@@ -136,7 +144,7 @@
 
   /* ── Mobile ── */
   @media (max-width: 900px) {
-    .event-conductor {
+    .event-people {
       display: none;
     }
   }

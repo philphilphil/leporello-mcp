@@ -217,15 +217,22 @@ function render(): void {
     for (const e of evts) {
       const time = esc(e.time ?? '');
       const venue = esc(e.venue_name ?? '');
-      const conductor = e.conductor ? esc(e.conductor) : '';
       const safeUrl = e.url && /^https?:\/\//.test(e.url) ? e.url : null;
       const link = (text: string, cls: string) =>
         safeUrl ? `<a href="${esc(safeUrl)}" target="_blank" rel="noopener" class="${cls}">${text}</a>` : `<span class="${cls}">${text}</span>`;
+
+      let people = '';
+      if (e.conductor) people += `<span class="people-label">${t('event.conductor')}</span> ${esc(e.conductor)}`;
+      if (e.cast && e.cast.length > 0) {
+        if (people) people += '<br>';
+        people += `<span class="people-label">${t('event.cast')}</span> ${e.cast.map(esc).join(', ')}`;
+      }
+
       html += `<tr class="event-row">`;
       html += `<td class="event-time">${time}</td>`;
       html += `<td class="event-title">${link(esc(e.title), 'event-link')}</td>`;
       html += `<td class="event-venue">${venue}</td>`;
-      html += `<td class="event-conductor">${conductor}</td>`;
+      html += `<td class="event-people">${people}</td>`;
       html += `</tr>`;
     }
   }
