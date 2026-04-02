@@ -1,4 +1,4 @@
-# Erda
+# Leporello
 
 Opera & classical music event schedule remote MCP.
 
@@ -6,9 +6,10 @@ Opera & classical music event schedule remote MCP.
 
 | Tool | Description |
 |---|---|
-| `list_cities` | All cities with venues |
-| `list_venues` | All venues, optionally filtered by city |
-| `get_events` | Upcoming events filtered by city or venue |
+| `list_countries` | All countries with city/venue counts |
+| `list_cities` | All cities with venues, optionally filtered by country |
+| `list_venues` | All venues, optionally filtered by country or city |
+| `list_events` | Upcoming events filtered by country, city, or venue |
 
 ## Run locally
 
@@ -27,12 +28,14 @@ Scrapes on startup if the database is empty, then daily at 03:00 UTC.
 |---|---|
 | `staatsoper-stuttgart` | Staatsoper Stuttgart |
 | `philharmoniker-stuttgart` | Stuttgarter Philharmoniker |
+| `wiener-staatsoper` | Wiener Staatsoper |
+| `metropolitan-opera` | Metropolitan Opera |
 
 ---
 
-## Contribute a Scraper
+## Contribute a Venue-Scraper
 
-> **This section is written for code agents.** Follow these instructions exactly to add a new venue scraper.
+> **This section is written for coding agents.** Follow these instructions exactly to add a new venue scraper.
 
 ### 1. Create the scraper
 
@@ -41,7 +44,7 @@ Create `src/scrapers/<venue-id>.ts`. The scraper declares its own metadata — c
 ```typescript
 import { load } from 'cheerio';
 import type { Event } from '../types.js';
-import { generateEventId, type Scraper, type VenueMeta } from './base.js';
+import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
 
 type FetchHtml = () => Promise<string>;
 
@@ -64,7 +67,9 @@ export class MyVenueScraper implements Scraper {
   async scrape(): Promise<Event[]> {
     const html = this.opts.fetchHtml
       ? await this.opts.fetchHtml()
-      : await fetch(this.venue.scheduleUrl).then((r) => {
+      : await fetch(this.venue.scheduleUrl, {
+          headers: { 'User-Agent': USER_AGENT },
+        }).then((r) => {
           if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
           return r.text();
         });
@@ -138,38 +143,23 @@ await browser.close();
 
 ### 3. Write tests
 
-Create `src/scrapers/__tests__/<venue-id>.test.ts`:
+Create `src/scrapers/__tests__/<venue-id>.test.ts`. Tests use saved fixtures to verify parsing logic — runtime validation in the scheduler catches live breakage.
 
 ```typescript
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { MyVenueScraper } from '../<venue-id>.js';
 
-const fixture = readFileSync(
-  new URL('../__fixtures__/<venue-id>.html', import.meta.url),
-  'utf-8',
-);
+const fixture = readFileSync(new URL('../__fixtures__/<venue-id>.html', import.meta.url), 'utf8');
+const scraper = new MyVenueScraper({ fetchHtml: async () => fixture });
 
 describe('MyVenueScraper', () => {
-  it('returns events from fixture', async () => {
-    const scraper = new MyVenueScraper({ fetchHtml: async () => fixture });
+  it('parses events from fixture', async () => {
     const events = await scraper.scrape();
     expect(events.length).toBeGreaterThan(0);
   });
 
-  it('event fields are valid', async () => {
-    const scraper = new MyVenueScraper({ fetchHtml: async () => fixture });
-    const [event] = await scraper.scrape();
-    expect(event.id).toMatch(/^[0-9a-f]{16}$/);
-    expect(event.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-    expect(event.title.length).toBeGreaterThan(0);
-    expect(event.venue_id).toBe('<venue-id>');
-  });
-
-  it('uses fetchHtml injection in tests (no network)', async () => {
-    const scraper = new MyVenueScraper({ fetchHtml: async () => fixture });
-    await expect(scraper.scrape()).resolves.toBeDefined();
-  });
+  // Add venue-specific tests here (e.g. conductor/cast parsing)
 });
 ```
 

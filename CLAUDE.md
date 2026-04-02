@@ -7,7 +7,7 @@ Remote MCP server for classical music / opera event schedules. Node.js 22, TypeS
 ```bash
 npm run dev      # Start server + scheduler (loads .env)
 npm run scrape   # Run scrapers once and exit (loads .env)
-npm test         # Run scraper unit tests (6 tests)
+npm test         # Run scraper unit tests (16 tests)
 npm run build    # Compile TypeScript to dist/
 npm run build --prefix web  # Build Astro frontend to web/dist/
 ```
@@ -27,7 +27,7 @@ Entry point is `src/index.ts`: initializes DB → starts HTTP server → starts 
 ```
 src/
   index.ts                    Entry point
-  server.ts                   McpServer (3 tools) + HTTP server + static file serving
+  server.ts                   McpServer (4 tools) + HTTP server + static file serving
   scheduler.ts                node-cron + runAllScrapers() + rebuildWeb()
   scrape.ts                   One-shot scrape script (npm run scrape)
   db.ts                       SQLite singleton, schema, seed data, queries
@@ -36,7 +36,9 @@ src/
     base.ts                   Scraper interface + generateEventId()
     philharmoniker-stuttgart.ts
     staatsoper-stuttgart.ts
-    __fixtures__/             Saved HTML snapshots for tests
+    wiener-staatsoper.ts
+    metropolitan-opera.ts
+    __fixtures__/             Saved HTML/JSON snapshots for tests
     __tests__/                Scraper unit tests (fixture-based)
 web/
   astro.config.ts             Astro configuration
@@ -46,29 +48,29 @@ web/
     components/               Filters.astro, EventList.astro
     lib/data.ts               Read-only SQLite queries for build time
     scripts/filter.ts         Client-side filtering, search, URL state
+    i18n/                     en.ts, de.ts — translation strings
 ```
 
 ## Database
 
-SQLite at `DB_PATH` env var (default `./data/erda.db`). Initialized on `getDb()` call.
+SQLite at `DB_PATH` env var (default `./data/leporello.db`). Initialized on `getDb()` call.
 
-- `cities` — static, seeded at startup
-- `venues` — static, seeded at startup, `last_scraped` updated after each successful scrape
+- `cities` — upserted by scrapers via `VenueMeta`
+- `venues` — upserted by scrapers via `VenueMeta`, `last_scraped` updated after each successful scrape
 - `events` — upserted by scrapers, `cast` stored as JSON string
 
 ## Adding a scraper
 
-1. Add seed row(s) to `seedStaticData()` in `src/db.ts`
-2. Create `src/scrapers/<venue-id>.ts`:
+1. Create `src/scrapers/<venue-id>.ts`:
    - `export class MyVenueScraper implements Scraper`
-   - `readonly venueId = '<venue-id>'`
+   - Declare `readonly venue: VenueMeta` with venueId, venueName, cityId, cityName, country, scheduleUrl
    - Constructor with optional `{ fetchHtml?: () => Promise<string> }` for test injection
    - Separate `scrape()` and `parse(html)` methods
    - Use `generateEventId()` from `./base.js`
    - Use `new URL(href, BASE_URL + '/').href` for URL construction
-3. Fetch fixture: `curl -s -A "Mozilla/5.0..." <url> -o src/scrapers/__fixtures__/<venue-id>.html`
-4. Write tests in `src/scrapers/__tests__/<venue-id>.test.ts` (see existing tests)
-5. Add to `scrapers` array in `src/scheduler.ts`
+2. Fetch fixture: `curl -s -A "Mozilla/5.0..." <url> -o src/scrapers/__fixtures__/<venue-id>.html`
+3. Write tests in `src/scrapers/__tests__/<venue-id>.test.ts` (see existing tests)
+4. Add to `scrapers` array in `src/scheduler.ts`
 
 ## MCP tools
 
@@ -82,6 +84,7 @@ SQLite at `DB_PATH` env var (default `./data/erda.db`). Initialized on `getDb()`
 ## Scraper pattern
 
 Each scraper:
+- Declares `VenueMeta` — the scheduler auto-registers the city and venue in the DB before scraping
 - Fetches HTML from the live site (or from `fetchHtml` in tests)
 - Parses with Cheerio
 - Returns `Event[]` — all 9 fields must be set (`null` is fine for optional ones)

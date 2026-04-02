@@ -5,7 +5,7 @@ import type { City, Venue, Event } from './types.js';
 
 const DB_PATH =
   process.env.DB_PATH ??
-  path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'data', 'erda.db');
+  path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'data', 'leporello.db');
 
 let _db: Database.Database | undefined;
 
@@ -51,11 +51,17 @@ function initSchema(db: Database.Database): void {
     CREATE INDEX IF NOT EXISTS events_venue_date ON events(venue_id, date);
   `);
 
-  // Migration: add location column to existing databases
-  try {
-    db.exec(`ALTER TABLE events ADD COLUMN location TEXT`);
-  } catch {
-    // column already exists — safe to ignore
+  // Migrations for existing databases
+  for (const col of [
+    { table: 'events', column: 'location', type: 'TEXT' },
+    { table: 'venues', column: 'last_scrape_status', type: "TEXT DEFAULT 'ok'" },
+    { table: 'venues', column: 'last_scrape_error', type: 'TEXT' },
+  ]) {
+    try {
+      db.exec(`ALTER TABLE ${col.table} ADD COLUMN ${col.column} ${col.type}`);
+    } catch {
+      // column already exists — safe to ignore
+    }
   }
 
 }
@@ -178,8 +184,14 @@ export function upsertEvents(events: Event[]): void {
 
 export function updateLastScraped(venueId: string, ts: string): void {
   getDb()
-    .prepare(`UPDATE venues SET last_scraped = ? WHERE id = ?`)
+    .prepare(`UPDATE venues SET last_scraped = ?, last_scrape_status = 'ok', last_scrape_error = NULL WHERE id = ?`)
     .run(ts, venueId);
+}
+
+export function updateScrapeError(venueId: string, error: string): void {
+  getDb()
+    .prepare(`UPDATE venues SET last_scrape_status = 'error', last_scrape_error = ? WHERE id = ?`)
+    .run(error, venueId);
 }
 
 export function upsertCity(id: string, name: string, country: string): void {

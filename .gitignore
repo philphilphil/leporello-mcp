@@ -8,6 +8,8 @@ data/
 coverage/
 web/dist/
 web/node_modules/
+web/.astro/
+idea.md
 .superpowers/
 .playwright-mcp/
 docs/

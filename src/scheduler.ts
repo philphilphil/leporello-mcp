@@ -3,7 +3,8 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { upsertEvents, updateLastScraped, upsertCity, upsertVenue } from './db.js';
+import { upsertEvents, updateLastScraped, updateScrapeError, upsertCity, upsertVenue } from './db.js';
+import { validateEvents } from './validate.js';
 import type { Scraper } from './scrapers/base.js';
 import { PhilharmonikerStuttgartScraper } from './scrapers/philharmoniker-stuttgart.js';
 import { StaatsoperStuttgartScraper } from './scrapers/staatsoper-stuttgart.js';
@@ -50,6 +51,22 @@ export async function runAllScrapers(): Promise<void> {
       const start = Date.now();
       try {
         const events = await scraper.scrape();
+        const validation = validateEvents(scraper.venueId, events);
+        if (!validation.valid) {
+          const msg = validation.errors.join('; ');
+          if (attempt === 2) updateScrapeError(scraper.venueId, msg);
+          console.error(
+            JSON.stringify({
+              event: 'scrape_validation_error',
+              venue: scraper.venueId,
+              errors: validation.errors,
+              duration_ms: Date.now() - start,
+              attempt,
+              final: attempt === 2,
+            }),
+          );
+          continue;
+        }
         upsertEvents(events);
         const ts = new Date().toISOString();
         updateLastScraped(scraper.venueId, ts);
@@ -64,6 +81,7 @@ export async function runAllScrapers(): Promise<void> {
         );
         break;
       } catch (err) {
+        if (attempt === 2) updateScrapeError(scraper.venueId, String(err));
         console.error(
           JSON.stringify({
             event: 'scrape_error',

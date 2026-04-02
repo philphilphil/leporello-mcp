@@ -229,8 +229,20 @@ export function startHttpServer() {
       }
 
       if (pathname === '/health') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ status: 'ok' }));
+        const venues = getVenues();
+        const failed = venues.filter((v) => v.last_scrape_status === 'error');
+        const healthy = failed.length === 0;
+        res.writeHead(healthy ? 200 : 503, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+          status: healthy ? 'ok' : 'degraded',
+          ...(failed.length > 0 && {
+            failed_venues: failed.map((v) => ({
+              id: v.id,
+              last_scraped: v.last_scraped,
+              error: v.last_scrape_error,
+            })),
+          }),
+        }));
         return;
       }
 
