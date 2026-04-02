@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCities, getVenues, getEvents } from '../lib/data.ts';
+
+const cities = getCities();
+const venues = getVenues();
+const events = getEvents(90);
+const dataAge: Record<string, string | null> = {};
+for (const v of venues) {
+  if (v.last_scraped) dataAge[v.id] = v.last_scraped;
+}
+
+const pageData = { cities, venues, events, dataAge };
+---
+<Base title="Erda — Classical Music Events">
+  <script type="application/json" id="event-data" set:html={JSON.stringify(pageData)} />
+  <main id="app">
+    <p>Loaded {events.length} events from {venues.length} venues.</p>
+  </main>
+</Base>
