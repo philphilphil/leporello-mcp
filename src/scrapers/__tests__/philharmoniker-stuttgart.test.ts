@@ -13,7 +13,7 @@ describe('PhilharmonikerStuttgartScraper', () => {
   it('parses at least one event from fixture', async () => {
     const scraper = new PhilharmonikerStuttgartScraper({ fetchHtml: async () => fixtureHtml });
     const events = await scraper.scrape();
-    expect(events.length).toBeGreaterThan(0);
+    expect(events.length).toBe(37);
   });
 
   it('returns events with required fields', async () => {

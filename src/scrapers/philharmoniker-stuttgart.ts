@@ -1,13 +1,13 @@
 import { load } from 'cheerio';
 import type { Event } from '../types.js';
-import { generateEventId } from './base.js';
+import { generateEventId, type Scraper } from './base.js';
 
 type FetchHtml = () => Promise<string>;
 
 const SCHEDULE_URL = 'https://www.stuttgarter-philharmoniker.de/konzerte/';
 const BASE_URL = 'https://www.stuttgarter-philharmoniker.de';
 
-export class PhilharmonikerStuttgartScraper {
+export class PhilharmonikerStuttgartScraper implements Scraper {
   readonly venueId = 'philharmoniker-stuttgart';
 
   constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
@@ -29,6 +29,8 @@ export class PhilharmonikerStuttgartScraper {
       try {
         // Date: prefer the datetime attribute on <time> for reliable parsing
         const timeEl = $(el).find('.date time').first();
+        // datetime attr format is non-standard: "2026-04-10T19:30:00TCEST" (note "T" before timezone)
+        // We extract only the date portion; time is parsed from text instead.
         const datetimeAttr = timeEl.attr('datetime') ?? '';
         const rawDateText = timeEl.text().trim();
 
@@ -46,7 +48,7 @@ export class PhilharmonikerStuttgartScraper {
         if (!date) return;
 
         const time = parseTime(rawTime);
-        const url = href ? (href.startsWith('http') ? href : `${BASE_URL}/${href}`) : null;
+        const url = href ? new URL(href, BASE_URL + '/').href : null;
 
         events.push({
           id: generateEventId(this.venueId, date, time, title),
