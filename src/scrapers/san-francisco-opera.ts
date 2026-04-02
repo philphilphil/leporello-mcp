@@ -40,28 +40,20 @@ export class SanFranciscoOperaScraper implements Scraper {
 
   private async fetchFromApi(): Promise<unknown[]> {
     const now = new Date();
-    const results: unknown[] = [];
-
-    // Fetch current month + next 2 months
-    for (let i = 0; i < 3; i++) {
-      const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
-      const startDate = d.toISOString().slice(0, 10);
-      const end = new Date(d.getFullYear(), d.getMonth() + 1, 0);
-      const endDate = end.toISOString().slice(0, 10);
-      const url = `${API_BASE}?startDate=${startDate}&endDate=${endDate}`;
-      const res = await fetch(url, {
-        headers: { 'User-Agent': USER_AGENT, Accept: 'application/json' },
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
-      const data = await res.json();
-      if (Array.isArray(data)) results.push(...data);
-    }
-
-    return results;
+    const startDate = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0, 10);
+    const endDate = new Date(now.getFullYear(), now.getMonth() + 3, 0).toISOString().slice(0, 10);
+    const url = `${API_BASE}?startDate=${startDate}&endDate=${endDate}`;
+    const res = await fetch(url, {
+      headers: { 'User-Agent': USER_AGENT, Accept: 'application/json' },
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
   }
 
   parse(data: unknown[]): Event[] {
     const events: Event[] = [];
+    const seen = new Set<string>();
     const now = new Date().toISOString();
 
     for (const item of data) {
@@ -77,8 +69,12 @@ export class SanFranciscoOperaScraper implements Scraper {
         const title = e.composerInfo ? `${e.name} (${e.composerInfo})` : e.name;
         const url = e.viewDetailCtaUrl ? new URL(e.viewDetailCtaUrl, SITE_BASE).href : null;
 
+        const id = generateEventId(this.venueId, date, time, e.name);
+        if (seen.has(id)) continue;
+        seen.add(id);
+
         events.push({
-          id: generateEventId(this.venueId, date, time, e.name),
+          id,
           venue_id: this.venueId,
           title,
           date,
