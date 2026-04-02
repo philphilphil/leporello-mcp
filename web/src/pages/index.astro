@@ -43,20 +43,24 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
           <img src="/leporello-logo.svg" alt="" class="site-logo" />
           <div class="header-text">
             <h1 class="site-title">Leporello</h1>
-            <p class="site-tagline">Opera & Classical Music Event Schedules</p>
+            <p class="site-tagline" data-i18n="site.tagline">Opera & Classical Music Event Schedules</p>
           </div>
         </div>
+        <select id="lang-switcher" class="lang-select" aria-label="Language">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+        </select>
       </div>
     </header>
 
     <div class="mcp-banner">
       <div class="mcp-banner-inner">
         <div class="mcp-info">
-          <span class="mcp-badge">MCP Server</span>
-          <p class="mcp-text">Connect this data to Claude, ChatGPT, or any MCP-compatible AI assistant</p>
+          <span class="mcp-badge" data-i18n="mcp.badge">MCP Server</span>
+          <p class="mcp-text" data-i18n="mcp.text">Connect this data to Claude, ChatGPT, or any MCP-compatible AI assistant</p>
         </div>
         <div class="mcp-url">
-          <span class="mcp-url-label">Endpoint</span>
+          <span class="mcp-url-label" data-i18n="mcp.endpoint">Endpoint</span>
           <code class="mcp-url-value">https://leporello.app/mcp</code>
           <button class="mcp-copy" type="button" aria-label="Copy endpoint URL">
             <svg class="mcp-copy-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11V3a1.5 1.5 0 011.5-1.5H11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
@@ -74,20 +78,22 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
       <div class="footer-inner">
         <div class="footer-grid">
           <div class="footer-section">
-            <h3 class="footer-heading">Sources</h3>
+            <h3 class="footer-heading" data-i18n="footer.sources">Sources</h3>
             <ul class="footer-venues">
               {venueAgeList.map(({ venue, age, count }) => (
                 <li class="footer-venue-row">
                   <a href={venue.url} target="_blank" rel="noopener" class="footer-venue-name">{venue.name}</a>
                   <span class="footer-venue-meta">
-                    {count} {count === 1 ? 'event' : 'events'} &middot; updated {formatAge(age)}
+                    <span data-i18n={count === 1 ? 'footer.event_one' : 'footer.events'} data-i18n-vars={JSON.stringify({ n: String(count) })}>{count} {count === 1 ? 'event' : 'events'}</span>
+                    &middot;
+                    <span data-i18n={age ? 'footer.updated' : 'footer.updated_never'} data-i18n-vars={age ? JSON.stringify({ date: '__date__' }) : undefined} data-i18n-date={age ?? undefined}>{age ? `updated ${formatAge(age)}` : 'updated never'}</span>
                   </span>
                 </li>
               ))}
             </ul>
           </div>
           <div class="footer-section footer-about">
-            <p class="footer-note">
+            <p class="footer-note" data-i18n="footer.note">
               Leporello aggregates publicly available concert schedules.
               All event data belongs to the respective venues.
             </p>
@@ -99,6 +105,18 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
 
   <script>
     import '../scripts/filter.ts';
+    import { applyTranslations, getLang } from '../i18n/index.ts';
+
+    // Apply translations to data-i18n elements
+    applyTranslations();
+
+    // Set language switcher to current language
+    const langSwitcher = document.getElementById('lang-switcher') as HTMLSelectElement;
+    langSwitcher.value = getLang();
+    langSwitcher.addEventListener('change', () => {
+      localStorage.setItem('lang', langSwitcher.value);
+      location.reload();
+    });
 
     document.querySelector('.mcp-copy')?.addEventListener('click', async (e) => {
       const btn = (e.currentTarget as HTMLElement);
@@ -131,6 +149,31 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
     max-width: 1400px;
     margin: 0 auto;
     padding: 0.5rem 2.5rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .lang-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 400;
+    padding: 0.35rem 0.6rem;
+    cursor: pointer;
+    outline: none;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+
+  .lang-select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 
   .header-brand {
