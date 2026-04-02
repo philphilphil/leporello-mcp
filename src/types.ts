@@ -9,7 +9,7 @@ export interface Venue {
   name: string;
   city_id: string;
   url: string;
-  last_scraped: string | null;
+  last_scraped: string | null; // ISO 8601
 }
 
 export interface Event {
