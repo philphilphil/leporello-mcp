@@ -22,10 +22,17 @@ function formatAge(iso: string | null): string {
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
+// Per-venue event counts for footer
+const eventCountByVenue: Record<string, number> = {};
+for (const e of events) {
+  eventCountByVenue[e.venue_id] = (eventCountByVenue[e.venue_id] ?? 0) + 1;
+}
+
 // Venues with data age for footer
-const venueAgeList: Array<{ venue: Venue; age: string | null }> = venues.map(v => ({
+const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> = venues.map(v => ({
   venue: v,
   age: dataAge[v.id] ?? null,
+  count: eventCountByVenue[v.id] ?? 0,
 }));
 ---
 
@@ -72,10 +79,11 @@ const venueAgeList: Array<{ venue: Venue; age: string | null }> = venues.map(v =
         <div class="footer-content">
           <p class="footer-heading">Data sources</p>
           <ul class="footer-venues">
-            {venueAgeList.map(({ venue, age }) => (
+            {venueAgeList.map(({ venue, age, count }) => (
               <li class="footer-venue-row">
                 <span class="footer-venue-name">{venue.name}</span>
                 <span class="footer-venue-city">{venue.city_name}</span>
+                <span class="footer-venue-count">{count} {count === 1 ? 'event' : 'events'}</span>
                 <span class="footer-venue-age">Updated {formatAge(age)}</span>
               </li>
             ))}
@@ -242,6 +250,14 @@ const venueAgeList: Array<{ venue: Venue; age: string | null }> = venues.map(v =
     color: var(--text-faint);
     font-weight: 300;
     letter-spacing: 0.02em;
+  }
+
+  .footer-venue-count {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    font-weight: 300;
+    white-space: nowrap;
   }
 
   .footer-venue-age {

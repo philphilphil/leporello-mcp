@@ -34,6 +34,10 @@ const data: PageData = JSON.parse(
   document.getElementById('event-data')!.textContent!
 );
 
+function esc(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 const citySelect = document.getElementById('filter-city') as HTMLSelectElement;
 const venueSelect = document.getElementById('filter-venue') as HTMLSelectElement;
 const daysSelect = document.getElementById('filter-days') as HTMLSelectElement;
@@ -149,14 +153,15 @@ function render(): void {
     html += `<div class="date-group">`;
     html += `<h3 class="date-header">${formatDate(date)}</h3>`;
     for (const e of evts) {
-      const time = e.time ?? '';
-      const details = [e.venue_name, e.conductor].filter(Boolean).join(' · ');
-      const tag = e.url ? 'a' : 'div';
-      const href = e.url ? ` href="${e.url}" target="_blank" rel="noopener"` : '';
+      const time = esc(e.time ?? '');
+      const details = esc([e.venue_name, e.conductor].filter(Boolean).join(' · '));
+      const safeUrl = e.url && /^https?:\/\//.test(e.url) ? e.url : null;
+      const tag = safeUrl ? 'a' : 'div';
+      const href = safeUrl ? ` href="${esc(safeUrl)}" target="_blank" rel="noopener"` : '';
       html += `<${tag} class="event-row"${href}>`;
       html += `<span class="event-time">${time}</span>`;
       html += `<div class="event-info">`;
-      html += `<span class="event-title">${e.title}</span>`;
+      html += `<span class="event-title">${esc(e.title)}</span>`;
       html += `<span class="event-details">${details}</span>`;
       html += `</div>`;
       html += `</${tag}>`;

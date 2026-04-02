@@ -143,6 +143,12 @@ const { cities } = Astro.props;
     border-bottom-color: var(--gold);
   }
 
+  .filter-select:focus-visible,
+  .filter-input:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
   .filter-select option {
     background: var(--bg-subtle);
     color: var(--text);
