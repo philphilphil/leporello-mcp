@@ -74,9 +74,10 @@ SQLite at `DB_PATH` env var (default `./data/erda.db`). Initialized on `getDb()`
 
 | Tool | Input | Notes |
 |---|---|---|
-| `list_cities` | — | Reads `cities` + venue count join |
-| `list_venues` | `city?` | `city` is lowercased and matched against `city_id` |
-| `get_events` | `city?`, `venue_id?`, `days_ahead?` | `days_ahead` default 30, max 90; returns `data_age` map |
+| `list_countries` | — | Returns countries with city/venue counts |
+| `list_cities` | `country?` | Filter by ISO country code (e.g. "DE") |
+| `list_venues` | `country?`, `city?` | Cascading filter: country → city |
+| `list_events` | `country?`, `city?`, `venue_id?`, `days_ahead?` | `days_ahead` default 30, max 90; returns `data_age` map |
 
 ## Scraper pattern
 

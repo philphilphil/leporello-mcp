@@ -62,8 +62,29 @@ function initSchema(db: Database.Database): void {
 
 // ── Query helpers ──────────────────────────────────────────────────────────────
 
-export function getCities(): Array<City & { venue_count: number }> {
+export function getCountries(): Array<{ country: string; city_count: number; venue_count: number }> {
   return getDb().prepare(`
+    SELECT c.country, COUNT(DISTINCT c.id) AS city_count, COUNT(v.id) AS venue_count
+    FROM cities c
+    LEFT JOIN venues v ON v.city_id = c.id
+    GROUP BY c.country
+    ORDER BY c.country
+  `).all() as Array<{ country: string; city_count: number; venue_count: number }>;
+}
+
+export function getCities(country?: string): Array<City & { venue_count: number }> {
+  const db = getDb();
+  if (country) {
+    return db.prepare(`
+      SELECT c.id, c.name, c.country, COUNT(v.id) AS venue_count
+      FROM cities c
+      LEFT JOIN venues v ON v.city_id = c.id
+      WHERE c.country = ?
+      GROUP BY c.id
+      ORDER BY c.name
+    `).all(country.toUpperCase()) as Array<City & { venue_count: number }>;
+  }
+  return db.prepare(`
     SELECT c.id, c.name, c.country, COUNT(v.id) AS venue_count
     FROM cities c
     LEFT JOIN venues v ON v.city_id = c.id
@@ -72,27 +93,36 @@ export function getCities(): Array<City & { venue_count: number }> {
   `).all() as Array<City & { venue_count: number }>;
 }
 
-export function getVenues(
-  cityId?: string,
-): Array<Venue & { city_name: string; country: string }> {
+export function getVenues(opts?: {
+  cityId?: string;
+  country?: string;
+}): Array<Venue & { city_name: string; country: string }> {
   const db = getDb();
-  if (cityId) {
-    return db.prepare(`
-      SELECT v.*, c.name AS city_name, c.country
-      FROM venues v JOIN cities c ON c.id = v.city_id
-      WHERE v.city_id = ? OR LOWER(c.name) = ?
-      ORDER BY v.name
-    `).all(cityId, cityId) as Array<Venue & { city_name: string; country: string }>;
-  }
-  return db.prepare(`
+  let sql = `
     SELECT v.*, c.name AS city_name, c.country
     FROM venues v JOIN cities c ON c.id = v.city_id
-    ORDER BY v.name
-  `).all() as Array<Venue & { city_name: string; country: string }>;
+  `;
+  const conditions: string[] = [];
+  const params: unknown[] = [];
+
+  if (opts?.cityId) {
+    conditions.push('(v.city_id = ? OR LOWER(c.name) = ?)');
+    params.push(opts.cityId, opts.cityId);
+  }
+  if (opts?.country) {
+    conditions.push('c.country = ?');
+    params.push(opts.country.toUpperCase());
+  }
+
+  if (conditions.length) sql += ' WHERE ' + conditions.join(' AND ');
+  sql += ' ORDER BY v.name';
+
+  return db.prepare(sql).all(...params) as Array<Venue & { city_name: string; country: string }>;
 }
 
 export function getEvents(opts: {
   cityId?: string;
+  country?: string;
   venueId?: string;
   daysAhead: number;
 }): Array<Event & { venue_name: string }> {
@@ -116,6 +146,9 @@ export function getEvents(opts: {
   } else if (opts.cityId) {
     sql += ' AND (v.city_id = ? OR LOWER(c.name) = ?)';
     params.push(opts.cityId, opts.cityId);
+  } else if (opts.country) {
+    sql += ' AND c.country = ?';
+    params.push(opts.country.toUpperCase());
   }
 
   sql += " ORDER BY e.date, COALESCE(e.time, '')";

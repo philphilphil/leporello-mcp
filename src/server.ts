@@ -5,7 +5,7 @@ import { createServer, type IncomingMessage, type ServerResponse } from 'node:ht
 import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
-import { getCities, getVenues, getEvents } from './db.js';
+import { getCountries, getCities, getVenues, getEvents } from './db.js';
 
 function parseCast(raw: unknown): string[] | undefined {
   if (typeof raw !== 'string') return undefined;
@@ -22,11 +22,28 @@ function buildMcpServer(): McpServer {
   const server = new McpServer({ name: 'leporello', version: '1.0.0' });
 
   server.tool(
-    'list_cities',
-    'List all cities that have classical music or opera venues in the database.',
+    'list_countries',
+    'List all countries that have classical music or opera venues.',
     {},
     async () => {
-      const cities = getCities();
+      const countries = getCountries();
+      return {
+        content: [{ type: 'text', text: JSON.stringify({ countries }) }],
+      };
+    },
+  );
+
+  server.tool(
+    'list_cities',
+    'List cities with classical music or opera venues. Optionally filter by country.',
+    {
+      country: z
+        .string()
+        .optional()
+        .describe('ISO 3166-1 alpha-2 country code, e.g. "DE", "AT", "US"'),
+    },
+    async ({ country }) => {
+      const cities = getCities(country);
       return {
         content: [{ type: 'text', text: JSON.stringify({ cities }) }],
       };
@@ -35,15 +52,22 @@ function buildMcpServer(): McpServer {
 
   server.tool(
     'list_venues',
-    'List all classical music and opera venues. Optionally filter by city name.',
+    'List classical music and opera venues. Filter by country or city.',
     {
+      country: z
+        .string()
+        .optional()
+        .describe('ISO 3166-1 alpha-2 country code, e.g. "DE", "AT", "US"'),
       city: z
         .string()
         .optional()
         .describe('City name to filter by, e.g. "Stuttgart"'),
     },
-    async ({ city }) => {
-      const venues = getVenues(city?.toLowerCase()).map((v) => ({
+    async ({ country, city }) => {
+      const venues = getVenues({
+        cityId: city?.toLowerCase(),
+        country,
+      }).map((v) => ({
         id: v.id,
         name: v.name,
         city: v.city_name,
@@ -57,9 +81,13 @@ function buildMcpServer(): McpServer {
   );
 
   server.tool(
-    'get_events',
-    'Get upcoming classical music and opera events. Filter by city or venue. Returns data_age so the caller knows how fresh the data is.',
+    'list_events',
+    'List upcoming classical music and opera events. Filter by country, city, or venue. Returns data_age so the caller knows how fresh the data is.',
     {
+      country: z
+        .string()
+        .optional()
+        .describe('ISO 3166-1 alpha-2 country code, e.g. "DE", "AT", "US"'),
       city: z.string().optional().describe('City name, e.g. "Stuttgart"'),
       venue_id: z
         .string()
@@ -73,14 +101,18 @@ function buildMcpServer(): McpServer {
         .optional()
         .describe('How many days ahead to look (default: 30, max: 90)'),
     },
-    async ({ city, venue_id, days_ahead }) => {
+    async ({ country, city, venue_id, days_ahead }) => {
       const rows = getEvents({
         cityId: city?.toLowerCase(),
+        country,
         venueId: venue_id,
         daysAhead: days_ahead ?? 30,
       });
 
-      const venueRows = getVenues(city?.toLowerCase());
+      const venueRows = getVenues({
+        cityId: city?.toLowerCase(),
+        country,
+      });
       const data_age: Record<string, string> = {};
       for (const v of venueRows) {
         if (venue_id && v.id !== venue_id) continue;
