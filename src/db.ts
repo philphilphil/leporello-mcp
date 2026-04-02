@@ -62,7 +62,7 @@ function seedStaticData(db: Database.Database): void {
     `INSERT OR IGNORE INTO venues (id, name, city_id, url) VALUES (?, ?, ?, ?)`
   );
   ins.run('staatsoper-stuttgart', 'Staatsoper Stuttgart', 'stuttgart',
-    'https://www.oper-stuttgart.de/spielplan/');
+    'https://www.staatsoper-stuttgart.de/spielplan/kalender/');
   ins.run('philharmoniker-stuttgart', 'Stuttgarter Philharmoniker', 'stuttgart',
     'https://www.stuttgarter-philharmoniker.de/konzerte/');
 }
