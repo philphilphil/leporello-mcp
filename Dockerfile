@@ -17,6 +17,7 @@ COPY --from=builder /app/dist ./dist
 COPY web/package*.json ./web/
 RUN cd web && npm ci
 COPY web/astro.config.ts web/tsconfig.json ./web/
+COPY web/public ./web/public
 COPY web/src ./web/src
 RUN mkdir -p data
 ENV NODE_ENV=production
