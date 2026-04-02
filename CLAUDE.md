@@ -71,6 +71,7 @@ SQLite at `DB_PATH` env var (default `./data/leporello.db`). Initialized on `get
 2. Fetch fixture: `curl -s -A "Mozilla/5.0..." <url> -o src/scrapers/__fixtures__/<venue-id>.html`
 3. Write tests in `src/scrapers/__tests__/<venue-id>.test.ts` (see existing tests)
 4. Add to `scrapers` array in `src/scheduler.ts`
+5. **PR description MUST include a clickable link to the venue's schedule page** (e.g. `**Schedule URL:** https://...`)
 
 ## MCP tools
 

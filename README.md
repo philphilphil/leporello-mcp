@@ -193,4 +193,13 @@ npm run scrape         # live scrape, check output for scrape_success
 
 ### 6. Open a PR
 
-Include a link to the venue's public schedule page (the calendar/Spielplan URL the scraper reads from) in the PR description so reviewers can manually verify the scraped output against the real listings.
+**IMPORTANT: The PR description MUST include a clickable link to the venue's public schedule page** (the calendar/Spielplan URL the scraper reads from). Reviewers use this to manually verify the scraped output against the real listings.
+
+Example PR description:
+
+```markdown
+## Summary
+- Add scraper for **Venue Name** (City, CC) — Closes #N
+- **Schedule URL:** https://example.com/schedule/
+- Brief description of how the scraper works
+```
