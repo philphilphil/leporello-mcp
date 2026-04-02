@@ -1,37 +1,16 @@
 # Erda
 
-A remote MCP server that aggregates classical music and opera schedules from Stuttgart venues and serves them via three MCP tools.
+A remote MCP server that aggregates classical music and opera schedules from German venues and serves them via three MCP tools.
 
-## Tools
+## MCP Tools
 
 | Tool | Description |
 |---|---|
 | `list_cities` | All cities with venues |
 | `list_venues` | All venues, optionally filtered by city |
-| `get_events` | Upcoming events, filtered by city or venue, with data freshness info |
-
-## Quick start
-
-```bash
-git clone <repo>
-cd erda
-cp .env.sample .env
-npm install
-npm run dev
-```
-
-The server starts on `http://localhost:3000`. On first run it scrapes both venues automatically (~30s).
-
-**Run a one-off scrape** (no server):
-```bash
-npm run scrape
-```
-
-**Inspect the data** — the SQLite database is at `data/erda.db`. Open it in any SQLite browser (e.g. DB Browser for SQLite) to explore the `cities`, `venues`, and `events` tables.
+| `get_events` | Upcoming events filtered by city or venue |
 
 ## Connect to Claude
-
-Add to your Claude Desktop `claude_desktop_config.json`:
 
 ```json
 {
@@ -43,76 +22,198 @@ Add to your Claude Desktop `claude_desktop_config.json`:
 }
 ```
 
-Or for local development:
-
-```json
-{
-  "mcpServers": {
-    "erda": {
-      "url": "http://localhost:3000/mcp"
-    }
-  }
-}
-```
-
-## Calling the API directly
-
-The MCP endpoint requires these headers:
+## Run locally
 
 ```bash
-curl -s -X POST http://localhost:3000/mcp \
-  -H "Content-Type: application/json" \
-  -H "Accept: application/json, text/event-stream" \
-  -d '{"jsonrpc":"2.0","method":"tools/call","params":{"name":"list_cities","arguments":{}},"id":1}'
+npm install
+npm run dev       # start server on http://localhost:3000
+npm run scrape    # one-off scrape, no server
+npm test          # run scraper tests
 ```
 
-The response is SSE — the JSON payload is on the `data:` line.
-
-## Deploy (Docker + Traefik)
-
-1. Copy `.env.sample` to `.env` and set values
-2. Update the hostname in `docker-compose.yml` (`erda.example.com` → your domain)
-3. Run:
+## Deploy
 
 ```bash
+# 1. Update the hostname in docker-compose.yml
+# 2. Run
 docker compose up -d
 ```
 
-The container scrapes on startup if the database is empty, then runs daily at 03:00 UTC.
+Scrapes on startup if the database is empty, then daily at 03:00 UTC.
 
-## Environment variables
-
-| Variable | Default | Description |
-|---|---|---|
-| `PORT` | `3000` | HTTP port |
-| `DB_PATH` | `./data/erda.db` | SQLite file path |
-| `SCRAPE_CRON` | `0 3 * * *` | Cron expression for daily scrape |
-
-## Adding a new venue
-
-1. Add the city to `seedStaticData()` in `src/db.ts` (if not already there)
-2. Add the venue to `seedStaticData()` in `src/db.ts`
-3. Create `src/scrapers/<venue-id>.ts` implementing the `Scraper` interface (use an existing scraper as reference)
-4. Fetch and save the HTML fixture: `curl -s -A "Mozilla/5.0..." <url> -o src/scrapers/__fixtures__/<venue-id>.html`
-5. Write tests in `src/scrapers/__tests__/<venue-id>.test.ts`
-6. Register the scraper in the `scrapers` array in `src/scheduler.ts`
-
-## Refreshing a broken scraper
-
-When a venue redesigns their site and the scraper returns 0 events:
-
-```bash
-# Save fresh fixture
-curl -s -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" \
-  <venue-url> -o src/scrapers/__fixtures__/<venue-id>.html
-
-# Fix selectors in the scraper, then verify
-npm test
-```
-
-## Current venues
+## Venues
 
 | ID | Venue |
 |---|---|
 | `staatsoper-stuttgart` | Staatsoper Stuttgart |
 | `philharmoniker-stuttgart` | Stuttgarter Philharmoniker |
+
+---
+
+## Contribute a Scraper
+
+> **This section is written for code agents.** Follow these instructions exactly to add a new venue scraper.
+
+### 1. Seed the database
+
+In `src/db.ts` → `seedStaticData()`, add the city (if new) and venue:
+
+```typescript
+db.prepare(`INSERT OR IGNORE INTO cities (id, name, country) VALUES (?, ?, ?)`)
+  .run('munich', 'Munich', 'DE');
+
+db.prepare(`INSERT OR IGNORE INTO venues (id, name, city_id, url) VALUES (?, ?, ?, ?)`)
+  .run('bayerische-staatsoper', 'Bayerische Staatsoper', 'munich',
+    'https://www.staatsoper.de/spielplan/');
+```
+
+### 2. Create the scraper
+
+Create `src/scrapers/<venue-id>.ts`. Implement the `Scraper` interface from `./base.js`:
+
+```typescript
+import { load } from 'cheerio';
+import type { Event } from '../types.js';
+import { generateEventId, type Scraper } from './base.js';
+
+type FetchHtml = () => Promise<string>;
+
+const SCHEDULE_URL = 'https://example.com/schedule/';
+const BASE_URL = 'https://example.com';
+
+export class MyVenueScraper implements Scraper {
+  readonly venueId = '<venue-id>';
+
+  constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
+
+  async scrape(): Promise<Event[]> {
+    const html = this.opts.fetchHtml
+      ? await this.opts.fetchHtml()
+      : await fetch(SCHEDULE_URL).then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status} from ${SCHEDULE_URL}`);
+          return r.text();
+        });
+    return this.parse(html);
+  }
+
+  parse(html: string): Event[] {
+    const $ = load(html);
+    const events: Event[] = [];
+    const now = new Date().toISOString();
+
+    $('selector-for-each-event').each((_, el) => {
+      try {
+        const title = $(el).find('...').text().trim();
+        const date = '...';   // "YYYY-MM-DD"
+        const time = '...';   // "HH:MM" or null
+        const location = '...'; // physical venue name or null
+        const href = $(el).find('a').attr('href') ?? '';
+        const url = href ? new URL(href, BASE_URL + '/').href : null;
+
+        if (!title || !date) return;
+
+        events.push({
+          id: generateEventId(this.venueId, date, time, title),
+          venue_id: this.venueId,
+          title,
+          date,
+          time,
+          conductor: null,
+          cast: null,
+          location,
+          url,
+          scraped_at: now,
+        });
+      } catch {
+        // skip malformed entries silently
+      }
+    });
+
+    return events;
+  }
+}
+```
+
+Rules:
+- All 9 `Event` fields must be set (`null` is fine for optional ones)
+- Use `generateEventId(venueId, date, time, title)` — never invent IDs
+- Use `new URL(href, BASE_URL + '/').href` for absolute URLs
+- Silently skip malformed entries with try/catch per element
+- Throw on non-2xx HTTP (the scheduler catches and logs it)
+
+### 3. Save an HTML fixture
+
+```bash
+curl -s -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" \
+  <schedule-url> -o src/scrapers/__fixtures__/<venue-id>.html
+```
+
+If curl is blocked (403/empty), use Playwright:
+
+```typescript
+// fetch-fixture.ts (run once, then delete)
+import { chromium } from 'playwright';
+import { writeFileSync } from 'node:fs';
+const browser = await chromium.launch();
+const page = await browser.newPage();
+await page.goto('<schedule-url>');
+writeFileSync('src/scrapers/__fixtures__/<venue-id>.html', await page.content());
+await browser.close();
+```
+
+### 4. Write tests
+
+Create `src/scrapers/__tests__/<venue-id>.test.ts`:
+
+```typescript
+import { readFileSync } from 'node:fs';
+import { describe, it, expect } from 'vitest';
+import { MyVenueScraper } from '../<venue-id>.js';
+
+const fixture = readFileSync(
+  new URL('../__fixtures__/<venue-id>.html', import.meta.url),
+  'utf-8',
+);
+
+describe('MyVenueScraper', () => {
+  it('returns events from fixture', async () => {
+    const scraper = new MyVenueScraper({ fetchHtml: async () => fixture });
+    const events = await scraper.scrape();
+    expect(events.length).toBeGreaterThan(0);
+  });
+
+  it('event fields are valid', async () => {
+    const scraper = new MyVenueScraper({ fetchHtml: async () => fixture });
+    const [event] = await scraper.scrape();
+    expect(event.id).toMatch(/^[0-9a-f]{16}$/);
+    expect(event.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(event.title.length).toBeGreaterThan(0);
+    expect(event.venue_id).toBe('<venue-id>');
+  });
+
+  it('uses fetchHtml injection in tests (no network)', async () => {
+    const scraper = new MyVenueScraper({ fetchHtml: async () => fixture });
+    await expect(scraper.scrape()).resolves.toBeDefined();
+  });
+});
+```
+
+### 5. Register the scraper
+
+In `src/scheduler.ts`, add to the `scrapers` array:
+
+```typescript
+import { MyVenueScraper } from './scrapers/<venue-id>.js';
+
+const scrapers: Scraper[] = [
+  // existing scrapers...
+  new MyVenueScraper(),
+];
+```
+
+### 6. Verify
+
+```bash
+npm test               # all tests must pass
+npm run scrape         # live scrape, check output for scrape_success
+```
