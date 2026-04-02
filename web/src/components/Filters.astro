@@ -79,9 +79,9 @@ const { cities } = Astro.props;
   }
 
   .filters-inner {
-    max-width: 1080px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2.5rem;
+    padding: 0 3rem;
     display: flex;
     gap: 0;
     align-items: stretch;
@@ -92,13 +92,18 @@ const { cities } = Astro.props;
     flex-direction: column;
     justify-content: center;
     gap: 0.35rem;
-    padding: 1.15rem 2rem 1.15rem 0;
+    padding: 1.15rem 2rem;
     border-right: 1px solid var(--border-light);
     min-width: 0;
   }
 
   .filter-group:first-child {
     padding-left: 0;
+  }
+
+  .filter-group:nth-child(2),
+  .filter-group:nth-child(3) {
+    padding-left: 2rem;
   }
 
   .filter-group:last-child {
