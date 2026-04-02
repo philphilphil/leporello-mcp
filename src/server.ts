@@ -19,7 +19,11 @@ function parseCast(raw: unknown): string[] | undefined {
 }
 
 function buildMcpServer(): McpServer {
-  const server = new McpServer({ name: 'leporello', version: '1.0.0' });
+  const server = new McpServer({
+    name: 'leporello',
+    version: '1.0.0',
+    icons: [{ src: 'https://leporello.app/concert_note.svg', mimeType: 'image/svg+xml' }],
+  });
 
   server.tool(
     'list_countries',
