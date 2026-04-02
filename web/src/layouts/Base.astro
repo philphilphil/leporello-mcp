@@ -13,7 +13,7 @@ const { title } = Astro.props;
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -22,19 +22,19 @@ const { title } = Astro.props;
     }
 
     :root {
-      --bg:          #141210;
-      --bg-raised:   #1c1916;
-      --bg-subtle:   #201e1b;
-      --border:      #2e2b27;
-      --border-mid:  #3d3930;
-      --text:        #f0ebe3;
-      --text-muted:  #8a8278;
-      --text-faint:  #8a8480;
-      --gold:        #c9a96e;
-      --gold-dim:    #8a7148;
-      --gold-bright: #e0c084;
-      --serif:       'EB Garamond', Georgia, serif;
-      --sans:        'DM Sans', system-ui, sans-serif;
+      --bg:           #FAF7F2;
+      --bg-warm:      #F3EDE4;
+      --bg-card:      #FFFFFF;
+      --border:       #E2DCD4;
+      --border-light: #EDE8E0;
+      --text:         #2A2520;
+      --text-mid:     #5C554D;
+      --text-muted:   #8A8278;
+      --accent:       #8B2635;
+      --accent-light: #A83244;
+      --accent-faint: rgba(139, 38, 53, 0.07);
+      --serif:        'Cormorant Garamond', 'Georgia', serif;
+      --sans:         'Source Sans 3', 'Segoe UI', sans-serif;
     }
 
     html {
@@ -47,7 +47,7 @@ const { title } = Astro.props;
       background-color: var(--bg);
       color: var(--text);
       font-family: var(--sans);
-      font-weight: 300;
+      font-weight: 400;
       min-height: 100vh;
       line-height: 1.6;
     }
@@ -58,22 +58,8 @@ const { title } = Astro.props;
     }
 
     ::selection {
-      background: var(--gold-dim);
-      color: var(--text);
-    }
-
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--bg);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--border-mid);
-      border-radius: 3px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--gold-dim);
+      background: var(--accent);
+      color: #fff;
     }
   </style>
 </head>

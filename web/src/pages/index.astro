@@ -10,25 +10,22 @@ const venues = getVenues();
 const events = getEvents(90);
 const dataAge: Record<string, string | null> = {};
 for (const v of venues) {
-  dataAge[v.id] = v.last_scraped ?? null;
+  if (v.last_scraped) dataAge[v.id] = v.last_scraped;
 }
 
 const pageData = { cities, venues, events, dataAge };
 
-// Format a last_scraped timestamp for display
 function formatAge(iso: string | null): string {
   if (!iso) return 'never';
   const d = new Date(iso);
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
-// Per-venue event counts for footer
 const eventCountByVenue: Record<string, number> = {};
 for (const e of events) {
   eventCountByVenue[e.venue_id] = (eventCountByVenue[e.venue_id] ?? 0) + 1;
 }
 
-// Venues with data age for footer
 const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> = venues.map(v => ({
   venue: v,
   age: dataAge[v.id] ?? null,
@@ -37,71 +34,54 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
 ---
 
 <Base title="Erda — Classical Music Events">
-  <!-- Embedded data for filter.ts -->
   <script type="application/json" id="event-data" set:html={JSON.stringify(pageData)} />
 
   <div class="page-wrapper">
-    <!-- ══ HEADER ══ -->
     <header class="site-header">
       <div class="header-inner">
         <div class="header-brand">
           <h1 class="site-title">Erda</h1>
-          <p class="site-tagline">Classical music &amp; opera events</p>
-        </div>
-        <div class="header-ornament" aria-hidden="true">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Lyre silhouette, minimal -->
-            <ellipse cx="24" cy="38" rx="10" ry="5" stroke="#c9a96e" stroke-width="1.5" fill="none"/>
-            <line x1="24" y1="33" x2="24" y2="8" stroke="#c9a96e" stroke-width="1.5"/>
-            <path d="M14 18 Q10 10 24 8 Q38 10 34 18" stroke="#c9a96e" stroke-width="1.5" fill="none"/>
-            <!-- Strings -->
-            <line x1="19" y1="19" x2="17" y2="33" stroke="#c9a96e" stroke-width="0.8" opacity="0.6"/>
-            <line x1="22" y1="18" x2="21" y2="33" stroke="#c9a96e" stroke-width="0.8" opacity="0.6"/>
-            <line x1="26" y1="18" x2="27" y2="33" stroke="#c9a96e" stroke-width="0.8" opacity="0.6"/>
-            <line x1="29" y1="19" x2="31" y2="33" stroke="#c9a96e" stroke-width="0.8" opacity="0.6"/>
-          </svg>
+          <div class="title-rule"></div>
+          <p class="site-tagline">Classical Music & Opera Events</p>
         </div>
       </div>
     </header>
 
-    <!-- ══ FILTERS ══ -->
     <Filters cities={cities} />
 
-    <!-- ══ EVENT LIST ══ -->
     <EventList />
 
-    <!-- ══ FOOTER ══ -->
     <footer class="site-footer">
       <div class="footer-inner">
-        <div class="footer-rule" aria-hidden="true">
-          <span class="footer-rule-ornament">◆</span>
-        </div>
-        <div class="footer-content">
-          <p class="footer-heading">Data sources</p>
-          <ul class="footer-venues">
-            {venueAgeList.map(({ venue, age, count }) => (
-              <li class="footer-venue-row">
-                <span class="footer-venue-name">{venue.name}</span>
-                <span class="footer-venue-city">{venue.city_name}</span>
-                <span class="footer-venue-count">{count} {count === 1 ? 'event' : 'events'}</span>
-                <span class="footer-venue-age">Updated {formatAge(age)}</span>
-              </li>
-            ))}
-          </ul>
-          <p class="footer-note">
-            Erda scrapes publicly available concert schedules. All event data belongs to the respective venues.
-          </p>
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h3 class="footer-heading">Sources</h3>
+            <ul class="footer-venues">
+              {venueAgeList.map(({ venue, age, count }) => (
+                <li class="footer-venue-row">
+                  <a href={venue.url} target="_blank" rel="noopener" class="footer-venue-name">{venue.name}</a>
+                  <span class="footer-venue-meta">
+                    {count} {count === 1 ? 'event' : 'events'} &middot; updated {formatAge(age)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="footer-section footer-about">
+            <p class="footer-note">
+              Erda aggregates publicly available concert schedules.
+              All event data belongs to the respective venues.
+            </p>
+          </div>
         </div>
       </div>
     </footer>
   </div>
 
-  <!-- Client-side filter logic -->
   <script>import '../scripts/filter.ts';</script>
 </Base>
 
 <style>
-  /* ── Page wrapper ── */
   .page-wrapper {
     display: flex;
     flex-direction: column;
@@ -110,199 +90,147 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
 
   /* ── Header ── */
   .site-header {
-    border-bottom: 1px solid var(--border);
     background: var(--bg);
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Subtle grain texture overlay */
-  .site-header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    opacity: 0.5;
-    pointer-events: none;
+    padding-top: 1rem;
   }
 
   .header-inner {
-    max-width: 1100px;
+    max-width: 960px;
     margin: 0 auto;
-    padding: 2.25rem 2rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
+    padding: 2.5rem 2rem 1.75rem;
   }
 
   .header-brand {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    align-items: flex-start;
+    gap: 0;
   }
 
   .site-title {
     font-family: var(--serif);
-    font-size: 2.6rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
+    font-size: 3.2rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
     color: var(--text);
     line-height: 1;
-    /* Italic for operatic character */
-    font-style: italic;
+  }
+
+  .title-rule {
+    width: 2.5rem;
+    height: 2px;
+    background: var(--accent);
+    margin: 0.7rem 0 0.6rem;
   }
 
   .site-tagline {
-    font-family: var(--serif);
-    font-size: 0.78rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
+    font-family: var(--sans);
+    font-size: 0.8rem;
     font-weight: 400;
-    font-style: normal;
-  }
-
-  .header-ornament {
-    opacity: 0.7;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
   }
 
   /* ── Footer ── */
   .site-footer {
     margin-top: auto;
+    background: var(--bg-warm);
     border-top: 1px solid var(--border);
-    background: var(--bg);
   }
 
   .footer-inner {
-    max-width: 1100px;
+    max-width: 960px;
     margin: 0 auto;
     padding: 2.5rem 2rem 3rem;
   }
 
-  .footer-rule {
+  .footer-grid {
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    color: var(--border-mid);
+    gap: 4rem;
+    align-items: flex-start;
   }
 
-  .footer-rule::before,
-  .footer-rule::after {
-    content: '';
+  .footer-section {
     flex: 1;
-    height: 1px;
-    background: var(--border);
   }
 
-  .footer-rule-ornament {
-    font-size: 0.5rem;
-    color: var(--gold-dim);
-  }
-
-  .footer-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+  .footer-about {
+    flex: 0 0 auto;
+    max-width: 280px;
   }
 
   .footer-heading {
-    font-family: var(--serif);
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--text-faint);
+    color: var(--text-muted);
+    margin-bottom: 1rem;
   }
 
   .footer-venues {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0;
+    gap: 0.6rem;
   }
 
   .footer-venue-row {
     display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 0.55rem 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.8rem;
-  }
-
-  .footer-venue-row:first-child {
-    border-top: 1px solid var(--border);
+    flex-direction: column;
+    gap: 0.1rem;
   }
 
   .footer-venue-name {
     font-family: var(--serif);
-    color: var(--text-muted);
-    font-size: 0.875rem;
-    font-style: italic;
-    flex: 1;
-    min-width: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    transition: color 0.12s ease;
   }
 
-  .footer-venue-city {
+  .footer-venue-name:hover {
+    color: var(--accent);
+  }
+
+  .footer-venue-meta {
     font-family: var(--sans);
     font-size: 0.75rem;
-    color: var(--text-faint);
-    font-weight: 300;
-    letter-spacing: 0.02em;
-  }
-
-  .footer-venue-count {
-    font-family: var(--sans);
-    font-size: 0.72rem;
-    color: var(--text-faint);
-    font-weight: 300;
-    white-space: nowrap;
-  }
-
-  .footer-venue-age {
-    font-family: var(--sans);
-    font-size: 0.72rem;
-    color: var(--text-faint);
-    font-weight: 300;
-    white-space: nowrap;
+    color: var(--text-muted);
+    font-weight: 400;
   }
 
   .footer-note {
     font-family: var(--sans);
-    font-size: 0.72rem;
-    color: var(--text-faint);
-    font-weight: 300;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 400;
     line-height: 1.6;
-    max-width: 50ch;
   }
 
   /* ── Mobile ── */
   @media (max-width: 700px) {
     .header-inner {
-      padding: 1.5rem 1.25rem;
+      padding: 2rem 1.25rem 1.25rem;
     }
 
     .site-title {
-      font-size: 2rem;
+      font-size: 2.4rem;
     }
 
     .footer-inner {
       padding: 2rem 1.25rem;
     }
 
-    .footer-venue-row {
-      flex-wrap: wrap;
-      gap: 0.25rem 0.75rem;
+    .footer-grid {
+      flex-direction: column;
+      gap: 2rem;
     }
 
-    .footer-venue-city {
-      order: 2;
-    }
-
-    .footer-venue-age {
-      order: 3;
-      width: 100%;
+    .footer-about {
+      max-width: none;
     }
   }
 </style>
