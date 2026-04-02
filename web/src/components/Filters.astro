@@ -1,0 +1,215 @@
+---
+interface City {
+  id: string;
+  name: string;
+  country: string;
+  venue_count: number;
+}
+
+interface Props {
+  cities: City[];
+}
+
+const { cities } = Astro.props;
+---
+
+<aside class="filters-panel">
+  <div class="filters-inner">
+    <div class="filter-group">
+      <label class="filter-label" for="filter-city">City</label>
+      <div class="select-wrapper">
+        <select id="filter-city" class="filter-select">
+          <option value="">All Cities</option>
+          {cities.map(city => (
+            <option value={city.id}>{city.name}</option>
+          ))}
+        </select>
+        <span class="select-arrow">&#8964;</span>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label" for="filter-venue">Venue</label>
+      <div class="select-wrapper">
+        <select id="filter-venue" class="filter-select">
+          <option value="">All Venues</option>
+        </select>
+        <span class="select-arrow">&#8964;</span>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label" for="filter-days">Period</label>
+      <div class="select-wrapper">
+        <select id="filter-days" class="filter-select">
+          <option value="7">Next 7 days</option>
+          <option value="14">Next 14 days</option>
+          <option value="30" selected>Next 30 days</option>
+          <option value="90">Next 90 days</option>
+        </select>
+        <span class="select-arrow">&#8964;</span>
+      </div>
+    </div>
+
+    <div class="filter-group filter-group--search">
+      <label class="filter-label" for="filter-search">Search</label>
+      <div class="input-wrapper">
+        <input
+          id="filter-search"
+          class="filter-input"
+          type="text"
+          placeholder="Search events..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </div>
+    </div>
+  </div>
+</aside>
+
+<style>
+  .filters-panel {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-raised);
+  }
+
+  .filters-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 0;
+    align-items: flex-end;
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.1rem 1.5rem 1.1rem 0;
+    border-right: 1px solid var(--border);
+    min-width: 0;
+  }
+
+  .filter-group:first-child {
+    padding-left: 0;
+  }
+
+  .filter-group:last-child {
+    border-right: none;
+    flex: 1;
+    padding-right: 0;
+  }
+
+  .filter-group--search {
+    padding-left: 1.5rem;
+  }
+
+  .filter-label {
+    font-family: var(--serif);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 400;
+    user-select: none;
+  }
+
+  .select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .filter-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border-mid);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    font-weight: 300;
+    padding: 0.3rem 1.8rem 0.3rem 0;
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+    min-width: 130px;
+    transition: border-color 0.2s;
+  }
+
+  .filter-select:focus {
+    border-bottom-color: var(--gold);
+  }
+
+  .filter-select option {
+    background: var(--bg-subtle);
+    color: var(--text);
+  }
+
+  .select-arrow {
+    position: absolute;
+    right: 0.3rem;
+    color: var(--text-faint);
+    font-size: 1.1rem;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .input-wrapper {
+    width: 100%;
+  }
+
+  .filter-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border-mid);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    font-weight: 300;
+    padding: 0.3rem 0;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.2s;
+  }
+
+  .filter-input::placeholder {
+    color: var(--text-faint);
+    font-style: italic;
+    font-family: var(--serif);
+  }
+
+  .filter-input:focus {
+    border-bottom-color: var(--gold);
+  }
+
+  @media (max-width: 700px) {
+    .filters-inner {
+      flex-direction: column;
+      gap: 0;
+      padding: 0 1.25rem;
+    }
+
+    .filter-group {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 0;
+      width: 100%;
+    }
+
+    .filter-group--search {
+      padding-left: 0;
+    }
+
+    .filter-group:last-child {
+      border-bottom: none;
+    }
+
+    .filter-select {
+      min-width: unset;
+      width: 100%;
+    }
+  }
+</style>

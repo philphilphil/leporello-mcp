@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="4" fill="#141210"/>
+  <!-- Musical note: stem + filled notehead -->
+  <ellipse cx="11" cy="23" rx="5" ry="3.5" fill="#c9a96e" transform="rotate(-15 11 23)"/>
+  <rect x="15.2" y="7" width="2" height="16" fill="#c9a96e"/>
+  <!-- Flag -->
+  <path d="M17.2 7 Q26 10 24 17 Q20 13 17.2 13 Z" fill="#c9a96e"/>
+</svg>
