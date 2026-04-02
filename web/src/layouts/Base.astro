@@ -1,26 +1,36 @@
 ---
+import '@fontsource-variable/eb-garamond/wght.css';
+import '@fontsource-variable/eb-garamond/wght-italic.css';
+import '@fontsource-variable/dm-sans/wght.css';
+
+import type { SupportedLang } from '../i18n/index.ts';
+
 interface Props {
   title: string;
+  lang?: SupportedLang;
+  dynamicLang?: boolean;
 }
-const { title } = Astro.props;
+const { title, lang = 'en', dynamicLang = false } = Astro.props;
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang={lang}>
 <head>
   <meta charset="UTF-8" />
-  <script is:inline>
+  <script is:inline define:vars={{ dynamicLang, lang }}>
     (function() {
-      var s = localStorage.getItem('lang');
-      var d = (navigator.language || '').startsWith('de') ? 'de' : 'en';
-      document.documentElement.lang = s || d;
+      var storedLang = localStorage.getItem('lang');
+      var fallbackLang = (navigator.language || '').startsWith('de') ? 'de' : 'en';
+      var selectedLang = dynamicLang ? (storedLang || fallbackLang) : lang;
+      var resolvedLang = selectedLang === 'de' ? 'de' : 'en';
+      document.documentElement.lang = resolvedLang;
+      if (!dynamicLang) {
+        localStorage.setItem('lang', resolvedLang);
+      }
     })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -40,8 +50,8 @@ const { title } = Astro.props;
       --accent:       #8B2635;
       --accent-light: #A83244;
       --accent-faint: rgba(139, 38, 53, 0.07);
-      --serif:        'Cormorant Garamond', 'Georgia', serif;
-      --sans:         'Source Sans 3', 'Segoe UI', sans-serif;
+      --serif:        'EB Garamond Variable', Georgia, Cambria, "Times New Roman", Times, serif;
+      --sans:         'DM Sans Variable', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     html {

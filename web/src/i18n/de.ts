@@ -20,6 +20,10 @@ const de: Record<string, string> = {
   "footer.updated_never": "nie",
   "footer.note":
     "Leporello sammelt öffentlich verfügbare Konzertprogramme. Alle Veranstaltungsdaten gehören den jeweiligen Spielstätten.",
+  "legal.terms": "Nutzungsbedingungen",
+  "legal.privacy": "Datenschutz",
+  "legal.impressum": "Impressum",
+  "legal.last_updated": "Stand: {date}",
   "event.conductor": "Dirigent",
   "event.cast": "Solisten",
   "mcp.badge": "MCP Server",

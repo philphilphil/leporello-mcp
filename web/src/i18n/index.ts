@@ -5,16 +5,34 @@ const translations: Record<string, Record<string, string>> = { en, de };
 
 export type SupportedLang = "en" | "de";
 
-export function getLang(): SupportedLang {
-  const lang = document.documentElement.lang;
+export type LegalPageSlug = "terms" | "privacy" | "impressum";
+
+export function resolveLang(lang?: string | null): SupportedLang {
   return lang === "de" ? "de" : "en";
 }
 
-export function t(key: string, vars?: Record<string, string | number>): string {
-  const lang = getLang();
-  const str = translations[lang]?.[key] ?? translations.en[key] ?? key;
+export function getLang(): SupportedLang {
+  return resolveLang(document.documentElement.lang);
+}
+
+export function translate(
+  lang: string | null | undefined,
+  key: string,
+  vars?: Record<string, string | number>,
+): string {
+  const resolvedLang = resolveLang(lang);
+  const str = translations[resolvedLang]?.[key] ?? translations.en[key] ?? key;
   if (!vars) return str;
   return str.replace(/\{(\w+)\}/g, (_, k) => String(vars[k] ?? `{${k}}`));
+}
+
+export function t(key: string, vars?: Record<string, string | number>): string {
+  return translate(getLang(), key, vars);
+}
+
+export function getLegalPageHref(page: LegalPageSlug, lang?: string | null): string {
+  const resolvedLang = resolveLang(lang);
+  return resolvedLang === "de" ? `/de/${page}` : `/${page}`;
 }
 
 export function applyTranslations(): void {

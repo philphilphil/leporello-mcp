@@ -33,7 +33,7 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
 }));
 ---
 
-<Base title="Leporello — Opera & classical music event schedules">
+<Base title="Leporello — Opera & classical music event schedules" dynamicLang={true}>
   <script type="application/json" id="event-data" set:html={JSON.stringify(pageData)} />
 
   <div class="page-wrapper">
@@ -97,6 +97,11 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
               Leporello aggregates publicly available concert schedules.
               All event data belongs to the respective venues.
             </p>
+            <nav class="footer-legal">
+              <a href="/terms" data-legal-page="terms" data-i18n="legal.terms">Terms</a>
+              <a href="/privacy" data-legal-page="privacy" data-i18n="legal.privacy">Privacy</a>
+              <a href="/impressum" data-legal-page="impressum" data-i18n="legal.impressum">Imprint</a>
+            </nav>
           </div>
         </div>
       </div>
@@ -105,10 +110,16 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
 
   <script>
     import '../scripts/filter.ts';
-    import { applyTranslations, getLang } from '../i18n/index.ts';
+    import { applyTranslations, getLang, getLegalPageHref, type LegalPageSlug } from '../i18n/index.ts';
 
     // Apply translations to data-i18n elements
     applyTranslations();
+
+    document.querySelectorAll<HTMLAnchorElement>('[data-legal-page]').forEach((link) => {
+      const page = link.dataset.legalPage as LegalPageSlug | undefined;
+      if (!page) return;
+      link.href = getLegalPageHref(page, getLang());
+    });
 
     // Set language switcher to current language
     const langSwitcher = document.getElementById('lang-switcher') as HTMLSelectElement;
@@ -380,6 +391,23 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
     color: var(--text-muted);
     font-weight: 400;
     line-height: 1.6;
+  }
+
+  .footer-legal {
+    display: flex;
+    gap: 1.25rem;
+    margin-top: 1rem;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+  }
+
+  .footer-legal a {
+    color: var(--text-muted);
+    transition: color 0.15s;
+  }
+
+  .footer-legal a:hover {
+    color: var(--accent);
   }
 
   @media (max-width: 700px) {

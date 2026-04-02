@@ -20,6 +20,10 @@ const en: Record<string, string> = {
   "footer.updated_never": "never",
   "footer.note":
     "Leporello aggregates publicly available concert schedules. All event data belongs to the respective venues.",
+  "legal.terms": "Terms",
+  "legal.privacy": "Privacy",
+  "legal.impressum": "Imprint",
+  "legal.last_updated": "Last updated: {date}",
   "event.conductor": "Conductor",
   "event.cast": "Soloists",
   "mcp.badge": "MCP Server",
