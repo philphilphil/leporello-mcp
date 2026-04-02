@@ -11,6 +11,7 @@ import { StaatsoperStuttgartScraper } from './scrapers/staatsoper-stuttgart.js';
 import { MetropolitanOperaScraper } from './scrapers/metropolitan-opera.js';
 import { WienerStaatsoperScraper } from './scrapers/wiener-staatsoper.js';
 import { OperFrankfurtScraper } from './scrapers/oper-frankfurt.js';
+import { SanFranciscoOperaScraper } from './scrapers/san-francisco-opera.js';
 
 const execFileAsync = promisify(execFile);
 
@@ -38,6 +39,7 @@ const scrapers: Scraper[] = [
   new MetropolitanOperaScraper(),
   new WienerStaatsoperScraper(),
   new OperFrankfurtScraper(),
+  new SanFranciscoOperaScraper(),
 ];
 
 export async function runAllScrapers(): Promise<void> {
