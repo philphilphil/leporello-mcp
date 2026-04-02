@@ -21,6 +21,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Semperoper | Dresden |
 | Opéra National de Paris | Paris |
 | Carnegie Hall | New York |
+| Teatro Real | Madrid |
 
 ## How it works
 
