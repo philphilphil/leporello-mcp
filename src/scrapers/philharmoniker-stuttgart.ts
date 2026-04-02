@@ -1,6 +1,6 @@
 import { load } from 'cheerio';
 import type { Event } from '../types.js';
-import { generateEventId, type Scraper, type VenueMeta } from './base.js';
+import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
 
 type FetchHtml = () => Promise<string>;
 
@@ -23,7 +23,9 @@ export class PhilharmonikerStuttgartScraper implements Scraper {
   async scrape(): Promise<Event[]> {
     const html = this.opts.fetchHtml
       ? await this.opts.fetchHtml()
-      : await fetch(this.venue.scheduleUrl).then((r) => {
+      : await fetch(this.venue.scheduleUrl, {
+          headers: { 'User-Agent': USER_AGENT },
+        }).then((r) => {
           if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
           return r.text();
         });
@@ -95,13 +97,17 @@ function parseDate(datetimeAttr: string, rawText: string): string | null {
   let m = rawText.match(/(\d{1,2})\.(\d{2})\.(\d{4})/);
   if (m) return `${m[3]}-${m[2]}-${m[1].padStart(2, '0')}`;
 
-  // Try DD.MM. (infer year — if month already passed this year, use next year)
+  // Try DD.MM. (infer year — if date already passed this year, use next year)
   m = rawText.match(/(\d{1,2})\.(\d{2})\./);
   if (!m) return null;
   const day = m[1].padStart(2, '0');
   const month = m[2];
-  const year =
-    parseInt(month, 10) < new Date().getMonth() + 1 ? currentYear + 1 : currentYear;
+  const now = new Date();
+  const parsedMonth = parseInt(month, 10);
+  const parsedDay = parseInt(day, 10);
+  const isPast = parsedMonth < now.getMonth() + 1 ||
+    (parsedMonth === now.getMonth() + 1 && parsedDay < now.getDate());
+  const year = isPast ? currentYear + 1 : currentYear;
   return `${year}-${month}-${day}`;
 }
 

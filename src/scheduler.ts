@@ -15,30 +15,38 @@ export async function runAllScrapers(): Promise<void> {
     upsertCity(cityId, cityName, country);
     upsertVenue(venueId, venueName, cityId, scheduleUrl);
 
-    const start = Date.now();
     console.log(JSON.stringify({ event: 'scrape_start', venue: scraper.venueId }));
-    try {
-      const events = await scraper.scrape();
-      upsertEvents(events);
-      const ts = new Date().toISOString();
-      updateLastScraped(scraper.venueId, ts);
-      console.log(
-        JSON.stringify({
-          event: 'scrape_success',
-          venue: scraper.venueId,
-          count: events.length,
-          duration_ms: Date.now() - start,
-        }),
-      );
-    } catch (err) {
-      console.error(
-        JSON.stringify({
-          event: 'scrape_error',
-          venue: scraper.venueId,
-          error: String(err),
-          duration_ms: Date.now() - start,
-        }),
-      );
+
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      if (attempt > 1) await new Promise((r) => setTimeout(r, 5_000));
+      const start = Date.now();
+      try {
+        const events = await scraper.scrape();
+        upsertEvents(events);
+        const ts = new Date().toISOString();
+        updateLastScraped(scraper.venueId, ts);
+        console.log(
+          JSON.stringify({
+            event: 'scrape_success',
+            venue: scraper.venueId,
+            count: events.length,
+            duration_ms: Date.now() - start,
+            ...(attempt > 1 && { attempt }),
+          }),
+        );
+        break;
+      } catch (err) {
+        console.error(
+          JSON.stringify({
+            event: 'scrape_error',
+            venue: scraper.venueId,
+            error: String(err),
+            duration_ms: Date.now() - start,
+            attempt,
+            final: attempt === 2,
+          }),
+        );
+      }
     }
   }
 }

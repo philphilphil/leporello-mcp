@@ -10,18 +10,6 @@ A remote MCP server that aggregates classical music and opera schedules from Ger
 | `list_venues` | All venues, optionally filtered by city |
 | `get_events` | Upcoming events filtered by city or venue |
 
-## Connect to Claude
-
-```json
-{
-  "mcpServers": {
-    "erda": {
-      "url": "https://your-domain.com/mcp"
-    }
-  }
-}
-```
-
 ## Run locally
 
 ```bash
@@ -29,14 +17,6 @@ npm install
 npm run dev       # start server on http://localhost:3000
 npm run scrape    # one-off scrape, no server
 npm test          # run scraper tests
-```
-
-## Deploy
-
-```bash
-# 1. Update the hostname in docker-compose.yml
-# 2. Run
-docker compose up -d
 ```
 
 Scrapes on startup if the database is empty, then daily at 03:00 UTC.
@@ -136,7 +116,7 @@ Rules:
 - Silently skip malformed entries with try/catch per element
 - Throw on non-2xx HTTP (the scheduler catches and logs it)
 
-### 3. Save an HTML fixture
+### 2. Save an HTML fixture
 
 ```bash
 curl -s -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" \
@@ -156,7 +136,7 @@ writeFileSync('src/scrapers/__fixtures__/<venue-id>.html', await page.content())
 await browser.close();
 ```
 
-### 4. Write tests
+### 3. Write tests
 
 Create `src/scrapers/__tests__/<venue-id>.test.ts`:
 
@@ -193,7 +173,7 @@ describe('MyVenueScraper', () => {
 });
 ```
 
-### 5. Register the scraper
+### 4. Register the scraper
 
 In `src/scheduler.ts`, add to the `scrapers` array:
 
@@ -206,9 +186,13 @@ const scrapers: Scraper[] = [
 ];
 ```
 
-### 6. Verify
+### 5. Verify
 
 ```bash
 npm test               # all tests must pass
 npm run scrape         # live scrape, check output for scrape_success
 ```
+
+### 6. Open a PR
+
+Include a link to the venue's public schedule page (the calendar/Spielplan URL the scraper reads from) in the PR description so reviewers can manually verify the scraped output against the real listings.

@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto';
 import type { Event } from '../types.js';
 
+export const USER_AGENT = 'Erda/0.1 (classical-music-schedule-aggregator)';
+
 export interface VenueMeta {
   venueId: string;
   venueName: string;

@@ -5,8 +5,11 @@ import { z } from 'zod';
 import { getCities, getVenues, getEvents } from './db.js';
 
 function parseCast(raw: unknown): string[] | undefined {
+  if (typeof raw !== 'string') return undefined;
   try {
-    return JSON.parse(raw as string) as string[];
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed) || !parsed.every((s) => typeof s === 'string')) return undefined;
+    return parsed as string[];
   } catch {
     return undefined;
   }
@@ -103,7 +106,7 @@ function buildMcpServer(): McpServer {
   return server;
 }
 
-export function startHttpServer(): void {
+export function startHttpServer() {
   const port = Number(process.env.PORT ?? 3000);
   if (!Number.isInteger(port) || port < 1 || port > 65535) {
     throw new Error(`Invalid PORT: ${process.env.PORT}`);
@@ -153,4 +156,6 @@ export function startHttpServer(): void {
   httpServer.listen(port, () => {
     console.log(JSON.stringify({ event: 'server_start', port }));
   });
+
+  return httpServer;
 }

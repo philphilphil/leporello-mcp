@@ -80,9 +80,9 @@ export function getVenues(
     return db.prepare(`
       SELECT v.*, c.name AS city_name, c.country
       FROM venues v JOIN cities c ON c.id = v.city_id
-      WHERE v.city_id = ?
+      WHERE v.city_id = ? OR LOWER(c.name) = ?
       ORDER BY v.name
-    `).all(cityId) as Array<Venue & { city_name: string; country: string }>;
+    `).all(cityId, cityId) as Array<Venue & { city_name: string; country: string }>;
   }
   return db.prepare(`
     SELECT v.*, c.name AS city_name, c.country
@@ -97,14 +97,15 @@ export function getEvents(opts: {
   daysAhead: number;
 }): Array<Event & { venue_name: string }> {
   const today = new Date().toISOString().slice(0, 10);
-  const until = new Date(Date.now() + opts.daysAhead * 86_400_000)
-    .toISOString()
-    .slice(0, 10);
+  const untilDate = new Date();
+  untilDate.setDate(untilDate.getDate() + opts.daysAhead);
+  const until = untilDate.toISOString().slice(0, 10);
 
   let sql = `
     SELECT e.*, v.name AS venue_name
     FROM events e
     JOIN venues v ON v.id = e.venue_id
+    JOIN cities c ON c.id = v.city_id
     WHERE e.date >= ? AND e.date <= ?
   `;
   const params: unknown[] = [today, until];
@@ -113,8 +114,8 @@ export function getEvents(opts: {
     sql += ' AND e.venue_id = ?';
     params.push(opts.venueId);
   } else if (opts.cityId) {
-    sql += ' AND v.city_id = ?';
-    params.push(opts.cityId);
+    sql += ' AND (v.city_id = ? OR LOWER(c.name) = ?)';
+    params.push(opts.cityId, opts.cityId);
   }
 
   sql += " ORDER BY e.date, COALESCE(e.time, '')";
@@ -170,6 +171,13 @@ export function upsertVenue(
 }
 
 // ── Sanitization helpers ──────────────────────────────────────────────────────
+
+export function closeDb(): void {
+  if (_db) {
+    _db.close();
+    _db = undefined;
+  }
+}
 
 function sanitizeId(value: string): string {
   const s = value.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-{2,}/g, '-').replace(/^-|-$/g, '');
