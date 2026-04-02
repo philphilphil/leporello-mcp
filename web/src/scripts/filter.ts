@@ -44,6 +44,7 @@ const citySelect = document.getElementById('filter-city') as HTMLSelectElement;
 const venueSelect = document.getElementById('filter-venue') as HTMLSelectElement;
 const daysSelect = document.getElementById('filter-days') as HTMLSelectElement;
 const searchInput = document.getElementById('filter-search') as HTMLInputElement;
+const clearBtn = document.getElementById('filter-clear') as HTMLButtonElement;
 const eventList = document.getElementById('event-list')!;
 const eventCount = document.getElementById('event-count')!;
 
@@ -167,9 +168,29 @@ function formatDate(dateStr: string): string {
   });
 }
 
+function hasActiveFilters(): boolean {
+  return !!(countrySelect.value || citySelect.value || venueSelect.value || daysSelect.value !== '30' || searchInput.value);
+}
+
+function updateClearButton(): void {
+  clearBtn.classList.toggle('visible', hasActiveFilters());
+}
+
+function resetFilters(): void {
+  countrySelect.value = '';
+  citySelect.value = '';
+  venueSelect.value = '';
+  daysSelect.value = '30';
+  searchInput.value = '';
+  populateCityDropdown();
+  populateVenueDropdown();
+  render();
+}
+
 function render(): void {
   const events = filterEvents();
   updateUrl();
+  updateClearButton();
 
   eventCount.textContent = `${events.length} event${events.length !== 1 ? 's' : ''}`;
 
@@ -230,6 +251,7 @@ citySelect.addEventListener('change', () => {
 venueSelect.addEventListener('change', render);
 daysSelect.addEventListener('change', render);
 searchInput.addEventListener('input', debounce(render, 200));
+clearBtn.addEventListener('click', resetFilters);
 
 // Initialize
 initFiltersFromUrl();

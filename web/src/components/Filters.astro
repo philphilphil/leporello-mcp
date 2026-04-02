@@ -79,6 +79,9 @@ const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) 
           autocomplete="off"
           spellcheck="false"
         />
+        <button id="filter-clear" class="filter-clear" type="button" title="Clear all filters" aria-label="Clear all filters">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
       </div>
     </div>
   </div>
@@ -216,6 +219,28 @@ const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) 
   .filter-input::placeholder {
     color: var(--text-muted);
     font-weight: 300;
+  }
+
+  .filter-clear {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.25rem;
+    margin-left: 0.5rem;
+    flex-shrink: 0;
+    transition: color 0.15s;
+  }
+
+  .filter-clear:hover {
+    color: var(--text);
+  }
+
+  .filter-clear.visible {
+    display: flex;
   }
 
   @media (max-width: 700px) {
