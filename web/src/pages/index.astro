@@ -44,6 +44,19 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
       </div>
     </header>
 
+    <div class="mcp-banner">
+      <div class="mcp-banner-inner">
+        <div class="mcp-info">
+          <span class="mcp-badge">MCP Server</span>
+          <p class="mcp-text">Connect this data to Claude, ChatGPT, or any MCP-compatible AI assistant</p>
+        </div>
+        <div class="mcp-url">
+          <span class="mcp-url-label">Endpoint</span>
+          <code class="mcp-url-value">https://leporello.app/mcp</code>
+        </div>
+      </div>
+    </div>
+
     <Filters cities={cities} />
 
     <EventList />
@@ -113,6 +126,75 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--text-muted);
+  }
+
+  /* ── MCP Banner ── */
+  .mcp-banner {
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  .mcp-banner-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .mcp-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .mcp-badge {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.3rem 0.7rem;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  .mcp-text {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(250, 247, 242, 0.7);
+  }
+
+  .mcp-url {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .mcp-url-label {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(250, 247, 242, 0.4);
+  }
+
+  .mcp-url-value {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.35rem 0.85rem;
+    border-radius: 4px;
+    color: var(--bg);
+    user-select: all;
+    letter-spacing: 0.01em;
   }
 
   /* ── Footer ── */
@@ -204,6 +286,29 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
 
     .footer-inner {
       padding: 2rem 1.5rem;
+    }
+
+    .mcp-banner-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+    }
+
+    .mcp-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .mcp-url {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.3rem;
+    }
+
+    .mcp-url-value {
+      font-size: 0.8rem;
     }
 
     .footer-grid {
