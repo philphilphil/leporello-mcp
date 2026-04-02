@@ -12,7 +12,7 @@ function parseCast(raw: unknown): string[] | undefined {
   }
 }
 
-export function createMcpServer(): McpServer {
+function buildMcpServer(): McpServer {
   const server = new McpServer({ name: 'erda', version: '1.0.0' });
 
   server.tool(
@@ -74,7 +74,6 @@ export function createMcpServer(): McpServer {
         daysAhead: days_ahead ?? 30,
       });
 
-      // Build data_age from venues touched by this query
       const venueRows = getVenues(city?.toLowerCase());
       const data_age: Record<string, string> = {};
       for (const v of venueRows) {
@@ -103,17 +102,33 @@ export function createMcpServer(): McpServer {
   return server;
 }
 
-export function startHttpServer(mcpServer: McpServer): void {
+export function startHttpServer(): void {
   const port = Number(process.env.PORT ?? 3000);
+  if (!Number.isInteger(port) || port < 1 || port > 65535) {
+    throw new Error(`Invalid PORT: ${process.env.PORT}`);
+  }
 
   const httpServer = createServer(
     async (req: IncomingMessage, res: ServerResponse) => {
-      if (req.url?.split('?')[0] === '/mcp') {
+      const pathname = req.url?.split('?')[0];
+
+      if (pathname === '/mcp') {
+        // Reject non-POST — GET would open a persistent SSE stream (DoS risk in stateless mode)
+        if (req.method !== 'POST') {
+          res.writeHead(405, { Allow: 'POST' }).end();
+          return;
+        }
+        const server = buildMcpServer();
+        const transport = new StreamableHTTPServerTransport({
+          sessionIdGenerator: undefined,
+        });
+        // Clean up on response close to prevent resource leaks
+        res.on('close', () => {
+          transport.close().catch(() => undefined);
+          server.close().catch(() => undefined);
+        });
         try {
-          const transport = new StreamableHTTPServerTransport({
-            sessionIdGenerator: undefined,
-          });
-          await mcpServer.connect(transport);
+          await server.connect(transport);
           await transport.handleRequest(req, res);
         } catch (err) {
           console.error(JSON.stringify({ event: 'mcp_request_error', error: String(err) }));
@@ -123,11 +138,13 @@ export function startHttpServer(mcpServer: McpServer): void {
         }
         return;
       }
-      if (req.url?.split('?')[0] === '/health') {
+
+      if (pathname === '/health') {
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ status: 'ok' }));
         return;
       }
+
       res.writeHead(404).end();
     },
   );

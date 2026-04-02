@@ -1,12 +1,11 @@
 import { getDb } from './db.js';
-import { createMcpServer, startHttpServer } from './server.js';
+import { startHttpServer } from './server.js';
 import { startScheduler, runAllScrapers } from './scheduler.js';
 
 // Initialize DB — creates schema and seeds cities/venues
 const db = getDb();
 
-const mcpServer = createMcpServer();
-startHttpServer(mcpServer);
+startHttpServer();
 startScheduler();
 
 // On first run (empty events table), scrape immediately rather than waiting for 03:00

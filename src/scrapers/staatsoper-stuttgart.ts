@@ -15,7 +15,10 @@ export class StaatsoperStuttgartScraper implements Scraper {
   async scrape(): Promise<Event[]> {
     const html = this.opts.fetchHtml
       ? await this.opts.fetchHtml()
-      : await fetch(SCHEDULE_URL).then((r) => r.text());
+      : await fetch(SCHEDULE_URL).then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status} from ${SCHEDULE_URL}`);
+          return r.text();
+        });
     return this.parse(html);
   }
 
