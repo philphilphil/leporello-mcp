@@ -1,0 +1,10 @@
+node_modules/
+dist/
+data/
+.env
+*.db
+*.sqlite
+coverage/
+.DS_Store
+docs/
+idea.md
