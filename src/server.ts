@@ -4,6 +4,14 @@ import { createServer, type IncomingMessage, type ServerResponse } from 'node:ht
 import { z } from 'zod';
 import { getCities, getVenues, getEvents } from './db.js';
 
+function parseCast(raw: unknown): string[] | undefined {
+  try {
+    return JSON.parse(raw as string) as string[];
+  } catch {
+    return undefined;
+  }
+}
+
 export function createMcpServer(): McpServer {
   const server = new McpServer({ name: 'erda', version: '1.0.0' });
 
@@ -70,6 +78,7 @@ export function createMcpServer(): McpServer {
       const venueRows = getVenues(city?.toLowerCase());
       const data_age: Record<string, string> = {};
       for (const v of venueRows) {
+        if (venue_id && v.id !== venue_id) continue;
         if (v.last_scraped) data_age[v.id] = v.last_scraped;
       }
 
@@ -81,7 +90,7 @@ export function createMcpServer(): McpServer {
         date: e.date,
         time: e.time,
         ...(e.conductor ? { conductor: e.conductor } : {}),
-        ...(e.cast ? { cast: JSON.parse(e.cast as unknown as string) } : {}),
+        ...(e.cast ? { cast: parseCast(e.cast) } : {}),
         url: e.url,
       }));
 
@@ -99,15 +108,22 @@ export function startHttpServer(mcpServer: McpServer): void {
 
   const httpServer = createServer(
     async (req: IncomingMessage, res: ServerResponse) => {
-      if (req.url === '/mcp') {
-        const transport = new StreamableHTTPServerTransport({
-          sessionIdGenerator: undefined,
-        });
-        await mcpServer.connect(transport);
-        await transport.handleRequest(req, res);
+      if (req.url?.split('?')[0] === '/mcp') {
+        try {
+          const transport = new StreamableHTTPServerTransport({
+            sessionIdGenerator: undefined,
+          });
+          await mcpServer.connect(transport);
+          await transport.handleRequest(req, res);
+        } catch (err) {
+          console.error(JSON.stringify({ event: 'mcp_request_error', error: String(err) }));
+          if (!res.headersSent) {
+            res.writeHead(500).end();
+          }
+        }
         return;
       }
-      if (req.url === '/health') {
+      if (req.url?.split('?')[0] === '/health') {
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ status: 'ok' }));
         return;
