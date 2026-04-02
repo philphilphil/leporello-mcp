@@ -1,0 +1,25 @@
+services:
+  erda:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - erda-data:/app/data
+    environment:
+      - SCRAPE_CRON=0 3 * * *
+      - PORT=3000
+    networks:
+      - gateway
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=gateway"
+      - "traefik.http.routers.erda.rule=Host(`erda.example.com`)"
+      - "traefik.http.routers.erda.entrypoints=websecure"
+      - "traefik.http.routers.erda.tls.certresolver=myresolver"
+      - "traefik.http.services.erda.loadbalancer.server.port=3000"
+
+volumes:
+  erda-data:
+
+networks:
+  gateway:
+    external: true
