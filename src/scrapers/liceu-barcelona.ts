@@ -2,7 +2,7 @@ import type { Event } from '../types.js';
 import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
 
 const JSON_URL =
-  'https://www.liceubarcelona.cat/themes/custom/liceu_2024/js/program/programacioJson.json';
+  'https://www.liceubarcelona.cat/sites/default/files/programme.json';
 const SITE_BASE = 'https://www.liceubarcelona.cat';
 
 interface LiceuSession {
@@ -21,7 +21,7 @@ interface LiceuProduction {
 }
 
 export interface LiceuData {
-  productions: LiceuProduction[];
+  productions: Record<string, LiceuProduction> | LiceuProduction[];
 }
 
 export class LiceuBarcelonaScraper implements Scraper {
@@ -58,13 +58,17 @@ export class LiceuBarcelonaScraper implements Scraper {
     const seen = new Set<string>();
     const now = new Date().toISOString();
 
-    for (const prod of data.productions) {
+    const prods = Array.isArray(data.productions)
+      ? data.productions
+      : Object.values(data.productions);
+
+    for (const prod of prods) {
       try {
-        const title = prod.title.en ?? prod.title.ca ?? prod.title.es;
+        const title = prod.title.ca ?? prod.title.es ?? prod.title.en;
         if (!title) continue;
 
-        const composer = prod.subtitle.en ?? prod.subtitle.ca ?? prod.subtitle.es;
-        const urlPath = prod.url.en ?? prod.url.ca;
+        const composer = prod.subtitle.ca ?? prod.subtitle.es ?? prod.subtitle.en;
+        const urlPath = prod.url.ca ?? prod.url.es ?? prod.url.en;
         const url = urlPath ? new URL(urlPath, SITE_BASE).href : null;
         const fullTitle = composer ? `${title} (${composer})` : title;
 
