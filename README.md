@@ -54,43 +54,38 @@ Scrapes on startup if the database is empty, then daily at 03:00 UTC.
 
 > **This section is written for code agents.** Follow these instructions exactly to add a new venue scraper.
 
-### 1. Seed the database
+### 1. Create the scraper
 
-In `src/db.ts` → `seedStaticData()`, add the city (if new) and venue:
-
-```typescript
-db.prepare(`INSERT OR IGNORE INTO cities (id, name, country) VALUES (?, ?, ?)`)
-  .run('munich', 'Munich', 'DE');
-
-db.prepare(`INSERT OR IGNORE INTO venues (id, name, city_id, url) VALUES (?, ?, ?, ?)`)
-  .run('bayerische-staatsoper', 'Bayerische Staatsoper', 'munich',
-    'https://www.staatsoper.de/spielplan/');
-```
-
-### 2. Create the scraper
-
-Create `src/scrapers/<venue-id>.ts`. Implement the `Scraper` interface from `./base.js`:
+Create `src/scrapers/<venue-id>.ts`. The scraper declares its own metadata — city, country, and URL — which the scheduler uses to automatically register the venue in the database before scraping.
 
 ```typescript
 import { load } from 'cheerio';
 import type { Event } from '../types.js';
-import { generateEventId, type Scraper } from './base.js';
+import { generateEventId, type Scraper, type VenueMeta } from './base.js';
 
 type FetchHtml = () => Promise<string>;
 
-const SCHEDULE_URL = 'https://example.com/schedule/';
 const BASE_URL = 'https://example.com';
 
 export class MyVenueScraper implements Scraper {
-  readonly venueId = '<venue-id>';
+  readonly venue: VenueMeta = {
+    venueId: '<venue-id>',
+    venueName: 'My Venue Name',
+    cityId: 'munich',
+    cityName: 'Munich',
+    country: 'DE',           // ISO 3166-1 alpha-2
+    scheduleUrl: 'https://example.com/schedule/',
+  };
+
+  get venueId(): string { return this.venue.venueId; }
 
   constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
 
   async scrape(): Promise<Event[]> {
     const html = this.opts.fetchHtml
       ? await this.opts.fetchHtml()
-      : await fetch(SCHEDULE_URL).then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status} from ${SCHEDULE_URL}`);
+      : await fetch(this.venue.scheduleUrl).then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
           return r.text();
         });
     return this.parse(html);

@@ -1,22 +1,30 @@
 import { load } from 'cheerio';
 import type { Event } from '../types.js';
-import { generateEventId, type Scraper } from './base.js';
+import { generateEventId, type Scraper, type VenueMeta } from './base.js';
 
 type FetchHtml = () => Promise<string>;
 
-const SCHEDULE_URL = 'https://www.stuttgarter-philharmoniker.de/konzerte/';
 const BASE_URL = 'https://www.stuttgarter-philharmoniker.de';
 
 export class PhilharmonikerStuttgartScraper implements Scraper {
-  readonly venueId = 'philharmoniker-stuttgart';
+  readonly venue: VenueMeta = {
+    venueId: 'philharmoniker-stuttgart',
+    venueName: 'Stuttgarter Philharmoniker',
+    cityId: 'stuttgart',
+    cityName: 'Stuttgart',
+    country: 'DE',
+    scheduleUrl: 'https://www.stuttgarter-philharmoniker.de/konzerte/',
+  };
+
+  get venueId(): string { return this.venue.venueId; }
 
   constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
 
   async scrape(): Promise<Event[]> {
     const html = this.opts.fetchHtml
       ? await this.opts.fetchHtml()
-      : await fetch(SCHEDULE_URL).then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status} from ${SCHEDULE_URL}`);
+      : await fetch(this.venue.scheduleUrl).then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
           return r.text();
         });
     return this.parse(html);

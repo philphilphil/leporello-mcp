@@ -1,5 +1,5 @@
 import cron from 'node-cron';
-import { upsertEvents, updateLastScraped } from './db.js';
+import { upsertEvents, updateLastScraped, upsertCity, upsertVenue } from './db.js';
 import type { Scraper } from './scrapers/base.js';
 import { PhilharmonikerStuttgartScraper } from './scrapers/philharmoniker-stuttgart.js';
 import { StaatsoperStuttgartScraper } from './scrapers/staatsoper-stuttgart.js';
@@ -11,6 +11,10 @@ const scrapers: Scraper[] = [
 
 export async function runAllScrapers(): Promise<void> {
   for (const scraper of scrapers) {
+    const { venueId, venueName, cityId, cityName, country, scheduleUrl } = scraper.venue;
+    upsertCity(cityId, cityName, country);
+    upsertVenue(venueId, venueName, cityId, scheduleUrl);
+
     const start = Date.now();
     console.log(JSON.stringify({ event: 'scrape_start', venue: scraper.venueId }));
     try {

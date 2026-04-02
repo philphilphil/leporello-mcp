@@ -58,21 +58,6 @@ function initSchema(db: Database.Database): void {
     // column already exists — safe to ignore
   }
 
-  seedStaticData(db);
-}
-
-function seedStaticData(db: Database.Database): void {
-  db.prepare(
-    `INSERT OR IGNORE INTO cities (id, name, country) VALUES (?, ?, ?)`
-  ).run('stuttgart', 'Stuttgart', 'DE');
-
-  const ins = db.prepare(
-    `INSERT OR IGNORE INTO venues (id, name, city_id, url) VALUES (?, ?, ?, ?)`
-  );
-  ins.run('staatsoper-stuttgart', 'Staatsoper Stuttgart', 'stuttgart',
-    'https://www.staatsoper-stuttgart.de/spielplan/kalender/');
-  ins.run('philharmoniker-stuttgart', 'Stuttgarter Philharmoniker', 'stuttgart',
-    'https://www.stuttgarter-philharmoniker.de/konzerte/');
 }
 
 // ── Query helpers ──────────────────────────────────────────────────────────────
@@ -161,4 +146,51 @@ export function updateLastScraped(venueId: string, ts: string): void {
   getDb()
     .prepare(`UPDATE venues SET last_scraped = ? WHERE id = ?`)
     .run(ts, venueId);
+}
+
+export function upsertCity(id: string, name: string, country: string): void {
+  getDb()
+    .prepare(`INSERT OR IGNORE INTO cities (id, name, country) VALUES (?, ?, ?)`)
+    .run(sanitizeId(id), sanitizeText(name), sanitizeCountry(country));
+}
+
+export function upsertVenue(
+  id: string,
+  name: string,
+  cityId: string,
+  url: string,
+): void {
+  getDb()
+    .prepare(
+      `INSERT INTO venues (id, name, city_id, url)
+       VALUES (?, ?, ?, ?)
+       ON CONFLICT(id) DO UPDATE SET name = excluded.name, url = excluded.url`,
+    )
+    .run(sanitizeId(id), sanitizeText(name), sanitizeId(cityId), sanitizeUrl(url));
+}
+
+// ── Sanitization helpers ──────────────────────────────────────────────────────
+
+function sanitizeId(value: string): string {
+  const s = value.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-{2,}/g, '-').replace(/^-|-$/g, '');
+  if (!s) throw new Error(`Invalid ID: "${value}"`);
+  return s;
+}
+
+function sanitizeText(value: string): string {
+  const s = value.trim().replace(/[\x00-\x1f]/g, '');
+  if (!s) throw new Error(`Text must not be empty`);
+  return s;
+}
+
+function sanitizeCountry(value: string): string {
+  const s = value.trim().toUpperCase();
+  if (!/^[A-Z]{2}$/.test(s)) throw new Error(`Country must be ISO 3166-1 alpha-2, got: "${value}"`);
+  return s;
+}
+
+function sanitizeUrl(value: string): string {
+  const url = new URL(value); // throws on invalid URL
+  if (!['http:', 'https:'].includes(url.protocol)) throw new Error(`URL must be http/https: "${value}"`);
+  return url.href;
 }
