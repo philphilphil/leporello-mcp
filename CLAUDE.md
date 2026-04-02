@@ -112,6 +112,10 @@ All logs are structured JSON on stdout/stderr:
 {"event":"mcp_request_error","error":"..."}
 ```
 
+## Playwright screenshots
+
+Save all Playwright screenshots into `.playwright-mcp/` (already gitignored), not the project root.
+
 ## Deployment
 
 Docker Compose + Traefik at `leporello.app`.

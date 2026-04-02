@@ -33,14 +33,19 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
 }));
 ---
 
-<Base title="Leporello — Classical Music Events">
+<Base title="Leporello — Opera & classical music event schedules">
   <script type="application/json" id="event-data" set:html={JSON.stringify(pageData)} />
 
   <div class="page-wrapper">
     <header class="site-header">
       <div class="header-inner">
-        <h1 class="site-title">Leporello</h1>
-        <p class="site-tagline">Classical Music & Opera Events</p>
+        <div class="header-brand">
+          <img src="/leporello-logo.svg" alt="" class="site-logo" />
+          <div class="header-text">
+            <h1 class="site-title">Leporello</h1>
+            <p class="site-tagline">Opera & Classical Music Event Schedules</p>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -125,7 +130,29 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
   .header-inner {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 1.5rem 2.5rem 1rem;
+    padding: 0.5rem 2.5rem 0.5rem;
+  }
+
+  .header-brand {
+    position: relative;
+    width: fit-content;
+  }
+
+  .site-logo {
+    display: block;
+    height: 120px;
+    width: auto;
+  }
+
+  .header-text {
+    position: absolute;
+    left: 72px;
+    top: 36px;
+    white-space: nowrap;
+  }
+
+  .site-tagline {
+    margin-top: 0.1rem;
   }
 
   .site-title {
