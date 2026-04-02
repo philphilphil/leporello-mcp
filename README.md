@@ -16,6 +16,7 @@
 | Metropolitan Opera | New York |
 | Oper Frankfurt | Frankfurt |
 | San Francisco Opera | San Francisco |
+| Gran Teatre del Liceu | Barcelona |
 
 Missing your favorite venue? PRs welcome — see [Contribute a Venue-Scraper](#contribute-a-venue-scraper) below.
 
