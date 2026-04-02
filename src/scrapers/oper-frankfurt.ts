@@ -4,7 +4,7 @@ import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './bas
 
 type FetchHtml = () => Promise<string>;
 
-const BASE_URL = 'https://oper-frankfurt.de/en';
+const BASE_URL = 'https://oper-frankfurt.de/de';
 
 export class OperFrankfurtScraper implements Scraper {
   readonly venue: VenueMeta = {
@@ -13,7 +13,7 @@ export class OperFrankfurtScraper implements Scraper {
     cityId: 'frankfurt',
     cityName: 'Frankfurt',
     country: 'DE',
-    scheduleUrl: 'https://oper-frankfurt.de/en/season-calendar/',
+    scheduleUrl: 'https://oper-frankfurt.de/de/spielplan/',
   };
 
   get venueId(): string { return this.venue.venueId; }
@@ -33,7 +33,7 @@ export class OperFrankfurtScraper implements Scraper {
       const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
       const yyyy = d.getFullYear();
       const mm = String(d.getMonth() + 1).padStart(2, '0');
-      const url = `${this.venue.scheduleUrl}?datum=${yyyy}-${mm}&lang=101`;
+      const url = `${this.venue.scheduleUrl}?datum=${yyyy}-${mm}`;
       const res = await fetch(url, {
         headers: { 'User-Agent': USER_AGENT },
       });
@@ -53,10 +53,13 @@ export class OperFrankfurtScraper implements Scraper {
     // Extract year from #year1 div
     const year = $('#year1').text().trim();
 
-    // Extract active month from li.active a href containing datum=YYYY-MM
-    const activeHref = $('li.active a').attr('href') ?? '';
-    const monthMatch = activeHref.match(/datum=\d{4}-(\d{2})/);
-    const month = monthMatch ? monthMatch[1] : null;
+    // Extract active month from the month slider link containing datum=YYYY-MM
+    let month: string | null = null;
+    $('li.active a').each((_, el) => {
+      const href = $(el).attr('href') ?? '';
+      const m = href.match(/datum=\d{4}-(\d{2})/);
+      if (m) month = m[1];
+    });
 
     if (!year || !month) return events;
 
@@ -83,7 +86,7 @@ export class OperFrankfurtScraper implements Scraper {
 
         // Get URL from the <a> href
         const href = $el.find('a').first().attr('href') ?? '';
-        const url = href ? new URL(href, BASE_URL + '/').href : null;
+        const url = href ? new URL(href, this.venue.scheduleUrl + '/').href : null;
 
         // Full title: if composer exists, format as "title (composer)"
         const fullTitle = composer ? `${title} (${composer})` : title;
@@ -109,16 +112,11 @@ export class OperFrankfurtScraper implements Scraper {
   }
 }
 
-// Parse "5:00 pm" or "7:30 pm" or "11:00 am" from start of meta text → "17:00" or "19:30" or "11:00"
+// Parse "17.00 Uhr" or "19.30 Uhr" from meta text → "17:00" or "19:30"
 function parseTime(meta: string): string | null {
-  const m = meta.match(/^(\d{1,2}):(\d{2})\s*(am|pm)/i);
+  const m = meta.match(/(\d{1,2})\.(\d{2})\s*Uhr/);
   if (!m) return null;
-  let hours = parseInt(m[1], 10);
-  const minutes = m[2];
-  const period = m[3].toLowerCase();
-  if (period === 'pm' && hours !== 12) hours += 12;
-  if (period === 'am' && hours === 12) hours = 0;
-  return `${String(hours).padStart(2, '0')}:${minutes}`;
+  return `${m[1].padStart(2, '0')}:${m[2]}`;
 }
 
 // Parse location from meta text: everything after first comma, trimmed

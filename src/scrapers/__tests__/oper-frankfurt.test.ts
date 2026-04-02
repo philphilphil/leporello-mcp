@@ -10,4 +10,13 @@ describe('OperFrankfurtScraper', () => {
     const events = await scraper.scrape();
     expect(events.length).toBe(46);
   });
+
+  it('generates URLs under the season-calendar path', async () => {
+    const events = await scraper.scrape();
+    const withUrl = events.filter(e => e.url);
+    expect(withUrl.length).toBeGreaterThan(0);
+    for (const e of withUrl) {
+      expect(e.url).toMatch(/^https:\/\/oper-frankfurt\.de\/de\/spielplan\//);
+    }
+  });
 });

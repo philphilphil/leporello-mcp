@@ -68,6 +68,7 @@ SQLite at `DB_PATH` env var (default `./data/leporello.db`). Initialized on `get
    - Separate `scrape()` and `parse(html)` methods
    - Use `generateEventId()` from `./base.js`
    - Use `new URL(href, BASE_URL + '/').href` for URL construction
+   - Use the venue's native-language pages when available (e.g. `/de/spielplan/` instead of `/en/schedule/`) to get original, untranslated event titles
 2. Fetch fixture: `curl -s -A "Mozilla/5.0..." <url> -o src/scrapers/__fixtures__/<venue-id>.html`
 3. Write tests in `src/scrapers/__tests__/<venue-id>.test.ts` (see existing tests)
 4. Add to `scrapers` array in `src/scheduler.ts`

@@ -3,7 +3,7 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { upsertEvents, updateLastScraped, updateScrapeError, upsertCity, upsertVenue } from './db.js';
+import { replaceVenueEvents, updateLastScraped, updateScrapeError, upsertCity, upsertVenue } from './db.js';
 import { validateEvents } from './validate.js';
 import type { Scraper } from './scrapers/base.js';
 import { PhilharmonikerStuttgartScraper } from './scrapers/philharmoniker-stuttgart.js';
@@ -69,7 +69,7 @@ export async function runAllScrapers(): Promise<void> {
           );
           continue;
         }
-        upsertEvents(events);
+        replaceVenueEvents(scraper.venueId, events);
         const ts = new Date().toISOString();
         updateLastScraped(scraper.venueId, ts);
         console.log(
