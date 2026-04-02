@@ -61,19 +61,7 @@ SQLite at `DB_PATH` env var (default `./data/leporello.db`). Initialized on `get
 
 ## Adding a scraper
 
-1. Create `src/scrapers/<venue-id>.ts`:
-   - `export class MyVenueScraper implements Scraper`
-   - Declare `readonly venue: VenueMeta` with venueId, venueName, cityId, cityName, country, scheduleUrl
-   - Constructor with optional `{ fetchHtml?: () => Promise<string> }` for test injection
-   - Separate `scrape()` and `parse(html)` methods
-   - Use `generateEventId()` from `./base.js`
-   - Use `new URL(href, BASE_URL + '/').href` for URL construction
-   - Use the venue's native-language pages when available (e.g. `/de/spielplan/` instead of `/en/schedule/`) to get original, untranslated event titles
-2. Fetch fixture: `curl -s -A "Mozilla/5.0..." <url> -o src/scrapers/__fixtures__/<venue-id>.html`
-3. Write tests in `src/scrapers/__tests__/<venue-id>.test.ts` (see existing tests)
-4. Add to `scrapers` array in `src/scheduler.ts`
-5. Add the new venue to the **Supported Venues** table in `README.md`
-6. **PR description MUST include a clickable link to the venue's schedule page** (e.g. `**Schedule URL:** https://...`)
+**Read [CONTRIBUTING.md](CONTRIBUTING.md) first** — it has the full step-by-step guide with code templates, rules, and examples. Agents must follow it exactly.
 
 ## MCP tools
 
