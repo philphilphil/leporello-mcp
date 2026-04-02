@@ -148,26 +148,25 @@ function render(): void {
     groups.set(e.date, list);
   }
 
-  let html = '';
+  let html = '<table class="event-table"><tbody>';
   for (const [date, evts] of groups) {
-    html += `<div class="date-group">`;
-    html += `<h3 class="date-header">${formatDate(date)}</h3>`;
+    html += `<tr class="date-row"><td colspan="4" class="date-header">${formatDate(date)}</td></tr>`;
     for (const e of evts) {
       const time = esc(e.time ?? '');
-      const details = esc([e.venue_name, e.conductor].filter(Boolean).join(' · '));
+      const venue = esc(e.venue_name ?? '');
+      const conductor = e.conductor ? esc(e.conductor) : '';
       const safeUrl = e.url && /^https?:\/\//.test(e.url) ? e.url : null;
-      const tag = safeUrl ? 'a' : 'div';
-      const href = safeUrl ? ` href="${esc(safeUrl)}" target="_blank" rel="noopener"` : '';
-      html += `<${tag} class="event-row"${href}>`;
-      html += `<span class="event-time">${time}</span>`;
-      html += `<div class="event-info">`;
-      html += `<span class="event-title">${esc(e.title)}</span>`;
-      html += `<span class="event-details">${details}</span>`;
-      html += `</div>`;
-      html += `</${tag}>`;
+      const link = (text: string, cls: string) =>
+        safeUrl ? `<a href="${esc(safeUrl)}" target="_blank" rel="noopener" class="${cls}">${text}</a>` : `<span class="${cls}">${text}</span>`;
+      html += `<tr class="event-row">`;
+      html += `<td class="event-time">${time}</td>`;
+      html += `<td class="event-title">${link(esc(e.title), 'event-link')}</td>`;
+      html += `<td class="event-venue">${venue}</td>`;
+      html += `<td class="event-conductor">${conductor}</td>`;
+      html += `</tr>`;
     }
-    html += `</div>`;
   }
+  html += '</tbody></table>';
   eventList.innerHTML = html;
 }
 

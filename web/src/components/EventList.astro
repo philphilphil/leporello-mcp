@@ -30,9 +30,16 @@
     color: var(--text-muted);
   }
 
-  /* ── Date groups ── */
-  .date-group {
-    margin-bottom: 0;
+  /* ── Table ── */
+  .event-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  /* ── Date header row ── */
+  .date-row td {
+    padding: 0;
   }
 
   .date-header {
@@ -40,69 +47,39 @@
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--accent);
-    padding: 1.25rem 0 0.25rem;
+    padding: 1.25rem 0 0.3rem !important;
     letter-spacing: 0.01em;
     line-height: 1.2;
   }
 
-  .date-group:first-child .date-header {
-    padding-top: 0.5rem;
+  .date-row:first-child .date-header {
+    padding-top: 0.5rem !important;
   }
 
   /* ── Event rows ── */
-  .event-row {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 0.5rem 0;
-    text-decoration: none;
-    color: var(--text);
-    transition: background 0.1s ease;
+  .event-row td {
+    padding: 0.5rem 0.75rem 0.5rem 0;
     border-bottom: 1px solid var(--border-light);
+    vertical-align: baseline;
   }
 
-  .event-row:last-child {
-    border-bottom: none;
+  .event-row td:last-child {
+    padding-right: 0;
   }
 
-  a.event-row {
-    cursor: pointer;
-    padding: 0.5rem 0.5rem;
-    margin: 0 -0.5rem;
-    border-radius: 4px;
-    border-bottom: none;
-  }
-
-  a.event-row + .event-row {
-    border-top: none;
-  }
-
-  a.event-row:hover {
+  .event-row:hover td {
     background: var(--accent-faint);
   }
 
-  a.event-row:hover .event-title {
-    color: var(--accent);
-  }
-
-  /* ── Time ── */
+  /* ── Columns ── */
   .event-time {
     font-family: var(--sans);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 400;
     color: var(--text-muted);
-    width: 3rem;
-    flex-shrink: 0;
+    width: 4rem;
     font-variant-numeric: tabular-nums;
-  }
-
-  /* ── Info block ── */
-  .event-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    min-width: 0;
-    flex: 1;
+    white-space: nowrap;
   }
 
   .event-title {
@@ -111,15 +88,39 @@
     font-weight: 500;
     color: var(--text);
     line-height: 1.35;
+  }
+
+  .event-link {
+    color: var(--text);
+    text-decoration: none;
     transition: color 0.1s ease;
   }
 
-  .event-details {
+  .event-link:hover {
+    color: var(--accent);
+  }
+
+  .event-venue {
     font-family: var(--sans);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--text-mid);
     font-weight: 400;
-    line-height: 1.4;
+    width: 15rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .event-conductor {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    width: 12rem;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* ── No results ── */
@@ -134,22 +135,33 @@
   }
 
   /* ── Mobile ── */
+  @media (max-width: 900px) {
+    .event-conductor {
+      display: none;
+    }
+  }
+
   @media (max-width: 700px) {
     .events-section {
       padding: 0 1.5rem 3rem;
     }
 
-    .event-row {
-      gap: 0.75rem;
+    .event-table {
+      table-layout: auto;
     }
 
     .event-time {
-      width: 2.75rem;
-      font-size: 0.8rem;
+      width: auto;
+      font-size: 0.85rem;
     }
 
     .event-title {
       font-size: 1.05rem;
+    }
+
+    .event-venue {
+      width: auto;
+      font-size: 0.8rem;
     }
   }
 </style>
