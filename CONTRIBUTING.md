@@ -1,6 +1,5 @@
 # Contribute a Venue-Scraper
-
-> **This section is written for coding agents.** Follow these instructions exactly to add a new venue scraper.
+**This section is written for coding agents.** Follow these instructions exactly to add a new venue scraper.
 
 ## 1. Create the scraper
 
