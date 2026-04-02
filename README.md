@@ -1,6 +1,6 @@
 # Erda
 
-A remote MCP server that aggregates classical music and opera schedules from German venues and serves them via three MCP tools.
+Opera & classical music event schedule remote MCP.
 
 ## MCP Tools
 
