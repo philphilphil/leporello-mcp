@@ -4,6 +4,7 @@ import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './bas
 const JSON_URL =
   'https://www.liceubarcelona.cat/sites/default/files/programme.json';
 const SITE_BASE = 'https://www.liceubarcelona.cat';
+const TZ = 'Europe/Madrid';
 
 interface LiceuSession {
   id: string;
@@ -53,6 +54,8 @@ export class LiceuBarcelonaScraper implements Scraper {
     return res.json() as Promise<LiceuData>;
   }
 
+  /** The API timestamps are double-offset: the server subtracts the Madrid
+   *  timezone offset twice. Correct by adding the offset back once. */
   parse(data: LiceuData): Event[] {
     const events: Event[] = [];
     const seen = new Set<string>();
@@ -76,9 +79,7 @@ export class LiceuBarcelonaScraper implements Scraper {
           try {
             if (session.date === null) continue;
 
-            const dt = new Date(session.date * 1000);
-            const date = dt.toISOString().slice(0, 10);
-            const time = dt.toISOString().slice(11, 16);
+            const { date, time } = fixTimestamp(session.date);
 
             const cast = session.artists.map(a => a.name.trim()).filter(Boolean);
 
@@ -109,4 +110,18 @@ export class LiceuBarcelonaScraper implements Scraper {
 
     return events;
   }
+}
+
+// The Liceu API double-subtracts the Madrid timezone offset from timestamps.
+// Correct by adding the offset back once.
+function fixTimestamp(ts: number): { date: string; time: string } {
+  const dt = new Date(ts * 1000);
+  const utc = dt.toLocaleString('en-US', { timeZone: 'UTC' });
+  const local = dt.toLocaleString('en-US', { timeZone: TZ });
+  const offsetMs = new Date(local).getTime() - new Date(utc).getTime();
+  const corrected = new Date(dt.getTime() + offsetMs);
+  return {
+    date: corrected.toLocaleDateString('sv-SE', { timeZone: TZ }),
+    time: corrected.toLocaleTimeString('en-GB', { timeZone: TZ, hour: '2-digit', minute: '2-digit', hour12: false }),
+  };
 }
