@@ -1,3 +1,5 @@
+import { t, getLang } from '../i18n/index.js';
+
 interface Event {
   id: string;
   venue_id: string;
@@ -75,7 +77,7 @@ function populateCityDropdown(): void {
     ? data.cities.filter((c) => c.country === country)
     : data.cities;
 
-  citySelect.innerHTML = '<option value="">All Cities</option>';
+  citySelect.innerHTML = `<option value="">${t('filter.all_cities')}</option>`;
   for (const c of filtered) {
     const opt = document.createElement('option');
     opt.value = c.id;
@@ -101,7 +103,7 @@ function populateVenueDropdown(): void {
     filtered = filtered.filter((v) => countryCityIds.has(v.city_id));
   }
 
-  venueSelect.innerHTML = '<option value="">All Venues</option>';
+  venueSelect.innerHTML = `<option value="">${t('filter.all_venues')}</option>`;
   for (const v of filtered) {
     const opt = document.createElement('option');
     opt.value = v.id;
@@ -161,7 +163,7 @@ function filterEvents(): Event[] {
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr + 'T00:00:00');
-  return date.toLocaleDateString('en-US', {
+  return date.toLocaleDateString(getLang(), {
     weekday: 'long',
     month: 'long',
     day: 'numeric',
@@ -192,10 +194,12 @@ function render(): void {
   updateUrl();
   updateClearButton();
 
-  eventCount.textContent = `${events.length} event${events.length !== 1 ? 's' : ''}`;
+  eventCount.textContent = events.length === 1
+    ? t('events.count_one')
+    : t('events.count', { n: events.length });
 
   if (events.length === 0) {
-    eventList.innerHTML = '<p class="no-results">No events found</p>';
+    eventList.innerHTML = `<p class="no-results">${t('events.none')}</p>`;
     return;
   }
 
