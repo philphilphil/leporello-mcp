@@ -90,6 +90,7 @@ function buildMcpServer(): McpServer {
         time: e.time,
         ...(e.conductor ? { conductor: e.conductor } : {}),
         ...(e.cast ? { cast: parseCast(e.cast) } : {}),
+        ...(e.location ? { location: e.location } : {}),
         url: e.url,
       }));
 

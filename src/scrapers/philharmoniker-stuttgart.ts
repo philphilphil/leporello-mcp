@@ -51,6 +51,7 @@ export class PhilharmonikerStuttgartScraper implements Scraper {
         if (!date) return;
 
         const time = parseTime(rawTime);
+        const location = parseLocation(rawTime);
         const url = href ? new URL(href, BASE_URL + '/').href : null;
 
         events.push({
@@ -61,6 +62,7 @@ export class PhilharmonikerStuttgartScraper implements Scraper {
           time,
           conductor: null,
           cast: null,
+          location,
           url,
           scraped_at: now,
         });
@@ -99,4 +101,10 @@ function parseDate(datetimeAttr: string, rawText: string): string | null {
 function parseTime(raw: string): string | null {
   const m = raw.match(/(\d{2})[.:](\d{2})/);
   return m ? `${m[1]}:${m[2]}` : null;
+}
+
+// "19:30 | Gustav-Siegle-Haus" → "Gustav-Siegle-Haus"; no separator → null
+function parseLocation(raw: string): string | null {
+  const parts = raw.split(' | ');
+  return parts.length > 1 ? parts[1].trim() || null : null;
 }

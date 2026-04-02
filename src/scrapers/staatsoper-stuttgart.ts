@@ -48,6 +48,8 @@ export class StaatsoperStuttgartScraper implements Scraper {
         if (!date) return;
 
         const time = parseTime(startDateContent);
+        const locationText = $(el).find('[itemprop="location"] [itemprop="name"]').first().text().trim();
+        const location = locationText || null;
         const url = href ? new URL(href, BASE_URL + '/').href : null;
 
         events.push({
@@ -58,6 +60,7 @@ export class StaatsoperStuttgartScraper implements Scraper {
           time,
           conductor: null,
           cast: null,
+          location,
           url,
           scraped_at: now,
         });

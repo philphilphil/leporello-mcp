@@ -20,6 +20,7 @@ export interface Event {
   time: string | null; // "HH:MM"
   conductor: string | null;
   cast: string[] | null;
+  location: string | null; // physical performance location, e.g. "Liederhalle"
   url: string | null;
   scraped_at: string;  // ISO 8601
 }

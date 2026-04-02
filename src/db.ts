@@ -43,12 +43,20 @@ function initSchema(db: Database.Database): void {
       time       TEXT,
       conductor  TEXT,
       cast       TEXT,
+      location   TEXT,
       url        TEXT,
       scraped_at TEXT NOT NULL
     );
 
     CREATE INDEX IF NOT EXISTS events_venue_date ON events(venue_id, date);
   `);
+
+  // Migration: add location column to existing databases
+  try {
+    db.exec(`ALTER TABLE events ADD COLUMN location TEXT`);
+  } catch {
+    // column already exists — safe to ignore
+  }
 
   seedStaticData(db);
 }
@@ -132,8 +140,8 @@ export function getEvents(opts: {
 export function upsertEvents(events: Event[]): void {
   const stmt = getDb().prepare(`
     INSERT OR REPLACE INTO events
-      (id, venue_id, title, date, time, conductor, cast, url, scraped_at)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      (id, venue_id, title, date, time, conductor, cast, location, url, scraped_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
   getDb().transaction((evts: Event[]) => {
@@ -142,6 +150,7 @@ export function upsertEvents(events: Event[]): void {
         e.id, e.venue_id, e.title, e.date, e.time,
         e.conductor,
         e.cast ? JSON.stringify(e.cast) : null,
+        e.location,
         e.url, e.scraped_at,
       );
     }
