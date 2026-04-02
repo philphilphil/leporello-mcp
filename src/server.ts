@@ -1,6 +1,9 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
+import { readFile } from 'node:fs/promises';
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
+import { join, extname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 import { getCities, getVenues, getEvents } from './db.js';
 
@@ -106,6 +109,52 @@ function buildMcpServer(): McpServer {
   return server;
 }
 
+const MIME_TYPES: Record<string, string> = {
+  '.html': 'text/html; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.js': 'application/javascript; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.svg': 'image/svg+xml',
+  '.png': 'image/png',
+  '.ico': 'image/x-icon',
+  '.woff2': 'font/woff2',
+  '.woff': 'font/woff',
+};
+
+const WEB_DIST = join(
+  fileURLToPath(import.meta.url), '..', '..', 'web', 'dist'
+);
+
+async function serveStatic(
+  req: IncomingMessage,
+  res: ServerResponse,
+  pathname: string,
+): Promise<void> {
+  // Resolve path and prevent directory traversal
+  let filePath = join(WEB_DIST, pathname);
+  if (!filePath.startsWith(WEB_DIST)) {
+    res.writeHead(403).end();
+    return;
+  }
+
+  // Try exact file, then append index.html for directories
+  try {
+    let content: Buffer;
+    try {
+      content = await readFile(filePath);
+    } catch {
+      filePath = join(filePath, 'index.html');
+      content = await readFile(filePath);
+    }
+
+    const ext = extname(filePath);
+    const mime = MIME_TYPES[ext] ?? 'application/octet-stream';
+    res.writeHead(200, { 'Content-Type': mime }).end(content);
+  } catch {
+    res.writeHead(404).end();
+  }
+}
+
 export function startHttpServer() {
   const port = Number(process.env.PORT ?? 3000);
   if (!Number.isInteger(port) || port < 1 || port > 65535) {
@@ -149,7 +198,8 @@ export function startHttpServer() {
         return;
       }
 
-      res.writeHead(404).end();
+      await serveStatic(req, res, pathname ?? '/');
+      return;
     },
   );
 
