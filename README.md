@@ -18,6 +18,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Oper Frankfurt | Frankfurt |
 | San Francisco Opera | San Francisco |
 | Gran Teatre del Liceu | Barcelona |
+| Bayerische Staatsoper | München |
 
 ## How it works
 
