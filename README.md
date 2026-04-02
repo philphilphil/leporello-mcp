@@ -1,6 +1,21 @@
-# Leporello
+<p align="center">
+  <img src="web/public/leporello-logo.svg" alt="Leporello" width="200" />
+</p>
 
-Opera & classical music event schedule remote MCP.
+<h1 align="center">Leporello</h1>
+
+<p align="center">Opera & classical music event schedule remote MCP.<br>Also available as a web app at <a href="https://leporello.app">leporello.app</a>.</p>
+
+## Supported Venues
+
+| Venue | City |
+|---|---|
+| Staatsoper Stuttgart | Stuttgart |
+| Stuttgarter Philharmoniker | Stuttgart |
+| Wiener Staatsoper | Vienna |
+| Metropolitan Opera | New York |
+
+Missing your favorite venue? PRs welcome — see [Contribute a Venue-Scraper](#contribute-a-venue-scraper) below.
 
 ## MCP Tools
 
@@ -21,15 +36,6 @@ npm test          # run scraper tests
 ```
 
 Scrapes on startup if the database is empty, then daily at 03:00 UTC.
-
-## Venues
-
-| ID | Venue |
-|---|---|
-| `staatsoper-stuttgart` | Staatsoper Stuttgart |
-| `philharmoniker-stuttgart` | Stuttgarter Philharmoniker |
-| `wiener-staatsoper` | Wiener Staatsoper |
-| `metropolitan-opera` | Metropolitan Opera |
 
 ---
 
@@ -86,9 +92,11 @@ export class MyVenueScraper implements Scraper {
         const title = $(el).find('...').text().trim();
         const date = '...';   // "YYYY-MM-DD"
         const time = '...';   // "HH:MM" or null
-        const location = '...'; // physical venue name or null
+        const conductor = '...'; // conductor name or null
+        const cast = ['...']; // array of performer names or null
+        const location = '...'; // physical performance hall, e.g. "Liederhalle", or null
         const href = $(el).find('a').attr('href') ?? '';
-        const url = href ? new URL(href, BASE_URL + '/').href : null;
+        const url = href ? new URL(href, BASE_URL + '/').href : null; // link to event detail page or null
 
         if (!title || !date) return;
 
@@ -98,8 +106,8 @@ export class MyVenueScraper implements Scraper {
           title,
           date,
           time,
-          conductor: null,
-          cast: null,
+          conductor,
+          cast,
           location,
           url,
           scraped_at: now,
