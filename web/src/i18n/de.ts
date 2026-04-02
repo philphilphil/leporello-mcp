@@ -22,7 +22,7 @@ const de: Record<string, string> = {
     "Leporello sammelt öffentlich verfügbare Konzertprogramme. Alle Veranstaltungsdaten gehören den jeweiligen Spielstätten.",
   "mcp.badge": "MCP Server",
   "mcp.text":
-    "Verbinden Sie diese Daten mit Claude, ChatGPT oder einem anderen MCP-kompatiblen KI-Assistenten",
+    "Verbinde diese Daten mit Claude, ChatGPT oder einem anderen MCP-kompatiblen KI-Assistenten",
   "mcp.endpoint": "Endpunkt",
 };
 
