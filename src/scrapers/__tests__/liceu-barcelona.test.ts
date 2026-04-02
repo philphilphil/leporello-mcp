@@ -8,6 +8,6 @@ const scraper = new LiceuBarcelonaScraper({ fetchJson: async () => fixture });
 describe('LiceuBarcelonaScraper', () => {
   it('parses expected events from fixture', async () => {
     const events = await scraper.scrape();
-    expect(events.length).toBe(232);
+    expect(events.length).toBe(230);
   });
 });

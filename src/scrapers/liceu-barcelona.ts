@@ -55,6 +55,7 @@ export class LiceuBarcelonaScraper implements Scraper {
 
   parse(data: LiceuData): Event[] {
     const events: Event[] = [];
+    const seen = new Set<string>();
     const now = new Date().toISOString();
 
     for (const prod of data.productions) {
@@ -77,8 +78,12 @@ export class LiceuBarcelonaScraper implements Scraper {
 
             const cast = session.artists.map(a => a.name.trim()).filter(Boolean);
 
+            const id = generateEventId(this.venueId, date, time, title);
+            if (seen.has(id)) continue;
+            seen.add(id);
+
             events.push({
-              id: generateEventId(this.venueId, date, time, title),
+              id,
               venue_id: this.venueId,
               title: fullTitle,
               date,
