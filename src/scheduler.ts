@@ -3,13 +3,14 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { upsertEvents, updateLastScraped, updateScrapeError, upsertCity, upsertVenue } from './db.js';
+import { replaceVenueEvents, updateLastScraped, updateScrapeError, upsertCity, upsertVenue } from './db.js';
 import { validateEvents } from './validate.js';
 import type { Scraper } from './scrapers/base.js';
 import { PhilharmonikerStuttgartScraper } from './scrapers/philharmoniker-stuttgart.js';
 import { StaatsoperStuttgartScraper } from './scrapers/staatsoper-stuttgart.js';
 import { MetropolitanOperaScraper } from './scrapers/metropolitan-opera.js';
 import { WienerStaatsoperScraper } from './scrapers/wiener-staatsoper.js';
+import { OperFrankfurtScraper } from './scrapers/oper-frankfurt.js';
 
 const execFileAsync = promisify(execFile);
 
@@ -36,6 +37,7 @@ const scrapers: Scraper[] = [
   new StaatsoperStuttgartScraper(),
   new MetropolitanOperaScraper(),
   new WienerStaatsoperScraper(),
+  new OperFrankfurtScraper(),
 ];
 
 export async function runAllScrapers(): Promise<void> {
@@ -67,7 +69,7 @@ export async function runAllScrapers(): Promise<void> {
           );
           continue;
         }
-        upsertEvents(events);
+        replaceVenueEvents(scraper.venueId, events);
         const ts = new Date().toISOString();
         updateLastScraped(scraper.venueId, ts);
         console.log(

@@ -162,16 +162,19 @@ export function getEvents(opts: {
   return getDb().prepare(sql).all(...params) as Array<Event & { venue_name: string }>;
 }
 
-export function upsertEvents(events: Event[]): void {
-  const stmt = getDb().prepare(`
-    INSERT OR REPLACE INTO events
+export function replaceVenueEvents(venueId: string, events: Event[]): void {
+  const db = getDb();
+  const del = db.prepare(`DELETE FROM events WHERE venue_id = ?`);
+  const ins = db.prepare(`
+    INSERT INTO events
       (id, venue_id, title, date, time, conductor, cast, location, url, scraped_at)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
-  getDb().transaction((evts: Event[]) => {
+  db.transaction((evts: Event[]) => {
+    del.run(venueId);
     for (const e of evts) {
-      stmt.run(
+      ins.run(
         e.id, e.venue_id, e.title, e.date, e.time,
         e.conductor,
         e.cast ? JSON.stringify(e.cast) : null,

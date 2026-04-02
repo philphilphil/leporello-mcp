@@ -128,6 +128,7 @@ Rules:
 - Use `new URL(href, BASE_URL + '/').href` for absolute URLs
 - Silently skip malformed entries with try/catch per element
 - Throw on non-2xx HTTP (the scheduler catches and logs it)
+- Use the venue's native-language pages when available (e.g. `/de/spielplan/` instead of `/en/schedule/`) to get original, untranslated event titles
 
 ### 2. Save an HTML fixture
 
