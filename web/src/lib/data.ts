@@ -1,4 +1,5 @@
 import Database from 'better-sqlite3';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -6,7 +7,8 @@ const DB_PATH =
   process.env.DB_PATH ??
   path.join(fileURLToPath(import.meta.url), '..', '..', '..', '..', 'data', 'erda.db');
 
-function openDb(): Database.Database {
+function openDb(): Database.Database | null {
+  if (!existsSync(DB_PATH)) return null;
   return new Database(DB_PATH, { readonly: true });
 }
 
@@ -41,6 +43,7 @@ export interface Event {
 
 export function getCities(): City[] {
   const db = openDb();
+  if (!db) return [];
   try {
     return db.prepare(`
       SELECT c.id, c.name, c.country, COUNT(v.id) AS venue_count
@@ -56,6 +59,7 @@ export function getCities(): City[] {
 
 export function getVenues(): Venue[] {
   const db = openDb();
+  if (!db) return [];
   try {
     return db.prepare(`
       SELECT v.id, v.name, v.city_id, c.name AS city_name, c.country, v.last_scraped
@@ -70,6 +74,7 @@ export function getVenues(): Venue[] {
 
 export function getEvents(daysAhead: number = 90): Event[] {
   const db = openDb();
+  if (!db) return [];
   try {
     const today = new Date().toISOString().slice(0, 10);
     const until = new Date();

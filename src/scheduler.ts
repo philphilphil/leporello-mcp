@@ -7,10 +7,12 @@ import { upsertEvents, updateLastScraped, upsertCity, upsertVenue } from './db.j
 import type { Scraper } from './scrapers/base.js';
 import { PhilharmonikerStuttgartScraper } from './scrapers/philharmoniker-stuttgart.js';
 import { StaatsoperStuttgartScraper } from './scrapers/staatsoper-stuttgart.js';
+import { MetropolitanOperaScraper } from './scrapers/metropolitan-opera.js';
+import { WienerStaatsoperScraper } from './scrapers/wiener-staatsoper.js';
 
 const execFileAsync = promisify(execFile);
 
-async function rebuildWeb(): Promise<void> {
+export async function rebuildWeb(): Promise<void> {
   console.log(JSON.stringify({ event: 'web_build_start' }));
   const start = Date.now();
   try {
@@ -31,6 +33,8 @@ async function rebuildWeb(): Promise<void> {
 const scrapers: Scraper[] = [
   new PhilharmonikerStuttgartScraper(),
   new StaatsoperStuttgartScraper(),
+  new MetropolitanOperaScraper(),
+  new WienerStaatsoperScraper(),
 ];
 
 export async function runAllScrapers(): Promise<void> {
