@@ -8,6 +8,13 @@ const { title } = Astro.props;
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script is:inline>
+    (function() {
+      var s = localStorage.getItem('lang');
+      var d = (navigator.language || '').startsWith('de') ? 'de' : 'en';
+      document.documentElement.lang = s || d;
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
