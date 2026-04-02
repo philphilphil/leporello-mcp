@@ -14,6 +14,8 @@
 | Stuttgarter Philharmoniker | Stuttgart |
 | Wiener Staatsoper | Vienna |
 | Metropolitan Opera | New York |
+| Oper Frankfurt | Frankfurt |
+| San Francisco Opera | San Francisco |
 
 Missing your favorite venue? PRs welcome — see [Contribute a Venue-Scraper](#contribute-a-venue-scraper) below.
 
@@ -185,14 +187,18 @@ const scrapers: Scraper[] = [
 ];
 ```
 
-### 5. Verify
+### 5. Update the venue list
+
+Add the new venue to the **Supported Venues** table at the top of this README.
+
+### 6. Verify
 
 ```bash
 npm test               # all tests must pass
 npm run scrape         # live scrape, check output for scrape_success
 ```
 
-### 6. Open a PR
+### 7. Open a PR
 
 **IMPORTANT: The PR description MUST include a clickable link to the venue's public schedule page** (the calendar/Spielplan URL the scraper reads from). Reviewers use this to manually verify the scraped output against the real listings.
 
