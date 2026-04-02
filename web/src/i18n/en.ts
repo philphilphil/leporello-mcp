@@ -1,0 +1,29 @@
+const en: Record<string, string> = {
+  "site.tagline": "Opera & Classical Music Event Schedules",
+  "filter.country": "Country",
+  "filter.city": "City",
+  "filter.venue": "Venue",
+  "filter.period": "Period",
+  "filter.search": "Search",
+  "filter.search.placeholder": "Search events...",
+  "filter.all_countries": "All Countries",
+  "filter.all_cities": "All Cities",
+  "filter.all_venues": "All Venues",
+  "filter.next_days": "Next {n} days",
+  "events.count": "{n} events",
+  "events.count_one": "1 event",
+  "events.none": "No events found",
+  "footer.sources": "Sources",
+  "footer.events": "{n} events",
+  "footer.event_one": "1 event",
+  "footer.updated": "updated {date}",
+  "footer.updated_never": "never",
+  "footer.note":
+    "Leporello aggregates publicly available concert schedules. All event data belongs to the respective venues.",
+  "mcp.badge": "MCP Server",
+  "mcp.text":
+    "Connect this data to Claude, ChatGPT, or any MCP-compatible AI assistant",
+  "mcp.endpoint": "Endpoint",
+};
+
+export default en;
