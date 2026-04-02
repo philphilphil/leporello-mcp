@@ -1,6 +1,6 @@
-# Erda — Codebase Guide
+# Leporello — Codebase Guide
 
-Remote MCP server for classical music / opera event schedules. Node.js 22, TypeScript ESM, SQLite, Cheerio scrapers, node-cron scheduler.
+Remote MCP server for classical music / opera event schedules. Node.js 22, TypeScript ESM, SQLite, Cheerio scrapers, node-cron scheduler. Static Astro frontend.
 
 ## Commands
 
@@ -9,14 +9,16 @@ npm run dev      # Start server + scheduler (loads .env)
 npm run scrape   # Run scrapers once and exit (loads .env)
 npm test         # Run scraper unit tests (6 tests)
 npm run build    # Compile TypeScript to dist/
+npm run build --prefix web  # Build Astro frontend to web/dist/
 ```
 
 ## Architecture
 
-One process, three responsibilities:
-- **HTTP server** (`src/server.ts`) — Streamable HTTP MCP endpoint at `POST /mcp`, health check at `GET /health`
-- **Scheduler** (`src/scheduler.ts`) — node-cron runs `runAllScrapers()` daily at 03:00 UTC
+One process, four responsibilities:
+- **HTTP server** (`src/server.ts`) — Streamable HTTP MCP endpoint at `POST /mcp`, health check at `GET /health`, static frontend for everything else
+- **Scheduler** (`src/scheduler.ts`) — node-cron runs `runAllScrapers()` daily at 03:00 UTC, then rebuilds the frontend
 - **Scrapers** (`src/scrapers/`) — Cheerio-based, one file per venue
+- **Frontend** (`web/`) — Astro static site, reads SQLite at build time, client-side filtering/search
 
 Entry point is `src/index.ts`: initializes DB → starts HTTP server → starts scheduler → triggers initial scrape if DB is empty.
 
@@ -25,8 +27,8 @@ Entry point is `src/index.ts`: initializes DB → starts HTTP server → starts 
 ```
 src/
   index.ts                    Entry point
-  server.ts                   McpServer (3 tools) + HTTP server
-  scheduler.ts                node-cron + runAllScrapers()
+  server.ts                   McpServer (3 tools) + HTTP server + static file serving
+  scheduler.ts                node-cron + runAllScrapers() + rebuildWeb()
   scrape.ts                   One-shot scrape script (npm run scrape)
   db.ts                       SQLite singleton, schema, seed data, queries
   types.ts                    City, Venue, Event interfaces
@@ -36,6 +38,14 @@ src/
     staatsoper-stuttgart.ts
     __fixtures__/             Saved HTML snapshots for tests
     __tests__/                Scraper unit tests (fixture-based)
+web/
+  astro.config.ts             Astro configuration
+  src/
+    pages/index.astro         Single page — event listing
+    layouts/Base.astro        HTML shell, fonts, meta
+    components/               Filters.astro, EventList.astro
+    lib/data.ts               Read-only SQLite queries for build time
+    scripts/filter.ts         Client-side filtering, search, URL state
 ```
 
 ## Database
@@ -96,15 +106,17 @@ All logs are structured JSON on stdout/stderr:
 {"event":"scrape_start","venue":"staatsoper-stuttgart"}
 {"event":"scrape_success","venue":"staatsoper-stuttgart","count":77,"duration_ms":214}
 {"event":"scrape_error","venue":"...","error":"...","duration_ms":...}
+{"event":"web_build_start"}
+{"event":"web_build_success","duration_ms":...}
 {"event":"initial_scrape_triggered"}
 {"event":"mcp_request_error","error":"..."}
 ```
 
 ## Deployment
 
-Docker Compose + Traefik. Update `erda.example.com` in `docker-compose.yml` before deploying.
+Docker Compose + Traefik at `leporello.app`.
 
 ```bash
 docker compose up -d
-docker compose logs -f erda
+docker compose logs -f leporello
 ```

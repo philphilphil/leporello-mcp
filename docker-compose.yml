@@ -1,9 +1,9 @@
 services:
-  erda:
+  leporello:
     build: .
     restart: unless-stopped
     volumes:
-      - erda-data:/app/data
+      - leporello-data:/app/data
     environment:
       - SCRAPE_CRON=0 3 * * *
       - PORT=3000
@@ -12,13 +12,13 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=gateway"
-      - "traefik.http.routers.erda.rule=Host(`erda.example.com`)"
-      - "traefik.http.routers.erda.entrypoints=websecure"
-      - "traefik.http.routers.erda.tls.certresolver=myresolver"
-      - "traefik.http.services.erda.loadbalancer.server.port=3000"
+      - "traefik.http.routers.leporello.rule=Host(`leporello.app`)"
+      - "traefik.http.routers.leporello.entrypoints=websecure"
+      - "traefik.http.routers.leporello.tls.certresolver=myresolver"
+      - "traefik.http.services.leporello.loadbalancer.server.port=3000"
 
 volumes:
-  erda-data:
+  leporello-data:
 
 networks:
   gateway:

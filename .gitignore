@@ -9,3 +9,4 @@ coverage/
 web/dist/
 web/node_modules/
 .superpowers/
+.playwright-mcp/

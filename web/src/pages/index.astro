@@ -33,17 +33,14 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
 }));
 ---
 
-<Base title="Erda — Classical Music Events">
+<Base title="Leporello — Classical Music Events">
   <script type="application/json" id="event-data" set:html={JSON.stringify(pageData)} />
 
   <div class="page-wrapper">
     <header class="site-header">
       <div class="header-inner">
-        <div class="header-brand">
-          <h1 class="site-title">Erda</h1>
-          <div class="title-rule"></div>
-          <p class="site-tagline">Classical Music & Opera Events</p>
-        </div>
+        <h1 class="site-title">Leporello</h1>
+        <p class="site-tagline">Classical Music & Opera Events</p>
       </div>
     </header>
 
@@ -69,7 +66,7 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
           </div>
           <div class="footer-section footer-about">
             <p class="footer-note">
-              Erda aggregates publicly available concert schedules.
+              Leporello aggregates publicly available concert schedules.
               All event data belongs to the respective venues.
             </p>
           </div>
@@ -91,43 +88,29 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
   /* ── Header ── */
   .site-header {
     background: var(--bg);
-    padding-top: 1rem;
   }
 
   .header-inner {
-    max-width: 960px;
+    max-width: 1080px;
     margin: 0 auto;
-    padding: 2.5rem 2rem 1.75rem;
-  }
-
-  .header-brand {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
+    padding: 2.5rem 2.5rem 1.5rem;
   }
 
   .site-title {
     font-family: var(--serif);
-    font-size: 3.2rem;
-    font-weight: 300;
-    letter-spacing: 0.04em;
+    font-size: 2.8rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
     color: var(--text);
     line-height: 1;
-  }
-
-  .title-rule {
-    width: 2.5rem;
-    height: 2px;
-    background: var(--accent);
-    margin: 0.7rem 0 0.6rem;
+    margin-bottom: 0.4rem;
   }
 
   .site-tagline {
     font-family: var(--sans);
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 400;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--text-muted);
   }
@@ -140,9 +123,9 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
   }
 
   .footer-inner {
-    max-width: 960px;
+    max-width: 1080px;
     margin: 0 auto;
-    padding: 2.5rem 2rem 3rem;
+    padding: 2.5rem 2.5rem 3rem;
   }
 
   .footer-grid {
@@ -157,14 +140,14 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
 
   .footer-about {
     flex: 0 0 auto;
-    max-width: 280px;
+    max-width: 300px;
   }
 
   .footer-heading {
     font-family: var(--sans);
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-muted);
     margin-bottom: 1rem;
@@ -174,7 +157,7 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.75rem;
   }
 
   .footer-venue-row {
@@ -185,10 +168,10 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
 
   .footer-venue-name {
     font-family: var(--serif);
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 500;
     color: var(--text);
-    transition: color 0.12s ease;
+    transition: color 0.1s ease;
   }
 
   .footer-venue-name:hover {
@@ -197,31 +180,30 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
 
   .footer-venue-meta {
     font-family: var(--sans);
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
     font-weight: 400;
   }
 
   .footer-note {
     font-family: var(--sans);
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
     font-weight: 400;
     line-height: 1.6;
   }
 
-  /* ── Mobile ── */
   @media (max-width: 700px) {
     .header-inner {
-      padding: 2rem 1.25rem 1.25rem;
+      padding: 2rem 1.5rem 1.25rem;
     }
 
     .site-title {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
     }
 
     .footer-inner {
-      padding: 2rem 1.25rem;
+      padding: 2rem 1.5rem;
     }
 
     .footer-grid {

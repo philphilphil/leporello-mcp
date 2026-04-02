@@ -19,7 +19,7 @@ function parseCast(raw: unknown): string[] | undefined {
 }
 
 function buildMcpServer(): McpServer {
-  const server = new McpServer({ name: 'erda', version: '1.0.0' });
+  const server = new McpServer({ name: 'leporello', version: '1.0.0' });
 
   server.tool(
     'list_cities',
