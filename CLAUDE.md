@@ -30,7 +30,7 @@ src/
   server.ts                   McpServer (4 tools) + HTTP server + static file serving
   scheduler.ts                node-cron + runAllScrapers() + rebuildWeb()
   scrape.ts                   One-shot scrape script (npm run scrape)
-  db.ts                       SQLite singleton, schema, seed data, queries
+  db.ts                       SQLite singleton, schema, queries
   types.ts                    City, Venue, Event interfaces
   scrapers/
     base.ts                   Scraper interface + generateEventId()

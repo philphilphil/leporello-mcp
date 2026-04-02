@@ -23,6 +23,7 @@ export interface Venue {
   id: string;
   name: string;
   city_id: string;
+  url: string;
   city_name: string;
   country: string;
   last_scraped: string | null;
@@ -62,7 +63,7 @@ export function getVenues(): Venue[] {
   if (!db) return [];
   try {
     return db.prepare(`
-      SELECT v.id, v.name, v.city_id, c.name AS city_name, c.country, v.last_scraped
+      SELECT v.id, v.name, v.city_id, v.url, c.name AS city_name, c.country, v.last_scraped
       FROM venues v
       JOIN cities c ON c.id = v.city_id
       ORDER BY v.name

@@ -5,7 +5,7 @@ import { getDb, closeDb } from './db.js';
 import { startHttpServer } from './server.js';
 import { startScheduler, runAllScrapers, rebuildWeb } from './scheduler.js';
 
-// Initialize DB — creates schema and seeds cities/venues
+// Initialize DB — creates schema if needed
 const db = getDb();
 
 const httpServer = startHttpServer();
