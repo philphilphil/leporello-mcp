@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="google-site-verification" content="fJ08sYppKWb9ScpXoTFTgV-DnIZsdIh5iHE5fhaaWFU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Programación — Auditorio Nacional de Música</title>
+    
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,800;1,300;1,400;1,700&amp;display=swap" rel="stylesheet" /> 
+
+    <link rel="shortcut icon" type="image/x-icon" href="/++theme++auditorionacionaltheme-copia/img/favicon.ico" />
+
+    <link rel="apple-touch-icon" href="/++theme++auditorionacionaltheme-copia/img/apple-touch-icon.gif" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/++theme++auditorionacionaltheme-copia/img/apple-touch-icon-144x144-precomposed.gif" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/++theme++auditorionacionaltheme-copia/img/apple-touch-icon-114x114-precomposed.gif" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/++theme++auditorionacionaltheme-copia/img/apple-touch-icon-72x72-precomposed.gif" />
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/++theme++auditorionacionaltheme-copia/img/apple-touch-icon-57x57-precomposed.gif" />
+    <link rel="apple-touch-icon-precomposed" href="/++theme++auditorionacionaltheme-copia/img/apple-touch-icon-precomposed.gif" />
+ 
+
+<meta name="DC.format" content="text/plain" /><meta name="DC.type" content="FolderishPage" /><meta name="DC.date.valid_range" content="2016/11/01 - " /><meta name="DC.date.modified" content="2026-03-27T11:51:35+02:00" /><meta name="DC.date.created" content="2016-11-07T14:11:43+02:00" /><meta name="DC.language" content="es" /><meta content="summary" name="twitter:card" /><meta content="Programación" name="twitter:title" /><meta content="Auditorio Nacional de Música" property="og:site_name" /><meta content="Programación" property="og:title" /><meta content="website" property="og:type" /><meta content="" name="twitter:description" /><meta content="https://auditorionacional.inaem.gob.es/es/programacion" name="twitter:url" /><meta content="" property="og:description" /><meta content="https://auditorionacional.inaem.gob.es/es/programacion" property="og:url" /><meta content="https://auditorionacional.inaem.gob.es/@@site-logo/logo-auditorio-nacional-de-musica.png" name="twitter:image" /><meta content="https://auditorionacional.inaem.gob.es/@@site-logo/logo-auditorio-nacional-de-musica.png" property="og:image" /><meta content="image/png" property="og:image:type" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Plone - http://plone.com" /><link rel="stylesheet" type="text/css" media="screen" href="https://auditorionacional.inaem.gob.es/++theme++auditorionacionaltheme/cookiebar/jquery.cookiebar.css" /><link rel="canonical" href="https://auditorionacional.inaem.gob.es/es/programacion" /><link rel="search" href="https://auditorionacional.inaem.gob.es/es/@@search" title="Buscar en este sitio" /><link rel="stylesheet" type="text/css" href="https://auditorionacional.inaem.gob.es/++plone++production/++unique++2019-08-02T10:14:18.853297/default.css" data-bundle="production" /><link rel="stylesheet" type="text/css" href="https://auditorionacional.inaem.gob.es/++resource++plone.app.imagecropping.static/imagecropping.css?version=2015-11-26%2000%3A00%3A00.000003" data-bundle="plone_app_imagecropping" /><link rel="stylesheet" type="text/css" href="https://auditorionacional.inaem.gob.es//++theme++auditorionacionaltheme-copia/less/theme-compiled.css?a=1" data-bundle="diazo" /><script>PORTAL_URL = 'https://auditorionacional.inaem.gob.es';</script><script src="https://auditorionacional.inaem.gob.es/++plone++production/++unique++2019-08-02T10:14:18.853297/default.js" data-bundle="production"></script><script src="https://auditorionacional.inaem.gob.es/++resource++plone.app.imagecropping.static/imagecropping-compiled.js?version=2015-11-26%2000%3A00%3A00.000003" data-bundle="plone_app_imagecropping"></script><script src="https://auditorionacional.inaem.gob.es//++theme++auditorionacionaltheme-copia/js/theme-compiled.js" data-bundle="diazo"></script><script>
+            require.undef('moment');
+            require.config({
+                "paths": {
+                    "fullcalendar": PORTAL_URL + "/++theme++auditorionacionaltheme/js/fullcalendar",
+                    "moment": PORTAL_URL + "/++theme++auditorionacionaltheme/js/moment-with-locales",
+                }
+            });
+            require(["jquery", "moment", "fullcalendar"], function ($, moment, cal) {
+                $(document).ready(function () {
+
+                    $('#event-calendar').fullCalendar({
+                        events: PORTAL_URL + '/front-page-events.json',
+                        header: {
+                            left: 'prev',
+                            center: 'title',
+                            right: 'next'
+                        },
+                        timeFormat: 'H:mm',
+                        lang: 'es',
+                        fixedWeekCount: false,
+                        aspectRatio: 1.1,
+                        eventRender: function (event, element) {
+                            var d = moment(event.start).format("HH:mm");
+                            $(element).attr('title', d + ' ' + event.description);
+                        },
+                        dayClick: function (date, allDay, jsEvent, view) {
+                            var today = date.format();
+                            var tomorrow = moment(date).add(1, "days").format(
+                                "YYYY-MM-DD");
+                            var url = "/es/programacion?oneday=1&start=" + today +
+                                "&end=" + tomorrow;
+                            location.href = url;
+                        }
+                    });
+
+                });
+            });
+        </script></head>
+
+<body id="visual-portal-wrapper" class="template-programacion_view portaltype-folderishpage site-es section-programacion icons-on thumbs-on frontend viewpermission-view userrole-anonymous" dir="ltr" data-i18ncatalogurl="https://auditorionacional.inaem.gob.es/plonejsi18n" data-view-url="https://auditorionacional.inaem.gob.es/es/programacion" data-pat-plone-modal="{&quot;actionOptions&quot;: {&quot;displayInModal&quot;: false}}" data-pat-tinymce="{&quot;loadingBaseUrl&quot;: &quot;https://auditorionacional.inaem.gob.es/es/++plone++static/components/tinymce-builded/js/tinymce&quot;, &quot;relatedItems&quot;: {&quot;sort_order&quot;: &quot;ascending&quot;, &quot;vocabularyUrl&quot;: &quot;https://auditorionacional.inaem.gob.es/es/@@getVocabulary?name=plone.app.vocabularies.Catalog&quot;, &quot;sort_on&quot;: &quot;sortable_title&quot;, &quot;folderTypes&quot;: [&quot;Folder&quot;, &quot;Large Plone Folder&quot;, &quot;Plone Site&quot;, &quot;LIF&quot;, &quot;FolderishPage&quot;, &quot;Portada&quot;], &quot;rootPath&quot;: &quot;/Plone/es&quot;}, &quot;prependToScalePart&quot;: &quot;/@@images/image/&quot;, &quot;linkAttribute&quot;: &quot;UID&quot;, &quot;prependToUrl&quot;: &quot;/es/resolveuid/&quot;, &quot;imageTypes&quot;: [&quot;Image&quot;, &quot;Programacion&quot;, &quot;News Item&quot;], &quot;upload&quot;: {&quot;maxFiles&quot;: 1, &quot;currentPath&quot;: &quot;/programacion&quot;, &quot;initialFolder&quot;: &quot;2fbc253456d74280884a013ad9f67894&quot;, &quot;baseUrl&quot;: &quot;https://auditorionacional.inaem.gob.es/es&quot;, &quot;uploadMultiple&quot;: false, &quot;relativePath&quot;: &quot;@@fileUpload&quot;, &quot;showTitle&quot;: false}, &quot;tiny&quot;: {&quot;templates&quot;: [{&quot;url&quot;: &quot;++theme++theme/tinymce-templates/image-grid-2x2.html&quot;, &quot;title&quot;: &quot;Image Grid 2x2&quot;}], &quot;content_css&quot;: &quot;https://auditorionacional.inaem.gob.es/es/++plone++static/plone-compiled.css,https://auditorionacional.inaem.gob.es/es/++plone++static/tinymce-styles.css,https://auditorionacional.inaem.gob.es/es/++plone++static/components/tinymce-builded/js/tinymce/skins/lightgray/content.min.css,https://auditorionacional.inaem.gob.es/es/++theme++auditorionacionaltheme-copia/less/tinymce.css&quot;, &quot;external_plugins&quot;: {&quot;template&quot;: &quot;+plone+static/components/tinymce-builded/js/tinymce/plugins/template&quot;}, &quot;plugins&quot;: [&quot;plonelink&quot;, &quot;ploneimage&quot;, &quot;importcss&quot;, &quot;advlist&quot;, &quot;code&quot;, &quot;fullscreen&quot;, &quot;hr&quot;, &quot;lists&quot;, &quot;media&quot;, &quot;nonbreaking&quot;, &quot;noneditable&quot;, &quot;pagebreak&quot;, &quot;paste&quot;, &quot;preview&quot;, &quot;print&quot;, &quot;searchreplace&quot;, &quot;tabfocus&quot;, &quot;table&quot;, &quot;visualchars&quot;, &quot;wordcount&quot;], &quot;toolbar&quot;: &quot;ltr rtl | undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | unlink plonelink ploneimage&quot;, &quot;menubar&quot;: [&quot;edit&quot;, &quot;table&quot;, &quot;format&quot;, &quot;toolsview&quot;, &quot;insert&quot;], &quot;importcss_file_filter&quot;: &quot;https://auditorionacional.inaem.gob.es/es/++plone++static/tinymce-styles.css&quot;, &quot;menu&quot;: {&quot;insert&quot;: {&quot;items&quot;: &quot;link media | template hr&quot;, &quot;title&quot;: &quot;Insert&quot;}, &quot;format&quot;: {&quot;items&quot;: &quot;bold italic underline strikethrough superscript subscript | formats | removeformat&quot;, &quot;title&quot;: &quot;Format&quot;}, &quot;edit&quot;: {&quot;items&quot;: &quot;undo redo | cut copy paste pastetext | searchreplace textpattern selectall | textcolor&quot;, &quot;title&quot;: &quot;Edit&quot;}, &quot;table&quot;: {&quot;items&quot;: &quot;inserttable tableprops deletetable | cell row column&quot;, &quot;title&quot;: &quot;Table&quot;}, &quot;tools&quot;: {&quot;items&quot;: &quot;spellchecker charmap emoticons insertdatetime layer code&quot;, &quot;title&quot;: &quot;Tools&quot;}, &quot;view&quot;: {&quot;items&quot;: &quot;visualaid visualchars visualblocks preview fullpage fullscreen&quot;, &quot;title&quot;: &quot;View&quot;}}, &quot;browser_spellcheck&quot;: true, &quot;entity_encoding&quot;: &quot;raw&quot;, &quot;style_formats&quot;: [{&quot;items&quot;: [{&quot;title&quot;: &quot;Header 1&quot;, &quot;format&quot;: &quot;h1&quot;}, {&quot;title&quot;: &quot;Header 2&quot;, &quot;format&quot;: &quot;h2&quot;}, {&quot;title&quot;: &quot;Header 3&quot;, &quot;format&quot;: &quot;h3&quot;}, {&quot;title&quot;: &quot;Header 4&quot;, &quot;format&quot;: &quot;h4&quot;}, {&quot;title&quot;: &quot;Header 5&quot;, &quot;format&quot;: &quot;h5&quot;}, {&quot;title&quot;: &quot;Header 6&quot;, &quot;format&quot;: &quot;h6&quot;}], &quot;title&quot;: &quot;Headers&quot;}, {&quot;items&quot;: [{&quot;title&quot;: &quot;Paragraph&quot;, &quot;format&quot;: &quot;p&quot;}, {&quot;title&quot;: &quot;Blockquote&quot;, &quot;format&quot;: &quot;blockquote&quot;}, {&quot;title&quot;: &quot;Div&quot;, &quot;format&quot;: &quot;div&quot;}, {&quot;title&quot;: &quot;Pre&quot;, &quot;format&quot;: &quot;pre&quot;}], &quot;title&quot;: &quot;Block&quot;}, {&quot;items&quot;: [{&quot;title&quot;: &quot;Bold&quot;, &quot;icon&quot;: &quot;bold&quot;, &quot;format&quot;: &quot;bold&quot;}, {&quot;title&quot;: &quot;Italic&quot;, &quot;icon&quot;: &quot;italic&quot;, &quot;format&quot;: &quot;italic&quot;}, {&quot;title&quot;: &quot;Underline&quot;, &quot;icon&quot;: &quot;underline&quot;, &quot;format&quot;: &quot;underline&quot;}, {&quot;title&quot;: &quot;Strikethrough&quot;, &quot;icon&quot;: &quot;strikethrough&quot;, &quot;format&quot;: &quot;strikethrough&quot;}, {&quot;title&quot;: &quot;Superscript&quot;, &quot;icon&quot;: &quot;superscript&quot;, &quot;format&quot;: &quot;superscript&quot;}, {&quot;title&quot;: &quot;Subscript&quot;, &quot;icon&quot;: &quot;subscript&quot;, &quot;format&quot;: &quot;subscript&quot;}, {&quot;title&quot;: &quot;Code&quot;, &quot;icon&quot;: &quot;code&quot;, &quot;format&quot;: &quot;code&quot;}], &quot;title&quot;: &quot;Inline&quot;}, {&quot;items&quot;: [{&quot;title&quot;: &quot;Left&quot;, &quot;icon&quot;: &quot;alignleft&quot;, &quot;format&quot;: &quot;alignleft&quot;}, {&quot;title&quot;: &quot;Center&quot;, &quot;icon&quot;: &quot;aligncenter&quot;, &quot;format&quot;: &quot;aligncenter&quot;}, {&quot;title&quot;: &quot;Right&quot;, &quot;icon&quot;: &quot;alignright&quot;, &quot;format&quot;: &quot;alignright&quot;}, {&quot;title&quot;: &quot;Justify&quot;, &quot;icon&quot;: &quot;alignjustify&quot;, &quot;format&quot;: &quot;alignjustify&quot;}], &quot;title&quot;: &quot;Alignment&quot;}, {&quot;items&quot;: [{&quot;title&quot;: &quot;Listing&quot;, &quot;format&quot;: &quot;listing&quot;}], &quot;title&quot;: &quot;Tables&quot;}], &quot;resize&quot;: &quot;both&quot;, &quot;formats&quot;: {&quot;clearfix&quot;: {&quot;classes&quot;: &quot;clearfix&quot;, &quot;block&quot;: &quot;div&quot;}, &quot;discreet&quot;: {&quot;inline&quot;: &quot;span&quot;, &quot;classes&quot;: &quot;discreet&quot;}}, &quot;importcss_append&quot;: true}, &quot;base_url&quot;: &quot;https://auditorionacional.inaem.gob.es/es/programacion&quot;}" data-portal-url="https://auditorionacional.inaem.gob.es" data-pat-pickadate="{&quot;date&quot;: {&quot;selectYears&quot;: 200}, &quot;time&quot;: {&quot;interval&quot;: 30 } }" data-base-url="https://auditorionacional.inaem.gob.es/es/programacion"><!-- Accessibility accesskeys - Jump to section -->
+    <nav id="skipLinks" aria-label="skipLinks" class="fixed m-3">
+        <a id="skip-to-content" class="btn btn-primary sr-only sr-only-focusable" href="#content">Saltar al contenido</a>
+        <a id="skip-to-navigation" class="btn btn-primary sr-only sr-only-focusable" href="#main-menu">Saltar a la navegación</a>
+        <a id="skip-to-contact-info" class="btn btn-primary sr-only sr-only-focusable" href="#prefooter-container">Información de contacto</a>
+    </nav>
+<!-- Header principal --><header id="an-portalHeader" class="pos-relative" aria-label="Portal Header">
+        <div id="toprow">
+            <a href="http://www.culturaydeporte.gob.es/cultura/artesescenicas/portada.html">
+                <img width="650" height="85" src="/++theme++auditorionacionaltheme-copia/img/logo-inaem-blanco.svg" alt="Instituto Nacional de las Artes Escénicas y la Música. Ministerio de Cultura y Deporte. Gobierno de España." />
+            </a>
+        </div>
+        <div id="header" class="container-fluid">
+            <nav id="main-menu" class="navbar navbar-default   mt-3">
+                <div class="navbar-header">
+                    <figure id="logo">
+                        <img src="/++theme++auditorionacionaltheme-copia/img/logo-auditorio-nacional-de-musica.svg" alt="Auditorio Nacional de Musica." width="50" height="40" />&gt;
+                    </figure>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+    <span class="navbar-toggle__text">Ver menú</span>
+    <span class="navbar-toggle__icon" aria-hidden="true"></span>
+</button>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                    <ul class="nav navbar-nav mt-3"><li class="menu-item logo-link-item">
+                  <a href="https://auditorionacional.inaem.gob.es/es"><span class="glyphicon glyphicon-home" aria-hidden="true"></span><span class="sr-only">Inicio</span></a>
+              </li><li class="menu-item selected" id="portaltab-programacion">
+                  <a href="https://auditorionacional.inaem.gob.es/es/programacion">Programación</a>
+              </li><li class="menu-item " id="portaltab-entradas">
+                  <a href="https://auditorionacional.inaem.gob.es/es/entradas">Taquillas</a>
+              </li><li id="portaltab-auditorio" class="menu-item dropdown  "> 
+                  <a href="https://auditorionacional.inaem.gob.es/es/auditorio" data-hover="dropdown" aria-haspopup="true" aria-expanded="false" title="">
+                    El Auditorio
+                    <span class="caret">
+                  </span></a>
+
+                  <ul class="dropdown-menu">
+                      <li>
+                        <a href="https://auditorionacional.inaem.gob.es/es/auditorio/encuesta-de-calidad">Encuesta de calidad</a>
+                      </li>
+                      <li>
+                        <a href="https://auditorionacional.inaem.gob.es/es/auditorio/newsletter">Newsletter</a>
+                      </li>
+                      <li>
+                        <a href="https://auditorionacional.inaem.gob.es/es/auditorio/concursos">Concursos</a>
+                      </li>
+                      <li>
+                        <a href="https://auditorionacional.inaem.gob.es/es/auditorio/instalaciones-y-servicios">Instalaciones y Servicios</a>
+                      </li>
+                  </ul>
+              </li><li id="portaltab-noticias" class="menu-item dropdown  ">
+                  <a href="https://auditorionacional.inaem.gob.es/es/noticias" data-hover="dropdown" aria-haspopup="true" aria-expanded="false" title="Publicaciones y avisos">
+                    Publicaciones
+                    <span class="caret">
+                  </span></a>
+
+                  <ul class="dropdown-menu">
+                      <li><a href="https://auditorionacional.inaem.gob.es/es/noticias/historico-de-programas">Histórico de programas</a></li>
+                  </ul>
+              </li><li class="menu-item " id="portaltab-accesibilidad">
+                  <a href="https://auditorionacional.inaem.gob.es/es/accesibilidad">Accesibilidad</a>
+              </li><li class="menu-item " id="portaltab-cesion-de-salas">
+                  <a href="https://auditorionacional.inaem.gob.es/es/cesion-de-salas">Cesión de Salas</a>
+              </li><li class="menu-item " id="portaltab-virtual">
+                  <a href="https://auditorionacional.inaem.gob.es/es/virtual">Visita Virtual</a>
+              </li><li class="dropdown languages">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                       
+					
+					Español
+				<span class="caret"></span></a>
+
+                   <ul class="dropdown-menu">
+                       <li class="language-en">
+				<a href="https://auditorionacional.inaem.gob.es/@@multilingual-selector/3deb498466f943c283e6e7b15432a5a9/en?set_language=en" title="English" hreflang="en" lang="en" xml:lang="en">
+					
+					English
+				</a>
+			</li><li class="language-fr">
+				<a href="https://auditorionacional.inaem.gob.es/@@multilingual-selector/3deb498466f943c283e6e7b15432a5a9/fr?set_language=fr" title="Français" hreflang="fr" lang="fr" xml:lang="fr">
+					
+					Français
+				</a>
+			</li><li class="language-ca">
+				<a href="https://auditorionacional.inaem.gob.es/@@multilingual-selector/3deb498466f943c283e6e7b15432a5a9/ca?set_language=ca" title="Català" hreflang="ca" lang="ca" xml:lang="ca">
+					
+					Català
+				</a>
+			</li><li class="language-gl">
+				<a href="https://auditorionacional.inaem.gob.es/@@multilingual-selector/3deb498466f943c283e6e7b15432a5a9/gl?set_language=gl" title="Galego" hreflang="gl" lang="gl" xml:lang="gl">
+					
+					Galego
+				</a>
+			</li><li class="language-eu">
+				<a href="https://auditorionacional.inaem.gob.es/@@multilingual-selector/3deb498466f943c283e6e7b15432a5a9/eu?set_language=eu" title="Euskara" hreflang="eu" lang="eu" xml:lang="eu">
+					
+					Euskara
+				</a>
+			</li><li class="language-vo">
+				<a href="https://auditorionacional.inaem.gob.es/@@multilingual-selector/3deb498466f943c283e6e7b15432a5a9/vo?set_language=vo" title="Valencià" hreflang="vo" lang="vo" xml:lang="vo">
+					
+					Valencià
+				</a>
+			</li>
+                   </ul>
+               </li><li class="search"><a href="https://auditorionacional.inaem.gob.es/es/search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span><span class="sr-only">Buscador</span></a></li></ul>
+                </div>
+            </nav>
+                
+        
+        </div>
+        <div class="affix-fixer" role="presentation"></div>
+        <script>
+            $( document ).ready(function() {
+                if ($('#header').length > 0) {
+                    $(document).scroll(function() {
+                        if ($(window).scrollTop() > 48) {
+                            $('#header').addClass('affix');
+                        } else {
+                            $('#header').removeClass('affix');
+                        }
+                    });
+                }
+            });
+        </script>
+    </header><main id="maincontainer"><nav id="portal-breadcrumbs" class="plone-breadcrumb">
+  <div class="container">
+    <span id="breadcrumbs-you-are-here" class="hiddenStructure">Usted está aquí:</span>
+    <ol aria-labelledby="breadcrumbs-you-are-here">
+      <li id="breadcrumbs-home">
+        <a href="https://auditorionacional.inaem.gob.es/es">Inicio</a>
+      </li>
+      <li id="breadcrumbs-1">
+        
+          
+          <span id="breadcrumbs-current">Programación</span>
+        
+      </li>
+    </ol>
+  </div>
+</nav><div id="portal-content" class="container"><article id="content">
+
+          
+
+        
+
+        
+
+        
+            <h1 class="home-header">Programación</h1>
+            <div class="mb-5">
+                               
+                <div id="eventfilters">
+                    <section class="othersearch">
+                        <form class="form-inline" method="get" action="https://auditorionacional.inaem.gob.es/es/search">
+                            <label class="eventFilters__title h3">Buscar un concierto</label>
+                            <div class="form-group display-flex">
+                                <input type="hidden" name="portal_type:list" value="Programacion" />
+                                <input type="hidden" name="sort_on" value="start" />
+                                <input type="hidden" name="sort_order" value="" />
+                                <label for="SearchableText_id" class="sr-only">Buscar un concierto</label>
+                                <input id="SearchableText_id" type="search" name="SearchableText" class="form-control flex-grow eventFilters__search-input" placeholder="" />
+                                <button type="submit" class="btn btn-default">
+                                    <span>Buscar</span>
+                                    <span class="glyphicon glyphicon-search ml-3" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-7">
+                        </div>
+                        
+                       
+                    </div>
+                </div>
+ 
+            </div>                 
+            <button aria-expanded="true" class="eventFilters__toggle btn btn-default" data-toggle="collapse" data-target="#collapseOne" type="button">
+                <span class="">Filtros de búsqueda</span>
+                <span class="glyphicon glyphicon-chevron-down " aria-hidden="true"></span>
+            </button>
+            <div id="collapseOne" class=" eventFilters clearfix mb-4 collapse in">
+                <div class="row">
+                    <section class="col-xs-12 col-sm-6 col-md-8 col-lg-9 ">
+                        <h2 class="eventFilters__title">Filtrar conciertos</h2>
+                        <form class="form row pt-md-5" method="get" action="https://auditorionacional.inaem.gob.es/es/programacion">
+                            <div id="startFormGroup" class="form-group col-xs-12 col-md-4 col-lg-4">
+                                <label for="startDate" class="display-block">Desde el día:</label>
+                                <input id="startDate" name="start" type="text" class="pat-pickadate" data-pat-pickadate="{&quot;date&quot;: {&quot;format&quot;: &quot;d !de mmmm !de yyyy&quot;, &quot;monthsShort&quot;: [&quot;ene&quot;, &quot;feb&quot;, &quot;mar&quot;, &quot;abr&quot;, &quot;may&quot;, &quot;jun&quot;, &quot;jul&quot;, &quot;ago&quot;, &quot;sep&quot;, &quot;oct&quot;, &quot;nov&quot;, &quot;dic&quot;], &quot;max&quot;: [2036, 1, 1], &quot;clear&quot;: &quot;Limpiar&quot;, &quot;min&quot;: [1916, 1, 1], &quot;monthsFull&quot;: [&quot;enero&quot;, &quot;febrero&quot;, &quot;marzo&quot;, &quot;abril&quot;, &quot;mayo&quot;, &quot;junio&quot;, &quot;julio&quot;, &quot;agosto&quot;, &quot;septiembre&quot;, &quot;octubre&quot;, &quot;noviembre&quot;, &quot;diciembre&quot;], &quot;weekdaysShort&quot;: [&quot;dom&quot;, &quot;lun&quot;, &quot;mar&quot;, &quot;mi\u00e9&quot;, &quot;jue&quot;, &quot;vie&quot;, &quot;s\u00e1b&quot;], &quot;weekdaysFull&quot;: [&quot;domingo&quot;, &quot;lunes&quot;, &quot;martes&quot;, &quot;mi\u00e9rcoles&quot;, &quot;jueves&quot;, &quot;viernes&quot;, &quot;s\u00e1bado&quot;], &quot;firstDay&quot;: 1, &quot;selectYears&quot;: 200, &quot;placeholder&quot;: &quot;Enter date...&quot;, &quot;today&quot;: &quot;Hoy&quot;}, &quot;time&quot;: false}" />                                        
+                            </div>
+                            <div id="endFormGroup" class="form-group col-xs-12 col-md-4 col-lg-4">
+                                <label for="endDate" class="display-block">y el día:</label>
+                                <input id="endDate" name="end" type="text" class="pat-pickadate" data-pat-pickadate="{&quot;date&quot;: {&quot;format&quot;: &quot;d !de mmmm !de yyyy&quot;, &quot;monthsShort&quot;: [&quot;ene&quot;, &quot;feb&quot;, &quot;mar&quot;, &quot;abr&quot;, &quot;may&quot;, &quot;jun&quot;, &quot;jul&quot;, &quot;ago&quot;, &quot;sep&quot;, &quot;oct&quot;, &quot;nov&quot;, &quot;dic&quot;], &quot;max&quot;: [2036, 1, 1], &quot;clear&quot;: &quot;Limpiar&quot;, &quot;min&quot;: [1916, 1, 1], &quot;monthsFull&quot;: [&quot;enero&quot;, &quot;febrero&quot;, &quot;marzo&quot;, &quot;abril&quot;, &quot;mayo&quot;, &quot;junio&quot;, &quot;julio&quot;, &quot;agosto&quot;, &quot;septiembre&quot;, &quot;octubre&quot;, &quot;noviembre&quot;, &quot;diciembre&quot;], &quot;weekdaysShort&quot;: [&quot;dom&quot;, &quot;lun&quot;, &quot;mar&quot;, &quot;mi\u00e9&quot;, &quot;jue&quot;, &quot;vie&quot;, &quot;s\u00e1b&quot;], &quot;weekdaysFull&quot;: [&quot;domingo&quot;, &quot;lunes&quot;, &quot;martes&quot;, &quot;mi\u00e9rcoles&quot;, &quot;jueves&quot;, &quot;viernes&quot;, &quot;s\u00e1bado&quot;], &quot;firstDay&quot;: 1, &quot;selectYears&quot;: 200, &quot;placeholder&quot;: &quot;Enter date...&quot;, &quot;today&quot;: &quot;Hoy&quot;}, &quot;time&quot;: false}" />                                        
+                            </div>
+                            <div class=" col-xs-12  col-md-4 col-lg-4">
+                                <div class="mb-0 form-control--select">
+                                    <label for="selectRoom">Lugar</label>
+                                    <select id="selectRoom" class="form-control">
+                                        
+                                            <option value="sala-sinfonica" id="sala-sinfonica">Sala Sinfónica</option>
+                                        
+                                            <option value="sala-de-camara" id="sala-de-camara">Sala de Cámara</option>
+                                        
+                                            <option value="otras-salas" id="otras-salas">Otros espacios</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <fieldset class="hidden">
+                                <legend class="sr-only">Lugar</legend>
+                                
+                                    <div class="radio">
+                                        <label for="sala-sinfonica">
+                                            <input type="radio" name="room" value="sala-sinfonica" id="sala-sinfonica" />
+                                            Sala Sinfónica
+                                        </label>
+                                    </div>
+                                
+                                    <div class="radio">
+                                        <label for="sala-de-camara">
+                                            <input type="radio" name="room" value="sala-de-camara" id="sala-de-camara" />
+                                            Sala de Cámara
+                                        </label>
+                                    </div>
+                                
+                                    <div class="radio">
+                                        <label for="otras-salas">
+                                            <input type="radio" name="room" value="otras-salas" id="otras-salas" />
+                                            Otros espacios
+                                        </label>
+                                    </div>
+                                
+                            </fieldset>
+                            <p class="mb-0 col-xs-12  col-sm-6 col-md-12 col-lg-4 text-right">
+                                <button type="submit" class="btn btn-default mt-3">
+                                    <span>Buscar</span>
+                                    <span class="glyphicon glyphicon-search ml-3" aria-hidden="true"></span>
+                                </button>
+                            </p>
+                        </form>
+                    </section>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-3">
+                        <table class="ploneCalendar" id="event-calendar">
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+ 
+            <ul class="row  display-flex flex-wrap list-unstyled">
+                
+                    
+                        <li class="col-xs-12 col-sm-6 col-md-4 mb-5">
+                            <article class=" eventitem sinfonica">
+                                
+                                <img src="https://auditorionacional.inaem.gob.es/es/programacion/fundacion-scherzo-eva-gevorgyan-1/@@images/047ac048-8b4a-46ce-b198-b4b912e1e6bb.jpeg" alt="Fundación Scherzo. Eva Gevorgyan" title="" height="262" width="262" class="img-circle" />
+                                <div class="eventitem__text p-3">
+                                    <p class="sinfonica location">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17.251" height="23" viewbox="0 0 17.251 23"><path d="M7.74,22.538C1.213,13.073,0,12.1,0,8.625a8.625,8.625,0,1,1,17.251,0c0,3.477-1.213,4.447-7.74,13.913a1.079,1.079,0,0,1-1.77,0Zm.885-7.444A6.469,6.469,0,1,0,2.156,8.625,6.471,6.471,0,0,0,8.625,15.094Z"></path>
+                                            <path d="M99.747,93.427,94.069,95.1a.575.575,0,0,0-.4.544v4.641a2.408,2.408,0,0,0-.566-.067c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V97.2l4.542-1.33v3.275a2.676,2.676,0,0,0-.566-.072c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V93.966a.568.568,0,0,0-.571-.566A.536.536,0,0,0,99.747,93.427Z" transform="translate(-87.294 -89.204)"></path>
+                                        </svg>
+                                        <span>Sala Sinfónica</span>
+                                    </p>
+                                    <h3 class="eventitem__title"><a href="https://auditorionacional.inaem.gob.es/es/programacion/fundacion-scherzo-eva-gevorgyan-1" class="eventitem__link link-wrappery">Fundación Scherzo. Eva Gevorgyan</a></h3>
+                                    <p class="event-date clearfix">
+                                        
+                                            <span class="weekday pat-localmoment" data-pat-localmoment="format:dddd">2026-04-07T19:30:00+02:00</span>, 
+                                            <span class="pat-localmoment" data-pat-localmoment="format:D \d\e MMMM \d\e YYYY">2026-04-07T19:30:00+02:00</span>
+                                         
+                                        <span class="hour pat-localmoment" data-pat-localmoment="format:H:mm">2026-04-07T19:30:00+02:00</span>
+                                    </p>
+                                    <span class=" btn btn-default  black">Más información</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div> 
+                                
+                            </article>
+                        </li>
+                    
+
+                
+                    
+                        <li class="col-xs-12 col-sm-6 col-md-4 mb-5">
+                            <article class=" eventitem camara">
+                                
+                                <img src="https://auditorionacional.inaem.gob.es/es/programacion/ocne-satelite-15-prisma-frances-2013-monografico-sobre-francis-poulenc/@@images/c2728c6a-a317-490b-bb05-beafde7f589b.jpeg" alt="OCNE. Satélite 15. Prisma Francés – Monográfico sobre  Francis Poulenc" title="" height="262" width="262" class="img-circle" />
+                                <div class="eventitem__text p-3">
+                                    <p class="camara location">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17.251" height="23" viewbox="0 0 17.251 23"><path d="M7.74,22.538C1.213,13.073,0,12.1,0,8.625a8.625,8.625,0,1,1,17.251,0c0,3.477-1.213,4.447-7.74,13.913a1.079,1.079,0,0,1-1.77,0Zm.885-7.444A6.469,6.469,0,1,0,2.156,8.625,6.471,6.471,0,0,0,8.625,15.094Z"></path>
+                                            <path d="M99.747,93.427,94.069,95.1a.575.575,0,0,0-.4.544v4.641a2.408,2.408,0,0,0-.566-.067c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V97.2l4.542-1.33v3.275a2.676,2.676,0,0,0-.566-.072c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V93.966a.568.568,0,0,0-.571-.566A.536.536,0,0,0,99.747,93.427Z" transform="translate(-87.294 -89.204)"></path>
+                                        </svg>
+                                        <span>Sala de Cámara</span>
+                                    </p>
+                                    <h3 class="eventitem__title"><a href="https://auditorionacional.inaem.gob.es/es/programacion/ocne-satelite-15-prisma-frances-2013-monografico-sobre-francis-poulenc" class="eventitem__link link-wrappery">OCNE. Satélite 15. Prisma Francés – Monográfico sobre  Francis Poulenc</a></h3>
+                                    <p class="event-date clearfix">
+                                        
+                                            <span class="weekday pat-localmoment" data-pat-localmoment="format:dddd">2026-04-07T19:30:00+02:00</span>, 
+                                            <span class="pat-localmoment" data-pat-localmoment="format:D \d\e MMMM \d\e YYYY">2026-04-07T19:30:00+02:00</span>
+                                         
+                                        <span class="hour pat-localmoment" data-pat-localmoment="format:H:mm">2026-04-07T19:30:00+02:00</span>
+                                    </p>
+                                    <span class=" btn btn-default  black">Más información</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div> 
+                                
+                            </article>
+                        </li>
+                    
+
+                
+                    
+                        <li class="col-xs-12 col-sm-6 col-md-4 mb-5">
+                            <article class=" eventitem camara">
+                                
+                                <img src="https://auditorionacional.inaem.gob.es/es/programacion/les-concerts-du-lac-eva-oertle-vesselin-stanev-1/@@images/b4023b48-197d-4980-92b7-f4493ddecbeb.jpeg" alt="Les Concerts du Lac. Eva Oertle &amp; Vesselin Stanev" title="" height="262" width="262" class="img-circle" />
+                                <div class="eventitem__text p-3">
+                                    <p class="camara location">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17.251" height="23" viewbox="0 0 17.251 23"><path d="M7.74,22.538C1.213,13.073,0,12.1,0,8.625a8.625,8.625,0,1,1,17.251,0c0,3.477-1.213,4.447-7.74,13.913a1.079,1.079,0,0,1-1.77,0Zm.885-7.444A6.469,6.469,0,1,0,2.156,8.625,6.471,6.471,0,0,0,8.625,15.094Z"></path>
+                                            <path d="M99.747,93.427,94.069,95.1a.575.575,0,0,0-.4.544v4.641a2.408,2.408,0,0,0-.566-.067c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V97.2l4.542-1.33v3.275a2.676,2.676,0,0,0-.566-.072c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V93.966a.568.568,0,0,0-.571-.566A.536.536,0,0,0,99.747,93.427Z" transform="translate(-87.294 -89.204)"></path>
+                                        </svg>
+                                        <span>Sala de Cámara</span>
+                                    </p>
+                                    <h3 class="eventitem__title"><a href="https://auditorionacional.inaem.gob.es/es/programacion/les-concerts-du-lac-eva-oertle-vesselin-stanev-1" class="eventitem__link link-wrappery">Les Concerts du Lac. Eva Oertle &amp; Vesselin Stanev</a></h3>
+                                    <p class="event-date clearfix">
+                                        
+                                            <span class="weekday pat-localmoment" data-pat-localmoment="format:dddd">2026-04-08T19:30:00+02:00</span>, 
+                                            <span class="pat-localmoment" data-pat-localmoment="format:D \d\e MMMM \d\e YYYY">2026-04-08T19:30:00+02:00</span>
+                                         
+                                        <span class="hour pat-localmoment" data-pat-localmoment="format:H:mm">2026-04-08T19:30:00+02:00</span>
+                                    </p>
+                                    <span class=" btn btn-default  black">Más información</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div> 
+                                
+                            </article>
+                        </li>
+                    
+
+                
+                    
+                        <li class="col-xs-12 col-sm-6 col-md-4 mb-5">
+                            <article class=" eventitem sinfonica">
+                                
+                                <img src="https://auditorionacional.inaem.gob.es/es/programacion/excelentia-violin-sibelius-2018eroica2019-beethoven/@@images/b996fe0a-7428-46da-bbe4-89117cbaedf5.jpeg" alt="Excelentia. Eroica de Beethoven" title="" height="262" width="262" class="img-circle" />
+                                <div class="eventitem__text p-3">
+                                    <p class="sinfonica location">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17.251" height="23" viewbox="0 0 17.251 23"><path d="M7.74,22.538C1.213,13.073,0,12.1,0,8.625a8.625,8.625,0,1,1,17.251,0c0,3.477-1.213,4.447-7.74,13.913a1.079,1.079,0,0,1-1.77,0Zm.885-7.444A6.469,6.469,0,1,0,2.156,8.625,6.471,6.471,0,0,0,8.625,15.094Z"></path>
+                                            <path d="M99.747,93.427,94.069,95.1a.575.575,0,0,0-.4.544v4.641a2.408,2.408,0,0,0-.566-.067c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V97.2l4.542-1.33v3.275a2.676,2.676,0,0,0-.566-.072c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V93.966a.568.568,0,0,0-.571-.566A.536.536,0,0,0,99.747,93.427Z" transform="translate(-87.294 -89.204)"></path>
+                                        </svg>
+                                        <span>Sala Sinfónica</span>
+                                    </p>
+                                    <h3 class="eventitem__title"><a href="https://auditorionacional.inaem.gob.es/es/programacion/excelentia-violin-sibelius-2018eroica2019-beethoven" class="eventitem__link link-wrappery">Excelentia. Eroica de Beethoven</a></h3>
+                                    <p class="event-date clearfix">
+                                        
+                                            <span class="weekday pat-localmoment" data-pat-localmoment="format:dddd">2026-04-08T19:30:00+02:00</span>, 
+                                            <span class="pat-localmoment" data-pat-localmoment="format:D \d\e MMMM \d\e YYYY">2026-04-08T19:30:00+02:00</span>
+                                         
+                                        <span class="hour pat-localmoment" data-pat-localmoment="format:H:mm">2026-04-08T19:30:00+02:00</span>
+                                    </p>
+                                    <span class=" btn btn-default  black">Más información</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div> 
+                                
+                            </article>
+                        </li>
+                    
+
+                
+                    
+                        <li class="col-xs-12 col-sm-6 col-md-4 mb-5">
+                            <article class=" eventitem camara">
+                                
+                                <img src="https://auditorionacional.inaem.gob.es/es/programacion/la-filarmonica-cuarteto-casals-shostakovich-5/@@images/a312e41e-cb93-4ba5-8c09-8046836af7a3.jpeg" alt="CNDM y La Filarmónica. Cuarteto Casals /Shostakóvich 5" title="" height="262" width="262" class="img-circle" />
+                                <div class="eventitem__text p-3">
+                                    <p class="camara location">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17.251" height="23" viewbox="0 0 17.251 23"><path d="M7.74,22.538C1.213,13.073,0,12.1,0,8.625a8.625,8.625,0,1,1,17.251,0c0,3.477-1.213,4.447-7.74,13.913a1.079,1.079,0,0,1-1.77,0Zm.885-7.444A6.469,6.469,0,1,0,2.156,8.625,6.471,6.471,0,0,0,8.625,15.094Z"></path>
+                                            <path d="M99.747,93.427,94.069,95.1a.575.575,0,0,0-.4.544v4.641a2.408,2.408,0,0,0-.566-.067c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V97.2l4.542-1.33v3.275a2.676,2.676,0,0,0-.566-.072c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V93.966a.568.568,0,0,0-.571-.566A.536.536,0,0,0,99.747,93.427Z" transform="translate(-87.294 -89.204)"></path>
+                                        </svg>
+                                        <span>Sala de Cámara</span>
+                                    </p>
+                                    <h3 class="eventitem__title"><a href="https://auditorionacional.inaem.gob.es/es/programacion/la-filarmonica-cuarteto-casals-shostakovich-5" class="eventitem__link link-wrappery">CNDM y La Filarmónica. Cuarteto Casals /Shostakóvich 5</a></h3>
+                                    <p class="event-date clearfix">
+                                        
+                                            <span class="weekday pat-localmoment" data-pat-localmoment="format:dddd">2026-04-09T19:30:00+02:00</span>, 
+                                            <span class="pat-localmoment" data-pat-localmoment="format:D \d\e MMMM \d\e YYYY">2026-04-09T19:30:00+02:00</span>
+                                         
+                                        <span class="hour pat-localmoment" data-pat-localmoment="format:H:mm">2026-04-09T19:30:00+02:00</span>
+                                    </p>
+                                    <span class=" btn btn-default  black">Más información</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div> 
+                                
+                            </article>
+                        </li>
+                    
+
+                
+                    
+                        <li class="col-xs-12 col-sm-6 col-md-4 mb-5">
+                            <article class=" eventitem sinfonica">
+                                
+                                <img src="https://auditorionacional.inaem.gob.es/es/programacion/maelicum-conciertos-sergej-krylov-lithuanian-chamber-orchestra/@@images/49b409f1-69d1-48ac-81a7-edb6adef471e.jpeg" alt="Maelicum Conciertos. Sergej Krylov. Lithuanian Chamber Orchestra" title="" height="262" width="262" class="img-circle" />
+                                <div class="eventitem__text p-3">
+                                    <p class="sinfonica location">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17.251" height="23" viewbox="0 0 17.251 23"><path d="M7.74,22.538C1.213,13.073,0,12.1,0,8.625a8.625,8.625,0,1,1,17.251,0c0,3.477-1.213,4.447-7.74,13.913a1.079,1.079,0,0,1-1.77,0Zm.885-7.444A6.469,6.469,0,1,0,2.156,8.625,6.471,6.471,0,0,0,8.625,15.094Z"></path>
+                                            <path d="M99.747,93.427,94.069,95.1a.575.575,0,0,0-.4.544v4.641a2.408,2.408,0,0,0-.566-.067c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V97.2l4.542-1.33v3.275a2.676,2.676,0,0,0-.566-.072c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V93.966a.568.568,0,0,0-.571-.566A.536.536,0,0,0,99.747,93.427Z" transform="translate(-87.294 -89.204)"></path>
+                                        </svg>
+                                        <span>Sala Sinfónica</span>
+                                    </p>
+                                    <h3 class="eventitem__title"><a href="https://auditorionacional.inaem.gob.es/es/programacion/maelicum-conciertos-sergej-krylov-lithuanian-chamber-orchestra" class="eventitem__link link-wrappery">Maelicum Conciertos. Sergej Krylov. Lithuanian Chamber Orchestra</a></h3>
+                                    <p class="event-date clearfix">
+                                        
+                                            <span class="weekday pat-localmoment" data-pat-localmoment="format:dddd">2026-04-09T19:30:00+02:00</span>, 
+                                            <span class="pat-localmoment" data-pat-localmoment="format:D \d\e MMMM \d\e YYYY">2026-04-09T19:30:00+02:00</span>
+                                         
+                                        <span class="hour pat-localmoment" data-pat-localmoment="format:H:mm">2026-04-09T19:30:00+02:00</span>
+                                    </p>
+                                    
+                                    
+                                    <span class=" btn btn-default btn-primary cancel">Cancelado</span>
+                                    
+                                    
+                                    
+                                    
+                                </div> 
+                                
+                            </article>
+                        </li>
+                    
+
+                
+                    
+                        <li class="col-xs-12 col-sm-6 col-md-4 mb-5">
+                            <article class=" eventitem sinfonica">
+                                
+                                <img src="https://auditorionacional.inaem.gob.es/es/programacion/ocne-sinfonico-17-3/@@images/2348e17e-3d60-4b8d-b790-50e5e12fba96.jpeg" alt="OCNE. Sinfónico 17" title="" height="262" width="262" class="img-circle" />
+                                <div class="eventitem__text p-3">
+                                    <p class="sinfonica location">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17.251" height="23" viewbox="0 0 17.251 23"><path d="M7.74,22.538C1.213,13.073,0,12.1,0,8.625a8.625,8.625,0,1,1,17.251,0c0,3.477-1.213,4.447-7.74,13.913a1.079,1.079,0,0,1-1.77,0Zm.885-7.444A6.469,6.469,0,1,0,2.156,8.625,6.471,6.471,0,0,0,8.625,15.094Z"></path>
+                                            <path d="M99.747,93.427,94.069,95.1a.575.575,0,0,0-.4.544v4.641a2.408,2.408,0,0,0-.566-.067c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V97.2l4.542-1.33v3.275a2.676,2.676,0,0,0-.566-.072c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V93.966a.568.568,0,0,0-.571-.566A.536.536,0,0,0,99.747,93.427Z" transform="translate(-87.294 -89.204)"></path>
+                                        </svg>
+                                        <span>Sala Sinfónica</span>
+                                    </p>
+                                    <h3 class="eventitem__title"><a href="https://auditorionacional.inaem.gob.es/es/programacion/ocne-sinfonico-17-3" class="eventitem__link link-wrappery">OCNE. Sinfónico 17</a></h3>
+                                    <p class="event-date clearfix">
+                                        
+                                            <span class="weekday pat-localmoment" data-pat-localmoment="format:dddd">2026-04-10T19:30:00+02:00</span>, 
+                                            <span class="pat-localmoment" data-pat-localmoment="format:D \d\e MMMM \d\e YYYY">2026-04-10T19:30:00+02:00</span>
+                                         
+                                        <span class="hour pat-localmoment" data-pat-localmoment="format:H:mm">2026-04-10T19:30:00+02:00</span>
+                                    </p>
+                                    <span class=" btn btn-default  black">Más información</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div> 
+                                
+                            </article>
+                        </li>
+                    
+
+                
+                    
+                        <li class="col-xs-12 col-sm-6 col-md-4 mb-5">
+                            <article class=" eventitem camara">
+                                
+                                <img src="https://auditorionacional.inaem.gob.es/es/programacion/cndm-mario-brunello/@@images/585a9220-6d2a-4f23-af7e-cdf55f843161.jpeg" alt="CNDM. Mario Brunello" title="" height="262" width="262" class="img-circle" />
+                                <div class="eventitem__text p-3">
+                                    <p class="camara location">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17.251" height="23" viewbox="0 0 17.251 23"><path d="M7.74,22.538C1.213,13.073,0,12.1,0,8.625a8.625,8.625,0,1,1,17.251,0c0,3.477-1.213,4.447-7.74,13.913a1.079,1.079,0,0,1-1.77,0Zm.885-7.444A6.469,6.469,0,1,0,2.156,8.625,6.471,6.471,0,0,0,8.625,15.094Z"></path>
+                                            <path d="M99.747,93.427,94.069,95.1a.575.575,0,0,0-.4.544v4.641a2.408,2.408,0,0,0-.566-.067c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V97.2l4.542-1.33v3.275a2.676,2.676,0,0,0-.566-.072c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V93.966a.568.568,0,0,0-.571-.566A.536.536,0,0,0,99.747,93.427Z" transform="translate(-87.294 -89.204)"></path>
+                                        </svg>
+                                        <span>Sala de Cámara</span>
+                                    </p>
+                                    <h3 class="eventitem__title"><a href="https://auditorionacional.inaem.gob.es/es/programacion/cndm-mario-brunello" class="eventitem__link link-wrappery">CNDM. Mario Brunello</a></h3>
+                                    <p class="event-date clearfix">
+                                        
+                                            <span class="weekday pat-localmoment" data-pat-localmoment="format:dddd">2026-04-10T19:30:00+02:00</span>, 
+                                            <span class="pat-localmoment" data-pat-localmoment="format:D \d\e MMMM \d\e YYYY">2026-04-10T19:30:00+02:00</span>
+                                         
+                                        <span class="hour pat-localmoment" data-pat-localmoment="format:H:mm">2026-04-10T19:30:00+02:00</span>
+                                    </p>
+                                    <span class=" btn btn-default  black">Más información</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div> 
+                                
+                            </article>
+                        </li>
+                    
+
+                
+                    
+                        <li class="col-xs-12 col-sm-6 col-md-4 mb-5">
+                            <article class=" eventitem sinfonica">
+                                
+                                <img src="https://auditorionacional.inaem.gob.es/es/programacion/film-symphony-orchestra-wanted/@@images/65011330-7639-4b3d-b758-9b9bf31caded.jpeg" alt="Film Symphony Orchestra. Wanted" title="" height="262" width="262" class="img-circle" />
+                                <div class="eventitem__text p-3">
+                                    <p class="sinfonica location">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17.251" height="23" viewbox="0 0 17.251 23"><path d="M7.74,22.538C1.213,13.073,0,12.1,0,8.625a8.625,8.625,0,1,1,17.251,0c0,3.477-1.213,4.447-7.74,13.913a1.079,1.079,0,0,1-1.77,0Zm.885-7.444A6.469,6.469,0,1,0,2.156,8.625,6.471,6.471,0,0,0,8.625,15.094Z"></path>
+                                            <path d="M99.747,93.427,94.069,95.1a.575.575,0,0,0-.4.544v4.641a2.408,2.408,0,0,0-.566-.067c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V97.2l4.542-1.33v3.275a2.676,2.676,0,0,0-.566-.072c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V93.966a.568.568,0,0,0-.571-.566A.536.536,0,0,0,99.747,93.427Z" transform="translate(-87.294 -89.204)"></path>
+                                        </svg>
+                                        <span>Sala Sinfónica</span>
+                                    </p>
+                                    <h3 class="eventitem__title"><a href="https://auditorionacional.inaem.gob.es/es/programacion/film-symphony-orchestra-wanted" class="eventitem__link link-wrappery">Film Symphony Orchestra. Wanted</a></h3>
+                                    <p class="event-date clearfix">
+                                        
+                                            <span class="weekday pat-localmoment" data-pat-localmoment="format:dddd">2026-04-10T22:30:00+02:00</span>, 
+                                            <span class="pat-localmoment" data-pat-localmoment="format:D \d\e MMMM \d\e YYYY">2026-04-10T22:30:00+02:00</span>
+                                         
+                                        <span class="hour pat-localmoment" data-pat-localmoment="format:H:mm">2026-04-10T22:30:00+02:00</span>
+                                    </p>
+                                    <span class=" btn btn-default  black">Más información</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div> 
+                                
+                            </article>
+                        </li>
+                    
+
+                
+                    
+                        <li class="col-xs-12 col-sm-6 col-md-4 mb-5">
+                            <article class=" eventitem sinfonica">
+                                
+                                <img src="https://auditorionacional.inaem.gob.es/es/programacion/ocne-sinfonico-17-3/@@images/2348e17e-3d60-4b8d-b790-50e5e12fba96.jpeg" alt="OCNE. Sinfónico 17" title="" height="262" width="262" class="img-circle" />
+                                <div class="eventitem__text p-3">
+                                    <p class="sinfonica location">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17.251" height="23" viewbox="0 0 17.251 23"><path d="M7.74,22.538C1.213,13.073,0,12.1,0,8.625a8.625,8.625,0,1,1,17.251,0c0,3.477-1.213,4.447-7.74,13.913a1.079,1.079,0,0,1-1.77,0Zm.885-7.444A6.469,6.469,0,1,0,2.156,8.625,6.471,6.471,0,0,0,8.625,15.094Z"></path>
+                                            <path d="M99.747,93.427,94.069,95.1a.575.575,0,0,0-.4.544v4.641a2.408,2.408,0,0,0-.566-.067c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V97.2l4.542-1.33v3.275a2.676,2.676,0,0,0-.566-.072c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V93.966a.568.568,0,0,0-.571-.566A.536.536,0,0,0,99.747,93.427Z" transform="translate(-87.294 -89.204)"></path>
+                                        </svg>
+                                        <span>Sala Sinfónica</span>
+                                    </p>
+                                    <h3 class="eventitem__title"><a href="https://auditorionacional.inaem.gob.es/es/programacion/ocne-sinfonico-17-3" class="eventitem__link link-wrappery">OCNE. Sinfónico 17</a></h3>
+                                    <p class="event-date clearfix">
+                                        
+                                            <span class="weekday pat-localmoment" data-pat-localmoment="format:dddd">2026-04-11T19:30:00+02:00</span>, 
+                                            <span class="pat-localmoment" data-pat-localmoment="format:D \d\e MMMM \d\e YYYY">2026-04-11T19:30:00+02:00</span>
+                                         
+                                        <span class="hour pat-localmoment" data-pat-localmoment="format:H:mm">2026-04-11T19:30:00+02:00</span>
+                                    </p>
+                                    <span class=" btn btn-default  black">Más información</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div> 
+                                
+                            </article>
+                        </li>
+                    
+
+                
+                    
+                        <li class="col-xs-12 col-sm-6 col-md-4 mb-5">
+                            <article class=" eventitem camara">
+                                
+                                <img src="https://auditorionacional.inaem.gob.es/es/programacion/excelentia-napolitanas-italianas/@@images/9261b3b7-fef0-4d62-bc20-8b26c908671a.jpeg" alt="Excelentia. Arias de Óperas Italianas y Napolitanas" title="" height="262" width="262" class="img-circle" />
+                                <div class="eventitem__text p-3">
+                                    <p class="camara location">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17.251" height="23" viewbox="0 0 17.251 23"><path d="M7.74,22.538C1.213,13.073,0,12.1,0,8.625a8.625,8.625,0,1,1,17.251,0c0,3.477-1.213,4.447-7.74,13.913a1.079,1.079,0,0,1-1.77,0Zm.885-7.444A6.469,6.469,0,1,0,2.156,8.625,6.471,6.471,0,0,0,8.625,15.094Z"></path>
+                                            <path d="M99.747,93.427,94.069,95.1a.575.575,0,0,0-.4.544v4.641a2.408,2.408,0,0,0-.566-.067c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V97.2l4.542-1.33v3.275a2.676,2.676,0,0,0-.566-.072c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V93.966a.568.568,0,0,0-.571-.566A.536.536,0,0,0,99.747,93.427Z" transform="translate(-87.294 -89.204)"></path>
+                                        </svg>
+                                        <span>Sala de Cámara</span>
+                                    </p>
+                                    <h3 class="eventitem__title"><a href="https://auditorionacional.inaem.gob.es/es/programacion/excelentia-napolitanas-italianas" class="eventitem__link link-wrappery">Excelentia. Arias de Óperas Italianas y Napolitanas</a></h3>
+                                    <p class="event-date clearfix">
+                                        
+                                            <span class="weekday pat-localmoment" data-pat-localmoment="format:dddd">2026-04-11T19:30:00+02:00</span>, 
+                                            <span class="pat-localmoment" data-pat-localmoment="format:D \d\e MMMM \d\e YYYY">2026-04-11T19:30:00+02:00</span>
+                                         
+                                        <span class="hour pat-localmoment" data-pat-localmoment="format:H:mm">2026-04-11T19:30:00+02:00</span>
+                                    </p>
+                                    <span class=" btn btn-default  black">Más información</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div> 
+                                
+                            </article>
+                        </li>
+                    
+
+                
+                    
+                        <li class="col-xs-12 col-sm-6 col-md-4 mb-5">
+                            <article class=" eventitem sinfonica">
+                                
+                                <img src="https://auditorionacional.inaem.gob.es/es/programacion/ocne-sinfonico-17-3/@@images/2348e17e-3d60-4b8d-b790-50e5e12fba96.jpeg" alt="OCNE. Sinfónico 17" title="" height="262" width="262" class="img-circle" />
+                                <div class="eventitem__text p-3">
+                                    <p class="sinfonica location">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17.251" height="23" viewbox="0 0 17.251 23"><path d="M7.74,22.538C1.213,13.073,0,12.1,0,8.625a8.625,8.625,0,1,1,17.251,0c0,3.477-1.213,4.447-7.74,13.913a1.079,1.079,0,0,1-1.77,0Zm.885-7.444A6.469,6.469,0,1,0,2.156,8.625,6.471,6.471,0,0,0,8.625,15.094Z"></path>
+                                            <path d="M99.747,93.427,94.069,95.1a.575.575,0,0,0-.4.544v4.641a2.408,2.408,0,0,0-.566-.067c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V97.2l4.542-1.33v3.275a2.676,2.676,0,0,0-.566-.072c-.939,0-1.7.508-1.7,1.137s.764,1.137,1.7,1.137,1.7-.508,1.7-1.137V93.966a.568.568,0,0,0-.571-.566A.536.536,0,0,0,99.747,93.427Z" transform="translate(-87.294 -89.204)"></path>
+                                        </svg>
+                                        <span>Sala Sinfónica</span>
+                                    </p>
+                                    <h3 class="eventitem__title"><a href="https://auditorionacional.inaem.gob.es/es/programacion/ocne-sinfonico-17-3" class="eventitem__link link-wrappery">OCNE. Sinfónico 17</a></h3>
+                                    <p class="event-date clearfix">
+                                        
+                                            <span class="weekday pat-localmoment" data-pat-localmoment="format:dddd">2026-04-12T11:30:00+02:00</span>, 
+                                            <span class="pat-localmoment" data-pat-localmoment="format:D \d\e MMMM \d\e YYYY">2026-04-12T11:30:00+02:00</span>
+                                         
+                                        <span class="hour pat-localmoment" data-pat-localmoment="format:H:mm">2026-04-12T11:30:00+02:00</span>
+                                    </p>
+                                    <span class=" btn btn-default  black">Más información</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div> 
+                                
+                            </article>
+                        </li>
+                    
+
+                
+            </ul>
+            <div id="pagination-wrapper">
+                
+                    
+
+    <!-- Navigation -->
+
+
+  <nav>
+
+    <ul class="pagination">
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      <li class="active">
+        <span>1</span>
+      </li>
+
+      
+      <li>
+        <a href="https://auditorionacional.inaem.gob.es/es/programacion?b_start:int=12">2</a>
+      </li>
+      <li>
+        <a href="https://auditorionacional.inaem.gob.es/es/programacion?b_start:int=24">3</a>
+      </li>
+      <li>
+        <a href="https://auditorionacional.inaem.gob.es/es/programacion?b_start:int=36">4</a>
+      </li>
+      <li>
+        <a href="https://auditorionacional.inaem.gob.es/es/programacion?b_start:int=48">5</a>
+      </li>
+      <li>
+        <a href="https://auditorionacional.inaem.gob.es/es/programacion?b_start:int=60">6</a>
+      </li>
+      <li>
+        <a href="https://auditorionacional.inaem.gob.es/es/programacion?b_start:int=72">7</a>
+      </li>
+
+      
+      <li class="disabled">
+        <span>...</span>
+      </li>
+
+      
+      <li class="last">
+        <a href="https://auditorionacional.inaem.gob.es/es/programacion?b_start:int=120">11</a>
+      </li>
+
+      
+      <li class="next">
+        <a href="https://auditorionacional.inaem.gob.es/es/programacion?b_start:int=12">
+          12 elementos siguientes
+          »
+        </a>
+      </li>
+    </ul>
+
+  </nav>
+
+
+
+
+
+                
+            </div>
+
+        
+
+    
+        </article></div></main><footer class="bgFooter">
+        <div class="container" id="prefooter-container">
+            <div class="prefooter row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="prefooter1">
+        <p><img src="https://auditorionacional.inaem.gob.es/es/contenido/imagenes/logo-auditorio-nacional.png/@@images/4b38c13f-8423-4a11-af96-a612eefac64b.png" data-linktype="image" title="logo-auditorio-nacional.png" data-val="4dbfa7fe7bcf482198ccd89b498fe8fe" data-scale="large" alt="Auditorio Nacional de Música." class="image-inline" /></p>
+<h3>Información práctica:</h3>
+<ul>
+<li><a data-val="2af1fd078611ad88a0ea2515ad715e39" href="https://auditorionacional.inaem.gob.es/es/auditorio" data-linktype="internal">Información General</a></li>
+<li><a data-val="d1038338e6ef683cae0c601af8981fd4" href="https://auditorionacional.inaem.gob.es/es/auditorio/instalaciones-y-servicios" data-linktype="internal">Instalaciones y Servicios</a></li>
+<li><a href="https://www.cultura.gob.es/cultura/artesescenicas/sc/quejas-y-sugerencias.html" target="_blank" data-linktype="external" data-val="https://www.cultura.gob.es/cultura/artesescenicas/sc/quejas-y-sugerencias.html">Quejas y Sugerencias</a></li>
+<li><a data-val="6f7997bcd03b3c1f2373ddb850f5e0d2" href="https://auditorionacional.inaem.gob.es/es/auditorio/datos-de-contacto" data-linktype="upload" target="_blank">Datos de contacto</a></li>
+</ul>
+    </div>
+                    <nav>
+                        <ul class="siteactions"><li><a href="https://www.cultura.gob.es/cultura/artesescenicas/proteccion-datos/aviso-legal-inaem" target="_blank" data-linktype="external" data-val="https://www.cultura.gob.es/cultura/artesescenicas/proteccion-datos/aviso-legal-inaem">Aviso legal</a></li><li><a href="https://auditorionacional.inaem.gob.es/../es/politica-de-cookies">Política de cookies</a></li><li><a data-val="6f7997bcd03b3c1f2373ddb850f5e0d2" href="https://auditorionacional.inaem.gob.es/es/auditorio/datos-de-contacto" data-linktype="internal">Contacto</a></li><li><a href="https://auditorionacional.inaem.gob.es/../es/sitemap">Mapa web</a></li><li><a data-val="e00767a599614e72b3f588c990c0b4d9" href="https://auditorionacional.inaem.gob.es/es/accesibilidad-sitio-web" data-linktype="internal">Accesibilidad</a></li><li><a href="https://www.cultura.gob.es/cultura/artesescenicas/proteccion-datos.html" target="_blank" data-linktype="external" data-val="https://www.cultura.gob.es/cultura/artesescenicas/proteccion-datos.html">Política de Privacidad y Protección de datos</a></li></ul>
+                    </nav>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="prefooter2">
+        <h3>Entradas OCNE, CNDM y JONDE</h3>
+<p><strong>Horario de taquillas:</strong><br /> <strong>Lunes</strong>: 16:00 - 18:00 horas.<br /> <strong>Martes - Viernes</strong>: 10:00 - 17:00 horas.<br /> <strong>Sábados</strong>: 11:00 - 13:00 horas (excepto el mes de julio).<br /><strong>Cerradas en festivos, mes de agosto y los días 24 y 31 de diciembre.</strong><br /> <strong>Teléfono</strong>: 91 337 03 07 / 91 337 01 34<br /><br /> <a href="https://entradasinaem.es/es/recintos" target="_blank" data-linktype="external" data-val="https://entradasinaem.es/es/recintos"><strong>Venta online</strong>: www.entradasinaem.es</a></p>
+<p><a href="https://entradasinaem.es/es/recintos" target="_blank" data-linktype="external" data-val="https://entradasinaem.es/es/recintos"><img class="image-inline" src="https://teatrodelazarzuela.mcu.es/images/banners/EntradasINAEM2021Blanco.png" alt="" data-linktype="externalImage" data-scale="large" data-val="https://teatrodelazarzuela.mcu.es/images/banners/EntradasINAEM2021Blanco.png" />    </a>    <a href="https://bonoculturajoven.gob.es/" target="_blank" data-linktype="external" data-val="https://bonoculturajoven.gob.es/"><img class="n3VNCb KAlRDb" style="width: 98px; height: 65px; margin: 0px;" src="https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/cultura/PublishingImages/Recursos/240622-bono-cultural.JPG?RenditionID=33" alt="La Moncloa. 24/06/2022. Cultura y Deporte selecciona a Correos y Telégrafos  como entidad financiera del Bono Cultural Joven [Prensa/Actualidad/Cultura  y Deporte]" data-noaft="1" /></a></p>
+<p><a href="https://entidades-adheridas.bonoculturajoven.gob.es/info" target="_blank" data-linktype="external" data-val="https://entidades-adheridas.bonoculturajoven.gob.es/info"> </a></p>
+<h3>Entradas PROGRAMADORES EXTERNOS</h3>
+<p>consultar en cada concierto de esta página web<br /><a data-val="https://auditorionacional.inaem.gob.es" href="https://auditorionacional.inaem.gob.es/../../" data-linktype="external" target="_blank">https://auditorionacional.inaem.gob.es</a></p>
+<h3>Información General</h3>
+<p><strong>Teléfono</strong>: 91 337 01 39 / 91 337 01 40<br /> <strong>auditorio.nacional@inaem.cultura.gob.es<br /><a href="http://www.mecd.gob.es/cultura-mecd/areas-cultura/artesescenicas/proteccion-datos.html" data-linktype="external" data-val="http://www.mecd.gob.es/cultura-mecd/areas-cultura/artesescenicas/proteccion-datos.html">(</a><a href="https://www.culturaydeporte.gob.es/cultura/artesescenicas/proteccion-datos.html" target="_blank" data-linktype="external" data-val="https://www.culturaydeporte.gob.es/cultura/artesescenicas/proteccion-datos.html">acerca de Protección de Datos</a><a href="http://www.mecd.gob.es/cultura-mecd/areas-cultura/artesescenicas/proteccion-datos.html" data-linktype="external" data-val="http://www.mecd.gob.es/cultura-mecd/areas-cultura/artesescenicas/proteccion-datos.html">)</a><br /></strong></p>
+<p class="sponsors"><a class="inaemLink" href="https://culturaydeporte.gob.es" target="_blank" rel="noopener"><img src="https://auditorionacional.inaem.gob.es/es/contenido/imagenes/logo-inaem-enlace.png" data-linktype="image" title="logo-inaem-enlace.png" data-val="8758e5a010b040b593faf8b9ab13a18d" data-scale="" alt="Instituto Nacional de las Artes Escénicas y la Música." class="image-inline" /></a> <a class="transparenciaLink" href="https://transparencia.gob.es" target="_blank" rel="noopener"><img src="https://auditorionacional.inaem.gob.es/es/contenido/imagenes/logo-portal-transparencia-enlace.png" data-linktype="image" title="logo-portal-transparencia-enlace.png" data-val="525a5b1d2cf84d489038ef6a5d2f28b8" data-scale="" alt="Portal de la Transparencia." class="image-inline" /></a></p>
+    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
+                    <div class="prefooter3">
+        <h3>Cómo llegar</h3>
+<p><strong>Príncipe de Vergara 146, 28002 Madrid</strong></p>
+<p><strong>Autobuses</strong>: 1,9,16, 29, 51, 52 y 73<br /> <strong>Metro</strong>: Cruz del Rayo y Prosperidad<br /><strong>BiciMAD</strong>: Estación 146 (c<span class="_Xbe">/ María Francisca, 1</span>)<br /><strong>Aparca-bicis</strong>: c/ Príncipe de Vergara, 139, 142 y 146 (este frente a la entrada de Sinfónica).<br /><strong>Parkings: </strong>Plaza de Rodolfo y Ernesto Halffter (c/ Suero de Quiñones, 31) y Parking López de Hoyos (c/ López de Hoyos, 65 y c/ Cartagena, 133)</p>
+<div><iframe style="border: 0;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.3216263014533!2d-3.67985968460319!3d40.4460178793617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228c3a1fdcc2d%3A0x25033d84455d790b!2sAuditorio%20Nacional%20de%20M%C3%BAsica!5e0!3m2!1ses!2ses!4v1639327656205!5m2!1ses!2ses" width="425" height="350" allowfullscreen="allowfullscreen"></iframe></div>
+    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy bg-black text-center">
+            <div class="container py-3">        
+                    
+        <p>© AUDITORIO NACIONAL - INAEM. - Ministerio de Cultura - 2026</p>
+    
+            </div>
+        </div>
+    </footer><script>
+        require.config({
+            "paths": {
+              "cookiebar": PORTAL_URL + "/++theme++auditorionacionaltheme/cookiebar/jquery.cookiebar",
+            }
+        });
+        require(["jquery", "cookiebar"], function($) {
+            var lang = document.documentElement.lang.toLowerCase()
+
+            var $cookieAccept = 'Acepto';
+            var $cookieDecline = 'Deshabilitar Cookies';
+            var $cookieMessage = 'Le informamos que utilizamos cookies propias y de terceros para ofrecer un mejor servicio, deacuerdo con sus hábitos de navegación.';
+
+            if ( lang === "ca" ) {
+                $cookieAccept = 'Accepto';
+                $cookieDecline = 'Deshabilitar Cookies';
+                $cookieMessage = 'L\'informem que utilitzem cookies pròpies i de tercers per oferir un millor servei, d\'acord amb els seus hàbits de navegació.';
+            }
+            
+            // if (!$.isFunction($.cookieBar)){
+            //     return
+            // }
+
+            $.cookieBar({
+              policyURL: 'https://auditorionacional.inaem.gob.es/' + lang + '/politica-de-cookies',
+              autoEnable: false,
+              acceptButton: true,
+              acceptText: $cookieAccept,
+              declineButton: true,
+              declineText: $cookieDecline,
+              expireDays: 60,
+              message: $cookieMessage
+            });
+        });
+     </script><script>
+  (function(w,d,s,i){
+    var f=d.getElementsByTagName(s)[0];
+    
+    // Crear el primer script (gtag.js) - asíncrono
+    var j=d.createElement(s);
+    j.async=1;
+    j.src='https://www.googletagmanager.com/gtag/js?id='+i;
+    f.parentNode.insertBefore(j,f);
+    
+    // Crear el segundo script (inicialización) - inline
+    var k=d.createElement(s);
+    k.text="window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','"+i+"');";
+    f.parentNode.insertBefore(k,f);
+    
+  })(window,document,'script','G-NSE7W1KM7D');
+</script><script>
+        !function(e,n,t){function r(e,n){return typeof e===n}function o(){var e,n,t,o,i,s,a;for(var l in C)if(C.hasOwnProperty(l)){if(e=[],n=C[l],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(t=0;t<n.options.aliases.length;t++)e.push(n.options.aliases[t].toLowerCase());for(o=r(n.fn,"function")?n.fn():n.fn,i=0;i<e.length;i++)s=e[i],a=s.split("."),1===a.length?Modernizr[a[0]]=o:(!Modernizr[a[0]]||Modernizr[a[0]]instanceof Boolean||(Modernizr[a[0]]=new Boolean(Modernizr[a[0]])),Modernizr[a[0]][a[1]]=o),h.push((o?"":"no-")+a.join("-"))}}function i(e){var n=_.className,t=Modernizr._config.classPrefix||"";if(w&&(n=n.baseVal),Modernizr._config.enableJSClass){var r=new RegExp("(^|\\s)"+t+"no-js(\\s|$)");n=n.replace(r,"$1"+t+"js$2")}Modernizr._config.enableClasses&&(n+=" "+t+e.join(" "+t),w?_.className.baseVal=n:_.className=n)}function s(e){return e.replace(/([a-z])-([a-z])/g,function(e,n,t){return n+t.toUpperCase()}).replace(/^-/,"")}function a(e,n){return!!~(""+e).indexOf(n)}function l(){return"function"!=typeof n.createElement?n.createElement(arguments[0]):w?n.createElementNS.call(n,"http://www.w3.org/2000/svg",arguments[0]):n.createElement.apply(n,arguments)}function f(e,n){return function(){return e.apply(n,arguments)}}function u(e,n,t){var o;for(var i in e)if(e[i]in n)return t===!1?e[i]:(o=n[e[i]],r(o,"function")?f(o,t||n):o);return!1}function p(n,t,r){var o;if("getComputedStyle"in e){o=getComputedStyle.call(e,n,t);var i=e.console;if(null!==o)r&&(o=o.getPropertyValue(r));else if(i){var s=i.error?"error":"log";i[s].call(i,"getComputedStyle returning null, its possible modernizr test results are inaccurate")}}else o=!t&&n.currentStyle&&n.currentStyle[r];return o}function c(e){return e.replace(/([A-Z])/g,function(e,n){return"-"+n.toLowerCase()}).replace(/^ms-/,"-ms-")}function d(){var e=n.body;return e||(e=l(w?"svg":"body"),e.fake=!0),e}function m(e,t,r,o){var i,s,a,f,u="modernizr",p=l("div"),c=d();if(parseInt(r,10))for(;r--;)a=l("div"),a.id=o?o[r]:u+(r+1),p.appendChild(a);return i=l("style"),i.type="text/css",i.id="s"+u,(c.fake?c:p).appendChild(i),c.appendChild(p),i.styleSheet?i.styleSheet.cssText=e:i.appendChild(n.createTextNode(e)),p.id=u,c.fake&&(c.style.background="",c.style.overflow="hidden",f=_.style.overflow,_.style.overflow="hidden",_.appendChild(c)),s=t(p,e),c.fake?(c.parentNode.removeChild(c),_.style.overflow=f,_.offsetHeight):p.parentNode.removeChild(p),!!s}function v(n,r){var o=n.length;if("CSS"in e&&"supports"in e.CSS){for(;o--;)if(e.CSS.supports(c(n[o]),r))return!0;return!1}if("CSSSupportsRule"in e){for(var i=[];o--;)i.push("("+c(n[o])+":"+r+")");return i=i.join(" or "),m("@supports ("+i+") { #modernizr { position: absolute; } }",function(e){return"absolute"==p(e,null,"position")})}return t}function y(e,n,o,i){function f(){p&&(delete P.style,delete P.modElem)}if(i=r(i,"undefined")?!1:i,!r(o,"undefined")){var u=v(e,o);if(!r(u,"undefined"))return u}for(var p,c,d,m,y,g=["modernizr","tspan","samp"];!P.style&&g.length;)p=!0,P.modElem=l(g.shift()),P.style=P.modElem.style;for(d=e.length,c=0;d>c;c++)if(m=e[c],y=P.style[m],a(m,"-")&&(m=s(m)),P.style[m]!==t){if(i||r(o,"undefined"))return f(),"pfx"==n?m:!0;try{P.style[m]=o}catch(h){}if(P.style[m]!=y)return f(),"pfx"==n?m:!0}return f(),!1}function g(e,n,t,o,i){var s=e.charAt(0).toUpperCase()+e.slice(1),a=(e+" "+b.join(s+" ")+s).split(" ");return r(n,"string")||r(n,"undefined")?y(a,n,o,i):(a=(e+" "+j.join(s+" ")+s).split(" "),u(a,n,t))}var h=[],C=[],S={_version:"3.6.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var t=this;setTimeout(function(){n(t[e])},0)},addTest:function(e,n,t){C.push({name:e,fn:n,options:t})},addAsyncTest:function(e){C.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=S,Modernizr=new Modernizr;var _=n.documentElement,w="svg"===_.nodeName.toLowerCase(),x="Moz O ms Webkit",b=S._config.usePrefixes?x.split(" "):[];S._cssomPrefixes=b;var E=function(n){var r,o=prefixes.length,i=e.CSSRule;if("undefined"==typeof i)return t;if(!n)return!1;if(n=n.replace(/^@/,""),r=n.replace(/-/g,"_").toUpperCase()+"_RULE",r in i)return"@"+n;for(var s=0;o>s;s++){var a=prefixes[s],l=a.toUpperCase()+"_"+r;if(l in i)return"@-"+a.toLowerCase()+"-"+n}return!1};S.atRule=E;var j=S._config.usePrefixes?x.toLowerCase().split(" "):[];S._domPrefixes=j;var z={elem:l("modernizr")};Modernizr._q.push(function(){delete z.elem});var P={style:z.elem.style};Modernizr._q.unshift(function(){delete P.style}),S.testAllProps=g;var N=S.prefixed=function(e,n,t){return 0===e.indexOf("@")?E(e):(-1!=e.indexOf("-")&&(e=s(e)),n?g(e,n,t):g(e,"pfx"))};Modernizr.addTest("objectfit",!!N("objectFit"),{aliases:["object-fit"]}),o(),i(h),delete S.addTest,delete S.addAsyncTest;for(var T=0;T<Modernizr._q.length;T++)Modernizr._q[T]();e.Modernizr=Modernizr}(window,document);
+        $( document ).ready(function() {
+            // Canviar imatges per bg on hi hagi object-fit
+            if ( !Modernizr.objectfit ) {
+                // mirar si n'hi ha
+                if($('.ieCover').length > 0 ) {
+                    $('.ieCover').each(function () {
+                        var $container = $(this),
+                            imgUrl = $container.find('img').data('image');
+                        if (imgUrl) {
+                            $container
+                            .css('backgroundImage', 'url(' + imgUrl + ')')
+                            .find('.ieCover__image').hide();
+                        }
+                    });
+                } else {
+                    $('.hasIeCover').removeClass('ieCover');
+                }
+                // Arreglar links massa llargs
+                if($('.eventitem__text').length > 0 ) {
+                    $('.eventitem__text').each(function () {
+                        $(this).css('display', 'block');
+                    });
+                }
+            }
+        });
+    </script><script type="text/javascript" src="/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&ns=2&cb=1064087043" async></script></body>
+
+</html>
