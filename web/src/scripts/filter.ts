@@ -49,6 +49,8 @@ const searchInput = document.getElementById('filter-search') as HTMLInputElement
 const clearBtn = document.getElementById('filter-clear') as HTMLButtonElement;
 const eventList = document.getElementById('event-list')!;
 const eventCount = document.getElementById('event-count')!;
+const filterToggle = document.getElementById('filter-toggle') as HTMLElement;
+const filterDetails = document.getElementById('filter-details') as HTMLDetailsElement;
 
 function initFiltersFromUrl(): void {
   const params = new URLSearchParams(window.location.search);
@@ -178,6 +180,24 @@ function updateClearButton(): void {
   clearBtn.classList.toggle('visible', hasActiveFilters());
 }
 
+function countActiveFilters(): number {
+  let count = 0;
+  if (countrySelect.value) count++;
+  if (citySelect.value) count++;
+  if (venueSelect.value) count++;
+  if (daysSelect.value !== '30') count++;
+  return count;
+}
+
+function updateFilterToggle(): void {
+  const count = countActiveFilters();
+  if (count > 0) {
+    filterToggle.textContent = t('filter.toggle_count', { n: count });
+  } else {
+    filterToggle.textContent = t('filter.toggle');
+  }
+}
+
 function resetFilters(): void {
   countrySelect.value = '';
   citySelect.value = '';
@@ -193,6 +213,7 @@ function render(): void {
   const events = filterEvents();
   updateUrl();
   updateClearButton();
+  updateFilterToggle();
 
   eventCount.textContent = events.length === 1
     ? t('events.count_one')
@@ -269,3 +290,8 @@ initFiltersFromUrl();
 populateCityDropdown();
 populateVenueDropdown();
 render();
+
+// On mobile, start with filters collapsed
+if (window.matchMedia('(max-width: 700px)').matches) {
+  filterDetails.removeAttribute('open');
+}
