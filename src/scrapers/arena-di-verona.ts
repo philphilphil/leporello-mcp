@@ -87,6 +87,12 @@ export class ArenaDiVeronaScraper implements Scraper {
       });
     });
 
-    return events;
+    // Deduplicate — the calendar HTML sometimes lists the same event twice on a day
+    const seen = new Set<string>();
+    return events.filter(e => {
+      if (seen.has(e.id)) return false;
+      seen.add(e.id);
+      return true;
+    });
   }
 }

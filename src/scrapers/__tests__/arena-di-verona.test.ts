@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { ArenaDiVeronaScraper } from '../arena-di-verona.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/arena-di-verona.html', import.meta.url), 'utf8');
 const scraper = new ArenaDiVeronaScraper({ fetchHtml: async () => fixture });
@@ -32,4 +33,6 @@ describe('ArenaDiVeronaScraper', () => {
     expect(withUrl).toBeDefined();
     expect(withUrl!.url).toMatch(/^https:\/\/www\.arena\.it\//);
   });
+
+  testDbIntegration(scraper);
 });
