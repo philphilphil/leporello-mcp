@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { PalauMusicaBarcelonaScraper } from '../palau-musica-barcelona.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = JSON.parse(readFileSync(new URL('../__fixtures__/palau-musica-barcelona.json', import.meta.url), 'utf8'));
 const scraper = new PalauMusicaBarcelonaScraper({ fetchJson: async () => fixture });
@@ -42,4 +43,6 @@ describe('PalauMusicaBarcelonaScraper', () => {
     expect(withUrl.length).toBeGreaterThan(0);
     expect(withUrl[0].url).toMatch(/^https:\/\/www\.palaumusica\.cat\//);
   });
+
+  testDbIntegration(scraper);
 });
