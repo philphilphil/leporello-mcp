@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { AuditorioNacionalMadridScraper } from '../auditorio-nacional-madrid.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/auditorio-nacional-madrid.html', import.meta.url), 'utf8');
 const scraper = new AuditorioNacionalMadridScraper({ fetchHtml: async () => fixture });
@@ -50,4 +51,6 @@ describe('AuditorioNacionalMadridScraper', () => {
       expect('url' in event).toBe(true);
     }
   });
+
+  testDbIntegration(scraper);
 });
