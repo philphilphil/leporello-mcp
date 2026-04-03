@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { SalzburgerFestspieleScraper } from '../salzburger-festspielhaus.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixtureJson = JSON.parse(
   readFileSync(new URL('../__fixtures__/salzburger-festspielhaus.json', import.meta.url), 'utf8'),
@@ -76,4 +77,6 @@ describe('SalzburgerFestspieleScraper', () => {
       expect(e.url).toMatch(/^https:\/\/www\.salzburgerfestspiele\.at\//);
     }
   });
+
+  testDbIntegration(scraper);
 });
