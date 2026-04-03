@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { CarnegieHallNewYorkScraper } from '../carnegie-hall-new-york.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixtureJson = JSON.parse(
   readFileSync(new URL('../__fixtures__/carnegie-hall-new-york.json', import.meta.url), 'utf8'),
@@ -60,4 +61,6 @@ describe('CarnegieHallNewYorkScraper', () => {
       // time, conductor, cast, location, url may be null
     }
   });
+
+  testDbIntegration(scraper);
 });
