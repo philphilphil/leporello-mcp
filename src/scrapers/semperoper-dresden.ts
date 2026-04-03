@@ -1,3 +1,4 @@
+import { load } from 'cheerio';
 import type { Event } from '../types.js';
 import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
 
@@ -63,6 +64,15 @@ export class SemperoperDresdenScraper implements Scraper {
       return [];
     }
 
+    // Build sospuid → detail URL map from the rendered anchor links
+    const $ = load(html);
+    const urlBySospuid = new Map<number, string>();
+    $('a[href*="#a_"]').each((_, el) => {
+      const href = $(el).attr('href') ?? '';
+      const m = href.match(/#a_(\d+)$/);
+      if (m) urlBySospuid.set(Number(m[1]), href);
+    });
+
     const events: Event[] = [];
     const now = new Date().toISOString();
 
@@ -99,7 +109,7 @@ export class SemperoperDresdenScraper implements Scraper {
           conductor: null,
           cast: null,
           location,
-          url: null,
+          url: urlBySospuid.get(entry.sospuid ?? -1) ?? null,
           scraped_at: now,
         });
       } catch {

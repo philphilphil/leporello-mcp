@@ -34,5 +34,12 @@ describe('SemperoperDresdenScraper', () => {
     expect(semperZwei).toBeDefined();
   });
 
+  it('populates detail URLs for events', async () => {
+    const events = await scraper.scrape();
+    const withUrl = events.filter(e => e.url !== null);
+    expect(withUrl.length).toBeGreaterThan(0);
+    expect(withUrl[0].url).toMatch(/^https:\/\/www\.semperoper\.de\/spielplan\/stuecke\//);
+  });
+
   testDbIntegration(scraper);
 });
