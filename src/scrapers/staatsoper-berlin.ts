@@ -2,9 +2,10 @@ import { load } from 'cheerio';
 import type { Event } from '../types.js';
 import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
 
-type FetchHtml = () => Promise<string>;
+type FetchHtml = (url: string) => Promise<string>;
 
 const BASE_URL = 'https://www.staatsoper-berlin.de';
+const MAX_PAGES = 12; // ~90 days at ~7 days per page
 
 export class StaatsoperBerlinScraper implements Scraper {
   readonly venue: VenueMeta = {
@@ -20,19 +21,28 @@ export class StaatsoperBerlinScraper implements Scraper {
 
   constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
 
-  async scrape(): Promise<Event[]> {
-    const html = this.opts.fetchHtml
-      ? await this.opts.fetchHtml()
-      : await fetch(this.venue.scheduleUrl, {
-          headers: { 'User-Agent': USER_AGENT },
-        }).then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
-          return r.text();
-        });
-    return this.parse(html);
+  private async fetchPage(url: string): Promise<string> {
+    if (this.opts.fetchHtml) return this.opts.fetchHtml(url);
+    const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+    if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
+    return res.text();
   }
 
-  parse(html: string): Event[] {
+  async scrape(): Promise<Event[]> {
+    const events: Event[] = [];
+    let url: string | null = this.venue.scheduleUrl;
+
+    for (let page = 0; page < MAX_PAGES && url; page++) {
+      const html = await this.fetchPage(url);
+      const { parsed, nextUrl } = this.parsePage(html);
+      events.push(...parsed);
+      url = nextUrl;
+    }
+
+    return events;
+  }
+
+  parsePage(html: string): { parsed: Event[]; nextUrl: string | null } {
     const $ = load(html);
     const events: Event[] = [];
     const now = new Date().toISOString();
@@ -107,6 +117,10 @@ export class StaatsoperBerlinScraper implements Scraper {
       }
     });
 
-    return events;
+    // Extract next pagination URL
+    const nextFragment = $('[data-pagination-fragment-url]').attr('data-pagination-fragment-url');
+    const nextUrl = nextFragment ? new URL(nextFragment, BASE_URL + '/').href : null;
+
+    return { parsed: events, nextUrl };
   }
 }
