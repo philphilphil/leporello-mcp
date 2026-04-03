@@ -43,4 +43,18 @@ npm run dev       # start server on http://localhost:3000
 npm run dev:fresh # scrape, then serve
 ```
 
-Scrapes on startup if the database is empty, then daily at 03:00 UTC.
+Scrapes daily at 03:00 UTC. Run `npm run scrape` to populate the database on first use.
+
+## Docker
+
+```bash
+docker compose up -d
+
+# Trigger a manual scrape (e.g. first run or on-demand refresh)
+docker compose exec leporello node dist/scrape.js
+
+# Tail logs
+docker compose logs -f leporello
+```
+
+The scheduler re-scrapes all venues at 03:00 UTC and rebuilds the web frontend automatically.

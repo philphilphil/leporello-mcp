@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const DB_PATH =
   process.env.DB_PATH ??
-  path.join(fileURLToPath(import.meta.url), '..', '..', '..', '..', 'data', 'erda.db');
+  path.join(fileURLToPath(import.meta.url), '..', '..', '..', '..', 'data', 'leporello.db');
 
 function openDb(): Database.Database | null {
   if (!existsSync(DB_PATH)) return null;
