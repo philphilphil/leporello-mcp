@@ -80,6 +80,32 @@ export class MyVenueScraper implements Scraper {
 }
 ```
 
+### Fetching data — three approaches
+
+Choose the right approach based on the venue's site:
+
+**1. Plain `fetch()` (default)** — use when `curl` returns the schedule HTML with event data. This is the simplest and fastest approach. Most scrapers use this.
+
+**2. `fetchRenderedHtml()` (Playwright)** — use when the site is JS-rendered and `curl`/`fetch()` returns empty HTML with no event data. Import the helper from `base.ts`:
+
+```typescript
+import { fetchRenderedHtml, type Scraper, type VenueMeta } from './base.js';
+
+// In scrape():
+const html = this.opts.fetchHtml
+  ? await this.opts.fetchHtml()
+  : await fetchRenderedHtml(this.venue.scheduleUrl, {
+      waitForSelector: '.event-card',  // CSS selector to wait for before extracting HTML
+    });
+```
+
+The `waitForSelector` option waits for JS-rendered content to appear in the DOM (up to 15s). Always specify it — without it the page may be captured before events load. See `bayerische-staatsoper.ts` for a working example.
+
+**3. JSON API** — some sites serve schedule data via AJAX/API endpoints (check the browser Network tab). Fetch the JSON directly and parse it — no Cheerio needed for extraction, though the response may contain HTML fragments. See `philharmonie-de-paris.ts` for an example.
+
+**How to decide:** Try `curl -s -A "Mozilla/5.0 ..." <url> | grep <known-event-title>`. If it finds events, use plain `fetch()`. If not, check the Network tab for JSON APIs. If neither works, use `fetchRenderedHtml()`.
+```
+
 Rules:
 - All 9 `Event` fields must be set (`null` is fine for optional ones)
 - Use `generateEventId(venueId, date, time, title)` — never invent IDs
@@ -91,23 +117,29 @@ Rules:
 
 ## 2. Save an HTML fixture
 
+**For sites that work with plain fetch:**
 ```bash
 curl -s -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" \
   <schedule-url> -o src/scrapers/__fixtures__/<venue-id>.html
 ```
 
-If curl is blocked (403/empty), use Playwright:
-
+**For JS-rendered sites** (when curl returns empty/no events), use Playwright MCP or a script:
 ```typescript
 // fetch-fixture.ts (run once, then delete)
 import { chromium } from 'playwright';
 import { writeFileSync } from 'node:fs';
 const browser = await chromium.launch();
-const page = await browser.newPage();
+const ctx = await browser.newContext({
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+});
+const page = await ctx.newPage();
 await page.goto('<schedule-url>');
+await page.waitForSelector('<event-selector>');
 writeFileSync('src/scrapers/__fixtures__/<venue-id>.html', await page.content());
 await browser.close();
 ```
+
+**For JSON API sites**, save the API response content as the fixture (the HTML fragment or JSON body).
 
 ## 3. Verify fixture data is current
 
