@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { OpernhausZuerichScraper } from '../opernhaus-zuerich.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/opernhaus-zuerich.html', import.meta.url), 'utf8');
 const scraper = new OpernhausZuerichScraper({ fetchHtml: async () => fixture });
@@ -40,4 +41,6 @@ describe('OpernhausZuerichScraper', () => {
     expect(scylla).toBeDefined();
     expect(scylla!.title).toContain('Jean-Marie Leclair');
   });
+
+  testDbIntegration(scraper);
 });
