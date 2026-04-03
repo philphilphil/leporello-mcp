@@ -13,8 +13,23 @@ const VENUE_LOCATIONS: Record<string, string> = {
   'Kleiner_Ballettsaal': 'Kleiner Ballettsaal',
 };
 
-/** Venues considered part of Semperoper operations. */
+/** Included venues considered part of Semperoper operations. */
 const INCLUDED_VENUES = new Set(Object.keys(VENUE_LOCATIONS));
+
+/**
+ * Derives a URL slug from a title using the same rules as the Semperoper website:
+ * strip leading articles, transliterate German umlauts, remove punctuation, spaces → hyphens.
+ * Used as a fallback for productions not yet rendered in the page's anchor links.
+ */
+function titleToSlug(title: string): string {
+  return title
+    .replace(/^(Die|Der|Das|Ein|Eine|La|Le|Les|L'|Il|Lo|Gli|I|The|A|An)\s+/i, '')
+    .toLowerCase()
+    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-');
+}
 
 interface ScheduleEntry {
   sostuid?: number;
@@ -64,13 +79,13 @@ export class SemperoperDresdenScraper implements Scraper {
       return [];
     }
 
-    // Build sospuid → detail URL map from the rendered anchor links
+    // Build sostuid → slug map from rendered anchor links (authoritative)
     const $ = load(html);
-    const urlBySospuid = new Map<number, string>();
-    $('a[href*="#a_"]').each((_, el) => {
+    const slugBySostuid = new Map<number, string>();
+    $('a[href*="/spielplan/stuecke/stid/"]').each((_, el) => {
       const href = $(el).attr('href') ?? '';
-      const m = href.match(/#a_(\d+)$/);
-      if (m) urlBySospuid.set(Number(m[1]), href);
+      const m = href.match(/\/spielplan\/stuecke\/stid\/([^/]+)\/(\d+)\.html/);
+      if (m) slugBySostuid.set(Number(m[2]), m[1]);
     });
 
     const events: Event[] = [];
@@ -100,6 +115,12 @@ export class SemperoperDresdenScraper implements Scraper {
 
         const location = VENUE_LOCATIONS[venueCode] ?? null;
 
+        const slug = slugBySostuid.get(entry.sostuid ?? -1)
+          ?? titleToSlug(entry.st_title ?? '');
+        const url = slug && entry.sostuid && entry.sospuid
+          ? `https://www.semperoper.de/spielplan/stuecke/stid/${slug}/${entry.sostuid}.html#a_${entry.sospuid}`
+          : null;
+
         events.push({
           id: generateEventId(this.venueId, date, time, title),
           venue_id: this.venueId,
@@ -109,7 +130,7 @@ export class SemperoperDresdenScraper implements Scraper {
           conductor: null,
           cast: null,
           location,
-          url: urlBySospuid.get(entry.sospuid ?? -1) ?? null,
+          url,
           scraped_at: now,
         });
       } catch {
