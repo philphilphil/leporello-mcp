@@ -16,21 +16,6 @@ const VENUE_LOCATIONS: Record<string, string> = {
 /** Included venues considered part of Semperoper operations. */
 const INCLUDED_VENUES = new Set(Object.keys(VENUE_LOCATIONS));
 
-/**
- * Derives a URL slug from a title using the same rules as the Semperoper website:
- * strip leading articles, transliterate German umlauts, remove punctuation, spaces → hyphens.
- * Used as a fallback for productions not yet rendered in the page's anchor links.
- */
-function titleToSlug(title: string): string {
-  return title
-    .replace(/^(Die|Der|Das|Ein|Eine|La|Le|Les|L'|Il|Lo|Gli|I|The|A|An)\s+/i, '')
-    .toLowerCase()
-    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
-    .replace(/[^a-z0-9\s-]/g, '')
-    .trim()
-    .replace(/\s+/g, '-');
-}
-
 interface ScheduleEntry {
   sostuid?: number;
   sospuid?: number;
@@ -115,11 +100,10 @@ export class SemperoperDresdenScraper implements Scraper {
 
         const location = VENUE_LOCATIONS[venueCode] ?? null;
 
-        const slug = slugBySostuid.get(entry.sostuid ?? -1)
-          ?? titleToSlug(entry.st_title ?? '');
+        const slug = slugBySostuid.get(entry.sostuid ?? -1);
         const url = slug && entry.sostuid && entry.sospuid
           ? `https://www.semperoper.de/spielplan/stuecke/stid/${slug}/${entry.sostuid}.html#a_${entry.sospuid}`
-          : null;
+          : this.venue.scheduleUrl;
 
         events.push({
           id: generateEventId(this.venueId, date, time, title),
