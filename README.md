@@ -26,6 +26,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Sydney Opera House | Sydney |
 | Philharmonie de Paris | Paris |
 | Bayerische Staatsoper | München |
+| Berliner Philharmonie | Berlin |
 
 ## How it works
 
