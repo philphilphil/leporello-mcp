@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { GewandhausLeipzigScraper } from '../gewandhaus-leipzig.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/gewandhaus-leipzig.html', import.meta.url), 'utf8');
 const scraper = new GewandhausLeipzigScraper({ fetchHtml: async () => fixture });
@@ -39,4 +40,6 @@ describe('GewandhausLeipzigScraper', () => {
       }
     }
   });
+
+  testDbIntegration(scraper);
 });
