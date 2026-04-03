@@ -120,6 +120,7 @@ const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) 
   /* --- Details / Summary (toggle) --- */
   .filter-details {
     display: contents;
+    order: 0;
   }
 
   .filter-toggle {
@@ -128,6 +129,10 @@ const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) 
 
   .filter-details-body {
     display: contents;
+  }
+
+  .filter-details-body .filter-group:first-child {
+    padding-left: 0;
   }
 
   /* --- Filter groups --- */
@@ -146,9 +151,11 @@ const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) 
   }
 
   .filter-group--search {
-    border-right: 1px solid var(--border-light);
+    order: 1;
     flex: 1;
-    padding-left: 0;
+    border-right: none;
+    padding-right: 0;
+    padding-left: 2rem;
   }
 
   .filter-label {
@@ -290,10 +297,12 @@ const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) 
 
     /* Search takes most of the row */
     .filter-group--search {
+      order: 0;
       flex: 1;
       border-right: none;
       border-bottom: none;
       padding: 0.9rem 0;
+      padding-left: 0;
       min-width: 0;
     }
 
