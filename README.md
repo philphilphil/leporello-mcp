@@ -20,6 +20,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Gran Teatre del Liceu | Barcelona |
 | Semperoper | Dresden |
 | Opéra National de Paris | Paris |
+| Carnegie Hall | New York |
 
 ## How it works
 
