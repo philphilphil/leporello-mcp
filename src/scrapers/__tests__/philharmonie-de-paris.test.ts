@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { PhilharmonieDeParisScraper } from '../philharmonie-de-paris.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/philharmonie-de-paris.html', import.meta.url), 'utf8');
 const scraper = new PhilharmonieDeParisScraper({ fetchHtml: async () => fixture });
@@ -43,4 +44,6 @@ describe('PhilharmonieDeParisScraper', () => {
       expect(e.url).toMatch(/^https:\/\/philharmoniedeparis\.fr\//);
     }
   });
+
+  testDbIntegration(scraper);
 });
