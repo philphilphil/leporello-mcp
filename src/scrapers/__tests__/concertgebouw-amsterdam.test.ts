@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { ConcertgebouwAmsterdamScraper } from '../concertgebouw-amsterdam.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/concertgebouw-amsterdam.html', import.meta.url), 'utf8');
 const scraper = new ConcertgebouwAmsterdamScraper({ fetchHtml: async () => fixture });
@@ -46,4 +47,6 @@ describe('ConcertgebouwAmsterdamScraper', () => {
       expect(e.url).toMatch(/^https:\/\/www\.concertgebouw\.nl\//);
     }
   });
+
+  testDbIntegration(scraper);
 });
