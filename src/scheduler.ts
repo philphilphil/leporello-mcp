@@ -19,6 +19,7 @@ import { CarnegieHallNewYorkScraper } from './scrapers/carnegie-hall-new-york.js
 import { TeatroRealMadridScraper } from './scrapers/teatro-real-madrid.js';
 import { StaatsoperBerlinScraper } from './scrapers/staatsoper-berlin.js';
 import { SydneyOperaHouseScraper } from './scrapers/sydney-opera-house.js';
+import { PhilharmonieDeParisScraper } from './scrapers/philharmonie-de-paris.js';
 
 const execFileAsync = promisify(execFile);
 
@@ -54,6 +55,7 @@ export const scrapers: Scraper[] = [
   new TeatroRealMadridScraper(),
   new StaatsoperBerlinScraper(),
   new SydneyOperaHouseScraper(),
+  new PhilharmonieDeParisScraper(),
 ];
 
 export async function runScrapers(list: Scraper[]): Promise<void> {
