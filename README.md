@@ -23,6 +23,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Carnegie Hall | New York |
 | Teatro Real | Madrid |
 | Staatsoper Unter den Linden | Berlin |
+| Sydney Opera House | Sydney |
 
 ## How it works
 
