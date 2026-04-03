@@ -12,6 +12,7 @@ const en: Record<string, string> = {
   "filter.next_days": "Next {n} days",
   "filter.toggle": "Filters",
   "filter.toggle_count": "Filters ({n})",
+  "filter.clear": "Clear all",
   "events.count": "{n} events",
   "events.count_one": "1 event",
   "events.none": "No events found",
