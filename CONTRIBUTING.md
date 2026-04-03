@@ -87,6 +87,7 @@ Rules:
 - Silently skip malformed entries with try/catch per element
 - Throw on non-2xx HTTP (the scheduler catches and logs it)
 - Use the venue's native-language pages when available (e.g. `/de/spielplan/` instead of `/en/schedule/`) to get original, untranslated event titles
+- **Event detail URLs:** only set `url` to a confirmed detail page URL found directly in the scraped HTML. Never construct or guess URLs (e.g. from title slugs). If a detail URL cannot be reliably extracted, fall back to `this.venue.scheduleUrl` (the schedule overview page) — never `null` when a fallback exists. Some sites only render a short window of events as clickable links; events outside that window should get the overview URL.
 
 ## 2. Save an HTML fixture
 
