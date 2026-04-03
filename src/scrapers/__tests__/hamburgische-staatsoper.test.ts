@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { HamburgischeStaatsoperScraper } from '../hamburgische-staatsoper.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/hamburgische-staatsoper.html', import.meta.url), 'utf8');
 const scraper = new HamburgischeStaatsoperScraper({ fetchHtml: async () => fixture });
@@ -59,4 +60,6 @@ describe('HamburgischeStaatsoperScraper', () => {
       expect(e).toHaveProperty('url');
     }
   });
+
+  testDbIntegration(scraper);
 });
