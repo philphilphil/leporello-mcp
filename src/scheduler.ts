@@ -14,6 +14,16 @@ import { OperFrankfurtScraper } from './scrapers/oper-frankfurt.js';
 import { SanFranciscoOperaScraper } from './scrapers/san-francisco-opera.js';
 import { LiceuBarcelonaScraper } from './scrapers/liceu-barcelona.js';
 import { SemperoperDresdenScraper } from './scrapers/semperoper-dresden.js';
+import { ElbphilharmonieHamburgScraper } from './scrapers/elbphilharmonie-hamburg.js';
+import { KoelnerPhilharmonieScraper } from './scrapers/koelner-philharmonie.js';
+import { ConcertgebouwAmsterdamScraper } from './scrapers/concertgebouw-amsterdam.js';
+import { BarbicanHallLondonScraper } from './scrapers/barbican-hall-london.js';
+import { SydneyOperaHouseScraper } from './scrapers/sydney-opera-house.js';
+import { MusikvereinWienScraper } from './scrapers/musikverein-wien.js';
+
+import { TonhalleZuerichScraper } from './scrapers/tonhalle-zuerich.js';
+import { WienerKonzerthausScraper } from './scrapers/wiener-konzerthaus.js';
+import { BerlinerPhilharmonieBerlinScraper } from './scrapers/berliner-philharmonie-berlin.js';
 
 const execFileAsync = promisify(execFile);
 
@@ -44,6 +54,14 @@ export const scrapers: Scraper[] = [
   new SanFranciscoOperaScraper(),
   new LiceuBarcelonaScraper(),
   new SemperoperDresdenScraper(),
+  new ElbphilharmonieHamburgScraper(),
+  new KoelnerPhilharmonieScraper(),
+  new ConcertgebouwAmsterdamScraper(),
+  new BarbicanHallLondonScraper(),
+  new SydneyOperaHouseScraper(),
+  new MusikvereinWienScraper(),
+  new TonhalleZuerichScraper(),
+  new WienerKonzerthausScraper(),
 ];
 
 export async function runScrapers(list: Scraper[]): Promise<void> {

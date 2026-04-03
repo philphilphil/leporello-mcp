@@ -19,6 +19,13 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | San Francisco Opera | San Francisco |
 | Gran Teatre del Liceu | Barcelona |
 | Semperoper | Dresden |
+| Elbphilharmonie | Hamburg |
+| Kölner Philharmonie | Köln |
+| Concertgebouw | Amsterdam |
+| Barbican Hall | London |
+| Sydney Opera House | Sydney |
+| Musikverein | Wien |
+| Wiener Konzerthaus | Wien |
 
 ## How it works
 
