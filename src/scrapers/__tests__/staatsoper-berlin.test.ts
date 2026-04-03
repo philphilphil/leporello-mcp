@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { StaatsoperBerlinScraper } from '../staatsoper-berlin.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/staatsoper-berlin.html', import.meta.url), 'utf8');
 const scraper = new StaatsoperBerlinScraper({ fetchHtml: async () => fixture });
@@ -46,4 +47,6 @@ describe('StaatsoperBerlinScraper', () => {
     const withComposer = events.filter((e) => e.title.includes('('));
     expect(withComposer.length).toBeGreaterThan(0);
   });
+
+  testDbIntegration(scraper);
 });
