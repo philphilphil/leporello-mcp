@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { KoelnerPhilharmonieScraper } from '../koelner-philharmonie.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/koelner-philharmonie.html', import.meta.url), 'utf8');
 const scraper = new KoelnerPhilharmonieScraper({ fetchHtml: async () => fixture });
@@ -35,4 +36,6 @@ describe('KoelnerPhilharmonieScraper', () => {
       }
     }
   });
+
+  testDbIntegration(scraper);
 });
