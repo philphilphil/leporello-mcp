@@ -128,6 +128,7 @@ Create `src/scrapers/__tests__/<venue-id>.test.ts`. Tests use saved fixtures to 
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { MyVenueScraper } from '../<venue-id>.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/<venue-id>.html', import.meta.url), 'utf8');
 const scraper = new MyVenueScraper({ fetchHtml: async () => fixture });
@@ -139,8 +140,12 @@ describe('MyVenueScraper', () => {
   });
 
   // Add venue-specific tests here (e.g. conductor/cast parsing)
+
+  testDbIntegration(scraper);
 });
 ```
+
+The `testDbIntegration` helper checks for duplicate event IDs and inserts all parsed events into an in-memory SQLite database to catch primary key collisions, foreign key violations, and schema mismatches. Always place it **last** in the describe block so parsing tests run first.
 
 ## 5. Register the scraper
 

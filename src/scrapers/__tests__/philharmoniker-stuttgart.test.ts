@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { PhilharmonikerStuttgartScraper } from '../philharmoniker-stuttgart.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/philharmoniker-stuttgart.html', import.meta.url), 'utf8');
 const scraper = new PhilharmonikerStuttgartScraper({ fetchHtml: async () => fixture });
@@ -30,4 +31,6 @@ describe('PhilharmonikerStuttgartScraper', () => {
     expect(withCast.length).toBeGreaterThan(0);
     expect(withCast[0].cast).toContain('Clayton Stephenson');
   });
+
+  testDbIntegration(scraper);
 });

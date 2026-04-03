@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { MetropolitanOperaScraper } from '../metropolitan-opera.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixtureJson = JSON.parse(
   readFileSync(new URL('../__fixtures__/metropolitan-opera.json', import.meta.url), 'utf8'),
@@ -23,4 +24,6 @@ describe('MetropolitanOperaScraper', () => {
     const events = await scraper.scrape();
     expect(events[0].title).toBe('Tristan und Isolde (Richard Wagner)');
   });
+
+  testDbIntegration(scraper);
 });

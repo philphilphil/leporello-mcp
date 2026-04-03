@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { SanFranciscoOperaScraper } from '../san-francisco-opera.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = JSON.parse(readFileSync(new URL('../__fixtures__/san-francisco-opera.json', import.meta.url), 'utf8'));
 const scraper = new SanFranciscoOperaScraper({ fetchJson: async () => fixture });
@@ -37,4 +38,6 @@ describe('SanFranciscoOperaScraper', () => {
     expect(events[0].conductor).toBeNull();
     expect(events[0].cast).toBeNull();
   });
+
+  testDbIntegration(scraper);
 });
