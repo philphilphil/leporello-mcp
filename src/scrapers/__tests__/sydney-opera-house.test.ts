@@ -9,7 +9,8 @@ const scraper = new SydneyOperaHouseScraper({ fetchHtml: async () => fixture });
 describe('SydneyOperaHouseScraper', () => {
   it('parses events from fixture', async () => {
     const events = await scraper.scrape();
-    expect(events.length).toBeGreaterThan(0);
+    // 15 cards, but multi-date cards expand: "9 & 11 Apr" = 2, "15 – 18 Apr" = 4, etc.
+    expect(events.length).toBeGreaterThan(15);
   });
 
   it('extracts event title and date', async () => {
@@ -33,20 +34,30 @@ describe('SydneyOperaHouseScraper', () => {
     expect(phantom!.url).toContain('sydneyoperahouse.com');
   });
 
-  it('parses date ranges correctly', async () => {
+  it('expands ampersand dates into separate events', async () => {
     const events = await scraper.scrape();
-    // "30 Mar – 16 May 2026" → start date 2026-03-30
-    const river = events.find(e => e.title === 'The River');
-    expect(river).toBeDefined();
-    expect(river!.date).toBe('2026-03-30');
+    // "9 & 11 Apr 2026" → two events
+    const mahler = events.filter(e => e.title.includes("Mahler"));
+    expect(mahler).toHaveLength(2);
+    expect(mahler.map(e => e.date).sort()).toEqual(['2026-04-09', '2026-04-11']);
   });
 
-  it('parses ampersand dates correctly', async () => {
+  it('expands same-month date ranges into separate events', async () => {
     const events = await scraper.scrape();
-    // "5 & 6 Apr 2026" → start date 2026-04-05
-    const pogues = events.find(e => e.title === 'The Pogues');
-    expect(pogues).toBeDefined();
-    expect(pogues!.date).toBe('2026-04-05');
+    // "15 – 18 Apr 2026" → four events
+    const tchaikovsky = events.filter(e => e.title.includes("Tchaikovsky"));
+    expect(tchaikovsky).toHaveLength(4);
+    expect(tchaikovsky.map(e => e.date).sort()).toEqual([
+      '2026-04-15', '2026-04-16', '2026-04-17', '2026-04-18',
+    ]);
+  });
+
+  it('uses start date only for cross-month ranges', async () => {
+    const events = await scraper.scrape();
+    // "2 Apr – 3 May 2026" → single event with start date
+    const phantom = events.filter(e => e.title.includes('Phantom of the Opera'));
+    expect(phantom).toHaveLength(1);
+    expect(phantom[0].date).toBe('2026-04-02');
   });
 
   it('sets time, conductor and cast to null', async () => {
