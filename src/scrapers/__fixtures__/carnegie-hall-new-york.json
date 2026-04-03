@@ -1,0 +1,2821 @@
+[
+  {
+    "_id": "{99E3AC14-55F6-420D-AB96-3FB3D2442FF8}",
+    "_name": "National Band  Orchestra Festival All Day 1000AM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{99E3AC14-55F6-420D-AB96-3FB3D2442FF8}"
+    ],
+    "seasonnumber": "32",
+    "webdisplayperformers": "Ensemble(s) to be announced",
+    "chronid": "95126",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{466E8F7E-474F-4281-AB21-553EEE4F9305}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "03",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/03/national-band--orchestra-festival-all-day-1000am",
+    "facility": "Stern Auditorium / Perelman Stage",
+    "facilityfacet": "Stern Auditorium / Perelman Stage",
+    "startdate": 1775224800000,
+    "title": "National Band & Orchestra Festival (All Day)",
+    "licenseename": "WorldStrides",
+    "dayofweek": "Friday",
+    "featured": false,
+    "time": "10 AM",
+    "date": "Friday, Apr 3, 2026",
+    "tessid": 53941,
+    "timeofday": "Matinee",
+    "objectID": "en_99e3ac14-55f6-420d-ab96-3fb3d2442ff8",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Ensemble(s) to be announced",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Stern Auditorium / Perelman Stage",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "National Band & Orchestra Festival (All Day)",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "WorldStrides",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{94E6F1E2-D5C0-45F6-AE4D-717299E269C0}",
+    "_name": "American Protege Winners Recital 0730PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{94E6F1E2-D5C0-45F6-AE4D-717299E269C0}"
+    ],
+    "seasonnumber": "32",
+    "webdisplayperformers": "Winners Recital",
+    "chronid": "84099",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{466E8F7E-474F-4281-AB21-553EEE4F9305}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "03",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/03/american-protege-winners-recital-0730pm",
+    "facility": "Weill Recital Hall",
+    "facilityfacet": "Weill Recital Hall",
+    "startdate": 1775259000000,
+    "title": "American Protégé Winners Recital",
+    "licenseename": "American Protégé",
+    "dayofweek": "Friday",
+    "featured": false,
+    "time": "7:30 PM",
+    "date": "Friday, Apr 3, 2026",
+    "tessid": 52940,
+    "timeofday": "Evening",
+    "objectID": "en_94e6f1e2-d5c0-45f6-ae4d-717299e269c0",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Winners Recital",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Weill Recital Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "American Protégé Winners Recital",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "American Protégé",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{5762CE93-FD1C-49D4-8444-AD4349D4B01C}",
+    "_name": "National Band  Orchestra Festival All Day 1000AM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{5762CE93-FD1C-49D4-8444-AD4349D4B01C}"
+    ],
+    "seasonnumber": "32",
+    "webdisplayperformers": "Ensemble(s) to be announced",
+    "chronid": "95131",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{8967FC2E-1DCC-427F-B818-B855B1ED5835}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "04",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/04/national-band--orchestra-festival-all-day-1000am",
+    "facility": "Stern Auditorium / Perelman Stage",
+    "facilityfacet": "Stern Auditorium / Perelman Stage",
+    "startdate": 1775311200000,
+    "title": "National Band & Orchestra Festival (All Day)",
+    "licenseename": "WorldStrides",
+    "dayofweek": "Saturday",
+    "featured": false,
+    "time": "10 AM",
+    "date": "Saturday, Apr 4, 2026",
+    "tessid": 53944,
+    "timeofday": "Matinee",
+    "objectID": "en_5762ce93-fd1c-49d4-8444-ad4349d4b01c",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Ensemble(s) to be announced",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Stern Auditorium / Perelman Stage",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "National Band & Orchestra Festival (All Day)",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "WorldStrides",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{AFDFA780-431E-4717-84F1-AF93F5C3E155}",
+    "_name": "NEPMTA Honors Recital 1100AM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{AFDFA780-431E-4717-84F1-AF93F5C3E155}"
+    ],
+    "seasonnumber": "32",
+    "webdisplayperformers": "Student Recital",
+    "chronid": "87579",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{8967FC2E-1DCC-427F-B818-B855B1ED5835}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "04",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/04/nepmta-honors-recital-1100am",
+    "facility": "Weill Recital Hall",
+    "facilityfacet": "Weill Recital Hall",
+    "startdate": 1775314800000,
+    "title": "NEPMTA Honors Recital",
+    "licenseename": "Northeast Pennsylvania Music Teachers Association",
+    "dayofweek": "Saturday",
+    "featured": false,
+    "time": "11 AM",
+    "date": "Saturday, Apr 4, 2026",
+    "tessid": 53361,
+    "timeofday": "Matinee",
+    "objectID": "en_afdfa780-431e-4717-84f1-af93f5c3e155",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Student Recital",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Weill Recital Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "NEPMTA Honors Recital",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "Northeast Pennsylvania Music Teachers Association",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{BACC0261-105E-41CD-8816-1BB30A9090A1}",
+    "_name": "NEPMTA Honors Recital 0430PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{BACC0261-105E-41CD-8816-1BB30A9090A1}"
+    ],
+    "seasonnumber": "32",
+    "webdisplayperformers": "Student Recital",
+    "chronid": "87581",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{8967FC2E-1DCC-427F-B818-B855B1ED5835}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "04",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/04/nepmta-honors-recital-0430pm",
+    "facility": "Weill Recital Hall",
+    "facilityfacet": "Weill Recital Hall",
+    "startdate": 1775334600000,
+    "title": "NEPMTA Honors Recital",
+    "licenseename": "Northeast Pennsylvania Music Teachers Association",
+    "dayofweek": "Saturday",
+    "featured": false,
+    "time": "4:30 PM",
+    "date": "Saturday, Apr 4, 2026",
+    "tessid": 53362,
+    "timeofday": "Matinee",
+    "objectID": "en_bacc0261-105e-41cd-8816-1bb30a9090a1",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Student Recital",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Weill Recital Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "NEPMTA Honors Recital",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "Northeast Pennsylvania Music Teachers Association",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{683B1B24-AA79-4F60-8F46-4D3E7DB86E64}",
+    "_name": "Carnegie Hall Citywide Jamila Woods 0500PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{683B1B24-AA79-4F60-8F46-4D3E7DB86E64}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-CH-Presents/2026-04-04-Jamila-Woods.jpg?fit=crop&crop=faces",
+      "alt": "Jamila Woods"
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "Jamila Woods\r<br/><br />​<span>Peter CottonTale, Keyboards</span><br/>Darryl \"DJ\" Abernathy, Drums\r<br/>Justin Canavan, Guitar\r<br/>Matthew Skillz, Bass",
+    "excludefromcyo": true,
+    "chronid": "92834",
+    "ancestors": [
+      "{8967FC2E-1DCC-427F-B818-B855B1ED5835}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "04",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/04/carnegie-hall-citywide-jamila-woods-0500pm",
+    "eventtype": [
+      "Carnegie Hall Presents",
+      "Citywide"
+    ],
+    "facility": "Brooklyn Museum",
+    "facilityfacet": "Offsite",
+    "startdate": 1775336400000,
+    "title": "Carnegie Hall Citywide: Jamila Woods",
+    "licenseename": "Carnegie Hall Presents",
+    "dayofweek": "Saturday",
+    "featured": false,
+    "time": "5 PM",
+    "date": "Saturday, Apr 4, 2026",
+    "tessid": 53087,
+    "timeofday": "Evening",
+    "objectID": "en_683b1b24-aa79-4f60-8f46-4d3e7db86e64",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Jamila Woods\r<br/><br />​<span>Peter CottonTale, Keyboards</span><br/>Darryl \"DJ\" Abernathy, Drums\r<br/>Justin Canavan, Guitar\r<br/>Matthew Skillz, Bass",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Brooklyn Museum",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "Carnegie Hall Citywide: Jamila Woods",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "Carnegie Hall Presents",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{8BD227F9-8E58-42AA-8E5C-6B1D146825CE}",
+    "_name": "American Protege Winners Recital 0100PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{8BD227F9-8E58-42AA-8E5C-6B1D146825CE}"
+    ],
+    "seasonnumber": "32",
+    "webdisplayperformers": "Winners Recital",
+    "chronid": "84101",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{671D5BDA-16B5-45A7-9852-42D396F9D6E0}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "05",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/05/american-protege-winners-recital-0100pm",
+    "facility": "Weill Recital Hall",
+    "facilityfacet": "Weill Recital Hall",
+    "startdate": 1775408400000,
+    "title": "American Protégé Winners Recital",
+    "licenseename": "American Protégé",
+    "dayofweek": "Sunday",
+    "featured": false,
+    "time": "1 PM",
+    "date": "Sunday, Apr 5, 2026",
+    "tessid": 52945,
+    "timeofday": "Matinee",
+    "objectID": "en_8bd227f9-8e58-42aa-8e5c-6b1d146825ce",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Winners Recital",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Weill Recital Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "American Protégé Winners Recital",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "American Protégé",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{56A67E53-E6B9-45B8-9560-4A01E634948D}",
+    "_name": "Ensemble Spotlight Series 0100PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{56A67E53-E6B9-45B8-9560-4A01E634948D}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-Rentals/2026-04-05-SP-1-PM-Ensemble-Spotlight-Series-new.jpg?fit=crop&crop=faces",
+      "alt": "Ensemble Spotlight Series"
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "Carolina Youth Symphony<br />Charles Daniel Baldwin, Conductor<br />Spring Valley Academy High School Band<br />Donald Huff, Conductor<br />Crystal Ensemble<br />Karl Chang, Conductor",
+    "chronid": "78656",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{671D5BDA-16B5-45A7-9852-42D396F9D6E0}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "05",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/05/ensemble-spotlight-series-0100pm",
+    "facility": "Stern Auditorium / Perelman Stage",
+    "facilityfacet": "Stern Auditorium / Perelman Stage",
+    "startdate": 1775408400000,
+    "composers": [
+      "BRACKETT",
+      "DAVID SHAFFER",
+      "RICHARD COMELLO",
+      "JAMES L. HOSAY",
+      "SIR JOHN RUTTER",
+      "BOB CHILCOTT",
+      "ZHENGJIE CAO",
+      "ERIC WHITACRE",
+      "JIM PAPOULIS",
+      "",
+      "GIANCARLO AQUILANTI",
+      "GUANYU CAO",
+      "RIMSKY-KORSAKOV",
+      "SCHUBERT",
+      "SIBELIUS"
+    ],
+    "repertoire": [
+      "BRACKETT  <p class=\"diese_formatting\">BRACKETT \"Simple Gifts\" (arr. Noah D. Taylor)</p>",
+      "DAVID SHAFFER DAVID SHAFFER <i>New World Variations</i>",
+      "RICHARD COMELLO RICHARD COMELLO <i>Sparkling Flutes</i>",
+      "JAMES L. HOSAY JAMES L. HOSAY <i>Were You There?</i>",
+      "SIR JOHN RUTTER SIR JOHN RUTTER <i>For the Beauty of the Earth</i>",
+      "BOB CHILCOTT BOB CHILCOTT <i>Can You Hear Me?</i>",
+      "ZHENGJIE CAO ZHENGJIE CAO \"The World Gives to Me\"",
+      "ERIC WHITACRE ERIC WHITACRE <i>The Seal Lullaby</i>",
+      "JIM PAPOULIS JIM PAPOULIS <i>Kusimama</i>",
+      " JAY CHOU \"Mojito\"",
+      "GIANCARLO AQUILANTI GIANCARLO AQUILANTI \"Ave Maria\"",
+      "GUANYU CAO GUANYU CAO <i>Colored Glass</i>",
+      "RIMSKY-KORSAKOV RIMSKY-KORSAKOV <I>Russian Easter Overture</I>",
+      "SCHUBERT  <p class=\"diese_formatting\">SCHUBERT Allegro moderato from Symphony No. 8, \"Unfinished\"</p>",
+      "SIBELIUS  <p class=\"diese_formatting\">JEAN SIBELIUS \"Alla Marcia\" from <i>Karelia Suite</i>, Op. 11</p>"
+    ],
+    "title": "Ensemble Spotlight Series",
+    "licenseename": "MidAmerica Productions",
+    "dayofweek": "Sunday",
+    "featured": false,
+    "time": "1 PM",
+    "date": "Sunday, Apr 5, 2026",
+    "tessid": 52851,
+    "timeofday": "Matinee",
+    "objectID": "en_56a67e53-e6b9-45b8-9560-4a01e634948d",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Carolina Youth Symphony<br />Charles Daniel Baldwin, Conductor<br />Spring Valley Academy High School Band<br />Donald Huff, Conductor<br />Crystal Ensemble<br />Karl Chang, Conductor",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Stern Auditorium / Perelman Stage",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "composers": [
+        {
+          "value": "BRACKETT",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "DAVID SHAFFER",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "RICHARD COMELLO",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "JAMES L. HOSAY",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "SIR JOHN RUTTER",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "BOB CHILCOTT",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "ZHENGJIE CAO",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "ERIC WHITACRE",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "JIM PAPOULIS",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "GIANCARLO AQUILANTI",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "GUANYU CAO",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "RIMSKY-KORSAKOV",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "SCHUBERT",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "SIBELIUS",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "repertoire": [
+        {
+          "value": "BRACKETT  <p class=\"diese_formatting\">BRACKETT \"Simple Gifts\" (arr. Noah D. Taylor)</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "DAVID SHAFFER DAVID SHAFFER <i>New World Variations</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "RICHARD COMELLO RICHARD COMELLO <i>Sparkling Flutes</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "JAMES L. HOSAY JAMES L. HOSAY <i>Were You There?</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "SIR JOHN RUTTER SIR JOHN RUTTER <i>For the Beauty of the Earth</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "BOB CHILCOTT BOB CHILCOTT <i>Can You Hear Me?</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "ZHENGJIE CAO ZHENGJIE CAO \"The World Gives to Me\"",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "ERIC WHITACRE ERIC WHITACRE <i>The Seal Lullaby</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "JIM PAPOULIS JIM PAPOULIS <i>Kusimama</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": " JAY CHOU \"Mojito\"",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "GIANCARLO AQUILANTI GIANCARLO AQUILANTI \"Ave Maria\"",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "GUANYU CAO GUANYU CAO <i>Colored Glass</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "RIMSKY-KORSAKOV RIMSKY-KORSAKOV <I>Russian Easter Overture</I>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "SCHUBERT  <p class=\"diese_formatting\">SCHUBERT Allegro moderato from Symphony No. 8, \"Unfinished\"</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "SIBELIUS  <p class=\"diese_formatting\">JEAN SIBELIUS \"Alla Marcia\" from <i>Karelia Suite</i>, Op. 11</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "title": {
+        "value": "Ensemble Spotlight Series",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "MidAmerica Productions",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{135C9ECB-3140-4AD1-9B9F-06B4610F10E5}",
+    "_name": "American Protege Winners Recital 0730PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{135C9ECB-3140-4AD1-9B9F-06B4610F10E5}"
+    ],
+    "seasonnumber": "32",
+    "webdisplayperformers": "Winners Recital",
+    "chronid": "84104",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{671D5BDA-16B5-45A7-9852-42D396F9D6E0}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "05",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/05/american-protege-winners-recital-0730pm",
+    "facility": "Weill Recital Hall",
+    "facilityfacet": "Weill Recital Hall",
+    "startdate": 1775431800000,
+    "title": "American Protégé Winners Recital",
+    "licenseename": "American Protégé",
+    "dayofweek": "Sunday",
+    "featured": false,
+    "time": "7:30 PM",
+    "date": "Sunday, Apr 5, 2026",
+    "tessid": 52949,
+    "timeofday": "Evening",
+    "objectID": "en_135c9ecb-3140-4ad1-9b9f-06b4610f10e5",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Winners Recital",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Weill Recital Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "American Protégé Winners Recital",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "American Protégé",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{98C8784D-D80D-457A-A7D2-14A2203D1284}",
+    "_name": "New England Symphonic Ensemble 0830PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{98C8784D-D80D-457A-A7D2-14A2203D1284}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-Rentals/Multiple-Dates-SP-MidAmerica-Productions.jpg?fit=crop&crop=faces",
+      "alt": "MidAmerica Productions"
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "New England Symphonic Ensemble<br />Daniel Gordon, KuanFen Liu, Terrance Cook-Green, and Bradley D. Vogel, Conductors<br />​With participating choruses",
+    "chronid": "101702",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{671D5BDA-16B5-45A7-9852-42D396F9D6E0}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "05",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/05/new-england-symphonic-ensemble-0830pm",
+    "facility": "Stern Auditorium / Perelman Stage",
+    "facilityfacet": "Stern Auditorium / Perelman Stage",
+    "startdate": 1775435400000,
+    "composers": [
+      "MORTEN LAURIDSEN",
+      "MOZART",
+      "JOHNNY EDWARDS",
+      "VIVALDI"
+    ],
+    "repertoire": [
+      "MORTEN LAURIDSEN MORTEN LAURIDSEN <i>Lux Aeterna</i>",
+      "MOZART MOZART Mass in C Major, K. 317, \"Coronation\"",
+      "MOZART MOZART Missa brevis in D Minor, K. 65",
+      "JOHNNY EDWARDS JOHNNY EDWARDS <i>Risen</i>",
+      "VIVALDI VIVALDI <I>Gloria</I>"
+    ],
+    "title": "New England Symphonic Ensemble",
+    "licenseename": "MidAmerica Productions",
+    "dayofweek": "Sunday",
+    "featured": false,
+    "time": "8:30 PM",
+    "date": "Sunday, Apr 5, 2026",
+    "tessid": 52963,
+    "timeofday": "Evening",
+    "objectID": "en_98c8784d-d80d-457a-a7d2-14a2203d1284",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "New England Symphonic Ensemble<br />Daniel Gordon, KuanFen Liu, Terrance Cook-Green, and Bradley D. Vogel, Conductors<br />​With participating choruses",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Stern Auditorium / Perelman Stage",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "composers": [
+        {
+          "value": "MORTEN LAURIDSEN",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "MOZART",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "JOHNNY EDWARDS",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "VIVALDI",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "repertoire": [
+        {
+          "value": "MORTEN LAURIDSEN MORTEN LAURIDSEN <i>Lux Aeterna</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "MOZART MOZART Mass in C Major, K. 317, \"Coronation\"",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "MOZART MOZART Missa brevis in D Minor, K. 65",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "JOHNNY EDWARDS JOHNNY EDWARDS <i>Risen</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "VIVALDI VIVALDI <I>Gloria</I>",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "title": {
+        "value": "New England Symphonic Ensemble",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "MidAmerica Productions",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{1FEEB035-1F3E-4DE5-A7EC-C3039571E912}",
+    "_name": "Klezmer and Other Displaced Musics in America 0100PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{1FEEB035-1F3E-4DE5-A7EC-C3039571E912}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-CH-Presents/2026-04-06-Klezmer-and-Other-Displaced-Musics-in-America.jpg?fit=crop&crop=faces",
+      "alt": "A mustached man wearing a striped shirt strings a violin as a bearded man watches"
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "Walter Zev Feldman",
+    "excludefromcyo": true,
+    "chronid": "103068",
+    "ancestors": [
+      "{0BABB93A-C0A0-4178-B5B9-2A2957202E13}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "06",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/06/klezmer-and-other-displaced-musics-in-america-0100pm",
+    "genre": [
+      "Lecture / Panel Discussion"
+    ],
+    "eventtype": [
+      "United in Sound: America at 250",
+      "Free Events",
+      "Online"
+    ],
+    "facility": "Online",
+    "facilityfacet": "Offsite",
+    "startdate": 1775494800000,
+    "title": "Klezmer and Other Displaced Musics in America",
+    "licenseename": "YIVO Institute for Jewish Research and American Society for Jewish Music’s Jewish Music Forum",
+    "dayofweek": "Monday",
+    "featured": false,
+    "time": "1 PM",
+    "date": "Monday, Apr 6, 2026",
+    "tessid": 0,
+    "timeofday": "Matinee",
+    "objectID": "en_1feeb035-1f3e-4de5-a7ec-c3039571e912",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Walter Zev Feldman",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Online",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "Klezmer and Other Displaced Musics in America",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "YIVO Institute for Jewish Research and American Society for Jewish Music’s Jewish Music Forum",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{153339AD-2789-4899-A426-10BCEA9A6172}",
+    "_name": "2026 New York International Music Festival 0100PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{153339AD-2789-4899-A426-10BCEA9A6172}"
+    ],
+    "seasonnumber": "32",
+    "webdisplayperformers": "<div>Aliso Niguel High School Orchestra</div><div>Jonathan Chen, Director</div><div>Rancho Bernardo High School Orchestra</div><div>Zachary Christy, Director</div><div>Del Mar High School Symphonic Band</div><div>William Burkhead, Director</div><div>Rancho Bernardo High School NY Tour Band</div><div>Duane Otani and Stuart Holmes, Directors</div>",
+    "chronid": "82258",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{0BABB93A-C0A0-4178-B5B9-2A2957202E13}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "06",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/06/2026-new-york-international-music-festival-0100pm",
+    "facility": "Stern Auditorium / Perelman Stage",
+    "facilityfacet": "Stern Auditorium / Perelman Stage",
+    "startdate": 1775494800000,
+    "title": "2026 New York International Music Festival",
+    "licenseename": "World Projects Corporation",
+    "dayofweek": "Monday",
+    "featured": false,
+    "time": "1 PM",
+    "date": "Monday, Apr 6, 2026",
+    "tessid": 53879,
+    "timeofday": "Matinee",
+    "objectID": "en_153339ad-2789-4899-a426-10bcea9a6172",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "<div>Aliso Niguel High School Orchestra</div><div>Jonathan Chen, Director</div><div>Rancho Bernardo High School Orchestra</div><div>Zachary Christy, Director</div><div>Del Mar High School Symphonic Band</div><div>William Burkhead, Director</div><div>Rancho Bernardo High School NY Tour Band</div><div>Duane Otani and Stuart Holmes, Directors</div>",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Stern Auditorium / Perelman Stage",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "2026 New York International Music Festival",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "World Projects Corporation",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{C893792A-1338-49A8-989F-A91428593AB3}",
+    "_name": "Juilliard at Zankel Hall 0730PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{C893792A-1338-49A8-989F-A91428593AB3}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-CH-Presents/2026-04-06-Juilliard-at-Zankel-Hall.jpg?fit=crop&crop=faces",
+      "alt": "Marin Alsop and the Juilliard Orchestra"
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "Musicians, Dancers, and Actors from The Juilliard School<br/> Juilliard Orchestra<br/>Marin Alsop, Conductor<br/>Stephen Wadsworth, Director<br/>Caili Quan, Choreographer<br/>Juilliard Alumni and Guest Artists",
+    "chronid": "81176",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{0BABB93A-C0A0-4178-B5B9-2A2957202E13}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "06",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/06/juilliard-at-zankel-hall-0730pm",
+    "genre": [
+      "Chamber Music",
+      "Contemporary Classical",
+      "Dance"
+    ],
+    "eventtype": [
+      "Carnegie Hall Presents",
+      "United in Sound: America at 250"
+    ],
+    "instrument": [
+      "Spoken Word"
+    ],
+    "ticketprice": [
+      "Under $50"
+    ],
+    "facility": "Zankel Hall",
+    "facilityfacet": "Zankel Hall",
+    "startdate": 1775518200000,
+    "composers": [
+      "COPLAND",
+      "JAMIE BERNSTEIN",
+      "JOY HARJO",
+      "TRAD.",
+      "BARBER",
+      "ANNA DEAVERE SMITH",
+      "STILL",
+      "BERNSTEIN",
+      "MURIEL RUKEYSER",
+      "PATRICIA SMITH",
+      "JOAN TOWER"
+    ],
+    "repertoire": [
+      "COPLAND COPLAND <i>Music for the Theatre</i>",
+      "JAMIE BERNSTEIN  <p class=\"diese_formatting\">JAMIE BERNSTEIN New Work (World Premiere)</p>",
+      "JOY HARJO  <p class=\"diese_formatting\">JOY HARJO New Work (World Premiere)</p>",
+      "TRAD. TRAD. \"Orphan Child” (\"ᎤᏪᏙᎵᏍᏗ\")",
+      "BARBER BARBER <i>Capricorn Concerto</i>",
+      "ANNA DEAVERE SMITH  <p class=\"diese_formatting\">ANNA DEAVERE SMITH New Work (World Premiere)</p>",
+      "STILL STILL <i>Out of the Silence</i>",
+      "BERNSTEIN  <p class=\"diese_formatting\">BERNSTEIN Selection from <i>On the Waterfront </i>(arr. Nicholas Hersh)</p>",
+      "MURIEL RUKEYSER MURIEL RUKEYSER \"Myth\"",
+      "PATRICIA SMITH  <p class=\"diese_formatting\">PATRICIA SMITH New Work (World Premiere)</p>",
+      "JOAN TOWER  <p class=\"diese_formatting\">JOAN TOWER <i>Fast Ride in a Short Machine</i> (World Premiere)</p>"
+    ],
+    "title": "Juilliard at Zankel Hall",
+    "licenseename": "Carnegie Hall Presents",
+    "dayofweek": "Monday",
+    "featured": true,
+    "time": "7:30 PM",
+    "date": "Monday, Apr 6, 2026",
+    "subtitle": "Spirit in Sound",
+    "tessid": 49738,
+    "timeofday": "Evening",
+    "objectID": "en_c893792a-1338-49a8-989f-a91428593ab3",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Musicians, Dancers, and Actors from The Juilliard School<br/> Juilliard Orchestra<br/>Marin Alsop, Conductor<br/>Stephen Wadsworth, Director<br/>Caili Quan, Choreographer<br/>Juilliard Alumni and Guest Artists",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Zankel Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "composers": [
+        {
+          "value": "COPLAND",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "JAMIE BERNSTEIN",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "JOY HARJO",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "TRAD.",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "BARBER",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "ANNA DEAVERE SMITH",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "STILL",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "BERNSTEIN",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "MURIEL RUKEYSER",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "PATRICIA SMITH",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "JOAN TOWER",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "repertoire": [
+        {
+          "value": "COPLAND COPLAND <i>Music for the Theatre</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "JAMIE BERNSTEIN  <p class=\"diese_formatting\">JAMIE BERNSTEIN New Work (World Premiere)</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "JOY HARJO  <p class=\"diese_formatting\">JOY HARJO New Work (World Premiere)</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "TRAD. TRAD. \"Orphan Child” (\"ᎤᏪᏙᎵᏍᏗ\")",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "BARBER BARBER <i>Capricorn Concerto</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "ANNA DEAVERE SMITH  <p class=\"diese_formatting\">ANNA DEAVERE SMITH New Work (World Premiere)</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "STILL STILL <i>Out of the Silence</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "BERNSTEIN  <p class=\"diese_formatting\">BERNSTEIN Selection from <i>On the Waterfront </i>(arr. Nicholas Hersh)</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "MURIEL RUKEYSER MURIEL RUKEYSER \"Myth\"",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "PATRICIA SMITH  <p class=\"diese_formatting\">PATRICIA SMITH New Work (World Premiere)</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "JOAN TOWER  <p class=\"diese_formatting\">JOAN TOWER <i>Fast Ride in a Short Machine</i> (World Premiere)</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "title": {
+        "value": "Juilliard at Zankel Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "Carnegie Hall Presents",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "subtitle": {
+        "value": "Spirit in Sound",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{03DB1122-36DB-4957-BB62-8E99DB8B15BE}",
+    "_name": "Rainer Crosett Cello Victor Santiago Asuncion Piano 0730PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{03DB1122-36DB-4957-BB62-8E99DB8B15BE}"
+    ],
+    "seasonnumber": "32",
+    "webdisplayperformers": "Rainer Crosett, Cello\r<br/>Victor Santiago Asuncion, Piano",
+    "chronid": "96417",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{0BABB93A-C0A0-4178-B5B9-2A2957202E13}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "06",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/06/rainer-crosett-cello-victor-santiago-asuncion-piano-0730pm",
+    "genre": [
+      "Cello",
+      "Recitals"
+    ],
+    "facility": "Weill Recital Hall",
+    "facilityfacet": "Weill Recital Hall",
+    "startdate": 1775518200000,
+    "composers": [
+      "BEETHOVEN",
+      "REINALDO MOYA",
+      "SHOSTAKOVICH",
+      "FRANCK"
+    ],
+    "repertoire": [
+      "BEETHOVEN BEETHOVEN Seven Variations on “Bei Männern, welche Liebe fühlen” after Mozart’s <i>The Magic Flute</i>",
+      "REINALDO MOYA REINALDO MOYA <i>Guayoyo Sketches</i>",
+      "SHOSTAKOVICH SHOSTAKOVICH Cello Sonata",
+      "FRANCK FRANCK Violin Sonata (transcr. for cello by Delsart)"
+    ],
+    "title": "Rainer Crosett, Cello<br />Victor Santiago Asunción, Piano",
+    "licenseename": "FilAm Music Foundation NFP",
+    "dayofweek": "Monday",
+    "featured": false,
+    "time": "7:30 PM",
+    "date": "Monday, Apr 6, 2026",
+    "subtitle": "The American Recital Debut Award Concert",
+    "tessid": 53096,
+    "timeofday": "Evening",
+    "objectID": "en_03db1122-36db-4957-bb62-8e99db8b15be",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Rainer Crosett, Cello\r<br/>Victor Santiago Asuncion, Piano",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Weill Recital Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "composers": [
+        {
+          "value": "BEETHOVEN",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "REINALDO MOYA",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "SHOSTAKOVICH",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "FRANCK",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "repertoire": [
+        {
+          "value": "BEETHOVEN BEETHOVEN Seven Variations on “Bei Männern, welche Liebe fühlen” after Mozart’s <i>The Magic Flute</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "REINALDO MOYA REINALDO MOYA <i>Guayoyo Sketches</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "SHOSTAKOVICH SHOSTAKOVICH Cello Sonata",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "FRANCK FRANCK Violin Sonata (transcr. for cello by Delsart)",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "title": {
+        "value": "Rainer Crosett, Cello<br />Victor Santiago Asunción, Piano",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "FilAm Music Foundation NFP",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "subtitle": {
+        "value": "The American Recital Debut Award Concert",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{69DB7416-5F5E-4DC2-9650-77FFD607E22D}",
+    "_name": "2026 New York International Music Festival 0800PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{69DB7416-5F5E-4DC2-9650-77FFD607E22D}"
+    ],
+    "seasonnumber": "32",
+    "webdisplayperformers": "<div>Beckman High School String Orchestra</div><div>Jim Kollias, Director</div><div>Kansas State University Wind Ensemble</div><div>Frank Tracz, Director</div><div>Saxon Wind Philharmonic</div><div>Peter Sommerer, Chief Conductor and Artistic Director</div>",
+    "chronid": "82367",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{0BABB93A-C0A0-4178-B5B9-2A2957202E13}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "06",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/06/2026-new-york-international-music-festival-0800pm",
+    "facility": "Stern Auditorium / Perelman Stage",
+    "facilityfacet": "Stern Auditorium / Perelman Stage",
+    "startdate": 1775520000000,
+    "title": "2026 New York International Music Festival",
+    "licenseename": "World Projects Corporation",
+    "dayofweek": "Monday",
+    "featured": false,
+    "time": "8 PM",
+    "date": "Monday, Apr 6, 2026",
+    "tessid": 53880,
+    "timeofday": "Evening",
+    "objectID": "en_69db7416-5f5e-4dc2-9650-77ffd607e22d",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "<div>Beckman High School String Orchestra</div><div>Jim Kollias, Director</div><div>Kansas State University Wind Ensemble</div><div>Frank Tracz, Director</div><div>Saxon Wind Philharmonic</div><div>Peter Sommerer, Chief Conductor and Artistic Director</div>",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Stern Auditorium / Perelman Stage",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "2026 New York International Music Festival",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "World Projects Corporation",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{7F42FC4A-CF26-438A-A846-602AF5179C19}",
+    "_name": "We Chose to Go to the Moon 0730PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{7F42FC4A-CF26-438A-A846-602AF5179C19}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-CH-Presents/2026-04-07-We-Chose-to-Go-to-the-Moon.jpg?fit=crop&crop=faces",
+      "alt": "An astronaut standing on the moon."
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "John Monsky, Historian, Creator, and Narrator<br/>Orchestra of St. Luke's<br/>Michael Mayer, Director<br/>Ian Weinberger, Music Supervisor and Conductor<br/>Skylar Astin, Vocalist<br/>Brent Comer, Vocalist<br/>Claybourne Elder, Vocalist<br/>Elizabeth Gillies, Vocalist<br/>Taylor Louderman, Vocalist<br/>Joy Woods, Vocalist<br/><br />Special Guests<br />​Mark Armstrong<br/>Kali Armstrong",
+    "chronid": "81140",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{EA282AFC-3E81-4B13-BF7F-224156345565}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "07",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/07/we-chose-to-go-to-the-moon-0730pm",
+    "eventtype": [
+      "Carnegie Hall Presents"
+    ],
+    "facility": "Stern Auditorium / Perelman Stage",
+    "facilityfacet": "Stern Auditorium / Perelman Stage",
+    "startdate": 1775604600000,
+    "title": "We Chose to Go to the Moon",
+    "licenseename": "Carnegie Hall Presents",
+    "dayofweek": "Tuesday",
+    "featured": true,
+    "time": "7:30 PM",
+    "date": "Tuesday, Apr 7, 2026",
+    "tessid": 53680,
+    "timeofday": "Evening",
+    "objectID": "en_7f42fc4a-cf26-438a-a846-602af5179c19",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "John Monsky, Historian, Creator, and Narrator<br/>Orchestra of St. Luke's<br/>Michael Mayer, Director<br/>Ian Weinberger, Music Supervisor and Conductor<br/>Skylar Astin, Vocalist<br/>Brent Comer, Vocalist<br/>Claybourne Elder, Vocalist<br/>Elizabeth Gillies, Vocalist<br/>Taylor Louderman, Vocalist<br/>Joy Woods, Vocalist<br/><br />Special Guests<br />​Mark Armstrong<br/>Kali Armstrong",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Stern Auditorium / Perelman Stage",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "We Chose to Go to the Moon",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "Carnegie Hall Presents",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{9BAC38D9-739E-43EE-86A9-EFC37A69DC91}",
+    "_name": "Matyas Novak Piano 0800PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{9BAC38D9-739E-43EE-86A9-EFC37A69DC91}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-Rentals/2026-04-07-WRH-Matyas-Novak.jpg?fit=crop&crop=faces",
+      "alt": "Matyas Novak"
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "Matyas Novak, Piano",
+    "chronid": "92592",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{EA282AFC-3E81-4B13-BF7F-224156345565}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "07",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/07/matyas-novak-piano-0800pm",
+    "genre": [
+      "Piano"
+    ],
+    "facility": "Weill Recital Hall",
+    "facilityfacet": "Weill Recital Hall",
+    "startdate": 1775606400000,
+    "composers": [
+      "SMETANA"
+    ],
+    "repertoire": [
+      "SMETANA  <p class=\"diese_formatting\">SMETANA <i>Má vlast </i>(transcr. Kàan; US Premiere)</p>"
+    ],
+    "title": "Matyas Novak, Piano",
+    "licenseename": "NU AVE ART",
+    "dayofweek": "Tuesday",
+    "featured": false,
+    "time": "8 PM",
+    "date": "Tuesday, Apr 7, 2026",
+    "subtitle": "Smetana Reborn",
+    "tessid": 53559,
+    "timeofday": "Evening",
+    "objectID": "en_9bac38d9-739e-43ee-86a9-efc37a69dc91",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Matyas Novak, Piano",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Weill Recital Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "composers": [
+        {
+          "value": "SMETANA",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "repertoire": [
+        {
+          "value": "SMETANA  <p class=\"diese_formatting\">SMETANA <i>Má vlast </i>(transcr. Kàan; US Premiere)</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "title": {
+        "value": "Matyas Novak, Piano",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "NU AVE ART",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "subtitle": {
+        "value": "Smetana Reborn",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{B542D077-4C7F-4C67-B4CE-84B68126D09F}",
+    "_name": "We Chose to Go to the Moon 0730PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{B542D077-4C7F-4C67-B4CE-84B68126D09F}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-CH-Presents/2026-04-07-We-Chose-to-Go-to-the-Moon.jpg?fit=crop&crop=faces",
+      "alt": "An astronaut standing on the moon."
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "John Monsky, Historian, Creator, and Narrator<br/>Orchestra of St. Luke's<br/>Michael Mayer, Director<br/>Ian Weinberger, Music Supervisor and Conductor<br/>Skylar Astin, Vocalist<br/>Brent Comer, Vocalist<br/>Claybourne Elder, Vocalist<br/>Elizabeth Gillies, Vocalist<br/>Taylor Louderman, Vocalist<br/>Joy Woods, Vocalist<br/><br />Special Guests<br />​Mark Armstrong<br/>Kali Armstrong",
+    "chronid": "81146",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{1D94DC62-2FA3-44D5-858C-A4759B0F11C4}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "08",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/08/we-chose-to-go-to-the-moon-0730pm",
+    "eventtype": [
+      "Carnegie Hall Presents"
+    ],
+    "facility": "Stern Auditorium / Perelman Stage",
+    "facilityfacet": "Stern Auditorium / Perelman Stage",
+    "startdate": 1775691000000,
+    "title": "We Chose to Go to the Moon",
+    "licenseename": "Carnegie Hall Presents",
+    "dayofweek": "Wednesday",
+    "featured": false,
+    "time": "7:30 PM",
+    "date": "Wednesday, Apr 8, 2026",
+    "tessid": 53683,
+    "timeofday": "Evening",
+    "objectID": "en_b542d077-4c7f-4c67-b4ce-84b68126d09f",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "John Monsky, Historian, Creator, and Narrator<br/>Orchestra of St. Luke's<br/>Michael Mayer, Director<br/>Ian Weinberger, Music Supervisor and Conductor<br/>Skylar Astin, Vocalist<br/>Brent Comer, Vocalist<br/>Claybourne Elder, Vocalist<br/>Elizabeth Gillies, Vocalist<br/>Taylor Louderman, Vocalist<br/>Joy Woods, Vocalist<br/><br />Special Guests<br />​Mark Armstrong<br/>Kali Armstrong",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Stern Auditorium / Perelman Stage",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "We Chose to Go to the Moon",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "Carnegie Hall Presents",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{6080623B-4536-465D-9BCA-5C6DD8AB76C9}",
+    "_name": "The American Classical Orchestra Chamber Ensemble 0730PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{6080623B-4536-465D-9BCA-5C6DD8AB76C9}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-Rentals/2026-04-08-WRH-The-American-Classical-Orchestra-Chamber-Ensemble.jpg?fit=crop&crop=faces",
+      "alt": "The American Classical Orchestra Chamber Ensemble"
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "The American Classical Orchestra Chamber Ensemble\r<br/>Thomas Crawford, Conductor",
+    "chronid": "96521",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{1D94DC62-2FA3-44D5-858C-A4759B0F11C4}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "08",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/08/the-american-classical-orchestra-chamber-ensemble-0730pm",
+    "genre": [
+      "Chamber Music"
+    ],
+    "facility": "Weill Recital Hall",
+    "facilityfacet": "Weill Recital Hall",
+    "startdate": 1775691000000,
+    "composers": [
+      "SCHUBERT"
+    ],
+    "repertoire": [
+      "SCHUBERT SCHUBERT String Quintet in C Major, D. 956"
+    ],
+    "title": "The American Classical Orchestra Chamber Ensemble",
+    "licenseename": "The American Classical Orchestra Chamber Ensemble",
+    "dayofweek": "Wednesday",
+    "featured": false,
+    "time": "7:30 PM",
+    "date": "Wednesday, Apr 8, 2026",
+    "tessid": 51653,
+    "timeofday": "Evening",
+    "objectID": "en_6080623b-4536-465d-9bca-5c6dd8ab76c9",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "The American Classical Orchestra Chamber Ensemble\r<br/>Thomas Crawford, Conductor",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Weill Recital Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "composers": [
+        {
+          "value": "SCHUBERT",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "repertoire": [
+        {
+          "value": "SCHUBERT SCHUBERT String Quintet in C Major, D. 956",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "title": {
+        "value": "The American Classical Orchestra Chamber Ensemble",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "The American Classical Orchestra Chamber Ensemble",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{34AE9FF8-A7FD-4B51-AB49-30BF866DF2FF}",
+    "_name": "The Knights 0730PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{34AE9FF8-A7FD-4B51-AB49-30BF866DF2FF}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-CH-Presents/2026-04-09-The-Knights.jpg?fit=crop&crop=faces",
+      "alt": "The Knights, Anthony McGill"
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "The Knights<br/>Colin Jacobsen, Artistic Director and Violin<br/>Eric Jacobsen, Artistic Director and Conductor<br/>Anthony McGill, Clarinet<br/>Christina Courtin, Vocals",
+    "chronid": "72908",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{ED1E565A-C130-40EE-BE2B-3236C8C69924}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "09",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/09/the-knights-0730pm",
+    "genre": [
+      "Chamber Music",
+      "Orchestras"
+    ],
+    "eventtype": [
+      "Carnegie Hall Presents",
+      "United in Sound: America at 250"
+    ],
+    "instrument": [
+      "Clarinet"
+    ],
+    "facility": "Zankel Hall",
+    "facilityfacet": "Zankel Hall",
+    "startdate": 1775777400000,
+    "composers": [
+      "LJOVA",
+      "ELLINGTON",
+      "BONDS",
+      "GABRIEL KAHANE",
+      "COPLAND",
+      "BRUMLEY"
+    ],
+    "repertoire": [
+      "LJOVA LJOVA \"Garmoshka\"",
+      "ELLINGTON  ELLINGTON \"Sophisticated Lady\" (arr. M. Gould)",
+      "BONDS  <p class=\"diese_formatting\">BONDS \"Troubled Water\" (arr. Bruno Lima)</p>",
+      "GABRIEL KAHANE  <p class=\"diese_formatting\">GABRIEL KAHANE <i>If love will not swing wide the gates </i>for Clarinet and Orchestra (NY Premiere, co-commissioned by Carnegie Hall)</p>",
+      "COPLAND  COPLAND <i style=\"\">Appalachian Spring </i><i style=\"\">Suite</i><span style=\"font-style: normal;\">&nbsp;</span>",
+      "BRUMLEY  BRUMLEY \"I'll Fly Away\" (arr. Christina Courtin)"
+    ],
+    "title": "The Knights",
+    "licenseename": "Carnegie Hall Presents",
+    "dayofweek": "Thursday",
+    "featured": true,
+    "time": "7:30 PM",
+    "date": "Thursday, Apr 9, 2026",
+    "tessid": 49285,
+    "timeofday": "Evening",
+    "objectID": "en_34ae9ff8-a7fd-4b51-ab49-30bf866df2ff",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "The Knights<br/>Colin Jacobsen, Artistic Director and Violin<br/>Eric Jacobsen, Artistic Director and Conductor<br/>Anthony McGill, Clarinet<br/>Christina Courtin, Vocals",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Zankel Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "composers": [
+        {
+          "value": "LJOVA",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "ELLINGTON",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "BONDS",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "GABRIEL KAHANE",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "COPLAND",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "BRUMLEY",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "repertoire": [
+        {
+          "value": "LJOVA LJOVA \"Garmoshka\"",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "ELLINGTON  ELLINGTON \"Sophisticated Lady\" (arr. M. Gould)",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "BONDS  <p class=\"diese_formatting\">BONDS \"Troubled Water\" (arr. Bruno Lima)</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "GABRIEL KAHANE  <p class=\"diese_formatting\">GABRIEL KAHANE <i>If love will not swing wide the gates </i>for Clarinet and Orchestra (NY Premiere, co-commissioned by Carnegie Hall)</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "COPLAND  COPLAND <i style=\"\">Appalachian Spring </i><i style=\"\">Suite</i><span style=\"font-style: normal;\">&nbsp;</span>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "BRUMLEY  BRUMLEY \"I'll Fly Away\" (arr. Christina Courtin)",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "title": {
+        "value": "The Knights",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "Carnegie Hall Presents",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{CB6F0CA9-41BF-472A-8CA4-DC0D02AA07E4}",
+    "_name": "Leonela Alejandro Guitar 0800PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{CB6F0CA9-41BF-472A-8CA4-DC0D02AA07E4}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-Rentals/2026-04-09-WRH-Leonela-Alejandro.jpg?fit=crop&crop=faces",
+      "alt": "Leonela Alejandro"
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "Leonela Alejandro, Guitar",
+    "chronid": "86613",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{ED1E565A-C130-40EE-BE2B-3236C8C69924}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "09",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/09/leonela-alejandro-guitar-0800pm",
+    "genre": [
+      "Folk/Roots"
+    ],
+    "facility": "Weill Recital Hall",
+    "facilityfacet": "Weill Recital Hall",
+    "startdate": 1775779200000,
+    "composers": [
+      "*"
+    ],
+    "repertoire": [
+      "*  <p>Works by Paulo Bellinati, Ronaldo Miranda, Castelnuovo-Tedesco, Takemitsu, Egúrbida, Juan Sorroche, Ernesto Cordero, Reinhardt, and Leo Brouwer</p>"
+    ],
+    "title": "Leonela Alejandro, Guitar",
+    "licenseename": "Guitar Foundation of America",
+    "dayofweek": "Thursday",
+    "featured": false,
+    "time": "8 PM",
+    "date": "Thursday, Apr 9, 2026",
+    "tessid": 53022,
+    "timeofday": "Evening",
+    "objectID": "en_cb6f0ca9-41bf-472a-8ca4-dc0d02aa07e4",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Leonela Alejandro, Guitar",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Weill Recital Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "composers": [
+        {
+          "value": "*",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "repertoire": [
+        {
+          "value": "*  <p>Works by Paulo Bellinati, Ronaldo Miranda, Castelnuovo-Tedesco, Takemitsu, Egúrbida, Juan Sorroche, Ernesto Cordero, Reinhardt, and Leo Brouwer</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "title": {
+        "value": "Leonela Alejandro, Guitar",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "Guitar Foundation of America",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{6D28368C-E68F-446D-8D62-01059C31B44B}",
+    "_name": "Boston Symphony Orchestra 0800PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{6D28368C-E68F-446D-8D62-01059C31B44B}"
+    ],
+    "metakeywords": "renee fleming april 9th, Renée Fleming April 9th",
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-CH-Presents/2026-04-09-Boston-Symphony-Orchestra.jpg?fit=crop&crop=faces",
+      "alt": "Andris Nelsons, Renée Fleming, Thomas Hampson"
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "Boston Symphony Orchestra\r<br/>Andris Nelsons, Music Director and Conductor\r<br/>Renée Fleming, Soprano\r<br/>Thomas Hampson, Baritone\r<br/> Tanglewood Festival Chorus\r<br/>Lisa Wong, Guest Choral Conductor",
+    "chronid": "72994",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{ED1E565A-C130-40EE-BE2B-3236C8C69924}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "09",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/09/boston-symphony-orchestra-0800pm",
+    "genre": [
+      "Contemporary Classical",
+      "Orchestras",
+      "Vocal/Choral"
+    ],
+    "eventtype": [
+      "Carnegie Hall Presents",
+      "United in Sound: America at 250"
+    ],
+    "instrument": [
+      "Voice"
+    ],
+    "ticketprice": [
+      "Under $50"
+    ],
+    "facility": "Stern Auditorium / Perelman Stage",
+    "facilityfacet": "Stern Auditorium / Perelman Stage",
+    "startdate": 1775779200000,
+    "composers": [
+      "JOHN ADAMS",
+      "DVOŘÁK"
+    ],
+    "repertoire": [
+      "JOHN ADAMS  <p class=\"diese_formatting\">JOHN ADAMS Three Scenes from <i>Nixon in China</i></p>",
+      "DVOŘÁK DVOŘÁK Symphony No. 9, \"From the New World\""
+    ],
+    "title": "Boston Symphony Orchestra",
+    "licenseename": "Carnegie Hall Presents",
+    "dayofweek": "Thursday",
+    "featured": true,
+    "time": "8 PM",
+    "date": "Thursday, Apr 9, 2026",
+    "tessid": 49430,
+    "timeofday": "Evening",
+    "objectID": "en_6d28368c-e68f-446d-8d62-01059c31b44b",
+    "_highlightResult": {
+      "metakeywords": {
+        "value": "renee fleming april 9th, Renée Fleming April 9th",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "webdisplayperformers": {
+        "value": "Boston Symphony Orchestra\r<br/>Andris Nelsons, Music Director and Conductor\r<br/>Renée Fleming, Soprano\r<br/>Thomas Hampson, Baritone\r<br/> Tanglewood Festival Chorus\r<br/>Lisa Wong, Guest Choral Conductor",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Stern Auditorium / Perelman Stage",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "composers": [
+        {
+          "value": "JOHN ADAMS",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "DVOŘÁK",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "repertoire": [
+        {
+          "value": "JOHN ADAMS  <p class=\"diese_formatting\">JOHN ADAMS Three Scenes from <i>Nixon in China</i></p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "DVOŘÁK DVOŘÁK Symphony No. 9, \"From the New World\"",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "title": {
+        "value": "Boston Symphony Orchestra",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "Carnegie Hall Presents",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{4E5C4451-6767-4B57-BB93-A7CED533172A}",
+    "_name": "Atlantic A Scottish Story 0800PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{4E5C4451-6767-4B57-BB93-A7CED533172A}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-CH-Presents/2026-04-09-A-Scottish-Story.jpg?fit=crop&crop=faces",
+      "alt": "Young men and women perform on stage under blue lighting as an audience watches"
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "Kirsty Findlay, Evie\r<br/>Claire MacKenzie, Musical Director\r<br/>Scott Gilmore, Host\r<br/><br />A Noisemaker Production",
+    "excludefromcyo": true,
+    "chronid": "101997",
+    "ancestors": [
+      "{ED1E565A-C130-40EE-BE2B-3236C8C69924}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "09",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/09/atlantic-a-scottish-story-0800pm",
+    "genre": [
+      "Musical/Theater"
+    ],
+    "eventtype": [
+      "United in Sound: America at 250"
+    ],
+    "facility": "The University Club of New York",
+    "facilityfacet": "Offsite",
+    "startdate": 1775779200000,
+    "title": "Atlantic: A Scottish Story",
+    "licenseename": "American-Scottish Foundation",
+    "dayofweek": "Thursday",
+    "featured": false,
+    "time": "8 PM",
+    "date": "Thursday, Apr 9, 2026",
+    "tessid": 0,
+    "timeofday": "Evening",
+    "objectID": "en_4e5c4451-6767-4b57-bb93-a7ced533172a",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Kirsty Findlay, Evie\r<br/>Claire MacKenzie, Musical Director\r<br/>Scott Gilmore, Host\r<br/><br />A Noisemaker Production",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "The University Club of New York",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "Atlantic: A Scottish Story",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "American-Scottish Foundation",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{C2DC870A-BD62-4D7B-9901-5F79CD7BB190}",
+    "_name": "Boston Symphony Orchestra 0800PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{C2DC870A-BD62-4D7B-9901-5F79CD7BB190}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-CH-Presents/2026-04-10-Boston-Symphony-Orchestra.jpg?fit=crop&crop=faces",
+      "alt": "Andris Nelsons, Lang Lang"
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "Boston Symphony Orchestra\r<br/>Andris Nelsons, Music Director and Conductor\r<br/>Lang Lang, Piano",
+    "chronid": "72992",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{67C764AB-E79B-4E60-B4C4-CA80B99D45BD}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "10",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/10/boston-symphony-orchestra-0800pm",
+    "genre": [
+      "Orchestras",
+      "Piano"
+    ],
+    "eventtype": [
+      "Carnegie Hall Presents"
+    ],
+    "facility": "Stern Auditorium / Perelman Stage",
+    "facilityfacet": "Stern Auditorium / Perelman Stage",
+    "startdate": 1775865600000,
+    "composers": [
+      "GRIEG",
+      "SIBELIUS"
+    ],
+    "repertoire": [
+      "OUTI TARKIANEN  OUTI TARKIAINEN&nbsp;<i>Day Night Day</i>&nbsp;(NY Premiere)",
+      "GRIEG GRIEG Piano Concerto",
+      "SIBELIUS SIBELIUS Symphony No. 1"
+    ],
+    "title": "Boston Symphony Orchestra",
+    "licenseename": "Carnegie Hall Presents",
+    "dayofweek": "Friday",
+    "featured": false,
+    "time": "8 PM",
+    "date": "Friday, Apr 10, 2026",
+    "tessid": 49442,
+    "timeofday": "Evening",
+    "objectID": "en_c2dc870a-bd62-4d7b-9901-5f79cd7bb190",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Boston Symphony Orchestra\r<br/>Andris Nelsons, Music Director and Conductor\r<br/>Lang Lang, Piano",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Stern Auditorium / Perelman Stage",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "composers": [
+        {
+          "value": "GRIEG",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "SIBELIUS",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "repertoire": [
+        {
+          "value": "OUTI TARKIANEN  OUTI TARKIAINEN&nbsp;<i>Day Night Day</i>&nbsp;(NY Premiere)",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "GRIEG GRIEG Piano Concerto",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "SIBELIUS SIBELIUS Symphony No. 1",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "title": {
+        "value": "Boston Symphony Orchestra",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "Carnegie Hall Presents",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{552233A6-19BD-45EF-B5AC-6B857D6E80DB}",
+    "_name": "Syracuse University in Concert 0800PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{552233A6-19BD-45EF-B5AC-6B857D6E80DB}"
+    ],
+    "seasonnumber": "32",
+    "webdisplayperformers": "Artists to be announced",
+    "chronid": "92661",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{67C764AB-E79B-4E60-B4C4-CA80B99D45BD}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "10",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/10/syracuse-university-in-concert-0800pm",
+    "facility": "Weill Recital Hall",
+    "facilityfacet": "Weill Recital Hall",
+    "startdate": 1775865600000,
+    "title": "Syracuse University in Concert",
+    "licenseename": "The Setnor School of Music",
+    "dayofweek": "Friday",
+    "featured": false,
+    "time": "8 PM",
+    "date": "Friday, Apr 10, 2026",
+    "tessid": 53668,
+    "timeofday": "Evening",
+    "objectID": "en_552233a6-19bd-45ef-b5ac-6b857d6e80db",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Artists to be announced",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Weill Recital Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "Syracuse University in Concert",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "The Setnor School of Music",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{D20839E5-E65C-4BA2-B3B2-43E80AD5EEF0}",
+    "_name": "Harlem Theaters From Hammersteins Harlem Opera House to the Apollo Theater 1100AM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{D20839E5-E65C-4BA2-B3B2-43E80AD5EEF0}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Tickets-and-Events/2025-2026-Season-Highlights/United-in-Sound-America-at-250/United-in-Sound-EVENT.jpg?fit=crop&crop=faces",
+      "alt": "United in Sound: America at 250"
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "John T. Reddick, Historian",
+    "excludefromcyo": true,
+    "chronid": "103344",
+    "ancestors": [
+      "{4B1A2F33-AB6B-4B63-8685-8BA9459BBE31}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "11",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/11/harlem-theaters-from-hammersteins-harlem-opera-house-to-the-apollo-theater-1100am",
+    "genre": [
+      "Lecture / Panel Discussion"
+    ],
+    "eventtype": [
+      "United in Sound: America at 250"
+    ],
+    "facility": "The Schomburg Center for Research in Black Culture",
+    "facilityfacet": "Offsite",
+    "startdate": 1775919600000,
+    "title": "Harlem Theaters: From  Hammerstein’s Harlem Opera House to the Apollo Theater",
+    "licenseename": "Harlem One Stop Inc",
+    "dayofweek": "Saturday",
+    "featured": false,
+    "time": "11 AM",
+    "date": "Saturday, Apr 11, 2026",
+    "tessid": 0,
+    "timeofday": "Matinee",
+    "objectID": "en_d20839e5-e65c-4ba2-b3b2-43e80ad5eef0",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "John T. Reddick, Historian",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "The Schomburg Center for Research in Black Culture",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "Harlem Theaters: From  Hammerstein’s Harlem Opera House to the Apollo Theater",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "Harlem One Stop Inc",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{612355D1-F27C-42A1-A7ED-A769F58D50BB}",
+    "_name": "National Concert Chorus 0100PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{612355D1-F27C-42A1-A7ED-A769F58D50BB}"
+    ],
+    "seasonnumber": "32",
+    "webdisplayperformers": "<span>National Concert Chorus<br />Michael Barrett and Cameron LaBarr, Conductors<br />Centennial High School Chamber Singers<br />Patrick Burzlaff, Conductor<br />​</span>Fiorello H. LaGuardia High School of Music and Performing Arts Orchestra<div>Tanya Chanphanitpornkit, Conductor</div>",
+    "chronid": "82846",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{4B1A2F33-AB6B-4B63-8685-8BA9459BBE31}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "11",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/11/national-concert-chorus-0100pm",
+    "facility": "Stern Auditorium / Perelman Stage",
+    "facilityfacet": "Stern Auditorium / Perelman Stage",
+    "startdate": 1775926800000,
+    "composers": [
+      "TRAD.",
+      "MOKALE KOAPENG / RODERICK WILLIAMS",
+      "SUSAN LABARR"
+    ],
+    "repertoire": [
+      "TRAD.  <p class=\"diese_formatting\">TRAD. \"Indodana\" (arr. Michael Barrett / Ralf Schmitt)</p>",
+      "TRAD.  <p class=\"diese_formatting\">TRAD. \"Somtimes I feel like a motherless child\" (arr. Susan LaBarr)</p>",
+      "MOKALE KOAPENG / RODERICK WILLIAMS MOKALE KOAPENG / RODERICK WILLIAMS <i>Khutšo</i>",
+      "SUSAN LABARR SUSAN LABARR <i>Where the Light Begins</i>",
+      "SUSAN LABARR SUSAN LABARR <i>Grace Before Sleep</i>",
+      "SUSAN LABARR SUSAN LABARR <i>The Cardinal and the Roller</i>",
+      "TRAD.  <p class=\"diese_formatting\">TRAD. \"Tshela Moya / Ke nna yo Morena\" (arr. Michael Barrett)</p>",
+      "TRAD.  <p class=\"diese_formatting\">TRAD. \"Modimo\" (arr. Michael Barrett)</p>"
+    ],
+    "title": "National Concert Chorus",
+    "licenseename": "National Concerts",
+    "dayofweek": "Saturday",
+    "featured": false,
+    "time": "1 PM",
+    "date": "Saturday, Apr 11, 2026",
+    "tessid": 52960,
+    "timeofday": "Matinee",
+    "objectID": "en_612355d1-f27c-42a1-a7ed-a769f58d50bb",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "<span>National Concert Chorus<br />Michael Barrett and Cameron LaBarr, Conductors<br />Centennial High School Chamber Singers<br />Patrick Burzlaff, Conductor<br />​</span>Fiorello H. LaGuardia High School of Music and Performing Arts Orchestra<div>Tanya Chanphanitpornkit, Conductor</div>",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Stern Auditorium / Perelman Stage",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "composers": [
+        {
+          "value": "TRAD.",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "MOKALE KOAPENG / RODERICK WILLIAMS",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "SUSAN LABARR",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "repertoire": [
+        {
+          "value": "TRAD.  <p class=\"diese_formatting\">TRAD. \"Indodana\" (arr. Michael Barrett / Ralf Schmitt)</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "TRAD.  <p class=\"diese_formatting\">TRAD. \"Somtimes I feel like a motherless child\" (arr. Susan LaBarr)</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "MOKALE KOAPENG / RODERICK WILLIAMS MOKALE KOAPENG / RODERICK WILLIAMS <i>Khutšo</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "SUSAN LABARR SUSAN LABARR <i>Where the Light Begins</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "SUSAN LABARR SUSAN LABARR <i>Grace Before Sleep</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "SUSAN LABARR SUSAN LABARR <i>The Cardinal and the Roller</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "TRAD.  <p class=\"diese_formatting\">TRAD. \"Tshela Moya / Ke nna yo Morena\" (arr. Michael Barrett)</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "TRAD.  <p class=\"diese_formatting\">TRAD. \"Modimo\" (arr. Michael Barrett)</p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "title": {
+        "value": "National Concert Chorus",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "National Concerts",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{3092A68F-AE1E-4AE6-970E-1E0D9EB6C222}",
+    "_name": "Elite International Music Competition Winners Recital 0100PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{3092A68F-AE1E-4AE6-970E-1E0D9EB6C222}"
+    ],
+    "seasonnumber": "32",
+    "webdisplayperformers": "Winners Recital",
+    "chronid": "89612",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{4B1A2F33-AB6B-4B63-8685-8BA9459BBE31}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "11",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/11/elite-international-music-competition-winners-recital-0100pm",
+    "facility": "Weill Recital Hall",
+    "facilityfacet": "Weill Recital Hall",
+    "startdate": 1775926800000,
+    "title": "Elite International Music Competition Winners Recital",
+    "licenseename": "Elite International Music Competition",
+    "dayofweek": "Saturday",
+    "featured": false,
+    "time": "1 PM",
+    "date": "Saturday, Apr 11, 2026",
+    "tessid": 53526,
+    "timeofday": "Matinee",
+    "objectID": "en_3092a68f-ae1e-4ae6-970e-1e0d9eb6c222",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Winners Recital",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Weill Recital Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "Elite International Music Competition Winners Recital",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "Elite International Music Competition",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{C1CBE90B-C8AE-4A0B-8E23-083F3E0669BD}",
+    "_name": "Pianists of the New York Piano Society featuring SoHyun Ko and Sydney Lee 0200PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{C1CBE90B-C8AE-4A0B-8E23-083F3E0669BD}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-Rentals/2026-04-11-ZH-Members-of-the-New-York-Piano-Society.jpg?fit=crop&crop=faces",
+      "alt": "Members of the New York Piano Society"
+    },
+    "seasonnumber": "32",
+    "webdisplayperformers": "Alok Dutt, Stan Sisskin, Siqi Mou, Tammy Tan, ​Ben Jablonski, Evelyn Mo, June Wu, Benjamin Chin, Carl Di Casoli, Alex Shapiro, Christian Poppell, Nate Warden, Yiran Wang, Fred Gautier, and Anqi Wang<br />​Guest Artists:<br />​SoHyun Ko, Violin<br />​Sydney Lee, Cello",
+    "chronid": "98257",
+    "excludefromcyo": false,
+    "ancestors": [
+      "{4B1A2F33-AB6B-4B63-8685-8BA9459BBE31}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "11",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/11/pianists-of-the-new-york-piano-society-featuring-sohyun-ko-and-sydney-lee-0200pm",
+    "facility": "Zankel Hall",
+    "facilityfacet": "Zankel Hall",
+    "startdate": 1775930400000,
+    "composers": [
+      "TCHAIKOVSKY",
+      "CHOPIN",
+      "GODOWSKY",
+      "FELIX MENDELSSOHN"
+    ],
+    "repertoire": [
+      "TCHAIKOVSKY  <p class=\"diese_formatting\">TCHAIKOVSKY Selections from <i>The Seasons</i></p>",
+      "CHOPIN CHOPIN Berceuse in D-flat Major, Op. 57",
+      "CHOPIN CHOPIN Twelve Etudes, Op. 10",
+      "GODOWSKY GODOWSKY Study in C Major after Chopin’s Etude, Op. 10, No. 1 from <i>53 studies on the Chopin études</i>",
+      "FELIX MENDELSSOHN FELIX MENDELSSOHN <i>Variations sérieuses</i>",
+      "CHOPIN CHOPIN <i>Variations on a theme of Moore</i>",
+      "CHOPIN CHOPIN Piano Trio in G Minor, Op. 8"
+    ],
+    "title": "Pianists of the New York Piano Society featuring SoHyun Ko and Sydney Lee",
+    "licenseename": "The New York Piano Society and Natasha Paremski, Artistic Director",
+    "dayofweek": "Saturday",
+    "featured": false,
+    "time": "2 PM",
+    "date": "Saturday, Apr 11, 2026",
+    "tessid": 53233,
+    "timeofday": "Matinee",
+    "objectID": "en_c1cbe90b-c8ae-4a0b-8e23-083f3e0669bd",
+    "_highlightResult": {
+      "webdisplayperformers": {
+        "value": "Alok Dutt, Stan Sisskin, Siqi Mou, Tammy Tan, ​Ben Jablonski, Evelyn Mo, June Wu, Benjamin Chin, Carl Di Casoli, Alex Shapiro, Christian Poppell, Nate Warden, Yiran Wang, Fred Gautier, and Anqi Wang<br />​Guest Artists:<br />​SoHyun Ko, Violin<br />​Sydney Lee, Cello",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "facility": {
+        "value": "Zankel Hall",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "composers": [
+        {
+          "value": "TCHAIKOVSKY",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "CHOPIN",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "GODOWSKY",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "FELIX MENDELSSOHN",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "repertoire": [
+        {
+          "value": "TCHAIKOVSKY  <p class=\"diese_formatting\">TCHAIKOVSKY Selections from <i>The Seasons</i></p>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "CHOPIN CHOPIN Berceuse in D-flat Major, Op. 57",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "CHOPIN CHOPIN Twelve Etudes, Op. 10",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "GODOWSKY GODOWSKY Study in C Major after Chopin’s Etude, Op. 10, No. 1 from <i>53 studies on the Chopin études</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "FELIX MENDELSSOHN FELIX MENDELSSOHN <i>Variations sérieuses</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "CHOPIN CHOPIN <i>Variations on a theme of Moore</i>",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        {
+          "value": "CHOPIN CHOPIN Piano Trio in G Minor, Op. 8",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      ],
+      "title": {
+        "value": "Pianists of the New York Piano Society featuring SoHyun Ko and Sydney Lee",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "The New York Piano Society and Natasha Paremski, Artistic Director",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  },
+  {
+    "_id": "{77DD8A21-0FC7-4D14-9502-E8D03A2E8850}",
+    "_name": "Contra Dance for All 0630PM",
+    "_templatename": "Event",
+    "_tags": [
+      "id_{77DD8A21-0FC7-4D14-9502-E8D03A2E8850}"
+    ],
+    "image": {
+      "src": "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2025-2026-CH-Presents/2026-04-11-Contra-Dance-for-All.jpg?fit=crop&crop=faces",
+      "alt": "People dance in groups of four on a gym floor"
+    },
+    "seasonnumber": "32",
+    "excludefromcyo": true,
+    "chronid": "103843",
+    "ancestors": [
+      "{4B1A2F33-AB6B-4B63-8685-8BA9459BBE31}",
+      "{6E937CEC-95A5-458C-AFD7-CB33DCE5B1E1}",
+      "{E38B27DF-FDF1-4D33-AC7F-8A4773BA5EF1}",
+      "{0FF1A6B9-C5CB-43AF-AF8A-C58C3BAC3DE9}",
+      "{1EA2DF24-9D7E-4DBE-A2BF-2F2341B3D48A}",
+      "{84F96D85-E413-46EF-921E-B9A5242ED9D0}"
+    ],
+    "categories": [
+      "11",
+      "04",
+      "2026",
+      "Calendar"
+    ],
+    "url": "/calendar/2026/04/11/contra-dance-for-all-0630pm",
+    "genre": [
+      "Dance",
+      "Folk/Roots",
+      "Workshop"
+    ],
+    "eventtype": [
+      "United in Sound: America at 250"
+    ],
+    "facility": "The Church of the Village",
+    "facilityfacet": "Offsite",
+    "startdate": 1775946600000,
+    "title": "Contra Dance for All",
+    "licenseename": "The Folk Music Society of New York and CDNY",
+    "dayofweek": "Saturday",
+    "featured": false,
+    "time": "6:30 PM",
+    "date": "Saturday, Apr 11, 2026",
+    "tessid": 0,
+    "timeofday": "Evening",
+    "objectID": "en_77dd8a21-0fc7-4d14-9502-e8d03a2e8850",
+    "_highlightResult": {
+      "facility": {
+        "value": "The Church of the Village",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "title": {
+        "value": "Contra Dance for All",
+        "matchLevel": "none",
+        "matchedWords": []
+      },
+      "licenseename": {
+        "value": "The Folk Music Society of New York and CDNY",
+        "matchLevel": "none",
+        "matchedWords": []
+      }
+    }
+  }
+]
