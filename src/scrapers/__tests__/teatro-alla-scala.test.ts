@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { TeatroAllaScalaScraper } from '../teatro-alla-scala.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/teatro-alla-scala.html', import.meta.url), 'utf8');
 const scraper = new TeatroAllaScalaScraper({ fetchHtml: async () => fixture });
@@ -31,4 +32,6 @@ describe('TeatroAllaScalaScraper', () => {
     expect(withUrl.length).toBeGreaterThan(0);
     expect(withUrl[0].url).toMatch(/^https:\/\/www\.teatroallascala\.org\//);
   });
+
+  testDbIntegration(scraper);
 });
