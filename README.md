@@ -24,6 +24,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Teatro Real | Madrid |
 | Staatsoper Unter den Linden | Berlin |
 | Sydney Opera House | Sydney |
+| Philharmonie de Paris | Paris |
 
 ## How it works
 
