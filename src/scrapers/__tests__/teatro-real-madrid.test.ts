@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { TeatroRealMadridScraper } from '../teatro-real-madrid.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/teatro-real-madrid.html', import.meta.url), 'utf8');
 const scraper = new TeatroRealMadridScraper({ fetchHtml: async () => fixture });
@@ -67,4 +68,6 @@ describe('TeatroRealMadridScraper', () => {
       expect('url' in event).toBe(true);
     }
   });
+
+  testDbIntegration(scraper);
 });
