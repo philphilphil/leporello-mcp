@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { MusikvereinWienScraper } from '../musikverein-wien.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/musikverein-wien.html', import.meta.url), 'utf8');
 const scraper = new MusikvereinWienScraper({ fetchHtml: async () => fixture });
@@ -41,4 +42,6 @@ describe('MusikvereinWienScraper', () => {
       }
     }
   });
+
+  testDbIntegration(scraper);
 });
