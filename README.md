@@ -25,6 +25,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Staatsoper Unter den Linden | Berlin |
 | Sydney Opera House | Sydney |
 | Philharmonie de Paris | Paris |
+| Bayerische Staatsoper | München |
 
 ## How it works
 
