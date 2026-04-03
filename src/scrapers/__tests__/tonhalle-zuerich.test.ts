@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { TonhalleZuerichScraper } from '../tonhalle-zuerich.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/tonhalle-zuerich.html', import.meta.url), 'utf8');
 const scraper = new TonhalleZuerichScraper({ fetchHtml: async () => fixture });
@@ -56,4 +57,6 @@ describe('TonhalleZuerichScraper', () => {
       expect(e.scraped_at).toBeTruthy();
     }
   });
+
+  testDbIntegration(scraper);
 });
