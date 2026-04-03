@@ -51,6 +51,13 @@ describe('BayerischeStaatsoperScraper', () => {
     }
   });
 
+  it('filters out non-performance genres (tours, community, etc.)', async () => {
+    const events = await scraper.scrape();
+    // Fixture has 44 rows total, but only ~26 are Oper/Ballett/Konzert/Liederabend
+    expect(events.length).toBeLessThan(44);
+    expect(events.length).toBeGreaterThan(10);
+  });
+
   it('sets all required Event fields', async () => {
     const events = await scraper.scrape();
     for (const e of events) {

@@ -1,10 +1,11 @@
 import { load } from 'cheerio';
 import type { Event } from '../types.js';
-import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
+import { generateEventId, fetchRenderedHtml, type Scraper, type VenueMeta } from './base.js';
 
 type FetchHtml = () => Promise<string>;
 
 const BASE_URL = 'https://www.staatsoper.de';
+const ALLOWED_GENRES = ['Oper', 'Ballett', 'Konzert', 'Liederabend'];
 
 export class BayerischeStaatsoperScraper implements Scraper {
   readonly venue: VenueMeta = {
@@ -23,11 +24,8 @@ export class BayerischeStaatsoperScraper implements Scraper {
   async scrape(): Promise<Event[]> {
     const html = this.opts.fetchHtml
       ? await this.opts.fetchHtml()
-      : await fetch(this.venue.scheduleUrl, {
-          headers: { 'User-Agent': USER_AGENT },
-        }).then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
-          return r.text();
+      : await fetchRenderedHtml(this.venue.scheduleUrl, {
+          waitForSelector: '.activity-list__row',
         });
     return this.parse(html);
   }
@@ -46,6 +44,10 @@ export class BayerischeStaatsoperScraper implements Scraper {
 
         const title = $row.find('.activity-list__text .h3').first().text().trim();
         if (!title) return;
+
+        // Filter by genre — skip tours, community events, etc.
+        const genre = $row.find('.activity-list__col--genre').text().trim();
+        if (!ALLOWED_GENRES.includes(genre)) return;
 
         // Info line: "HH.MM Uhr | Location"
         const infoSpan = $row.find('.activity-list__text > span').first().text().trim();
@@ -67,9 +69,6 @@ export class BayerischeStaatsoperScraper implements Scraper {
 
         // Build full title with composer when available (e.g. "PARSIFAL (Richard Wagner)")
         const fullTitle = composer ? `${title} (${composer})` : title;
-
-        // Genre from the genre column
-        const genre = $row.find('.activity-list__col--genre').text().trim();
 
         // Event detail URL
         const href = $row.find('.activity-list__content').attr('href') ?? '';
