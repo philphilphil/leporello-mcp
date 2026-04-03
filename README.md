@@ -37,7 +37,11 @@ Venue-specific scrapers fetch schedule pages (HTML or JSON) from opera houses an
 ```bash
 npm install
 npm test          # run scraper tests
-npm run scrape    # one-off scrape, no server
+
+npm run scrape                       # one-off scrape all venues
+#or
+npm run scrape -- wiener-staatsoper  # scrape a single venue
+
 npm run dev       # start server on http://localhost:3000
 # or
 npm run dev:fresh # scrape, then serve
@@ -52,6 +56,8 @@ docker compose up -d
 
 # Trigger a manual scrape (e.g. first run or on-demand refresh)
 docker compose exec leporello node dist/scrape.js
+# Scrape a single venue
+docker compose exec leporello node dist/scrape.js wiener-staatsoper
 
 # Tail logs
 docker compose logs -f leporello

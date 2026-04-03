@@ -167,8 +167,9 @@ Add the new venue to the **Supported Venues** table in `README.md`.
 ## 7. Verify
 
 ```bash
-npm test               # all tests must pass
-npm run scrape         # live scrape, check output for scrape_success
+npm test                              # all tests must pass
+npm run scrape -- <venue-id>          # live scrape for the new venue only
+npm run scrape                        # optional: scrape all venues
 ```
 
 ## 8. Open a PR

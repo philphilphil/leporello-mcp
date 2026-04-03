@@ -34,7 +34,7 @@ export async function rebuildWeb(): Promise<void> {
   }
 }
 
-const scrapers: Scraper[] = [
+export const scrapers: Scraper[] = [
   new PhilharmonikerStuttgartScraper(),
   new StaatsoperStuttgartScraper(),
   new MetropolitanOperaScraper(),
@@ -44,8 +44,8 @@ const scrapers: Scraper[] = [
   new LiceuBarcelonaScraper(),
 ];
 
-export async function runAllScrapers(): Promise<void> {
-  for (const scraper of scrapers) {
+export async function runScrapers(list: Scraper[]): Promise<void> {
+  for (const scraper of list) {
     const { venueId, venueName, cityId, cityName, country, scheduleUrl } = scraper.venue;
     upsertCity(cityId, cityName, country);
     upsertVenue(venueId, venueName, cityId, scheduleUrl);
@@ -103,6 +103,10 @@ export async function runAllScrapers(): Promise<void> {
   }
 
   await rebuildWeb();
+}
+
+export async function runAllScrapers(): Promise<void> {
+  await runScrapers(scrapers);
 }
 
 export function startScheduler(): void {
