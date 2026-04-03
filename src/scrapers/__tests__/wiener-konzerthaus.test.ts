@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { WienerKonzerthausScraper } from '../wiener-konzerthaus.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixtureJson = JSON.parse(
   readFileSync(new URL('../__fixtures__/wiener-konzerthaus.json', import.meta.url), 'utf8'),
@@ -47,4 +48,6 @@ describe('WienerKonzerthausScraper', () => {
       expect(e).toHaveProperty('url');
     }
   });
+
+  testDbIntegration(scraper);
 });

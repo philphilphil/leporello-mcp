@@ -87,7 +87,7 @@ export class WienerKonzerthausScraper implements Scraper {
           : null;
 
         events.push({
-          id: generateEventId(this.venueId, date, time, title),
+          id: generateEventId(this.venueId, date, time, `${title}-${item.id}`),
           venue_id: this.venueId,
           title,
           date,
