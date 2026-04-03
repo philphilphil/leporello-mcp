@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { RoyalOperaHouseLondonScraper } from '../royal-opera-house-london.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixtureJson = JSON.parse(
   readFileSync(new URL('../__fixtures__/royal-opera-house-london.json', import.meta.url), 'utf8'),
@@ -57,4 +58,6 @@ describe('RoyalOperaHouseLondonScraper', () => {
       expect('url' in event).toBe(true);
     }
   });
+
+  testDbIntegration(scraper);
 });
