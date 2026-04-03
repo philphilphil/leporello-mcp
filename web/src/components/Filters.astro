@@ -86,10 +86,13 @@ const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) 
             </div>
           </div>
 
-          <button id="filter-clear" class="filter-clear" type="button" title="Clear all filters" aria-label="Clear all filters" data-i18n-title="filter.clear" data-i18n-aria-label="filter.clear">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-            <span data-i18n="filter.clear">Clear all</span>
-          </button>
+          <div class="filter-actions">
+            <button id="filter-clear" class="filter-clear" type="button" title="Clear all filters" aria-label="Clear all filters" data-i18n-title="filter.clear" data-i18n-aria-label="filter.clear">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <span data-i18n="filter.clear">Clear all</span>
+            </button>
+            <button id="filter-done" class="filter-done" type="button" data-i18n="filter.done">Done</button>
+          </div>
         </div>
       </details>
     </div>
@@ -251,6 +254,11 @@ const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) 
     font-weight: 300;
   }
 
+  /* --- Filter actions row --- */
+  .filter-actions {
+    display: contents;
+  }
+
   /* --- Clear button --- */
   .filter-clear {
     display: none;
@@ -274,6 +282,11 @@ const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) 
 
   .filter-clear.visible {
     display: flex;
+  }
+
+  /* --- Done button (mobile only) --- */
+  .filter-done {
+    display: none;
   }
 
   /* --- Desktop: details forced open, summary hidden --- */
@@ -372,13 +385,31 @@ const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) 
       width: 100%;
     }
 
-    .filter-clear {
+    .filter-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 0.9rem 0;
-      justify-content: flex-end;
+    }
+
+    .filter-clear {
+      padding: 0;
     }
 
     .filter-clear span {
       display: inline;
+    }
+
+    .filter-done {
+      display: block;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent, #8b2500);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.4rem 0;
     }
   }
 </style>

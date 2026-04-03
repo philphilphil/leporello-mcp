@@ -284,6 +284,12 @@ venueSelect.addEventListener('change', render);
 daysSelect.addEventListener('change', render);
 searchInput.addEventListener('input', debounce(render, 200));
 clearBtn.addEventListener('click', resetFilters);
+const doneBtn = document.getElementById('filter-done');
+if (doneBtn) {
+  doneBtn.addEventListener('click', () => {
+    filterDetails.removeAttribute('open');
+  });
+}
 
 // Initialize
 initFiltersFromUrl();

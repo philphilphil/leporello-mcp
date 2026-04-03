@@ -13,6 +13,7 @@ const de: Record<string, string> = {
   "filter.toggle": "Filter",
   "filter.toggle_count": "Filter ({n})",
   "filter.clear": "Alle zurücksetzen",
+  "filter.done": "Fertig",
   "events.count": "{n} Veranstaltungen",
   "events.count_one": "1 Veranstaltung",
   "events.none": "Keine Veranstaltungen gefunden",
