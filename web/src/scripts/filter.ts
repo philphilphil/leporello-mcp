@@ -238,6 +238,8 @@ function render(): void {
     for (const e of evts) {
       const time = esc(e.time ?? '');
       const venue = esc(e.venue_name ?? '');
+      const location = e.location ? esc(e.location) : null;
+      const venueDisplay = location ? `${venue}<span class="event-location"> · ${location}</span>` : venue;
       const safeUrl = e.url && /^https?:\/\//.test(e.url) ? e.url : null;
       const link = (text: string, cls: string) =>
         safeUrl ? `<a href="${esc(safeUrl)}" target="_blank" rel="noopener" class="${cls}">${text}</a>` : `<span class="${cls}">${text}</span>`;
@@ -252,7 +254,7 @@ function render(): void {
       html += `<tr class="event-row">`;
       html += `<td class="event-time">${time}</td>`;
       html += `<td class="event-title">${link(esc(e.title), 'event-link')}</td>`;
-      html += `<td class="event-venue">${venue}</td>`;
+      html += `<td class="event-venue">${venueDisplay}</td>`;
       html += `<td class="event-people">${people}</td>`;
       html += `</tr>`;
     }
