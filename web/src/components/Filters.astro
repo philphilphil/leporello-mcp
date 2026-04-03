@@ -110,11 +110,27 @@ const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) 
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 3rem;
+  }
+
+  .filters-bar {
     display: flex;
-    gap: 0;
     align-items: stretch;
   }
 
+  /* --- Details / Summary (toggle) --- */
+  .filter-details {
+    display: contents;
+  }
+
+  .filter-toggle {
+    display: none;
+  }
+
+  .filter-details-body {
+    display: contents;
+  }
+
+  /* --- Filter groups --- */
   .filter-group {
     display: flex;
     flex-direction: column;
@@ -125,19 +141,14 @@ const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) 
     min-width: 0;
   }
 
-  .filter-group:first-child {
-    padding-left: 0;
-  }
-
-
   .filter-group:last-child {
     border-right: none;
-    flex: 1;
-    padding-right: 0;
   }
 
   .filter-group--search {
-    padding-left: 2rem;
+    border-right: 1px solid var(--border-light);
+    flex: 1;
+    padding-left: 0;
   }
 
   .filter-label {
@@ -230,18 +241,21 @@ const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) 
     font-weight: 300;
   }
 
+  /* --- Clear button --- */
   .filter-clear {
     display: none;
     align-items: center;
     justify-content: center;
+    gap: 0.4rem;
     background: none;
     border: none;
     color: var(--text-muted);
     cursor: pointer;
     padding: 0.25rem;
-    margin-left: 0.5rem;
     flex-shrink: 0;
     transition: color 0.15s;
+    font-family: var(--sans);
+    font-size: 0.85rem;
   }
 
   .filter-clear:hover {
@@ -252,31 +266,107 @@ const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) 
     display: flex;
   }
 
+  /* --- Desktop: details forced open, summary hidden --- */
+  @media (min-width: 701px) {
+    .filter-clear {
+      padding: 1.15rem 2rem;
+    }
+
+    .filter-clear span {
+      display: none;
+    }
+  }
+
+  /* --- Mobile --- */
   @media (max-width: 700px) {
     .filters-inner {
-      flex-direction: column;
-      gap: 0;
       padding: 0 1.5rem;
     }
 
-    .filter-group {
+    .filters-bar {
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    /* Search takes most of the row */
+    .filter-group--search {
+      flex: 1;
+      border-right: none;
+      border-bottom: none;
+      padding: 0.9rem 0;
+      min-width: 0;
+    }
+
+    /* Details element becomes a block, not display:contents */
+    .filter-details {
+      display: block;
+      flex-shrink: 0;
+    }
+
+    /* Summary becomes the toggle button */
+    .filter-toggle {
+      display: flex;
+      align-items: center;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: none;
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      padding: 0.5rem 0.85rem;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      white-space: nowrap;
+    }
+
+    .filter-toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .filter-toggle::marker {
+      content: '';
+    }
+
+    /* Body is a dropdown panel below the bar */
+    .filter-details-body {
+      display: none;
+      flex-direction: column;
+      width: 100vw;
+      margin-left: -1.5rem;
+      padding: 0 1.5rem;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-light);
+    }
+
+    .filter-details[open] .filter-details-body {
+      display: flex;
+    }
+
+    .filter-details-body .filter-group {
       border-right: none;
       border-bottom: 1px solid var(--border-light);
       padding: 0.9rem 0;
       width: 100%;
     }
 
-    .filter-group--search {
-      padding-left: 0;
-    }
-
-    .filter-group:last-child {
+    .filter-details-body .filter-group:last-child {
       border-bottom: none;
     }
 
     .filter-select {
       min-width: unset;
       width: 100%;
+    }
+
+    .filter-clear {
+      padding: 0.9rem 0;
+      justify-content: flex-end;
+    }
+
+    .filter-clear span {
+      display: inline;
     }
   }
 </style>
