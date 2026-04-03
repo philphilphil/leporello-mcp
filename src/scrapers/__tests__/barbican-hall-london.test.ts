@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { BarbicanHallLondonScraper } from '../barbican-hall-london.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixture = readFileSync(new URL('../__fixtures__/barbican-hall-london.html', import.meta.url), 'utf8');
 const scraper = new BarbicanHallLondonScraper({ fetchHtml: async () => fixture });
@@ -52,4 +53,6 @@ describe('BarbicanHallLondonScraper', () => {
       expect(event).toHaveProperty('scraped_at');
     }
   });
+
+  testDbIntegration(scraper);
 });
