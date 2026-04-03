@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { BerlinerPhilharmonieBerlinScraper } from '../berliner-philharmonie-berlin.js';
+import { testDbIntegration } from './helpers/db-integration.js';
 
 const fixtureJson = JSON.parse(
   readFileSync(new URL('../__fixtures__/berliner-philharmonie-berlin.json', import.meta.url), 'utf8'),
@@ -69,4 +70,6 @@ describe('BerlinerPhilharmonieBerlinScraper', () => {
     const withLocation = events.filter(e => e.location !== null);
     expect(withLocation.length).toBeGreaterThan(0);
   });
+
+  testDbIntegration(scraper);
 });
