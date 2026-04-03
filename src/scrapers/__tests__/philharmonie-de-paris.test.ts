@@ -24,12 +24,6 @@ describe('PhilharmonieDeParisScraper', () => {
     }
   });
 
-  it('parses subtitle into cast', async () => {
-    const events = await scraper.scrape();
-    const withCast = events.filter(e => e.cast !== null);
-    expect(withCast.length).toBeGreaterThan(0);
-  });
-
   it('parses location (hall name)', async () => {
     const events = await scraper.scrape();
     const withLocation = events.filter(e => e.location !== null);

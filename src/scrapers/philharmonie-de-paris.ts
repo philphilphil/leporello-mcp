@@ -62,20 +62,6 @@ export class PhilharmonieDeParisScraper implements Scraper {
         }).format(eventDate); // "HH:MM"
         const time = timeFmt;
 
-        // Subtitle contains ensemble/performer names
-        const subtitle = $el.find('.EventCard-subtitle').first().text().trim() || null;
-
-        // Parse cast from subtitle: "Ensemble - Conductor" or "Performer1 - Performer2"
-        let conductor: string | null = null;
-        let cast: string[] | null = null;
-        if (subtitle) {
-          // The subtitle typically lists performers/ensembles separated by " - "
-          const parts = subtitle.split(/\s+-\s+/).map(s => s.trim()).filter(Boolean);
-          if (parts.length > 0) {
-            cast = parts;
-          }
-        }
-
         // Location / hall
         const placeEl = $el.find('.EventCard-place').first();
         const location = placeEl.length
@@ -92,8 +78,8 @@ export class PhilharmonieDeParisScraper implements Scraper {
           title,
           date,
           time,
-          conductor,
-          cast: cast && cast.length > 0 ? cast : null,
+          conductor: null,
+          cast: null,
           location,
           url,
           scraped_at: now,
