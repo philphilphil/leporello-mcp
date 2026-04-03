@@ -19,6 +19,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | San Francisco Opera | San Francisco |
 | Gran Teatre del Liceu | Barcelona |
 | Semperoper | Dresden |
+| Opéra National de Paris | Paris |
 
 ## How it works
 
