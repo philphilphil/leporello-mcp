@@ -10,6 +10,8 @@ const de: Record<string, string> = {
   "filter.all_cities": "Alle Städte",
   "filter.all_venues": "Alle Spielstätten",
   "filter.next_days": "Nächste {n} Tage",
+  "filter.toggle": "Filter",
+  "filter.toggle_count": "Filter ({n})",
   "events.count": "{n} Veranstaltungen",
   "events.count_one": "1 Veranstaltung",
   "events.none": "Keine Veranstaltungen gefunden",

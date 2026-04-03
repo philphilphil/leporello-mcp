@@ -10,6 +10,8 @@ const en: Record<string, string> = {
   "filter.all_cities": "All Cities",
   "filter.all_venues": "All Venues",
   "filter.next_days": "Next {n} days",
+  "filter.toggle": "Filters",
+  "filter.toggle_count": "Filters ({n})",
   "events.count": "{n} events",
   "events.count_one": "1 event",
   "events.none": "No events found",
