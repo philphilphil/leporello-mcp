@@ -22,6 +22,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Opéra National de Paris | Paris |
 | Carnegie Hall | New York |
 | Teatro Real | Madrid |
+| Staatsoper Unter den Linden | Berlin |
 
 ## How it works
 
