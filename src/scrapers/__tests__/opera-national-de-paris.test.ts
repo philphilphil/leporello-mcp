@@ -1,10 +1,12 @@
 import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
-import { OperaNationalDeParisScraper } from '../opera-national-de-paris.js';
+import { OperaNationalDeParisScraper, type ApiResponse } from '../opera-national-de-paris.js';
 import { testDbIntegration } from './helpers/db-integration.js';
 
-const fixture = readFileSync(new URL('../__fixtures__/opera-national-de-paris.html', import.meta.url), 'utf8');
-const scraper = new OperaNationalDeParisScraper({ fetchHtml: async () => fixture });
+const fixture: ApiResponse = JSON.parse(
+  readFileSync(new URL('../__fixtures__/opera-national-de-paris.json', import.meta.url), 'utf8'),
+);
+const scraper = new OperaNationalDeParisScraper({ fetchJson: async () => [fixture] });
 
 describe('OperaNationalDeParisScraper', () => {
   it('parses events from fixture', async () => {

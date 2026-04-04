@@ -1,14 +1,10 @@
-import { load } from 'cheerio';
 import type { Event } from '../types.js';
 import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
 
-type FetchHtml = () => Promise<string>;
-
-const BASE_URL = 'https://www.operadeparis.fr';
+const API_URL = 'https://www.operadeparis.fr/ajax/programming/saison-25-26';
 
 /**
- * French month abbreviations used in date strings on operadeparis.fr.
- * Full months ("janvier") and abbreviated months ("janv.") both appear.
+ * French month abbreviations used in date strings from the API.
  */
 const FRENCH_MONTHS: Record<string, string> = {
   'janvier': '01', 'janv.': '01', 'janv': '01', 'jan.': '01', 'jan': '01',
@@ -26,7 +22,7 @@ const FRENCH_MONTHS: Record<string, string> = {
 };
 
 /**
- * Parse a French date string from operadeparis.fr.
+ * Parse a French date string from the API.
  *
  * Examples:
  *   "du 12 mars  au 18 avr. 2026"  → { date: "2026-03-12", time: null }
@@ -35,7 +31,6 @@ const FRENCH_MONTHS: Record<string, string> = {
  *   "du 28 mai  au 14 juin 2026"    → { date: "2026-05-28", time: null }
  */
 function parseFrenchDate(text: string): { date: string; time: string | null } | null {
-  // Normalize whitespace
   const s = text.replace(/\s+/g, ' ').trim();
 
   // Single date: "le DD month YYYY à HHhMM"
@@ -80,6 +75,25 @@ function parseFrenchDate(text: string): { date: string; time: string | null } | 
   return null;
 }
 
+interface ApiShow {
+  title: string;
+  sub_title: string | null;
+  genre: string | null;
+  venue: string | null;
+  start_end_dates: string;
+  full_url: string | null;
+}
+
+interface ApiDataItem {
+  type: string;
+  shows?: ApiShow[];
+}
+
+export interface ApiResponse {
+  data: ApiDataItem[];
+  meta: { pagination: { total_pages: number; current_page: number } };
+}
+
 export class OperaNationalDeParisScraper implements Scraper {
   readonly venue: VenueMeta = {
     venueId: 'opera-national-de-paris',
@@ -92,66 +106,71 @@ export class OperaNationalDeParisScraper implements Scraper {
 
   get venueId(): string { return this.venue.venueId; }
 
-  constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
+  constructor(private readonly opts: { fetchJson?: () => Promise<ApiResponse[]> } = {}) {}
 
   async scrape(): Promise<Event[]> {
-    const html = this.opts.fetchHtml
-      ? await this.opts.fetchHtml()
-      : await fetch(this.venue.scheduleUrl, {
-          headers: { 'User-Agent': USER_AGENT },
-        }).then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
-          return r.text();
-        });
-    return this.parse(html);
+    const pages = this.opts.fetchJson
+      ? await this.opts.fetchJson()
+      : await this.fetchAllPages();
+    return this.parse(pages);
   }
 
-  parse(html: string): Event[] {
-    const $ = load(html);
+  private async fetchAllPages(): Promise<ApiResponse[]> {
+    const pages: ApiResponse[] = [];
+    let page = 1;
+
+    while (true) {
+      const url = `${API_URL}?page=${page}`;
+      const res = await fetch(url, {
+        headers: { 'User-Agent': USER_AGENT, Accept: 'application/json' },
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
+      const data = await res.json() as ApiResponse;
+      pages.push(data);
+      if (page >= data.meta.pagination.total_pages) break;
+      page++;
+    }
+
+    return pages;
+  }
+
+  parse(pages: ApiResponse[]): Event[] {
     const events: Event[] = [];
     const now = new Date().toISOString();
 
-    $('.FeaturedList__card').each((_, el) => {
-      try {
-        const $card = $(el);
+    for (const page of pages) {
+      for (const item of page.data) {
+        if (item.type !== 'shows' || !item.shows) continue;
 
-        const title = $card.find('.show__title').first().text().trim();
-        const author = $card.find('.show__author').first().text().trim();
-        const genre = $card.find('.show__genre').first().text().trim();
-        const location = $card.find('.show__place span').first().text().trim() || null;
-        const dateText = $card.find('.show__date span').first().text().trim();
+        for (const show of item.shows) {
+          try {
+            const { title, sub_title, venue, full_url, start_end_dates } = show;
+            if (!title || !start_end_dates) continue;
 
-        if (!title || !dateText) return;
+            const parsed = parseFrenchDate(start_end_dates);
+            if (!parsed) continue;
 
-        const parsed = parseFrenchDate(dateText);
-        if (!parsed) return;
+            const { date, time } = parsed;
+            const fullTitle = sub_title ? `${title} — ${sub_title}` : title;
 
-        const { date, time } = parsed;
-
-        const fullTitle = author ? `${title} — ${author}` : title;
-        if (genre) {
-          // prefix with genre for clarity
+            events.push({
+              id: generateEventId(this.venueId, date, time, title),
+              venue_id: this.venueId,
+              title: fullTitle,
+              date,
+              time,
+              conductor: null,
+              cast: null,
+              location: venue || null,
+              url: full_url || null,
+              scraped_at: now,
+            });
+          } catch {
+            // skip malformed entries silently
+          }
         }
-
-        const href = $card.find('a').first().attr('href') ?? '';
-        const url = href ? new URL(href, BASE_URL + '/').href : null;
-
-        events.push({
-          id: generateEventId(this.venueId, date, time, title),
-          venue_id: this.venueId,
-          title: fullTitle,
-          date,
-          time,
-          conductor: null,
-          cast: null,
-          location,
-          url,
-          scraped_at: now,
-        });
-      } catch {
-        // skip malformed entries silently
       }
-    });
+    }
 
     return events;
   }
