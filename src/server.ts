@@ -231,10 +231,11 @@ export function startHttpServer() {
       if (pathname === '/health') {
         const venues = getVenues();
         const failed = venues.filter((v) => v.last_scrape_status === 'error');
-        const healthy = failed.length === 0;
-        res.writeHead(healthy ? 200 : 503, { 'Content-Type': 'application/json' });
+        // Always return 200 so Docker/Traefik keep routing traffic.
+        // Individual scraper failures are informational, not service-breaking.
+        res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({
-          status: healthy ? 'ok' : 'degraded',
+          status: failed.length === 0 ? 'ok' : 'degraded',
           ...(failed.length > 0 && {
             failed_venues: failed.map((v) => ({
               id: v.id,
