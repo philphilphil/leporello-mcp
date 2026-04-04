@@ -1,7 +1,7 @@
 name: leporello
 
 services:
-  leporello:
+  web:
     build: .
     restart: unless-stopped
     volumes:
