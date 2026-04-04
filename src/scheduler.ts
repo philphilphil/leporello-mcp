@@ -1,8 +1,3 @@
-import cron from 'node-cron';
-import { execFile } from 'node:child_process';
-import { promisify } from 'node:util';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { replaceVenueEvents, updateLastScraped, updateScrapeError, upsertCity, upsertVenue } from './db.js';
 import { validateEvents } from './validate.js';
 import type { Scraper } from './scrapers/base.js';
@@ -21,26 +16,6 @@ import { StaatsoperBerlinScraper } from './scrapers/staatsoper-berlin.js';
 import { SydneyOperaHouseScraper } from './scrapers/sydney-opera-house.js';
 import { PhilharmonieDeParisScraper } from './scrapers/philharmonie-de-paris.js';
 import { BayerischeStaatsoperScraper } from './scrapers/bayerische-staatsoper.js';
-
-const execFileAsync = promisify(execFile);
-
-export async function rebuildWeb(): Promise<void> {
-  console.log(JSON.stringify({ event: 'web_build_start' }));
-  const start = Date.now();
-  try {
-    await execFileAsync('npm', ['run', 'build', '--prefix', 'web'], {
-      cwd: path.join(fileURLToPath(import.meta.url), '..', '..'),
-      timeout: 60_000,
-    });
-    console.log(
-      JSON.stringify({ event: 'web_build_success', duration_ms: Date.now() - start })
-    );
-  } catch (err) {
-    console.error(
-      JSON.stringify({ event: 'web_build_error', error: String(err), duration_ms: Date.now() - start })
-    );
-  }
-}
 
 export const scrapers: Scraper[] = [
   new PhilharmonikerStuttgartScraper(),
@@ -118,17 +93,4 @@ export async function runScrapers(list: Scraper[]): Promise<void> {
     }
   }
 
-  await rebuildWeb();
-}
-
-export async function runAllScrapers(): Promise<void> {
-  await runScrapers(scrapers);
-}
-
-export function startScheduler(): void {
-  const expr = process.env.SCRAPE_CRON ?? '0 3 * * *';
-  console.log(JSON.stringify({ event: 'scheduler_start', cron: expr }));
-  cron.schedule(expr, () => {
-    runAllScrapers().catch(console.error);
-  });
 }

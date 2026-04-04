@@ -1,6 +1,6 @@
 # Leporello — Codebase Guide
 
-Remote MCP server for classical music / opera event schedules. Node.js 22, TypeScript ESM, SQLite, Cheerio scrapers, node-cron scheduler. Static Astro frontend.
+Remote MCP server for classical music / opera event schedules. Node.js 22, TypeScript ESM, SQLite, Cheerio scrapers. Static Astro frontend. Two Docker containers: web (server + frontend) and scraper (fills DB, runs once and exits).
 
 ## Commands
 
@@ -14,13 +14,12 @@ npm run build --prefix web  # Build Astro frontend to web/dist/
 
 ## Architecture
 
-One process, four responsibilities:
-- **HTTP server** (`src/server.ts`) — Streamable HTTP MCP endpoint at `POST /mcp`, health check at `GET /health`, static frontend for everything else
-- **Scheduler** (`src/scheduler.ts`) — node-cron runs `runAllScrapers()` daily at 03:00 UTC, then rebuilds the frontend
-- **Scrapers** (`src/scrapers/`) — Cheerio-based, one file per venue
-- **Frontend** (`web/`) — Astro static site, reads SQLite at build time, client-side filtering/search
+Two Docker containers sharing a SQLite volume:
 
-Entry point is `src/index.ts`: initializes DB → starts HTTP server → starts scheduler → triggers initial scrape if DB is empty.
+- **Web container** (`Dockerfile.web`, entry: `src/index.ts`) — HTTP server (MCP + static Astro frontend), rebuilds frontend on every container start
+- **Scraper container** (`Dockerfile.scraper`, entry: `src/scrape.ts`) — runs all scrapers once and exits. Scheduled via host cron or `docker compose run --rm scraper`
+- **Scrapers** (`src/scrapers/`) — Cheerio/Playwright-based, one file per venue
+- **Frontend** (`web/`) — Astro static site, reads SQLite at build time, client-side filtering/search
 
 ## File map
 
@@ -28,7 +27,7 @@ Entry point is `src/index.ts`: initializes DB → starts HTTP server → starts 
 src/
   index.ts                    Entry point
   server.ts                   McpServer (4 tools) + HTTP server + static file serving
-  scheduler.ts                node-cron + runAllScrapers() + rebuildWeb()
+  scheduler.ts                Scraper registry + runScrapers()
   scrape.ts                   One-shot scrape script (npm run scrape)
   db.ts                       SQLite singleton, schema, queries
   types.ts                    City, Venue, Event interfaces
@@ -97,13 +96,11 @@ All logs are structured JSON on stdout/stderr:
 
 ```json
 {"event":"server_start","port":3000}
-{"event":"scheduler_start","cron":"0 3 * * *"}
 {"event":"scrape_start","venue":"staatsoper-stuttgart"}
 {"event":"scrape_success","venue":"staatsoper-stuttgart","count":77,"duration_ms":214}
 {"event":"scrape_error","venue":"...","error":"...","duration_ms":...}
 {"event":"web_build_start"}
 {"event":"web_build_success","duration_ms":...}
-{"event":"initial_scrape_triggered"}
 {"event":"mcp_request_error","error":"..."}
 ```
 
@@ -116,6 +113,13 @@ Save all Playwright screenshots into `.playwright-mcp/` (already gitignored), no
 Docker Compose + Traefik at `leporello.app`.
 
 ```bash
-docker compose up -d
-docker compose logs -f leporello
+docker compose up -d                          # Start web server
+docker compose run --rm scraper               # Run all scrapers (exits when done)
+docker compose run --rm scraper node dist/scrape.js wiener-staatsoper  # Single venue
+docker compose logs -f web                    # Tail web logs
+```
+
+Schedule scrapers via host cron (scrape then restart web to rebuild frontend):
+```cron
+0 3 * * * cd /home/phil/docker/lep && docker compose run --rm scraper && docker compose restart web
 ```

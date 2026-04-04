@@ -59,16 +59,32 @@ Scrapes daily at 03:00 UTC. Run `npm run scrape` to populate the database on fir
 
 ## Docker
 
+Two containers: **web** (HTTP server + MCP + static frontend) and **scraper** (fetches venue data into SQLite). They share a data volume. The scraper runs once and exits — schedule it with a host cron job.
+
 ```bash
+# Start the web server
 docker compose up -d
 
-# Trigger a manual scrape (e.g. first run or on-demand refresh)
-docker compose exec leporello node dist/scrape.js
+# Run all scrapers (one-off, container stops when done)
+docker compose run --rm scraper
+
 # Scrape a single venue
-docker compose exec leporello node dist/scrape.js wiener-staatsoper
+docker compose run --rm scraper node dist/scrape.js wiener-staatsoper
+
+# Rebuild the Astro frontend (e.g. after a manual scrape)
+docker compose exec web node -e "
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+await promisify(execFile)('npm', ['run', 'build', '--prefix', 'web'], { cwd: '/app', timeout: 60000 });
+console.log('done');
+"
 
 # Tail logs
-docker compose logs -f leporello
+docker compose logs -f web
 ```
 
-The scheduler re-scrapes all venues at 03:00 UTC and rebuilds the web frontend automatically.
+The web container rebuilds the Astro frontend on every start. To run scrapers on a schedule, add a host cron job that scrapes then restarts web:
+
+```cron
+0 3 * * * cd /home/phil/docker/lep && docker compose run --rm scraper && docker compose restart web
+```
