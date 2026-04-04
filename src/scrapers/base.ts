@@ -1,5 +1,4 @@
 import { createHash } from 'node:crypto';
-import { chromium } from 'playwright';
 import type { Event } from '../types.js';
 
 export const USER_AGENT = 'Leporello/0.1 (classical-music-schedule-aggregator)';
@@ -13,6 +12,7 @@ export async function fetchRenderedHtml(
   url: string,
   opts: { waitForSelector?: string } = {},
 ): Promise<string> {
+  const { chromium } = await import('playwright');
   const browser = await chromium.launch();
   try {
     const ctx = await browser.newContext({
