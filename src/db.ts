@@ -162,6 +162,39 @@ export function getEvents(opts: {
   return getDb().prepare(sql).all(...params) as Array<Event & { venue_name: string }>;
 }
 
+export function findUnmatchedFilters(filters: {
+  country?: string;
+  city?: string;
+  venueId?: string;
+}): { country?: string; city?: string; venue_id?: string } {
+  const db = getDb();
+  const unmatched: { country?: string; city?: string; venue_id?: string } = {};
+
+  if (filters.country) {
+    const row = db
+      .prepare('SELECT 1 FROM cities WHERE country = ? LIMIT 1')
+      .get(filters.country.toUpperCase());
+    if (!row) unmatched.country = filters.country;
+  }
+
+  if (filters.city) {
+    const cityLower = filters.city.toLowerCase();
+    const row = db
+      .prepare('SELECT 1 FROM cities WHERE id = ? OR LOWER(name) = ? LIMIT 1')
+      .get(cityLower, cityLower);
+    if (!row) unmatched.city = filters.city;
+  }
+
+  if (filters.venueId) {
+    const row = db
+      .prepare('SELECT 1 FROM venues WHERE id = ? LIMIT 1')
+      .get(filters.venueId);
+    if (!row) unmatched.venue_id = filters.venueId;
+  }
+
+  return unmatched;
+}
+
 export function replaceVenueEvents(venueId: string, events: Event[]): void {
   const db = getDb();
   const del = db.prepare(`DELETE FROM events WHERE venue_id = ?`);
