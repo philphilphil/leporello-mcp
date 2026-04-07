@@ -6,6 +6,7 @@ import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 import { getCountries, getCities, getVenues, getEvents } from './db.js';
+import { log, logError } from './logger.js';
 
 function parseCast(raw: unknown): string[] | undefined {
   if (typeof raw !== 'string') return undefined;
@@ -220,7 +221,7 @@ export function startHttpServer() {
           await server.connect(transport);
           await transport.handleRequest(req, res);
         } catch (err) {
-          console.error(JSON.stringify({ event: 'mcp_request_error', error: String(err) }));
+          logError('mcp_request_error', { error: String(err) });
           if (!res.headersSent) {
             res.writeHead(500).end();
           }
@@ -253,7 +254,7 @@ export function startHttpServer() {
   );
 
   httpServer.listen(port, () => {
-    console.log(JSON.stringify({ event: 'server_start', port }));
+    log('server_start', { port });
   });
 
   return httpServer;
