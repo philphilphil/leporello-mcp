@@ -6,7 +6,7 @@ import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 import { getCountries, getCities, getVenues, getEvents } from './db.js';
-import { log, logError } from './logger.js';
+import { log, logError, hashClientIp } from './logger.js';
 
 function parseCast(raw: unknown): string[] | undefined {
   if (typeof raw !== 'string') return undefined;
@@ -19,7 +19,47 @@ function parseCast(raw: unknown): string[] | undefined {
   }
 }
 
-function buildMcpServer(): McpServer {
+type ReqContext = {
+  ua: string | null;
+  ipHash: string | null;
+};
+
+type ToolHandler<Args> = (args: Args) => Promise<{ content: Array<{ type: 'text'; text: string }> }>;
+
+function instrumentTool<Args>(
+  toolName: string,
+  reqContext: ReqContext,
+  handler: ToolHandler<Args>,
+  countResult: (result: { content: Array<{ type: 'text'; text: string }> }) => number,
+): ToolHandler<Args> {
+  return async (args: Args) => {
+    const start = performance.now();
+    try {
+      const result = await handler(args);
+      log('mcp_tool_call', {
+        tool: toolName,
+        duration_ms: Math.round(performance.now() - start),
+        result_count: countResult(result),
+        args: args as Record<string, unknown>,
+        client_ua: reqContext.ua,
+        client_ip_hash: reqContext.ipHash,
+      });
+      return result;
+    } catch (err) {
+      logError('mcp_tool_error', {
+        tool: toolName,
+        duration_ms: Math.round(performance.now() - start),
+        args: args as Record<string, unknown>,
+        client_ua: reqContext.ua,
+        client_ip_hash: reqContext.ipHash,
+        error: String(err),
+      });
+      throw err;
+    }
+  };
+}
+
+function buildMcpServer(reqContext: ReqContext): McpServer {
   const server = new McpServer({
     name: 'leporello',
     version: '1.0.0',
@@ -30,12 +70,17 @@ function buildMcpServer(): McpServer {
     'list_countries',
     'List all countries that have classical music or opera venues.',
     {},
-    async () => {
-      const countries = getCountries();
-      return {
-        content: [{ type: 'text', text: JSON.stringify({ countries }) }],
-      };
-    },
+    instrumentTool(
+      'list_countries',
+      reqContext,
+      async () => {
+        const countries = getCountries();
+        return {
+          content: [{ type: 'text', text: JSON.stringify({ countries }) }],
+        };
+      },
+      () => 0,
+    ),
   );
 
   server.tool(
@@ -47,12 +92,17 @@ function buildMcpServer(): McpServer {
         .optional()
         .describe('ISO 3166-1 alpha-2 country code, e.g. "DE", "AT", "US"'),
     },
-    async ({ country }) => {
-      const cities = getCities(country);
-      return {
-        content: [{ type: 'text', text: JSON.stringify({ cities }) }],
-      };
-    },
+    instrumentTool(
+      'list_cities',
+      reqContext,
+      async ({ country }) => {
+        const cities = getCities(country);
+        return {
+          content: [{ type: 'text', text: JSON.stringify({ cities }) }],
+        };
+      },
+      () => 0,
+    ),
   );
 
   server.tool(
@@ -68,21 +118,26 @@ function buildMcpServer(): McpServer {
         .optional()
         .describe('City name to filter by, e.g. "Stuttgart"'),
     },
-    async ({ country, city }) => {
-      const venues = getVenues({
-        cityId: city?.toLowerCase(),
-        country,
-      }).map((v) => ({
-        id: v.id,
-        name: v.name,
-        city: v.city_name,
-        country: v.country,
-        last_scraped: v.last_scraped,
-      }));
-      return {
-        content: [{ type: 'text', text: JSON.stringify({ venues }) }],
-      };
-    },
+    instrumentTool(
+      'list_venues',
+      reqContext,
+      async ({ country, city }) => {
+        const venues = getVenues({
+          cityId: city?.toLowerCase(),
+          country,
+        }).map((v) => ({
+          id: v.id,
+          name: v.name,
+          city: v.city_name,
+          country: v.country,
+          last_scraped: v.last_scraped,
+        }));
+        return {
+          content: [{ type: 'text', text: JSON.stringify({ venues }) }],
+        };
+      },
+      () => 0,
+    ),
   );
 
   server.tool(
@@ -106,41 +161,46 @@ function buildMcpServer(): McpServer {
         .optional()
         .describe('How many days ahead to look (default: 30, max: 90)'),
     },
-    async ({ country, city, venue_id, days_ahead }) => {
-      const rows = getEvents({
-        cityId: city?.toLowerCase(),
-        country,
-        venueId: venue_id,
-        daysAhead: days_ahead ?? 30,
-      });
+    instrumentTool(
+      'list_events',
+      reqContext,
+      async ({ country, city, venue_id, days_ahead }) => {
+        const rows = getEvents({
+          cityId: city?.toLowerCase(),
+          country,
+          venueId: venue_id,
+          daysAhead: days_ahead ?? 30,
+        });
 
-      const venueRows = getVenues({
-        cityId: city?.toLowerCase(),
-        country,
-      });
-      const data_age: Record<string, string> = {};
-      for (const v of venueRows) {
-        if (venue_id && v.id !== venue_id) continue;
-        if (v.last_scraped) data_age[v.id] = v.last_scraped;
-      }
+        const venueRows = getVenues({
+          cityId: city?.toLowerCase(),
+          country,
+        });
+        const data_age: Record<string, string> = {};
+        for (const v of venueRows) {
+          if (venue_id && v.id !== venue_id) continue;
+          if (v.last_scraped) data_age[v.id] = v.last_scraped;
+        }
 
-      const events = rows.map((e) => ({
-        id: e.id,
-        venue_id: e.venue_id,
-        venue_name: e.venue_name,
-        title: e.title,
-        date: e.date,
-        time: e.time,
-        ...(e.conductor ? { conductor: e.conductor } : {}),
-        ...(e.cast ? { cast: parseCast(e.cast) } : {}),
-        ...(e.location ? { location: e.location } : {}),
-        url: e.url,
-      }));
+        const events = rows.map((e) => ({
+          id: e.id,
+          venue_id: e.venue_id,
+          venue_name: e.venue_name,
+          title: e.title,
+          date: e.date,
+          time: e.time,
+          ...(e.conductor ? { conductor: e.conductor } : {}),
+          ...(e.cast ? { cast: parseCast(e.cast) } : {}),
+          ...(e.location ? { location: e.location } : {}),
+          url: e.url,
+        }));
 
-      return {
-        content: [{ type: 'text', text: JSON.stringify({ events, data_age }) }],
-      };
-    },
+        return {
+          content: [{ type: 'text', text: JSON.stringify({ events, data_age }) }],
+        };
+      },
+      () => 0,
+    ),
   );
 
   return server;
@@ -208,7 +268,12 @@ export function startHttpServer() {
           res.writeHead(405, { Allow: 'POST' }).end();
           return;
         }
-        const server = buildMcpServer();
+        const xff = req.headers['x-forwarded-for'];
+        const xffStr = Array.isArray(xff) ? xff[0] : xff;
+        const ip = xffStr?.split(',')[0]?.trim() ?? req.socket.remoteAddress ?? null;
+        const ua = req.headers['user-agent'] ?? null;
+        const reqContext: ReqContext = { ua, ipHash: hashClientIp(ip) };
+        const server = buildMcpServer(reqContext);
         const transport = new StreamableHTTPServerTransport({
           sessionIdGenerator: undefined,
         });
