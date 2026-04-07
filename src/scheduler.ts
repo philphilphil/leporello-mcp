@@ -1,5 +1,6 @@
 import { replaceVenueEvents, updateLastScraped, updateScrapeError, upsertCity, upsertVenue } from './db.js';
 import { validateEvents } from './validate.js';
+import { log, logError } from './logger.js';
 import type { Scraper } from './scrapers/base.js';
 import { PhilharmonikerStuttgartScraper } from './scrapers/philharmoniker-stuttgart.js';
 import { StaatsoperStuttgartScraper } from './scrapers/staatsoper-stuttgart.js';
@@ -41,7 +42,7 @@ export async function runScrapers(list: Scraper[]): Promise<void> {
     upsertCity(cityId, cityName, country);
     upsertVenue(venueId, venueName, cityId, scheduleUrl);
 
-    console.log(JSON.stringify({ event: 'scrape_start', venue: scraper.venueId }));
+    log('scrape_start', { venue: scraper.venueId });
 
     for (let attempt = 1; attempt <= 2; attempt++) {
       if (attempt > 1) await new Promise((r) => setTimeout(r, 5_000));
@@ -52,43 +53,34 @@ export async function runScrapers(list: Scraper[]): Promise<void> {
         if (!validation.valid) {
           const msg = validation.errors.join('; ');
           if (attempt === 2) updateScrapeError(scraper.venueId, msg);
-          console.error(
-            JSON.stringify({
-              event: 'scrape_validation_error',
-              venue: scraper.venueId,
-              errors: validation.errors,
-              duration_ms: Date.now() - start,
-              attempt,
-              final: attempt === 2,
-            }),
-          );
+          logError('scrape_validation_error', {
+            venue: scraper.venueId,
+            errors: validation.errors,
+            duration_ms: Date.now() - start,
+            attempt,
+            final: attempt === 2,
+          });
           continue;
         }
         replaceVenueEvents(scraper.venueId, events);
         const ts = new Date().toISOString();
         updateLastScraped(scraper.venueId, ts);
-        console.log(
-          JSON.stringify({
-            event: 'scrape_success',
-            venue: scraper.venueId,
-            count: events.length,
-            duration_ms: Date.now() - start,
-            ...(attempt > 1 && { attempt }),
-          }),
-        );
+        log('scrape_success', {
+          venue: scraper.venueId,
+          count: events.length,
+          duration_ms: Date.now() - start,
+          ...(attempt > 1 && { attempt }),
+        });
         break;
       } catch (err) {
         if (attempt === 2) updateScrapeError(scraper.venueId, String(err));
-        console.error(
-          JSON.stringify({
-            event: 'scrape_error',
-            venue: scraper.venueId,
-            error: String(err),
-            duration_ms: Date.now() - start,
-            attempt,
-            final: attempt === 2,
-          }),
-        );
+        logError('scrape_error', {
+          venue: scraper.venueId,
+          error: String(err),
+          duration_ms: Date.now() - start,
+          attempt,
+          final: attempt === 2,
+        });
       }
     }
   }
