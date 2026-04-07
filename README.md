@@ -40,6 +40,10 @@ Venue-specific scrapers fetch schedule pages (HTML or JSON) from opera houses an
 | `list_venues` | All venues, optionally filtered by country or city |
 | `list_events` | Upcoming events filtered by country, city, or venue |
 
+## Privacy
+
+The hosted instance at [leporello.app](https://leporello.app) logs aggregate MCP usage (tool name, arguments, response time, User-Agent, and a daily-rotating salted hash of the client IP) so I can see what's working and what isn't. No raw IPs, no personal data, no auth tokens. If you'd rather not be counted, run your own instance — it's a single `docker compose up`.
+
 ## Run locally
 
 ```bash
