@@ -92,17 +92,34 @@ npm test -- philharmoniker  # Run one scraper
 
 ## Logging
 
-All logs are structured JSON on stdout/stderr:
+All logs are structured JSON on stdout/stderr via `src/logger.ts`. When `AXIOM_TOKEN` and `AXIOM_DATASET` are set, events are also shipped to Axiom (batched, flushed on shutdown). When unset, Axiom is a no-op — local dev and tests need no config.
+
+Env vars (see `.env.example`):
+- `AXIOM_TOKEN` — Axiom ingest token (optional; absent = stdout only)
+- `AXIOM_DATASET` — Axiom dataset name, e.g. `leporello-mcp`
+- `HASH_SALT` — secret for hashing client IPs in MCP usage events; rotate yearly
+- `SERVICE_NAME` — `web` or `scraper`, set per container in `docker-compose.yml`
+
+Events:
 
 ```json
 {"event":"server_start","port":3000}
 {"event":"scrape_start","venue":"staatsoper-stuttgart"}
 {"event":"scrape_success","venue":"staatsoper-stuttgart","count":77,"duration_ms":214}
 {"event":"scrape_error","venue":"...","error":"...","duration_ms":...}
+{"event":"scrape_validation_error","venue":"...","errors":[...],"attempt":2,"final":true}
 {"event":"web_build_start"}
 {"event":"web_build_success","duration_ms":...}
+{"event":"web_build_error","error":"...","duration_ms":...}
+{"event":"shutdown"}
 {"event":"mcp_request_error","error":"..."}
+{"event":"mcp_tool_call","tool":"list_events","duration_ms":12,"result_count":47,"args":{"country":"DE"},"client_ua":"Claude/1.2.3","client_ip_hash":"a3f1b2c4d5e6f708"}
+{"event":"mcp_tool_error","tool":"list_events","duration_ms":3,"args":{...},"error":"..."}
+{"event":"axiom_disabled","reason":"no_token"}
+{"event":"axiom_ingest_error","error":"..."}
 ```
+
+To add a new logger call: import `log` / `logError` from `./logger.js` (or `../logger.js`) — never use `console.log(JSON.stringify(...))` directly.
 
 ## Playwright screenshots
 
