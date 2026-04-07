@@ -8,8 +8,11 @@ services:
     restart: unless-stopped
     volumes:
       - ./data:/app/data
+    env_file:
+      - .env
     environment:
       - PORT=3000
+      - SERVICE_NAME=web
     networks:
       - gateway
     labels:
@@ -27,6 +30,10 @@ services:
     restart: "no"
     volumes:
       - ./data:/app/data
+    env_file:
+      - .env
+    environment:
+      - SERVICE_NAME=scraper
     profiles:
       - scrape
 
