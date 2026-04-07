@@ -71,6 +71,8 @@ SQLite at `DB_PATH` env var (default `./data/leporello.db`). Initialized on `get
 | `list_venues` | `country?`, `city?` | Cascading filter: country → city |
 | `list_events` | `country?`, `city?`, `venue_id?`, `days_ahead?` | `days_ahead` default 30, max 90; returns `data_age` map |
 
+When a filter value isn't in the catalog (e.g. `city: "paris"`), `list_cities` / `list_venues` / `list_events` add a `note` field to the response telling the agent which filter is uncovered and which tool to call to discover what's available. The same miss is also logged on the `mcp_tool_call` event as `unmatched: {city: "paris"}` for Axiom monitoring — useful to see which cities/countries agents are asking for so we can prioritize new scrapers.
+
 ## Scraper pattern
 
 Each scraper:
@@ -115,6 +117,7 @@ Events:
 {"event":"shutdown"}
 {"event":"mcp_request_error","error":"..."}
 {"event":"mcp_tool_call","tool":"list_events","duration_ms":12,"result_count":47,"args":{"country":"DE"},"client_ua":"Claude/1.2.3","client_ip_hash":"a3f1b2c4d5e6f708"}
+{"event":"mcp_tool_call","tool":"list_events","duration_ms":3,"result_count":0,"unmatched":{"city":"paris"},"args":{"city":"paris"},"client_ua":"...","client_ip_hash":"..."}
 {"event":"mcp_tool_error","tool":"list_events","duration_ms":3,"args":{...},"error":"..."}
 {"event":"axiom_disabled","reason":"no_token"}
 {"event":"axiom_ingest_error","error":"..."}

@@ -5,7 +5,7 @@ import { createServer, type IncomingMessage, type ServerResponse } from 'node:ht
 import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
-import { getCountries, getCities, getVenues, getEvents } from './db.js';
+import { getCountries, getCities, getVenues, getEvents, findUnmatchedFilters } from './db.js';
 import { log, logError, hashClientIp } from './logger.js';
 
 function parseCast(raw: unknown): string[] | undefined {
@@ -19,32 +19,61 @@ function parseCast(raw: unknown): string[] | undefined {
   }
 }
 
-type ReqContext = {
+export type ReqContext = {
   ua: string | null;
   ipHash: string | null;
 };
 
-type ToolHandler<Args> = (args: Args) => Promise<{ content: Array<{ type: 'text'; text: string }> }>;
+export type Unmatched = { country?: string; city?: string; venue_id?: string };
 
-function instrumentTool<Args>(
+export type McpResponse = { content: Array<{ type: 'text'; text: string }> };
+
+export type HandlerResult = {
+  response: McpResponse;
+  meta: { result_count: number; unmatched?: Unmatched };
+};
+
+export type ToolHandler<Args> = (args: Args) => Promise<HandlerResult>;
+
+export function buildNote(unmatched: Unmatched): string | undefined {
+  const parts: string[] = [];
+  const tools: string[] = [];
+  if (unmatched.country) {
+    parts.push(`country '${unmatched.country}'`);
+    tools.push('list_countries');
+  }
+  if (unmatched.city) {
+    parts.push(`city '${unmatched.city}'`);
+    tools.push('list_cities');
+  }
+  if (unmatched.venue_id) {
+    parts.push(`venue '${unmatched.venue_id}'`);
+    tools.push('list_venues');
+  }
+  if (parts.length === 0) return undefined;
+  return `Leporello does not currently cover ${parts.join(' and ')}. Call ${tools.join(' / ')} to see what's covered.`;
+}
+
+export function instrumentTool<Args>(
   toolName: string,
   reqContext: ReqContext,
   handler: ToolHandler<Args>,
-  countResult: (result: { content: Array<{ type: 'text'; text: string }> }) => number,
-): ToolHandler<Args> {
+): (args: Args) => Promise<McpResponse> {
   return async (args: Args) => {
     const start = performance.now();
     try {
-      const result = await handler(args);
+      const { response, meta } = await handler(args);
+      const hasUnmatched = meta.unmatched && Object.keys(meta.unmatched).length > 0;
       log('mcp_tool_call', {
         tool: toolName,
         duration_ms: Math.round(performance.now() - start),
-        result_count: countResult(result),
+        result_count: meta.result_count,
+        ...(hasUnmatched ? { unmatched: meta.unmatched } : {}),
         args: args as Record<string, unknown>,
         client_ua: reqContext.ua,
         client_ip_hash: reqContext.ipHash,
       });
-      return result;
+      return response;
     } catch (err) {
       logError('mcp_tool_error', {
         tool: toolName,
@@ -59,6 +88,109 @@ function instrumentTool<Args>(
   };
 }
 
+// ── MCP tool handlers ─────────────────────────────────────────────────────────
+// Pure handlers (no instrumentation, no req context). Exported for testability.
+
+export type ListCountriesArgs = Record<string, never>;
+export type ListCitiesArgs = { country?: string };
+export type ListVenuesArgs = { country?: string; city?: string };
+export type ListEventsArgs = {
+  country?: string;
+  city?: string;
+  venue_id?: string;
+  days_ahead?: number;
+};
+
+export const handleListCountries: ToolHandler<ListCountriesArgs> = async () => {
+  const countries = getCountries();
+  return {
+    response: {
+      content: [{ type: 'text', text: JSON.stringify({ countries }) }],
+    },
+    meta: { result_count: countries.length },
+  };
+};
+
+export const handleListCities: ToolHandler<ListCitiesArgs> = async ({ country }) => {
+  const cities = getCities(country);
+  const unmatched = findUnmatchedFilters({ country });
+  const note = buildNote(unmatched);
+  const payload: Record<string, unknown> = { cities };
+  if (note) payload.note = note;
+  return {
+    response: { content: [{ type: 'text', text: JSON.stringify(payload) }] },
+    meta: { result_count: cities.length, unmatched },
+  };
+};
+
+export const handleListVenues: ToolHandler<ListVenuesArgs> = async ({ country, city }) => {
+  const venues = getVenues({
+    cityId: city?.toLowerCase(),
+    country,
+  }).map((v) => ({
+    id: v.id,
+    name: v.name,
+    city: v.city_name,
+    country: v.country,
+    last_scraped: v.last_scraped,
+  }));
+  const unmatched = findUnmatchedFilters({ country, city });
+  const note = buildNote(unmatched);
+  const payload: Record<string, unknown> = { venues };
+  if (note) payload.note = note;
+  return {
+    response: { content: [{ type: 'text', text: JSON.stringify(payload) }] },
+    meta: { result_count: venues.length, unmatched },
+  };
+};
+
+export const handleListEvents: ToolHandler<ListEventsArgs> = async ({
+  country,
+  city,
+  venue_id,
+  days_ahead,
+}) => {
+  const rows = getEvents({
+    cityId: city?.toLowerCase(),
+    country,
+    venueId: venue_id,
+    daysAhead: days_ahead ?? 30,
+  });
+
+  const venueRows = getVenues({
+    cityId: city?.toLowerCase(),
+    country,
+  });
+  const data_age: Record<string, string> = {};
+  for (const v of venueRows) {
+    if (venue_id && v.id !== venue_id) continue;
+    if (v.last_scraped) data_age[v.id] = v.last_scraped;
+  }
+
+  const events = rows.map((e) => ({
+    id: e.id,
+    venue_id: e.venue_id,
+    venue_name: e.venue_name,
+    title: e.title,
+    date: e.date,
+    time: e.time,
+    ...(e.conductor ? { conductor: e.conductor } : {}),
+    ...(e.cast ? { cast: parseCast(e.cast) } : {}),
+    ...(e.location ? { location: e.location } : {}),
+    url: e.url,
+  }));
+
+  const unmatched = findUnmatchedFilters({ country, city, venueId: venue_id });
+  const note = buildNote(unmatched);
+  const payload: Record<string, unknown> = { events, data_age };
+  if (note) payload.note = note;
+
+  return {
+    response: { content: [{ type: 'text', text: JSON.stringify(payload) }] },
+    meta: { result_count: events.length, unmatched },
+  };
+};
+
 function buildMcpServer(reqContext: ReqContext): McpServer {
   const server = new McpServer({
     name: 'leporello',
@@ -70,24 +202,7 @@ function buildMcpServer(reqContext: ReqContext): McpServer {
     'list_countries',
     'List all countries that have classical music or opera venues.',
     {},
-    instrumentTool(
-      'list_countries',
-      reqContext,
-      async () => {
-        const countries = getCountries();
-        return {
-          content: [{ type: 'text', text: JSON.stringify({ countries }) }],
-        };
-      },
-      (result) => {
-        try {
-          const parsed = JSON.parse(result.content[0].text) as { countries: unknown[] };
-          return parsed.countries.length;
-        } catch {
-          return 0;
-        }
-      },
-    ),
+    instrumentTool('list_countries', reqContext, handleListCountries),
   );
 
   server.tool(
@@ -99,24 +214,7 @@ function buildMcpServer(reqContext: ReqContext): McpServer {
         .optional()
         .describe('ISO 3166-1 alpha-2 country code, e.g. "DE", "AT", "US"'),
     },
-    instrumentTool(
-      'list_cities',
-      reqContext,
-      async ({ country }) => {
-        const cities = getCities(country);
-        return {
-          content: [{ type: 'text', text: JSON.stringify({ cities }) }],
-        };
-      },
-      (result) => {
-        try {
-          const parsed = JSON.parse(result.content[0].text) as { cities: unknown[] };
-          return parsed.cities.length;
-        } catch {
-          return 0;
-        }
-      },
-    ),
+    instrumentTool('list_cities', reqContext, handleListCities),
   );
 
   server.tool(
@@ -132,33 +230,7 @@ function buildMcpServer(reqContext: ReqContext): McpServer {
         .optional()
         .describe('City name to filter by, e.g. "Stuttgart"'),
     },
-    instrumentTool(
-      'list_venues',
-      reqContext,
-      async ({ country, city }) => {
-        const venues = getVenues({
-          cityId: city?.toLowerCase(),
-          country,
-        }).map((v) => ({
-          id: v.id,
-          name: v.name,
-          city: v.city_name,
-          country: v.country,
-          last_scraped: v.last_scraped,
-        }));
-        return {
-          content: [{ type: 'text', text: JSON.stringify({ venues }) }],
-        };
-      },
-      (result) => {
-        try {
-          const parsed = JSON.parse(result.content[0].text) as { venues: unknown[] };
-          return parsed.venues.length;
-        } catch {
-          return 0;
-        }
-      },
-    ),
+    instrumentTool('list_venues', reqContext, handleListVenues),
   );
 
   server.tool(
@@ -182,53 +254,7 @@ function buildMcpServer(reqContext: ReqContext): McpServer {
         .optional()
         .describe('How many days ahead to look (default: 30, max: 90)'),
     },
-    instrumentTool(
-      'list_events',
-      reqContext,
-      async ({ country, city, venue_id, days_ahead }) => {
-        const rows = getEvents({
-          cityId: city?.toLowerCase(),
-          country,
-          venueId: venue_id,
-          daysAhead: days_ahead ?? 30,
-        });
-
-        const venueRows = getVenues({
-          cityId: city?.toLowerCase(),
-          country,
-        });
-        const data_age: Record<string, string> = {};
-        for (const v of venueRows) {
-          if (venue_id && v.id !== venue_id) continue;
-          if (v.last_scraped) data_age[v.id] = v.last_scraped;
-        }
-
-        const events = rows.map((e) => ({
-          id: e.id,
-          venue_id: e.venue_id,
-          venue_name: e.venue_name,
-          title: e.title,
-          date: e.date,
-          time: e.time,
-          ...(e.conductor ? { conductor: e.conductor } : {}),
-          ...(e.cast ? { cast: parseCast(e.cast) } : {}),
-          ...(e.location ? { location: e.location } : {}),
-          url: e.url,
-        }));
-
-        return {
-          content: [{ type: 'text', text: JSON.stringify({ events, data_age }) }],
-        };
-      },
-      (result) => {
-        try {
-          const parsed = JSON.parse(result.content[0].text) as { events: unknown[] };
-          return parsed.events.length;
-        } catch {
-          return 0;
-        }
-      },
-    ),
+    instrumentTool('list_events', reqContext, handleListEvents),
   );
 
   return server;
