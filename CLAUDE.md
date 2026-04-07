@@ -94,7 +94,7 @@ npm test -- philharmoniker  # Run one scraper
 
 All logs are structured JSON on stdout/stderr via `src/logger.ts`. When `AXIOM_TOKEN` and `AXIOM_DATASET` are set, events are also shipped to Axiom (batched, flushed on shutdown). When unset, Axiom is a no-op — local dev and tests need no config.
 
-Env vars (see `.env.example`):
+Env vars (see `.env.sample`):
 - `AXIOM_TOKEN` — Axiom ingest token (optional; absent = stdout only)
 - `AXIOM_DATASET` — Axiom dataset name, e.g. `leporello-mcp`
 - `HASH_SALT` — secret for hashing client IPs in MCP usage events; rotate yearly
