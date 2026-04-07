@@ -79,7 +79,14 @@ function buildMcpServer(reqContext: ReqContext): McpServer {
           content: [{ type: 'text', text: JSON.stringify({ countries }) }],
         };
       },
-      () => 0,
+      (result) => {
+        try {
+          const parsed = JSON.parse(result.content[0].text) as { countries: unknown[] };
+          return parsed.countries.length;
+        } catch {
+          return 0;
+        }
+      },
     ),
   );
 
@@ -101,7 +108,14 @@ function buildMcpServer(reqContext: ReqContext): McpServer {
           content: [{ type: 'text', text: JSON.stringify({ cities }) }],
         };
       },
-      () => 0,
+      (result) => {
+        try {
+          const parsed = JSON.parse(result.content[0].text) as { cities: unknown[] };
+          return parsed.cities.length;
+        } catch {
+          return 0;
+        }
+      },
     ),
   );
 
@@ -136,7 +150,14 @@ function buildMcpServer(reqContext: ReqContext): McpServer {
           content: [{ type: 'text', text: JSON.stringify({ venues }) }],
         };
       },
-      () => 0,
+      (result) => {
+        try {
+          const parsed = JSON.parse(result.content[0].text) as { venues: unknown[] };
+          return parsed.venues.length;
+        } catch {
+          return 0;
+        }
+      },
     ),
   );
 
@@ -199,7 +220,14 @@ function buildMcpServer(reqContext: ReqContext): McpServer {
           content: [{ type: 'text', text: JSON.stringify({ events, data_age }) }],
         };
       },
-      () => 0,
+      (result) => {
+        try {
+          const parsed = JSON.parse(result.content[0].text) as { events: unknown[] };
+          return parsed.events.length;
+        } catch {
+          return 0;
+        }
+      },
     ),
   );
 
