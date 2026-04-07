@@ -98,7 +98,8 @@ Env vars (see `.env.example`):
 - `AXIOM_TOKEN` — Axiom ingest token (optional; absent = stdout only)
 - `AXIOM_DATASET` — Axiom dataset name, e.g. `leporello-mcp`
 - `HASH_SALT` — secret for hashing client IPs in MCP usage events; rotate yearly
-- `SERVICE_NAME` — `web` or `scraper`, set per container in `docker-compose.yml`
+- `SERVICE_NAME` — `web` or `scraper`, set per container in `docker-compose.yml` (and per `npm` script for local dev)
+- `LEPORELLO_ENV` — `production` (set in `docker-compose.yml`) or `dev` (default for local). Tagged on every Axiom event as `env` so you can filter dev vs prod.
 
 Events:
 

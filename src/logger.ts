@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { Axiom } from '@axiomhq/js';
 
 const SERVICE_NAME = process.env.SERVICE_NAME ?? 'unknown';
+const ENV_NAME = process.env.LEPORELLO_ENV ?? 'dev';
 const AXIOM_TOKEN = process.env.AXIOM_TOKEN;
 const AXIOM_DATASET = process.env.AXIOM_DATASET;
 const HASH_SALT = process.env.HASH_SALT ?? '';
@@ -23,7 +24,7 @@ function sendToAxiom(event: string, fields: Record<string, unknown>): void {
   if (!axiom) return;
   try {
     axiom.ingest(AXIOM_DATASET!, [
-      { event, ...fields, _time: new Date().toISOString(), service: SERVICE_NAME },
+      { event, ...fields, _time: new Date().toISOString(), service: SERVICE_NAME, env: ENV_NAME },
     ]);
   } catch (err) {
     // Never re-throw, never re-send to Axiom (avoid loops)
