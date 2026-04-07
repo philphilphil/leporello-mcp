@@ -1,8 +1,10 @@
+import { createHash } from 'node:crypto';
 import { Axiom } from '@axiomhq/js';
 
 const SERVICE_NAME = process.env.SERVICE_NAME ?? 'unknown';
 const AXIOM_TOKEN = process.env.AXIOM_TOKEN;
 const AXIOM_DATASET = process.env.AXIOM_DATASET;
+const HASH_SALT = process.env.HASH_SALT ?? '';
 
 const axiom: Axiom | null =
   AXIOM_TOKEN && AXIOM_DATASET ? new Axiom({ token: AXIOM_TOKEN }) : null;
@@ -63,4 +65,10 @@ export async function flush(): Promise<void> {
       }) + '\n',
     );
   }
+}
+
+export function hashClientIp(ip: string | null, now: Date = new Date()): string | null {
+  if (!ip) return null;
+  const day = now.toISOString().slice(0, 10); // YYYY-MM-DD
+  return createHash('sha256').update(ip + HASH_SALT + day).digest('hex').slice(0, 16);
 }

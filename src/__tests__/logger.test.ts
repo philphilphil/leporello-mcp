@@ -105,3 +105,42 @@ describe('logger (with Axiom)', () => {
     expect(stderrCalls).toContain('axiom_ingest_error');
   });
 });
+
+describe('hashClientIp', () => {
+  beforeEach(() => {
+    process.env.HASH_SALT = 'test-salt';
+    vi.resetModules();
+  });
+
+  it('returns 16-char hex hash', async () => {
+    const { hashClientIp } = await import('../logger.js');
+    const h = hashClientIp('1.2.3.4', new Date('2026-04-07T12:00:00Z'));
+    expect(h).toMatch(/^[0-9a-f]{16}$/);
+  });
+
+  it('same ip + same date → same hash', async () => {
+    const { hashClientIp } = await import('../logger.js');
+    const a = hashClientIp('1.2.3.4', new Date('2026-04-07T01:00:00Z'));
+    const b = hashClientIp('1.2.3.4', new Date('2026-04-07T23:00:00Z'));
+    expect(a).toBe(b);
+  });
+
+  it('same ip + different date → different hash', async () => {
+    const { hashClientIp } = await import('../logger.js');
+    const a = hashClientIp('1.2.3.4', new Date('2026-04-07T12:00:00Z'));
+    const b = hashClientIp('1.2.3.4', new Date('2026-04-08T12:00:00Z'));
+    expect(a).not.toBe(b);
+  });
+
+  it('different ip + same date → different hash', async () => {
+    const { hashClientIp } = await import('../logger.js');
+    const a = hashClientIp('1.2.3.4', new Date('2026-04-07T12:00:00Z'));
+    const b = hashClientIp('5.6.7.8', new Date('2026-04-07T12:00:00Z'));
+    expect(a).not.toBe(b);
+  });
+
+  it('returns null for null ip', async () => {
+    const { hashClientIp } = await import('../logger.js');
+    expect(hashClientIp(null, new Date())).toBeNull();
+  });
+});
