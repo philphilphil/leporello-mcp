@@ -7,9 +7,9 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "dev": "npm run build --prefix web && tsx --env-file=.env src/index.ts",
+    "dev": "npm run build --prefix web && SERVICE_NAME=web tsx --env-file=.env src/index.ts",
     "dev:fresh": "npm run scrape && npm run dev",
-    "scrape": "tsx --env-file=.env src/scrape.ts",
+    "scrape": "SERVICE_NAME=scraper tsx --env-file=.env src/scrape.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "vitest run"
