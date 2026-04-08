@@ -142,5 +142,5 @@ docker compose logs -f web                    # Tail web logs
 
 Schedule scrapers via host cron (scrape then restart web to rebuild frontend):
 ```cron
-0 3 * * * cd /home/phil/docker/lep && docker compose run --rm scraper && docker compose restart web
+0 3 * * * cd /home/phil/docker/lep && docker compose --profile scrape build scraper && docker compose run --rm scraper && docker compose restart web
 ```
