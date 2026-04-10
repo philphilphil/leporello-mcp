@@ -24,7 +24,7 @@ function sendToAxiom(event: string, fields: Record<string, unknown>): void {
   if (!axiom) return;
   try {
     axiom.ingest(AXIOM_DATASET!, [
-      { event, ...fields, _time: new Date().toISOString(), service: SERVICE_NAME, env: ENV_NAME },
+      { event, ...fields, _time: new Date().toISOString(), app: 'leporello', service: SERVICE_NAME, env: ENV_NAME },
     ]);
   } catch (err) {
     // Never re-throw, never re-send to Axiom (avoid loops)
