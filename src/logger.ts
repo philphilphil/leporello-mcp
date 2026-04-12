@@ -1,36 +1,48 @@
 import { createHash } from 'node:crypto';
-import { Axiom } from '@axiomhq/js';
 
 const SERVICE_NAME = process.env.SERVICE_NAME ?? 'unknown';
 const ENV_NAME = process.env.LEPORELLO_ENV ?? 'dev';
-const AXIOM_TOKEN = process.env.AXIOM_TOKEN;
-const AXIOM_DATASET = process.env.AXIOM_DATASET;
+const SEQ_URL = process.env.SEQ_URL;
+const SEQ_API_KEY = process.env.SEQ_API_KEY;
 const HASH_SALT = process.env.HASH_SALT ?? '';
 
-const axiom: Axiom | null =
-  AXIOM_TOKEN && AXIOM_DATASET ? new Axiom({ token: AXIOM_TOKEN }) : null;
+// Buffer CLEF lines and auto-flush every 5 seconds to Seq
+const seqEnabled = !!(SEQ_URL && SEQ_API_KEY);
+const buffer: string[] = [];
+let flushTimer: ReturnType<typeof setInterval> | null = null;
 
-if (!axiom) {
+if (seqEnabled) {
+  flushTimer = setInterval(() => { flush(); }, 5_000);
+  flushTimer.unref(); // don't keep process alive just for logging
+}
+
+if (!seqEnabled) {
   process.stdout.write(
     JSON.stringify({
-      event: 'axiom_disabled',
-      reason: AXIOM_TOKEN ? 'no_dataset' : 'no_token',
+      event: 'seq_disabled',
+      reason: SEQ_URL ? 'no_api_key' : 'no_url',
       timestamp: new Date().toISOString(),
     }) + '\n',
   );
 }
 
-function sendToAxiom(event: string, fields: Record<string, unknown>): void {
-  if (!axiom) return;
+function sendToSeq(event: string, fields: Record<string, unknown>): void {
+  if (!seqEnabled) return;
   try {
-    axiom.ingest(AXIOM_DATASET!, [
-      { event, ...fields, _time: new Date().toISOString(), app: 'leporello', service: SERVICE_NAME, env: ENV_NAME },
-    ]);
+    const clefEvent = JSON.stringify({
+      '@t': new Date().toISOString(),
+      '@mt': event,
+      event,
+      ...fields,
+      app: 'leporello',
+      service: SERVICE_NAME,
+      env: ENV_NAME,
+    });
+    buffer.push(clefEvent);
   } catch (err) {
-    // Never re-throw, never re-send to Axiom (avoid loops)
     process.stderr.write(
       JSON.stringify({
-        event: 'axiom_ingest_error',
+        event: 'seq_ingest_error',
         error: String(err),
         timestamp: new Date().toISOString(),
       }) + '\n',
@@ -45,22 +57,33 @@ function writeLine(stream: NodeJS.WriteStream, event: string, fields: Record<str
 
 export function log(event: string, fields: Record<string, unknown> = {}): void {
   writeLine(process.stdout, event, fields);
-  sendToAxiom(event, fields);
+  sendToSeq(event, fields);
 }
 
 export function logError(event: string, fields: Record<string, unknown> = {}): void {
   writeLine(process.stderr, event, fields);
-  sendToAxiom(event, fields);
+  sendToSeq(event, fields);
 }
 
 export async function flush(): Promise<void> {
-  if (!axiom) return;
+  if (!seqEnabled || buffer.length === 0) return;
+  const body = buffer.splice(0).join('\n');
   try {
-    await axiom.flush();
+    const res = await fetch(`${SEQ_URL}/api/events/raw?clef`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/vnd.serilog.clef',
+        'X-Seq-ApiKey': SEQ_API_KEY!,
+      },
+      body,
+    });
+    if (!res.ok) {
+      throw new Error(`Seq responded ${res.status}: ${await res.text()}`);
+    }
   } catch (err) {
     process.stderr.write(
       JSON.stringify({
-        event: 'axiom_flush_error',
+        event: 'seq_flush_error',
         error: String(err),
         timestamp: new Date().toISOString(),
       }) + '\n',
