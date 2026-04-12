@@ -94,23 +94,33 @@ describe('logger (with Seq)', () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it('Seq flush errors do not throw to caller', async () => {
+  it('Seq flush errors do not throw and re-queue events', async () => {
     fetchMock.mockRejectedValueOnce(new Error('network down'));
+    fetchMock.mockResolvedValueOnce({ ok: true });
     const { log, flush } = await import('../logger.js');
     log('hi', {});
     await expect(flush()).resolves.toBeUndefined();
     const stderrCalls = stderrSpy.mock.calls.map((c: unknown[]) => String(c[0])).join('');
     expect(stderrCalls).toContain('seq_flush_error');
+    // Re-queued event is sent on next flush
+    await flush();
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    const body = fetchMock.mock.calls[1][1].body as string;
+    expect(body).toContain('"hi"');
   });
 
-  it('Seq non-2xx response is reported as flush error', async () => {
+  it('Seq non-2xx response re-queues events', async () => {
     fetchMock.mockResolvedValueOnce({ ok: false, status: 500, text: async () => 'Internal Server Error' });
+    fetchMock.mockResolvedValueOnce({ ok: true });
     const { log, flush } = await import('../logger.js');
     log('hi', {});
     await expect(flush()).resolves.toBeUndefined();
     const stderrCalls = stderrSpy.mock.calls.map((c: unknown[]) => String(c[0])).join('');
     expect(stderrCalls).toContain('seq_flush_error');
     expect(stderrCalls).toContain('500');
+    // Re-queued event is sent on next flush
+    await flush();
+    expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 });
 

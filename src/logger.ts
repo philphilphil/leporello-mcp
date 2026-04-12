@@ -9,14 +9,11 @@ const HASH_SALT = process.env.HASH_SALT ?? '';
 // Buffer CLEF lines and auto-flush every 5 seconds to Seq
 const seqEnabled = !!(SEQ_URL && SEQ_API_KEY);
 const buffer: string[] = [];
-let flushTimer: ReturnType<typeof setInterval> | null = null;
+let flushing = false;
 
 if (seqEnabled) {
-  flushTimer = setInterval(() => { flush(); }, 5_000);
-  flushTimer.unref(); // don't keep process alive just for logging
-}
-
-if (!seqEnabled) {
+  setInterval(() => { if (!flushing) flush(); }, 5_000).unref();
+} else {
   process.stdout.write(
     JSON.stringify({
       event: 'seq_disabled',
@@ -66,8 +63,9 @@ export function logError(event: string, fields: Record<string, unknown> = {}): v
 }
 
 export async function flush(): Promise<void> {
-  if (!seqEnabled || buffer.length === 0) return;
-  const body = buffer.splice(0).join('\n');
+  if (!seqEnabled || buffer.length === 0 || flushing) return;
+  const batch = buffer.splice(0);
+  flushing = true;
   try {
     const res = await fetch(`${SEQ_URL}/api/events/raw?clef`, {
       method: 'POST',
@@ -75,12 +73,13 @@ export async function flush(): Promise<void> {
         'Content-Type': 'application/vnd.serilog.clef',
         'X-Seq-ApiKey': SEQ_API_KEY!,
       },
-      body,
+      body: batch.join('\n'),
     });
     if (!res.ok) {
       throw new Error(`Seq responded ${res.status}: ${await res.text()}`);
     }
   } catch (err) {
+    buffer.unshift(...batch);
     process.stderr.write(
       JSON.stringify({
         event: 'seq_flush_error',
@@ -88,6 +87,8 @@ export async function flush(): Promise<void> {
         timestamp: new Date().toISOString(),
       }) + '\n',
     );
+  } finally {
+    flushing = false;
   }
 }
 
