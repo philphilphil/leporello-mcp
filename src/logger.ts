@@ -59,7 +59,7 @@ export function log(event: string, fields: Record<string, unknown> = {}): void {
 
 export function logError(event: string, fields: Record<string, unknown> = {}): void {
   writeLine(process.stderr, event, fields);
-  sendToSeq(event, fields);
+  sendToSeq(event, { '@l': 'Error', ...fields });
 }
 
 export async function flush(): Promise<void> {

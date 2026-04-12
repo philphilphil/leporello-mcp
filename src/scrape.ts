@@ -12,6 +12,7 @@ try {
     if (matched.length === 0) {
       const ids = scrapers.map((s) => s.venueId).join(', ');
       logError('unknown_venue', { venue: venueArg, available: ids });
+      await flush();
       process.exit(1);
     }
     await runScrapers(matched);

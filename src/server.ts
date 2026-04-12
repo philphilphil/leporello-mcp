@@ -68,7 +68,7 @@ export function instrumentTool<Args>(
         tool: toolName,
         duration_ms: Math.round(performance.now() - start),
         result_count: meta.result_count,
-        ...(hasUnmatched ? { unmatched: meta.unmatched } : {}),
+        ...(hasUnmatched ? { '@l': 'Warning', unmatched: meta.unmatched } : {}),
         args: args as Record<string, unknown>,
         client_ua: reqContext.ua,
         client_ip_hash: reqContext.ipHash,
