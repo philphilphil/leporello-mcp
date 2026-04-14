@@ -53,6 +53,16 @@ describe('OperaNationalDeParisScraper', () => {
     expect(tosca!.url).toContain('tosca');
   });
 
+  it('deduplicates events across pages', async () => {
+    // Simulate the same show appearing on two API pages (observed in production)
+    const duplicateScraper = new OperaNationalDeParisScraper({
+      fetchJson: async () => [fixture, fixture],
+    });
+    const events = await duplicateScraper.scrape();
+    const ids = events.map(e => e.id);
+    expect(ids.length).toBe(new Set(ids).size);
+  });
+
   it('all events have required fields', async () => {
     const events = await scraper.scrape();
     for (const e of events) {

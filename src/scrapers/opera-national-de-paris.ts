@@ -136,6 +136,7 @@ export class OperaNationalDeParisScraper implements Scraper {
 
   parse(pages: ApiResponse[]): Event[] {
     const events: Event[] = [];
+    const seen = new Set<string>();
     const now = new Date().toISOString();
 
     for (const page of pages) {
@@ -151,10 +152,14 @@ export class OperaNationalDeParisScraper implements Scraper {
             if (!parsed) continue;
 
             const { date, time } = parsed;
+            const id = generateEventId(this.venueId, date, time, title);
+            if (seen.has(id)) continue;
+            seen.add(id);
+
             const fullTitle = sub_title ? `${title} — ${sub_title}` : title;
 
             events.push({
-              id: generateEventId(this.venueId, date, time, title),
+              id,
               venue_id: this.venueId,
               title: fullTitle,
               date,
