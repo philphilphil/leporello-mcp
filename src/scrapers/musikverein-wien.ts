@@ -2,9 +2,18 @@ import { load } from 'cheerio';
 import type { Event } from '../types.js';
 import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
 
-type FetchHtml = () => Promise<string>;
+type FetchHtml = (url: string) => Promise<string>;
 
-const SPIELPLAN_URL = 'https://spielplan.musikverein.at/spielplan';
+const BASE_URL = 'https://spielplan.musikverein.at';
+const SPIELPLAN_URL = `${BASE_URL}/spielplan`;
+const DAYS_AHEAD = 90; // stop paginating once events run past this window
+const MAX_PAGES = 6; // safety cap; the 90-day cutoff normally stops sooner
+
+/** Returns "YYYY-MM" for the month `offset` months after `from`. */
+function monthKey(from: Date, offset: number): string {
+  const d = new Date(Date.UTC(from.getUTCFullYear(), from.getUTCMonth() + offset, 1));
+  return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
+}
 
 export class MusikvereinWienScraper implements Scraper {
   readonly venue: VenueMeta = {
@@ -20,16 +29,49 @@ export class MusikvereinWienScraper implements Scraper {
 
   constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
 
+  private async fetchPage(url: string): Promise<string> {
+    if (this.opts.fetchHtml) return this.opts.fetchHtml(url);
+    const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+    if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
+    return res.text();
+  }
+
   async scrape(): Promise<Event[]> {
-    const html = this.opts.fetchHtml
-      ? await this.opts.fetchHtml()
-      : await fetch(SPIELPLAN_URL, {
-          headers: { 'User-Agent': USER_AGENT },
-        }).then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status} from ${SPIELPLAN_URL}`);
-          return r.text();
-        });
-    return this.parse(html);
+    const now = new Date();
+    const cutoff = new Date(now.getTime() + DAYS_AHEAD * 86_400_000).toISOString().slice(0, 10);
+
+    // The default /spielplan page returns a rolling ~30-day window starting
+    // today. Each subsequent month is reachable via ?month=YYYY-MM. We walk
+    // forward month by month, deduping by id (pages overlap), until events run
+    // past the 90-day cutoff or a page adds nothing new.
+    const urls = [SPIELPLAN_URL];
+    for (let i = 0; i < MAX_PAGES - 1; i++) {
+      urls.push(`${SPIELPLAN_URL}?month=${monthKey(now, i + 1)}`);
+    }
+
+    const events: Event[] = [];
+    const seen = new Set<string>();
+
+    for (const url of urls) {
+      const pageEvents = this.parse(await this.fetchPage(url));
+      if (pageEvents.length === 0) break; // no more events published
+
+      let added = 0;
+      let reachedCutoff = false;
+      for (const event of pageEvents) {
+        if (event.date > cutoff) { reachedCutoff = true; continue; }
+        if (seen.has(event.id)) continue; // overlap between window pages
+        seen.add(event.id);
+        events.push(event);
+        added++;
+      }
+      // Same fixture served for every page (tests/analyze) or fully-overlapping
+      // months add nothing new — stop rather than spin to MAX_PAGES.
+      if (reachedCutoff) break;
+      if (added === 0) break;
+    }
+
+    return events;
   }
 
   parse(html: string): Event[] {
@@ -87,9 +129,12 @@ export class MusikvereinWienScraper implements Scraper {
         // Build full title: append composers if present
         const fullTitle = composersText ? `${title} — ${composersText}` : title;
 
-        // URL
+        // URL — hrefs in the markup are already absolute; resolve defensively.
         const href = mainLink.attr('href') ?? '';
-        const url = href || null;
+        let url: string | null = null;
+        if (href) {
+          try { url = new URL(href, BASE_URL).href; } catch { url = null; }
+        }
 
         events.push({
           id: generateEventId(this.venueId, date, time, title),

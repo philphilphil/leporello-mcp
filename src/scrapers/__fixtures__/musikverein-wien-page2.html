@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spielplan - Musikverein Wien</title>
+        <link rel="stylesheet" href="https://spielplan.musikverein.at/assets/css/spielplan.css">
+    </head>
+<body class="mv-custom">
+
+
+<div class="container spielplan" id="wrapper">
+    <div class="search-section search-active">
+        <form id="archive-search-form" class="archive-search accordion-container" method="post" action="https://spielplan.musikverein.at/spielplan">
+<div class="form-column full-1 signal">
+  <label class="visually-hidden" for="interpreter_name">Interpret:in</label>
+  <input type="search" id="interpreter_name" name="interpreter_name"
+         placeholder="Interpret:in"
+         value="">
+</div>
+
+<div class="form-column full-1 signal">
+  <label class="visually-hidden" for="composer_author">Komponist:in</label>
+  <input type="search" id="composer_author" name="composer_author"
+         placeholder="Komponist:in"
+         value="">
+</div>
+
+<div class="form-column full-1 signal">
+  <label class="visually-hidden" for="code">Genre</label>
+  <select id="code" name="code">
+    <option value="">Genre auswählen</option>
+            <option value="ORCH" >
+          Orchestermusik        </option>
+            <option value="KAM" >
+          Kammermusik        </option>
+            <option value="STRQUA" >
+          Streichquartett        </option>
+            <option value="CHOR" >
+          Chormusik        </option>
+            <option value="AM" >
+          Alte Musik        </option>
+            <option value="LES" >
+          Lesung        </option>
+            <option value="KIJU" >
+          Kinder, Jugend & Familien        </option>
+            <option value="GESSOL" >
+          Gesangssolist        </option>
+            <option value="INSTRSOL" >
+          Instrumentalsolist        </option>
+      </select>
+</div>
+
+<div class="form-column half-2 ">
+  <label class="visually-hidden date-picker" for="date_start_from">Datum Start</label>
+  <input type="date" id="date_start_from" name="date_start_from"
+         min="2026-06-13"
+         placeholder="dd.mm.yyyy"
+         value="2026-08-01">
+</div>
+
+<div class="form-column full-1 button-row">
+    <input type="submit" id="submitButton" name="submit" value="Suchen" class="button" onclick="showWaitOverlay();">
+    <input type="reset" value="Reset" class="hide button" onclick="window.location.href = 'https://spielplan.musikverein.at/spielplan';">
+</div>
+
+            
+        </form>
+        <div class="filter-section search-active">
+            <div class="filter-section">
+                                    <div class="filter-box">
+                        <h3>Filter: Komponist:innen</h3>
+                        <div class="filter">
+                                                            <a href="#" onclick="fillField('composer_author', '*** | Antonio Vivaldi | Joseph Haydn | Wolfgang Amadeus Mozart'); return false;">*** | Antonio Vivaldi | Joseph Haydn | Wolfgang Amadeus Mozart</a>
+                                                            <a href="#" onclick="fillField('composer_author', ' | *** | Gaetano Donizetti | Giacomo Puccini | Gioacchino Rossini | Jacques Offenbach | Liping He | Luan Kai | Ming Yao / Su Yan | Peng Xue | Richard Rodgers | Shang Deyi | Shiguang Wang | Sisi Zhu | Traditional Guizhou | Traditional Russland | Wei Jin | Wolfgang Amadeus Mozart | Zhang Jingan / Ouyang Qianshu'); return false;"> | *** | Gaetano Donizetti | Giacomo Puccini | Gioacchino Rossini | Jacques Offenbach | Liping He | Luan Kai | Ming Yao / Su Yan | Peng Xue | Richard Rodgers | Shang Deyi | Shiguang Wang | Sisi Zhu | Traditional Guizhou | Traditional Russland | Wei Jin | Wolfgang Amadeus Mozart | Zhang Jingan / Ouyang Qianshu</a>
+                                                    </div>
+                    </div>
+                
+                                    <div class="filter-box">
+                        <h3>Filter: Interpret:innen</h3>
+                        <div class="filter">
+                                                            <a href="#" onclick="fillField('interpreter_name', 'Wiener Mozart Orchester');return false;">Wiener Mozart Orchester</a>
+                                                            <a href="#" onclick="fillField('interpreter_name', 'Die SchlossCapelle | Fritz Kircher');return false;">Die SchlossCapelle | Fritz Kircher</a>
+                                                            <a href="#" onclick="fillField('interpreter_name', 'Filarmonica Arad | Internationale Solist:innen | Martin Braun');return false;">Filarmonica Arad | Internationale Solist:innen | Martin Braun</a>
+                                                            <a href="#" onclick="fillField('interpreter_name', 'Inspirierende junge Solistinnen und Solisten, Chöre und Orchester aus Amerika, A | Inspiring young soloists, choirs, and orchestras from America, Asia and Europe');return false;">Inspirierende junge Solistinnen und Solisten, Chöre und Orchester aus Amerika, A | Inspiring young soloists, choirs, and orchestras from America, Asia and Europe</a>
+                                                            <a href="#" onclick="fillField('interpreter_name', 'Ensemble Belle Époque | Internationale Solistinnen und Solisten | Ronen Nissan');return false;">Ensemble Belle Époque | Internationale Solistinnen und Solisten | Ronen Nissan</a>
+                                                            <a href="#" onclick="fillField('interpreter_name', 'Chinesisches Nationalorchester | Europäisches Ballettensemble | Internationale Pianist:innen | Internationale Sänger:innen | Internationaler gemischter Chor | Internationaler Violin-Solist | Internationales Contemporary Dance Ensemble | Junge Solist:innen traditioneller Instrumente | Kammermusikensemble | Traditionelles Chinesisches Tanzensemble');return false;">Chinesisches Nationalorchester | Europäisches Ballettensemble | Internationale Pianist:innen | Internationale Sänger:innen | Internationaler gemischter Chor | Internationaler Violin-Solist | Internationales Contemporary Dance Ensemble | Junge Solist:innen traditioneller Instrumente | Kammermusikensemble | Traditionelles Chinesisches Tanzensemble</a>
+                                                            <a href="#" onclick="fillField('interpreter_name', 'Die SchlossCapelle | Mykhaylo Zakharov');return false;">Die SchlossCapelle | Mykhaylo Zakharov</a>
+                                                            <a href="#" onclick="fillField('interpreter_name', 'Internationale Kammermusikensembles | Internationale Solist:innen');return false;">Internationale Kammermusikensembles | Internationale Solist:innen</a>
+                                                            <a href="#" onclick="fillField('interpreter_name', 'Internationale Solistinnen und Solisten');return false;">Internationale Solistinnen und Solisten</a>
+                                                            <a href="#" onclick="fillField('interpreter_name', 'Chunhe Zhang | Helge Dorsch | Hua Wang | Jane Zhou | Jessie Chen | Jianguang Yuan | Lena Li | Li Huang | Lin Cheng | Liu Keqing | Nicole Gong | Sisi Zhu | Tian Yue | Wei Weigh | Weidong Liu | Weijie Huang | Xiaoming Yu | Xiaoxia Feng | Yan Cui | Yongdi Chen | Zizhen Liu');return false;">Chunhe Zhang | Helge Dorsch | Hua Wang | Jane Zhou | Jessie Chen | Jianguang Yuan | Lena Li | Li Huang | Lin Cheng | Liu Keqing | Nicole Gong | Sisi Zhu | Tian Yue | Wei Weigh | Weidong Liu | Weijie Huang | Xiaoming Yu | Xiaoxia Feng | Yan Cui | Yongdi Chen | Zizhen Liu</a>
+                                                    </div>
+                    </div>
+                            </div>
+        </div>
+        <script>
+            function fillField(fieldId, value) {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    field.value = value;
+                    document.getElementById("archive-search-form").requestSubmit();
+                } else {
+                    console.warn(`Field with ID '${fieldId}' not found.`);
+                }
+            }
+            document.querySelectorAll('input[type="search"]').forEach(searchInput => {
+                searchInput.addEventListener('input', function() {
+                    // Check if input is cleared (empty)
+                    if (searchInput.value === '') {
+                        document.getElementById("archive-search-form").requestSubmit();
+                    }
+                });
+            });
+            document.querySelectorAll('input[type="checkbox"]').forEach(searchInput => {
+                searchInput.addEventListener("click", function() {
+                    document.getElementById("archive-search-form").requestSubmit();
+                });
+            });
+            document.querySelectorAll('select').forEach(selectElement => {
+                selectElement.addEventListener('change', function() {
+                    // Submit the form when a select option is changed
+                    document.getElementById("archive-search-form").requestSubmit();
+                });
+            });
+        </script>
+    </div>
+            <div class="time-nav">
+            <div class="time">
+                                <a href="?month=2026-07">Vorherige Konzerte</a>
+                
+                <a class="next-m" href="?month=2026-09">Weitere Konzerte</a>
+
+                <select  style="display: none;" id="month" name="month" onchange="changeMonth()">
+                    <option value="">Monat wählen</option>
+                                                <option value="2026-06" >2026-06</option>
+                                                <option value="2026-07" >2026-07</option>
+                                                <option value="2026-08" selected>2026-08</option>
+                                                <option value="2026-09" >2026-09</option>
+                                                <option value="2026-10" >2026-10</option>
+                                                <option value="2026-11" >2026-11</option>
+                                                <option value="2026-12" >2026-12</option>
+                                                <option value="2027-01" >2027-01</option>
+                                                <option value="2027-02" >2027-02</option>
+                                                <option value="2027-03" >2027-03</option>
+                                                <option value="2027-04" >2027-04</option>
+                                                <option value="2027-05" >2027-05</option>
+                                                <option value="2027-06" >2027-06</option>
+                                                <option value="2027-07" >2027-07</option>
+                                                <option value="2027-08" >2027-08</option>
+                                    </select>
+                <script>
+                    function changeMonth() {
+                        window.location.href = "?month=" + document.getElementById("month").value;
+                    }
+                </script>
+            </div>
+        </div>
+        <ul class="calendar spielplan">
+
+                        
+                                        
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Samstag, 1. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="0006090c">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=0006090c" target="_blank">
+                                        <p class="">01.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=0006090c" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229753402997"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Sonntag, 2. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="000f5f46">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=000f5f46" target="_blank">
+                                        <p class="">02.08.2026 </p>
+                                        <p class="">
+                                            14:30 Uhr  - 17:30 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=000f5f46" target="_blank">
+                                        <h3 class="event--heading">VOICES OF THE FUTURE</h3>
+                                        <p class="text">With young talented Soloists, Choirs and Orchestras</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Future China Foundation Limited</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229834162771"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <div class="event FV" id="0010a6f8">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=0010a6f8" target="_blank">
+                                        <p class="">02.08.2026 </p>
+                                        <p class="">
+                                            20:00 Uhr  - 22:00 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=0010a6f8" target="_blank">
+                                        <h3 class="event--heading">Die SchlossCapelle </h3>
+                                        <p class="text">Mozart, Haydn & Vivaldi</p>
+                                        <p class="text">Die vier Jahreszeiten - The four seasons</p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Classic Exclusive OG</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229753267350"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Montag, 3. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="00117913">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=00117913" target="_blank">
+                                        <p class="">03.08.2026 </p>
+                                        <p class="">
+                                            19:30 Uhr  - 22:00 Uhr                                        </p>
+                                        <p class="text">Brahms-Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=00117913" target="_blank">
+                                        <h3 class="event--heading">VIYAF Virtuosi – Chamber & Recital Evenings I</h3>
+                                        <p class="text">Ensemble Belle Époque • Ronen Nissan</p>
+                                        <p class="text">Internationale Solistinnen und Solisten</p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Meta Management GmbH</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                                                                    <p class="text">Der Vorverkaufstermin wird zu einem späteren Zeitpunkt bekannt gegeben.</p>
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <div class="event FV" id="0006090b">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=0006090b" target="_blank">
+                                        <p class="">03.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=0006090b" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229760653647"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Dienstag, 4. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="000607ed">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=000607ed" target="_blank">
+                                        <p class="">04.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=000607ed" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229760656374"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Mittwoch, 5. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="000607ef">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=000607ef" target="_blank">
+                                        <p class="">05.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=000607ef" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229760656375"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Donnerstag, 6. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="000607f1">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=000607f1" target="_blank">
+                                        <p class="">06.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=000607f1" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229760663242"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Freitag, 7. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="000607f3">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=000607f3" target="_blank">
+                                        <p class="">07.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=000607f3" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229760664252"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Samstag, 8. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="000607f5">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=000607f5" target="_blank">
+                                        <p class="">08.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=000607f5" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229760665060"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Sonntag, 9. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="00121011">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=00121011" target="_blank">
+                                        <p class="">09.08.2026 </p>
+                                        <p class="">
+                                            15:00 Uhr  - 18:00 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=00121011" target="_blank">
+                                        <h3 class="event--heading">Ost-West Harmonie: Klangglanz im Goldenen Saal</h3>
+                                        <p class="text">Internationales Kultur- und Musikfestival</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Hua Yun Dandelion (Beijing) Culture Media Co., Ltd.</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229827879064"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <div class="event FV" id="0010a6f7">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=0010a6f7" target="_blank">
+                                        <p class="">09.08.2026 </p>
+                                        <p class="">
+                                            20:00 Uhr  - 22:00 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=0010a6f7" target="_blank">
+                                        <h3 class="event--heading">Die SchlossCapelle </h3>
+                                        <p class="text">Mozart, Haydn & Vivaldi</p>
+                                        <p class="text">Die vier Jahreszeiten - The four seasons</p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Classic Exclusive OG</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229760790098"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Montag, 10. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="000607f7">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=000607f7" target="_blank">
+                                        <p class="">10.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=000607f7" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229753219076"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Dienstag, 11. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="000607f9">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=000607f9" target="_blank">
+                                        <p class="">11.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=000607f9" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229753188873"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Mittwoch, 12. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="000607fb">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=000607fb" target="_blank">
+                                        <p class="">12.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=000607fb" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229753141716"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Donnerstag, 13. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="000607fd">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=000607fd" target="_blank">
+                                        <p class="">13.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=000607fd" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229753267349"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Freitag, 14. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="0012ac82">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=0012ac82" target="_blank">
+                                        <p class="">14.08.2026 </p>
+                                        <p class="">
+                                            15:30 Uhr  - 18:00 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=0012ac82" target="_blank">
+                                        <h3 class="event--heading">Belt and Road – Chinesische Werke im Sinfoniekonzert</h3>
+                                        <p class="text"></p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Peking BEI YI Kultur Medien GmbH</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                                                                    <p class="text">Der Vorverkaufstermin wird zu einem späteren Zeitpunkt bekannt gegeben.</p>
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <div class="event FV" id="000607ff">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=000607ff" target="_blank">
+                                        <p class="">14.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=000607ff" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229760665061"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Samstag, 15. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="0011796d">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=0011796d" target="_blank">
+                                        <p class="">15.08.2026 </p>
+                                        <p class="">
+                                            15:30 Uhr  - 18:00 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=0011796d" target="_blank">
+                                        <h3 class="event--heading">VIYAF Virtuosi – Great Piano Concertos I</h3>
+                                        <p class="text">Filarmonica Arad • Martin Braun • N.N.</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Meta Management GmbH</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229821235086"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <div class="event FV" id="00060801">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=00060801" target="_blank">
+                                        <p class="">15.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=00060801" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229760673847"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Sonntag, 16. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="00117970">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=00117970" target="_blank">
+                                        <p class="">16.08.2026 </p>
+                                        <p class="">
+                                            15:30 Uhr  - 18:00 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=00117970" target="_blank">
+                                        <h3 class="event--heading">VIYAF Virtuosi – Great Piano Concertos II</h3>
+                                        <p class="text">Filarmonica Arad • Martin Braun • N.N.</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Meta Management GmbH</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229820834017"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <div class="event FV" id="00117915">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=00117915" target="_blank">
+                                        <p class="">16.08.2026 </p>
+                                        <p class="">
+                                            19:30 Uhr  - 22:00 Uhr                                        </p>
+                                        <p class="text">Brahms-Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=00117915" target="_blank">
+                                        <h3 class="event--heading">VIYAF Virtuosi – Chamber & Recital Evenings II</h3>
+                                        <p class="text">Internationale Solistinnen und Solisten</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Meta Management GmbH</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                                                                    <p class="text">Der Vorverkaufstermin wird zu einem späteren Zeitpunkt bekannt gegeben.</p>
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                            
+                    
+                                            <div class="event FV" id="0010a6f4">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=0010a6f4" target="_blank">
+                                        <p class="">16.08.2026 </p>
+                                        <p class="">
+                                            20:00 Uhr  - 22:00 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=0010a6f4" target="_blank">
+                                        <h3 class="event--heading">Die SchlossCapelle </h3>
+                                        <p class="text">Mozart, Haydn & Vivaldi</p>
+                                        <p class="text">Die vier Jahreszeiten - The four seasons</p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Classic Exclusive OG</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229760673849"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Freitag, 28. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="00060817">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=00060817" target="_blank">
+                                        <p class="">28.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=00060817" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229760664253"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Samstag, 29. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="001230c4">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=001230c4" target="_blank">
+                                        <p class="">29.08.2026 </p>
+                                        <p class="">
+                                            15:30 Uhr  - 18:00 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=001230c4" target="_blank">
+                                        <h3 class="event--heading">Rhein International Arts Festival</h3>
+                                        <p class="text">Liu Keqing</p>
+                                        <p class="text">Feier anlässlich des 50‑jährigen Bühnenjubiläums und 70. Geburtstages von Direktor Liu Keqing</p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: SONATA Book Int. & Translation Service GmbH</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                                                                    <p class="text">Der Vorverkaufstermin wird zu einem späteren Zeitpunkt bekannt gegeben.</p>
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <div class="event FV" id="00060819">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=00060819" target="_blank">
+                                        <p class="">29.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=00060819" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229760665062"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Sonntag, 30. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="0010a6f6">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=0010a6f6" target="_blank">
+                                        <p class="">30.08.2026 </p>
+                                        <p class="">
+                                            20:00 Uhr  - 22:00 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=0010a6f6" target="_blank">
+                                        <h3 class="event--heading">Die SchlossCapelle </h3>
+                                        <p class="text">Mozart, Haydn & Vivaldi</p>
+                                        <p class="text">Die vier Jahreszeiten - The four seasons</p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Classic Exclusive OG</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229760675666"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                            
+                    
+                                            <li class="day">
+                            <h2 class="day--heading">Montag, 31. August 2026</h2>
+                <ul class="day--events">
+                                            <div class="event FV" id="0006081b">
+                            <div class="event-text-container">
+                                <div class="event--date-time text">
+                                    <div class="filter fremd"><p>Fremdveranstaltung</p></div>
+                                    <div class="filter eigen"><p>Eigenveranstaltung</p></div>
+                                    <a href="https://musikverein.at/konzert/?id=0006081b" target="_blank">
+                                        <p class="">31.08.2026 </p>
+                                        <p class="">
+                                            20:15 Uhr  - 22:05 Uhr                                        </p>
+                                        <p class="text">Großer Saal</p>
+                                        <p class="text">Musikverein</p>
+                                    </a>
+                                </div>
+
+                                <div class="event--main">
+                                    <a href="https://musikverein.at/konzert/?id=0006081b" target="_blank">
+                                        <h3 class="event--heading">Wiener Mozart Orchester</h3>
+                                        <p class="text">Wolfgang Amadeus Mozart</p>
+                                        <p class="text"></p>
+                                        <p class="text veranstalter">Eingemietete Veranstaltung von: Wiener Mozart Orchester</p>
+                                                                            </a>
+                                </div>
+
+
+                                <p class="text veranstalter-ev">Veranstalter: Gesellschaft der Musikfreunde in Wien</p>
+                                <div class="mv-logo"><img src="https://musikverein.at/wp-content/uploads/2025/12/mv-coral.svg"></div>
+
+                                <div class="event--ticketing">
+                                    
+
+                                                                            
+                                                                                    <a href="https://shop.musikverein.at/selection/event/seat?perfId=10229760675665"
+                                               class="ticket-link" target="_blank">
+                                                <span>Tickets</span>
+                                            </a>
+                                        
+                                    
+                                        
+                                        
+                                        
+                                                                    </div>
+                            </div>
+
+                                                    </div>
+                                    </ul>
+                </li>
+                                                        <p class="time">
+                                        <a href="?month=2026-07">Vorherige</a>
+                                        <a class="next-m" href="?month=2026-09">Folgender Monat</a>
+                </p>
+                    </ul>
+    </div>
+
+<div id="waitOverlay">
+    <div id="spinner"></div>
+</div>
+
+<script src="https://unpkg.com/accordion-js@3.4.0/dist/accordion.min.js"></script>
+<script>
+    function showWaitOverlay() {
+        const startDateInput = document.getElementById('date_start_from');
+        const endDateInput = document.getElementById('date_start_to');
+        if (!startDateInput.checkValidity() || !endDateInput.checkValidity()) {
+            return;
+        }
+        const overlay = document.getElementById('waitOverlay');
+        overlay.style.display = 'flex';
+    }
+
+    window.addEventListener('beforeunload', showWaitOverlay);
+
+    function initAccordion() {
+        const screenWidth = window.innerWidth;
+        let options = {
+            showMultiple: true,
+            openOnInit: [0]
+        };
+
+        if (screenWidth > 1200) {
+            options.openOnInit = [0, 1, 5];
+        } else if (screenWidth > 768) {
+            options.openOnInit = [0, 1];
+        }
+
+        accordionInstance = new Accordion('.accordion-container', options);
+    }
+    document.addEventListener("DOMContentLoaded", initAccordion);
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("archive-search-form");
+        const resetButton = form.querySelector("input[type='reset']");
+
+        function checkFormInputs() {
+            let isEmpty = true;
+
+            // Check all text and search inputs
+            const textInputs = form.querySelectorAll("input[type='text'], input[type='search'], input[type='date']");
+            textInputs.forEach(input => {
+                if (input.value.trim() !== "") {
+                    isEmpty = false;
+                }
+            });
+
+            // Check all checkboxes
+            const checkboxes = form.querySelectorAll("input[type='checkbox']");
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    isEmpty = false;
+                }
+            });
+
+            // Check all select elements
+            const selects = form.querySelectorAll("select");
+            selects.forEach(select => {
+                if (select.value.trim() !== "") {
+                    isEmpty = false;
+                }
+            });
+
+            // Disable or enable reset button
+            resetButton.disabled = isEmpty;
+            resetButton.classList.toggle("disabled", isEmpty); // Optionally add a CSS class to style it
+        }
+
+        // Attach event listeners to inputs
+        form.addEventListener("input", checkFormInputs);
+
+        // Initial check on page load
+        checkFormInputs();
+    });
+
+
+</script>
+
+<script type="text/javascript">
+    window.addEventListener('load', function () {
+        setTimeout(() => {
+            let message = {height: document.body.scrollHeight, width: document.body.scrollWidth};
+
+            // window.top refers to parent window
+            window.top.postMessage(message, "*");
+        }, "1000");
+    });
+</script>
+
+</body>
+</html>
