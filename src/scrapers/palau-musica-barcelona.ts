@@ -167,3 +167,5 @@ function parsePerformers(html: string | null): {
 
   return { conductor, cast };
 }
+
+export default new PalauMusicaBarcelonaScraper();
