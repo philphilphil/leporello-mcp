@@ -27,6 +27,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Philharmonie de Paris | Paris |
 | Bayerische Staatsoper | München |
 | Berliner Philharmonie | Berlin |
+| Gewandhaus | Leipzig |
 
 ## How it works
 
