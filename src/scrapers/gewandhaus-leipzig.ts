@@ -6,6 +6,26 @@ type FetchHtml = () => Promise<string>;
 
 const BASE_URL = 'https://www.gewandhausorchester.de';
 
+// Full schedule lives behind the site's Apache Solr search (`/suche/`), not the
+// homepage teaser (which only shows the next few events). `q=*` with a
+// server-side `concert_dateS` date filter returns every concert in the window,
+// in the same event-teaser markup the homepage uses. Results paginate via
+// `groupPage` (10 per page); an out-of-range page returns zero events.
+const HORIZON_DAYS = 365;
+// Pagination normally ends when a page returns zero events (~62 pages for a
+// full year). MAX_PAGES is only a runaway guard for the case where the date
+// filter stops working — set well above the expected page count so it never
+// truncates real results.
+const MAX_PAGES = 120;
+
+// Solr expects a `YYYYMMDDHHMM` timestamp for the concert_dateS filter.
+function solrTimestamp(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}${m}${day}0000`;
+}
+
 export class GewandhausLeipzigScraper implements Scraper {
   readonly venue: VenueMeta = {
     venueId: 'gewandhaus-leipzig',
@@ -26,39 +46,47 @@ export class GewandhausLeipzigScraper implements Scraper {
       return this.parse(html);
     }
 
-    // The homepage shows the first batch; AJAX endpoint loads more with offset
-    const allEvents: Event[] = [];
+    const events: Event[] = [];
+    const seen = new Set<string>();
 
-    // Fetch the homepage (first batch of events)
-    const res = await fetch(this.venue.scheduleUrl, {
-      headers: { 'User-Agent': USER_AGENT },
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status} from ${this.venue.scheduleUrl}`);
-    const homeHtml = await res.text();
-    allEvents.push(...this.parse(homeHtml));
+    for (let page = 1; page <= MAX_PAGES; page++) {
+      const url = this.searchUrl(page);
+      const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+      if (!res.ok) {
+        // The first page must succeed; tolerate a mid-pagination hiccup.
+        if (page === 1) throw new Error(`HTTP ${res.status} from ${url}`);
+        break;
+      }
 
-    // Extract AJAX URL for additional pages and fetch them
-    const $ = load(homeHtml);
-    let nextUrl = $('[data-ajax-url]').last().attr('data-ajax-url') ?? '';
+      const parsed = this.parse(await res.text());
+      if (parsed.length === 0) break; // past the last page
 
-    while (nextUrl) {
-      const url = new URL(nextUrl, BASE_URL).href;
-      const ajaxRes = await fetch(url, {
-        headers: { 'User-Agent': USER_AGENT },
-      });
-      if (!ajaxRes.ok) break;
-      const ajaxHtml = await ajaxRes.text();
-      const parsed = this.parse(ajaxHtml);
-      if (parsed.length === 0) break;
-      allEvents.push(...parsed);
-
-      // Look for the next "load more" AJAX URL
-      const $ajax = load(ajaxHtml);
-      const candidateUrl = $ajax('[data-ajax-url]').last().attr('data-ajax-url') ?? '';
-      nextUrl = candidateUrl !== nextUrl ? candidateUrl : '';
+      let added = 0;
+      for (const ev of parsed) {
+        if (seen.has(ev.id)) continue;
+        seen.add(ev.id);
+        events.push(ev);
+        added++;
+      }
+      if (added === 0) break; // page yielded only duplicates → stop
     }
 
-    return allEvents;
+    return events;
+  }
+
+  // Builds the Solr search URL for one result page, bounded to the next
+  // HORIZON_DAYS so the crawl terminates instead of walking years of future
+  // seasons.
+  private searchUrl(page: number): string {
+    const now = new Date();
+    const end = new Date(now);
+    end.setDate(end.getDate() + HORIZON_DAYS);
+    const params = new URLSearchParams({
+      'tx_solr[q]': '*',
+      'tx_solr[filter][concert_dateS]': `concert_dateS:${solrTimestamp(now)}-${solrTimestamp(end)}`,
+      'tx_solr[groupPage][concert][altTypestringSconcert]': String(page),
+    });
+    return `${BASE_URL}/suche/?${params.toString()}`;
   }
 
   parse(html: string): Event[] {
@@ -94,9 +122,14 @@ export class GewandhausLeipzigScraper implements Scraper {
         }).text().trim();
         const location = locationText || null;
 
-        // Title from h2 inside .event-teaser__short-description-link
+        // Title from h2 inside .event-teaser__short-description-link.
+        // The h2 leads with a screen-reader-only "Veranstaltung:" label
+        // (<span class="h-only-screenreader-text">) that must be removed so it
+        // doesn't leak into the stored title.
         const $link = $teaser.find('.event-teaser__short-description-link').first();
-        const title = $link.find('h2').first().text().trim();
+        const $title = $link.find('h2').first().clone();
+        $title.find('.h-only-screenreader-text').remove();
+        const title = $title.text().trim();
         if (!title) return;
 
         // Subtitle (genre / description above the title)

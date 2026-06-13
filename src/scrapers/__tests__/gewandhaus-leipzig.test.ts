@@ -32,6 +32,13 @@ describe('GewandhausLeipzigScraper', () => {
     expect(withLocation).toBeDefined();
   });
 
+  it('strips the screen-reader "Veranstaltung:" prefix from titles', async () => {
+    const events = await scraper.scrape();
+    for (const e of events) {
+      expect(e.title).not.toMatch(/Veranstaltung:/i);
+    }
+  });
+
   it('builds absolute detail URLs', async () => {
     const events = await scraper.scrape();
     for (const e of events) {
