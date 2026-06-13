@@ -125,3 +125,5 @@ function fixTimestamp(ts: number): { date: string; time: string } {
     time: corrected.toLocaleTimeString('en-GB', { timeZone: TZ, hour: '2-digit', minute: '2-digit', hour12: false }),
   };
 }
+
+export default new LiceuBarcelonaScraper();

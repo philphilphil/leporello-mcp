@@ -101,3 +101,5 @@ export class KoelnerPhilharmonieScraper implements Scraper {
     return events;
   }
 }
+
+export default new KoelnerPhilharmonieScraper();

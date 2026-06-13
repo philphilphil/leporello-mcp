@@ -125,3 +125,5 @@ export class SemperoperDresdenScraper implements Scraper {
     return events;
   }
 }
+
+export default new SemperoperDresdenScraper();
