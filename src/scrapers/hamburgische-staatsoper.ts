@@ -87,16 +87,16 @@ export class HamburgischeStaatsoperScraper implements Scraper {
 
           // Cast from "Mit: ..." paragraph in extra__text
           let cast: string[] | null = null;
-          $block.find('div.extra__text p').each((_, pEl) => {
+          for (const pEl of $block.find('div.extra__text p').toArray()) {
             const pText = $(pEl).text().trim();
             const mitMatch = pText.match(/^Mit:\s*(.+)/);
             if (mitMatch) {
               cast = mitMatch[1]
                 .split(',')
-                .map(s => s.trim())
+                .map((s) => s.trim())
                 .filter(Boolean);
             }
-          });
+          }
 
           events.push({
             id: generateEventId(this.venueId, date, time, title),
