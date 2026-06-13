@@ -2,9 +2,12 @@ import { load } from 'cheerio';
 import type { Event } from '../types.js';
 import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
 
-type FetchHtml = () => Promise<string>;
+type FetchHtml = (url: string) => Promise<string>;
 
 const BASE_URL = 'https://www.opernhaus.ch';
+const CALENDAR_PATH = '/spielplan/kalendarium/';
+const DAYS_AHEAD = 90; // stop paginating once events run past this window
+const MAX_PAGES = 20; // safety cap; the 90-day cutoff normally stops sooner
 
 const MONTH_MAP: Record<string, string> = {
   Jan: '01', Feb: '02', Mär: '03', Mar: '03', Apr: '04', Mai: '05', May: '05',
@@ -25,16 +28,47 @@ export class OpernhausZuerichScraper implements Scraper {
 
   constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
 
+  private async fetchPage(url: string): Promise<string> {
+    if (this.opts.fetchHtml) return this.opts.fetchHtml(url);
+    const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+    if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
+    return res.text();
+  }
+
   async scrape(): Promise<Event[]> {
-    const html = this.opts.fetchHtml
-      ? await this.opts.fetchHtml()
-      : await fetch(this.venue.scheduleUrl, {
-          headers: { 'User-Agent': USER_AGENT },
-        }).then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
-          return r.text();
-        });
-    return this.parse(html);
+    // The calendar paginates (page1 holds ~25 events spanning ~10 days), so we
+    // walk pages until events run past the 90-day window or the list runs out.
+    const cutoff = new Date(Date.now() + DAYS_AHEAD * 86_400_000).toISOString().slice(0, 10);
+    const events: Event[] = [];
+    const seen = new Set<string>();
+
+    for (let page = 1; page <= MAX_PAGES; page++) {
+      const url = page === 1
+        ? this.venue.scheduleUrl
+        : `${BASE_URL}${CALENDAR_PATH}page${page}`;
+
+      const pageEvents = this.parse(await this.fetchPage(url));
+      if (pageEvents.length === 0) break; // no more event rows — last page reached
+
+      let reachedCutoff = false;
+      let addedFromPage = 0;
+      for (const event of pageEvents) {
+        if (event.date > cutoff) {
+          reachedCutoff = true; // events are chronological — past the window
+          continue;
+        }
+        if (seen.has(event.id)) continue; // page boundaries overlap by one date
+        seen.add(event.id);
+        events.push(event);
+        addedFromPage++;
+      }
+      if (reachedCutoff) break;
+      // If a full page yielded nothing new (e.g. the same page served twice),
+      // stop rather than spinning to MAX_PAGES.
+      if (addedFromPage === 0) break;
+    }
+
+    return events;
   }
 
   parse(html: string): Event[] {
