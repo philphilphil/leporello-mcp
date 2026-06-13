@@ -37,8 +37,11 @@ export class PhilharmonikerStuttgartScraper implements Scraper {
     const events: Event[] = [];
     const now = new Date().toISOString();
 
-    // Each concert is a div.item.stgtphil
-    $('.item.stgtphil').each((_, el) => {
+    // Each concert is a div.item inside #concert. The venue tags items with a
+    // per-series modifier class (stgtphil, beethoven, dgr, sextett, terzett, …)
+    // but the inner structure is identical, so we match on the container, not
+    // the modifier — otherwise non-stgtphil series are silently dropped.
+    $('#concert .item').each((_, el) => {
       try {
         // Date: prefer the datetime attribute on <time> for reliable parsing
         const timeEl = $(el).find('.date time').first();

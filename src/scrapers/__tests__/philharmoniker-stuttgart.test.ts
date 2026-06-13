@@ -9,7 +9,20 @@ const scraper = new PhilharmonikerStuttgartScraper({ fetchHtml: async () => fixt
 describe('PhilharmonikerStuttgartScraper', () => {
   it('parses expected events from fixture', async () => {
     const events = await scraper.scrape();
-    expect(events.length).toBe(37);
+    expect(events.length).toBe(47);
+  });
+
+  it('captures concerts from all series layouts, not just stgtphil', async () => {
+    const events = await scraper.scrape();
+    const titles = events.map((e) => e.title);
+    // terzett layout
+    expect(titles).toContain('Klassik Highlights');
+    // beethoven layout
+    expect(titles).toContain('Kammerkonzert Beethoven-Tage');
+    // dgr layout
+    expect(titles).toContain('Die große Reihe – Staunen');
+    // sextett layout
+    expect(titles).toContain('Sinfonische Horizonte – Paare');
   });
 
   it('extracts conductor from "unter der Leitung von"', async () => {
