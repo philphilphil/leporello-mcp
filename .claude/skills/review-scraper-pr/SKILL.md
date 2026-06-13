@@ -194,7 +194,12 @@ From the analyze-scraper output's `dates` block:
 - `all_in_past: true` → finding (parser is reading stale data)
 - `all_same_day: true` → finding (looks like a single date got attached
   to every event)
-- `span_days < 14` → finding (real venues publish a multi-week schedule)
+- `span_days < 14` → finding (real venues publish a multi-week schedule).
+  A short span often means the scraper stopped at page 1 of a paginated
+  calendar — cross-check with check 10's recall. Note there's no *upper*
+  bound to enforce: ~90 days of coverage is plenty (see check 10's
+  "Coverage window"), so a span that tops out near 90 days is healthy,
+  not truncated.
 - `beyond_2y: true` → finding (likely a date parse bug)
 
 ### Check 6 — Field-quality sampling
@@ -296,6 +301,20 @@ with dates, repeated card structures). Compare to `count` from check 3.
   scraper is missing events")
 - If the snapshot shows substantially fewer → likely the page paginates
   or lazy-loads; not a finding by itself, but worth noting
+
+**Coverage window — ~90 days is enough.** The MCP `list_events` tool caps
+`days_ahead` at 90, so the scraper only needs to surface roughly the next
+90 days of events. Capturing the full multi-year/whole-season calendar is
+**not** required — and a scraper that deliberately stops once events pass a
+~90-day cutoff (because paginating or date-filtering further is awkward) is
+**fine, not a recall finding**. Only flag missing events that fall *within*
+the next ~90 days. Concretely:
+- Rendered page shows more events than parsed, but the extras are all dated
+  beyond ~90 days out → **not a finding** (acceptable coverage cap).
+- Rendered page shows more events than parsed *within* the next ~90 days
+  (e.g. a paginated/lazy-loaded calendar the scraper never advances past
+  page 1) → **finding** (the scraper should paginate up to the ~90-day
+  cutoff, as `staatsoper-berlin` and `tonhalle-zuerich` do).
 
 Save a screenshot to `.playwright-mcp/<venue-id>-review.png` (per the
 CLAUDE.md convention) so the human can eyeball it after the report if
