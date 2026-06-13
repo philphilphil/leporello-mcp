@@ -1,52 +1,68 @@
-import cron from 'node-cron';
-import { execFile } from 'node:child_process';
-import { promisify } from 'node:util';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { readdirSync } from 'node:fs';
+import { dirname, join, extname } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { replaceVenueEvents, updateLastScraped, updateScrapeError, upsertCity, upsertVenue } from './db.js';
 import { validateEvents } from './validate.js';
+import { log, logError } from './logger.js';
 import type { Scraper } from './scrapers/base.js';
-import { PhilharmonikerStuttgartScraper } from './scrapers/philharmoniker-stuttgart.js';
-import { StaatsoperStuttgartScraper } from './scrapers/staatsoper-stuttgart.js';
-import { MetropolitanOperaScraper } from './scrapers/metropolitan-opera.js';
-import { WienerStaatsoperScraper } from './scrapers/wiener-staatsoper.js';
-import { OperFrankfurtScraper } from './scrapers/oper-frankfurt.js';
-import { SanFranciscoOperaScraper } from './scrapers/san-francisco-opera.js';
-import { LiceuBarcelonaScraper } from './scrapers/liceu-barcelona.js';
-import { SemperoperDresdenScraper } from './scrapers/semperoper-dresden.js';
-import { BarbicanHallLondonScraper } from './scrapers/barbican-hall-london.js';
 
-const execFileAsync = promisify(execFile);
+// ── Scraper discovery ───────────────────────────────────────────────────────
+// Scrapers are auto-discovered from the scrapers/ directory: every module there
+// that has a `export default new XScraper()` is registered. Adding a venue means
+// adding one file — no central registry edit — so parallel scraper PRs never
+// conflict on this file. See CONTRIBUTING.md §5.
 
-export async function rebuildWeb(): Promise<void> {
-  console.log(JSON.stringify({ event: 'web_build_start' }));
-  const start = Date.now();
-  try {
-    await execFileAsync('npm', ['run', 'build', '--prefix', 'web'], {
-      cwd: path.join(fileURLToPath(import.meta.url), '..', '..'),
-      timeout: 60_000,
-    });
-    console.log(
-      JSON.stringify({ event: 'web_build_success', duration_ms: Date.now() - start })
-    );
-  } catch (err) {
-    console.error(
-      JSON.stringify({ event: 'web_build_error', error: String(err), duration_ms: Date.now() - start })
-    );
-  }
+const here = fileURLToPath(import.meta.url); // src/scheduler.ts (dev) or dist/scheduler.js (prod)
+const SCRAPER_EXT = extname(here); // '.ts' under tsx, '.js' after build
+const SCRAPERS_DIR = join(dirname(here), 'scrapers');
+
+// Files in scrapers/ that are not themselves venue scrapers.
+const NON_SCRAPER_MODULES = new Set(['base']);
+
+function isScraper(x: unknown): x is Scraper {
+  return (
+    !!x &&
+    typeof x === 'object' &&
+    typeof (x as Scraper).scrape === 'function' &&
+    typeof (x as Scraper).venueId === 'string' &&
+    typeof (x as Scraper).venue === 'object'
+  );
 }
 
-export const scrapers: Scraper[] = [
-  new PhilharmonikerStuttgartScraper(),
-  new StaatsoperStuttgartScraper(),
-  new MetropolitanOperaScraper(),
-  new WienerStaatsoperScraper(),
-  new OperFrankfurtScraper(),
-  new SanFranciscoOperaScraper(),
-  new LiceuBarcelonaScraper(),
-  new SemperoperDresdenScraper(),
-  new BarbicanHallLondonScraper(),
-];
+/**
+ * Discover and instantiate every scraper in scrapers/. Returns them sorted by
+ * filename for deterministic run/log order. A module that fails to import or
+ * lacks a valid default export is logged and skipped — one bad scraper never
+ * blocks the rest of the batch.
+ */
+export async function loadScrapers(): Promise<Scraper[]> {
+  const moduleNames = readdirSync(SCRAPERS_DIR, { withFileTypes: true })
+    .filter((e) => e.isFile() && e.name.endsWith(SCRAPER_EXT) && !e.name.endsWith(`.d${SCRAPER_EXT}`))
+    .map((e) => e.name.slice(0, -SCRAPER_EXT.length))
+    .filter((name) => !NON_SCRAPER_MODULES.has(name))
+    .sort();
+
+  const scrapers: Scraper[] = [];
+  for (const name of moduleNames) {
+    const url = pathToFileURL(join(SCRAPERS_DIR, name + SCRAPER_EXT)).href;
+    let mod: { default?: unknown };
+    try {
+      mod = (await import(url)) as { default?: unknown };
+    } catch (err) {
+      logError('scraper_load_error', { file: name, error: String(err) });
+      continue;
+    }
+    if (!isScraper(mod.default)) {
+      logError('scraper_load_error', {
+        file: name,
+        error: 'no valid default export (expected `export default new XScraper()`)',
+      });
+      continue;
+    }
+    scrapers.push(mod.default);
+  }
+  return scrapers;
+}
 
 export async function runScrapers(list: Scraper[]): Promise<void> {
   for (const scraper of list) {
@@ -54,7 +70,7 @@ export async function runScrapers(list: Scraper[]): Promise<void> {
     upsertCity(cityId, cityName, country);
     upsertVenue(venueId, venueName, cityId, scheduleUrl);
 
-    console.log(JSON.stringify({ event: 'scrape_start', venue: scraper.venueId }));
+    log('scrape_start', { venue: scraper.venueId });
 
     for (let attempt = 1; attempt <= 2; attempt++) {
       if (attempt > 1) await new Promise((r) => setTimeout(r, 5_000));
@@ -65,58 +81,36 @@ export async function runScrapers(list: Scraper[]): Promise<void> {
         if (!validation.valid) {
           const msg = validation.errors.join('; ');
           if (attempt === 2) updateScrapeError(scraper.venueId, msg);
-          console.error(
-            JSON.stringify({
-              event: 'scrape_validation_error',
-              venue: scraper.venueId,
-              errors: validation.errors,
-              duration_ms: Date.now() - start,
-              attempt,
-              final: attempt === 2,
-            }),
-          );
+          logError('scrape_validation_error', {
+            venue: scraper.venueId,
+            errors: validation.errors,
+            duration_ms: Date.now() - start,
+            attempt,
+            final: attempt === 2,
+          });
           continue;
         }
         replaceVenueEvents(scraper.venueId, events);
         const ts = new Date().toISOString();
         updateLastScraped(scraper.venueId, ts);
-        console.log(
-          JSON.stringify({
-            event: 'scrape_success',
-            venue: scraper.venueId,
-            count: events.length,
-            duration_ms: Date.now() - start,
-            ...(attempt > 1 && { attempt }),
-          }),
-        );
+        log('scrape_success', {
+          venue: scraper.venueId,
+          count: events.length,
+          duration_ms: Date.now() - start,
+          ...(attempt > 1 && { attempt }),
+        });
         break;
       } catch (err) {
         if (attempt === 2) updateScrapeError(scraper.venueId, String(err));
-        console.error(
-          JSON.stringify({
-            event: 'scrape_error',
-            venue: scraper.venueId,
-            error: String(err),
-            duration_ms: Date.now() - start,
-            attempt,
-            final: attempt === 2,
-          }),
-        );
+        logError('scrape_error', {
+          venue: scraper.venueId,
+          error: String(err),
+          duration_ms: Date.now() - start,
+          attempt,
+          final: attempt === 2,
+        });
       }
     }
   }
 
-  await rebuildWeb();
-}
-
-export async function runAllScrapers(): Promise<void> {
-  await runScrapers(scrapers);
-}
-
-export function startScheduler(): void {
-  const expr = process.env.SCRAPE_CRON ?? '0 3 * * *';
-  console.log(JSON.stringify({ event: 'scheduler_start', cron: expr }));
-  cron.schedule(expr, () => {
-    runAllScrapers().catch(console.error);
-  });
 }

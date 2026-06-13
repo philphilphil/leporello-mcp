@@ -140,3 +140,5 @@ export class BarbicanHallLondonScraper implements Scraper {
     return events;
   }
 }
+
+export default new BarbicanHallLondonScraper();
