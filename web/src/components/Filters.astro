@@ -14,402 +14,212 @@ const { cities } = Astro.props;
 const countryCodes = [...new Set(cities.map(c => c.country))].sort();
 const countryNames = new Intl.DisplayNames(['en'], { type: 'region' });
 const countries = countryCodes.map(code => ({ code, name: countryNames.of(code) ?? code }));
+
+const periods = [7, 14, 30, 90];
+const chevron = '<path d="M6 9 L12 15 L18 9"/>';
 ---
 
-<aside class="filters-panel">
-  <div class="filters-inner">
-    <div class="filters-bar">
-      <div class="filter-group filter-group--search">
-        <label class="filter-label" for="filter-search" data-i18n="filter.search">Search</label>
-        <div class="input-wrapper">
-          <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.4"/><line x1="11" y1="11" x2="15" y2="15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-          <input
-            id="filter-search"
-            class="filter-input"
-            type="text"
-            placeholder="Search events..."
-            data-i18n-placeholder="filter.search.placeholder"
-            autocomplete="off"
-            spellcheck="false"
-          />
-        </div>
-      </div>
-      <details id="filter-details" class="filter-details" open>
-        <summary id="filter-toggle" class="filter-toggle" data-i18n="filter.toggle">Filters</summary>
-        <div class="filter-details-body">
-          <div class="filter-group">
-            <label class="filter-label" for="filter-country" data-i18n="filter.country">Country</label>
-            <div class="select-wrapper">
-              <select id="filter-country" class="filter-select">
-                <option value="" data-i18n="filter.all_countries">All Countries</option>
-                {countries.map(c => (
-                  <option value={c.code}>{c.name}</option>
-                ))}
-              </select>
-              <svg class="select-chevron" width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-          </div>
+<section class="filters" aria-label="Filters">
+  <label class="search">
+    <svg class="search-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20 L16 16"/></svg>
+    <input
+      id="filter-search"
+      class="filter-input"
+      type="search"
+      placeholder="Search works, venues, performers…"
+      data-i18n-placeholder="filter.search.placeholder"
+      aria-label="Search"
+      data-i18n-aria-label="filter.search"
+      autocomplete="off"
+      spellcheck="false"
+    />
+  </label>
 
-          <div class="filter-group">
-            <label class="filter-label" for="filter-city" data-i18n="filter.city">City</label>
-            <div class="select-wrapper">
-              <select id="filter-city" class="filter-select">
-                <option value="" data-i18n="filter.all_cities">All Cities</option>
-                {cities.map(city => (
-                  <option value={city.id}>{city.name}</option>
-                ))}
-              </select>
-              <svg class="select-chevron" width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-          </div>
-
-          <div class="filter-group">
-            <label class="filter-label" for="filter-venue" data-i18n="filter.venue">Venue</label>
-            <div class="select-wrapper">
-              <select id="filter-venue" class="filter-select">
-                <option value="" data-i18n="filter.all_venues">All Venues</option>
-              </select>
-              <svg class="select-chevron" width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-          </div>
-
-          <div class="filter-group">
-            <label class="filter-label" for="filter-days" data-i18n="filter.period">Period</label>
-            <div class="select-wrapper">
-              <select id="filter-days" class="filter-select">
-                <option value="7" data-i18n="filter.next_days" data-i18n-vars='{"n":"7"}'>Next 7 days</option>
-                <option value="14" data-i18n="filter.next_days" data-i18n-vars='{"n":"14"}'>Next 14 days</option>
-                <option value="30" selected data-i18n="filter.next_days" data-i18n-vars='{"n":"30"}'>Next 30 days</option>
-                <option value="90" data-i18n="filter.next_days" data-i18n-vars='{"n":"90"}'>Next 90 days</option>
-              </select>
-              <svg class="select-chevron" width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-          </div>
-
-          <div class="filter-actions">
-            <button id="filter-clear" class="filter-clear" type="button" title="Clear all filters" aria-label="Clear all filters" data-i18n-title="filter.clear" data-i18n-aria-label="filter.clear">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-              <span data-i18n="filter.clear">Clear all</span>
-            </button>
-            <button id="filter-done" class="filter-done" type="button" data-i18n="filter.done">Done</button>
-          </div>
-        </div>
-      </details>
-    </div>
+  <div class="control">
+    <select id="filter-country" class="filter-select" aria-label="Country" data-i18n-aria-label="filter.country">
+      <option value="" data-i18n="filter.all_countries">All Countries</option>
+      {countries.map(c => (<option value={c.code}>{c.name}</option>))}
+    </select>
+    <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" set:html={chevron} />
   </div>
-</aside>
+
+  <div class="control">
+    <select id="filter-city" class="filter-select" aria-label="City" data-i18n-aria-label="filter.city">
+      <option value="" data-i18n="filter.all_cities">All Cities</option>
+      {cities.map(city => (<option value={city.id}>{city.name}</option>))}
+    </select>
+    <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" set:html={chevron} />
+  </div>
+
+  <div class="control">
+    <select id="filter-venue" class="filter-select" aria-label="Venue" data-i18n-aria-label="filter.venue">
+      <option value="" data-i18n="filter.all_venues">All Venues</option>
+    </select>
+    <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" set:html={chevron} />
+  </div>
+
+  <div class="period-group">
+    <div class="seg" id="filter-days" role="group" aria-label="Period" data-i18n-aria-label="filter.period">
+      {periods.map(n => (
+        <button
+          type="button"
+          class:list={['seg-btn', { 'is-active': n === 30 }]}
+          data-days={String(n)}
+          aria-pressed={n === 30 ? 'true' : 'false'}
+          aria-label={`Next ${n} days`}
+          data-i18n-aria-label="filter.next_days"
+          data-i18n-vars={JSON.stringify({ n: String(n) })}
+        >
+          <span data-i18n="filter.days_short" data-i18n-vars={JSON.stringify({ n: String(n) })}>{n}d</span>
+        </button>
+      ))}
+    </div>
+
+    <button id="filter-clear" class="clear-btn" type="button" aria-label="Clear all filters" title="Clear all filters" data-i18n-aria-label="filter.clear" data-i18n-title="filter.clear">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5 L19 19 M19 5 L5 19"/></svg>
+    </button>
+  </div>
+</section>
 
 <style>
-  .filters-panel {
-    background: var(--bg-card);
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-  }
-
-  .filters-inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 3rem;
-  }
-
-  .filters-bar {
+  .filters {
+    margin-top: 24px;
     display: flex;
-    align-items: stretch;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
   }
 
-  /* --- Details / Summary (toggle) --- */
-  .filter-details {
-    display: flex;
-    align-items: stretch;
-    order: 0;
-  }
-
-  .filter-toggle {
-    display: none;
-  }
-
-  .filter-details-body {
-    display: flex;
-    align-items: stretch;
-  }
-
-  .filter-details-body .filter-group:first-child {
-    padding-left: 0;
-  }
-
-  /* --- Filter groups --- */
-  .filter-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.35rem;
-    padding: 1.15rem 2rem;
-    border-right: 1px solid var(--border-light);
+  .search {
+    flex: 1 1 220px;
     min-width: 0;
-  }
-
-  .filter-group:last-child,
-  .filter-details-body .filter-group:last-of-type {
-    border-right: none;
-  }
-
-  .filter-group--search {
-    order: 1;
-    flex: 1;
-    border-right: none;
-    padding-right: 0;
-    padding-left: 2rem;
-  }
-
-  .filter-label {
-    font-family: var(--sans);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    user-select: none;
-  }
-
-  .select-wrapper {
     position: relative;
     display: flex;
     align-items: center;
   }
 
+  /* Segmented period + clear travel together so the clear never wraps alone */
+  .period-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: none;
+  }
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+  .filter-input {
+    width: 100%;
+    font: inherit;
+    font-size: 15px;
+    color: var(--text);
+    background: var(--surface);
+    border: 0;
+    border-radius: var(--pill);
+    padding: 12px 18px 12px 44px;
+    box-shadow: var(--shadow-sm);
+    outline: none;
+    transition: box-shadow 0.15s ease;
+  }
+  .filter-input::placeholder { color: var(--text-muted); }
+  .filter-input:focus-visible {
+    box-shadow: 0 0 0 2px var(--accent), var(--shadow-sm);
+    outline: none;
+  }
+  /* hide the native search clear control for a cleaner look */
+  .filter-input::-webkit-search-cancel-button { -webkit-appearance: none; }
+
+  .control { position: relative; flex: none; }
   .filter-select {
     appearance: none;
     -webkit-appearance: none;
-    background: transparent;
-    border: none;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
     color: var(--text);
-    font-family: var(--sans);
-    font-size: 1rem;
-    font-weight: 400;
-    padding: 0.25rem 2rem 0.25rem 0;
+    background: var(--surface);
+    border: 0;
+    border-radius: var(--pill);
+    padding: 11px 38px 11px 18px;
+    box-shadow: var(--shadow-sm);
     cursor: pointer;
     outline: none;
-    width: 100%;
-    min-width: 140px;
-    line-height: 1.4;
+    max-width: 220px;
+    text-overflow: ellipsis;
+    transition: box-shadow 0.15s ease;
   }
-
   .filter-select:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
-
-  .filter-select option {
-    background: var(--bg-card);
-    color: var(--text);
-    font-size: 1rem;
-  }
-
-  .select-chevron {
-    position: absolute;
-    right: 0.4rem;
-    color: var(--text-muted);
-    pointer-events: none;
-  }
-
-  .input-wrapper {
-    width: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-
-  .search-icon {
-    position: absolute;
-    left: 0;
-    color: var(--text-muted);
-    pointer-events: none;
-  }
-
-  .filter-input {
-    background: transparent;
-    border: none;
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 1rem;
-    font-weight: 400;
-    padding: 0.25rem 0 0.25rem 1.8rem;
+    box-shadow: 0 0 0 2px var(--accent), var(--shadow-sm);
     outline: none;
-    width: 100%;
-    line-height: 1.4;
   }
-
-  .filter-input:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
-
-  .filter-input::placeholder {
+  .chev {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
     color: var(--text-muted);
-    font-weight: 300;
+    pointer-events: none;
   }
 
-  /* --- Filter actions row --- */
-  .filter-actions {
-    display: contents;
+  /* Segmented period control */
+  .seg {
+    display: inline-flex;
+    align-items: center;
+    background: var(--surface-2);
+    border-radius: var(--pill);
+    padding: 3px;
+    flex: none;
   }
+  .seg-btn {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 8px 13px;
+    border-radius: var(--pill);
+    cursor: pointer;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.15s ease;
+  }
+  .seg-btn.is-active {
+    background: var(--surface);
+    color: var(--accent-text);
+    box-shadow: var(--shadow-sm);
+  }
+  .seg-btn:not(.is-active):hover { color: var(--text-mid); }
+  .seg-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  /* --- Clear button --- */
-  .filter-clear {
+  .clear-btn {
     display: none;
+    width: 38px;
+    height: 38px;
+    flex: none;
     align-items: center;
     justify-content: center;
-    gap: 0.4rem;
-    background: none;
-    border: none;
+    border: 0;
+    border-radius: var(--pill);
+    background: var(--surface);
     color: var(--text-muted);
     cursor: pointer;
-    padding: 0.25rem;
-    flex-shrink: 0;
-    transition: color 0.15s;
-    font-family: var(--sans);
-    font-size: 0.85rem;
+    box-shadow: var(--shadow-sm);
+    transition: color 0.15s ease;
   }
+  .clear-btn:hover { color: var(--accent); }
+  .clear-btn.visible { display: inline-flex; }
 
-  .filter-clear:hover {
-    color: var(--text);
-  }
-
-  .filter-clear.visible {
-    display: flex;
-  }
-
-  /* --- Done button (mobile only) --- */
-  .filter-done {
-    display: none;
-  }
-
-  /* --- Desktop: details forced open, summary hidden --- */
-  @media (min-width: 701px) {
-    .filter-clear {
-      padding: 1.15rem 2rem;
-    }
-
-    .filter-clear span {
-      display: none;
-    }
-  }
-
-  /* --- Mobile --- */
-  @media (max-width: 700px) {
-    .filters-inner {
-      padding: 0 1.5rem;
-    }
-
-    .filters-bar {
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    /* Search takes most of the row */
-    .filter-group--search {
-      order: 0;
-      flex: 1;
-      border-right: none;
-      border-bottom: none;
-      padding: 0.9rem 0;
-      padding-left: 0;
-      min-width: 0;
-    }
-
-    /* Details element becomes a block, not display:contents */
-    .filter-details {
-      display: block;
-      flex-shrink: 0;
-    }
-
-    /* Summary becomes the toggle button */
-    .filter-toggle {
-      display: flex;
-      align-items: center;
-      font-family: var(--sans);
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      background: none;
-      border: 1px solid var(--border-light);
-      border-radius: 6px;
-      padding: 0.5rem 0.85rem;
-      cursor: pointer;
-      user-select: none;
-      list-style: none;
-      white-space: nowrap;
-    }
-
-    .filter-toggle::-webkit-details-marker {
-      display: none;
-    }
-
-    .filter-toggle::marker {
-      content: '';
-    }
-
-    /* Body is a dropdown panel below the bar */
-    .filter-details-body {
-      display: none;
-      flex-direction: column;
-      width: 100vw;
-      margin-left: -1.5rem;
-      padding: 0 1.5rem;
-      background: var(--bg-card);
-      border-top: 1px solid var(--border-light);
-    }
-
-    .filter-details[open] .filter-details-body {
-      display: flex;
-    }
-
-    .filter-details-body .filter-group {
-      border-right: none;
-      border-bottom: 1px solid var(--border-light);
-      padding: 0.9rem 0;
-      width: 100%;
-    }
-
-    .filter-details-body .filter-group:last-child {
-      border-bottom: none;
-    }
-
-    .filter-select {
-      min-width: unset;
-      width: 100%;
-    }
-
-    .filter-actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.9rem 0;
-    }
-
-    .filter-clear {
-      padding: 0;
-    }
-
-    .filter-clear span {
-      display: inline;
-    }
-
-    .filter-done {
-      display: block;
-      font-family: var(--sans);
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--accent, #8b2500);
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.4rem 0;
-    }
+  @media (max-width: 560px) {
+    .filters { gap: 10px; }
+    .search { flex: 1 1 100%; min-width: 0; }
+    .control { flex: 1 1 calc(50% - 5px); }
+    .filter-select { width: 100%; max-width: none; }
+    .period-group { flex: 1 1 100%; }
+    .seg { flex: 1; justify-content: space-between; }
+    .seg-btn { flex: 1; text-align: center; }
   }
 </style>

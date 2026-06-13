@@ -3,7 +3,6 @@ import Base from '../layouts/Base.astro';
 import Filters from '../components/Filters.astro';
 import EventList from '../components/EventList.astro';
 import { getCities, getVenues, getEvents } from '../lib/data.ts';
-import type { Venue } from '../lib/data.ts';
 
 const cities = getCities();
 const venues = getVenues();
@@ -14,105 +13,79 @@ for (const v of venues) {
 }
 
 const pageData = { cities, venues, events, dataAge };
-
-function formatAge(iso: string | null): string {
-  if (!iso) return 'never';
-  const d = new Date(iso);
-  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-}
-
-const eventCountByVenue: Record<string, number> = {};
-for (const e of events) {
-  eventCountByVenue[e.venue_id] = (eventCountByVenue[e.venue_id] ?? 0) + 1;
-}
-
-const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> = venues.map(v => ({
-  venue: v,
-  age: dataAge[v.id] ?? null,
-  count: eventCountByVenue[v.id] ?? 0,
-}));
 ---
 
 <Base title="Leporello — Opera & classical music event schedules" dynamicLang={true}>
   <script type="application/json" id="event-data" set:html={JSON.stringify(pageData)} />
 
-  <div class="page-wrapper">
-    <header class="site-header">
-      <div class="header-inner">
-        <div class="header-brand">
-          <img src="/leporello-logo.svg" alt="" class="site-logo" />
-          <div class="header-text">
-            <h1 class="site-title">Leporello</h1>
-            <p class="site-tagline" data-i18n="site.tagline">Opera & Classical Music Event Schedules</p>
-          </div>
-        </div>
-        <select id="lang-switcher" class="lang-select" aria-label="Language">
-          <option value="en">English</option>
-          <option value="de">Deutsch</option>
-        </select>
-      </div>
-    </header>
-
-    <div class="mcp-banner">
-      <div class="mcp-banner-inner">
-        <div class="mcp-info">
-          <span class="mcp-badge" data-i18n="mcp.badge">MCP Server</span>
-          <p class="mcp-text" data-i18n="mcp.text">Connect this data to Claude, ChatGPT, or any MCP-compatible AI assistant</p>
-        </div>
-        <div class="mcp-url">
-          <span class="mcp-url-label" data-i18n="mcp.endpoint">Endpoint</span>
-          <code class="mcp-url-value">https://leporello.app/mcp</code>
-          <button class="mcp-copy" type="button" aria-label="Copy endpoint URL">
-            <svg class="mcp-copy-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11V3a1.5 1.5 0 011.5-1.5H11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-            <svg class="mcp-check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
+  <!-- ── Sticky translucent header ── -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="Leporello — home">
+        <img src="/leporello-logo.svg" alt="" class="logo-mark" width="40" height="40" />
+        <span class="brand-text">
+          <span class="wordmark">Leporello</span>
+          <span class="tagline" data-i18n="site.tagline">Opera &amp; Classical Music Schedules</span>
+        </span>
+      </a>
+      <div class="topbar-actions">
+        <a class="topbar-link" href="/sources" data-sources-link data-i18n="footer.sources">Sources</a>
+        <div class="langswitch" role="group" aria-label="Language" data-i18n-aria-label="a11y.language">
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="de">DE</button>
         </div>
       </div>
     </div>
+  </header>
+
+  <main class="wrap">
+    <!-- ── MCP callout ── -->
+    <section class="mcp" aria-label="MCP server">
+      <span class="mcp-glyph" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 7 L12 3 L20 7 L12 11 Z"/><path d="M4 7 V17 L12 21 V11"/><path d="M20 7 V17 L12 21"/>
+        </svg>
+      </span>
+      <div class="mcp-text">
+        <span class="mcp-label" data-i18n="mcp.badge">MCP Server</span>
+        <p class="mcp-pitch" data-i18n="mcp.text">Connect live schedules to Claude, ChatGPT, or any MCP assistant.</p>
+      </div>
+      <div class="endpoint">
+        <code>https://leporello.app/mcp</code>
+        <button class="copy-btn" type="button" aria-label="Copy endpoint URL" title="Copy" data-i18n-aria-label="a11y.copy" data-i18n-title="a11y.copy">
+          <svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15 H4.5 A1.5 1.5 0 0 1 3 13.5 V4.5 A1.5 1.5 0 0 1 4.5 3 H13.5 A1.5 1.5 0 0 1 15 4.5 V5"/></svg>
+          <svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M4 12.5 L9 17.5 L20 6.5"/></svg>
+        </button>
+      </div>
+    </section>
 
     <Filters cities={cities} />
 
     <EventList />
+  </main>
 
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <div class="footer-grid">
-          <div class="footer-section">
-            <h3 class="footer-heading" data-i18n="footer.sources">Sources</h3>
-            <ul class="footer-venues">
-              {venueAgeList.map(({ venue, age, count }) => (
-                <li class="footer-venue-row">
-                  <a href={venue.url} target="_blank" rel="noopener" class="footer-venue-name">{venue.name}</a>
-                  <span class="footer-venue-meta">
-                    <span data-i18n={count === 1 ? 'footer.event_one' : 'footer.events'} data-i18n-vars={JSON.stringify({ n: String(count) })}>{count} {count === 1 ? 'event' : 'events'}</span>
-                    &middot;
-                    <span data-i18n={age ? 'footer.updated' : 'footer.updated_never'} data-i18n-vars={age ? JSON.stringify({ date: '__date__' }) : undefined} data-i18n-date={age ?? undefined}>{age ? `updated ${formatAge(age)}` : 'updated never'}</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div class="footer-section footer-about">
-            <p class="footer-note" data-i18n="footer.note">
-              Leporello aggregates publicly available concert schedules.
-              All event data belongs to the respective venues.
-            </p>
-            <nav class="footer-legal">
-              <a href="/terms" data-legal-page="terms" data-i18n="legal.terms">Terms</a>
-              <a href="/privacy" data-legal-page="privacy" data-i18n="legal.privacy">Privacy</a>
-              <a href="/impressum" data-legal-page="impressum" data-i18n="legal.impressum">Imprint</a>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </div>
+  <footer class="site-footer">
+    <div class="wrap foot-inner">
+      <p class="foot-note" data-i18n="footer.note">
+        Leporello aggregates publicly available concert schedules.
+        All event data belongs to the respective venues.
+      </p>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="/sources" data-sources-link data-i18n="footer.sources">Sources</a>
+        <a href="/terms" data-legal-page="terms" data-i18n="legal.terms">Terms</a>
+        <a href="/privacy" data-legal-page="privacy" data-i18n="legal.privacy">Privacy</a>
+        <a href="/impressum" data-legal-page="impressum" data-i18n="legal.impressum">Imprint</a>
+      </nav>
+    </div>
+    <div class="wrap">
+      <p class="colophon" data-i18n="footer.colophon">Leporello &middot; a fold-out of the world&rsquo;s concert halls.</p>
+    </div>
+  </footer>
 
   <script>
     import '../scripts/filter.ts';
-    import { applyTranslations, getLang, getLegalPageHref, type LegalPageSlug } from '../i18n/index.ts';
+    import { applyTranslations, getLang, getLegalPageHref, getSourcesHref, type LegalPageSlug } from '../i18n/index.ts';
 
-    // Apply translations to data-i18n elements
     applyTranslations();
 
     document.querySelectorAll<HTMLAnchorElement>('[data-legal-page]').forEach((link) => {
@@ -121,338 +94,241 @@ const venueAgeList: Array<{ venue: Venue; age: string | null; count: number }> =
       link.href = getLegalPageHref(page, getLang());
     });
 
-    // Set language switcher to current language
-    const langSwitcher = document.getElementById('lang-switcher') as HTMLSelectElement;
-    langSwitcher.value = getLang();
-    langSwitcher.addEventListener('change', () => {
-      localStorage.setItem('lang', langSwitcher.value);
-      location.reload();
+    document.querySelectorAll<HTMLAnchorElement>('[data-sources-link]').forEach((link) => {
+      link.href = getSourcesHref(getLang());
     });
 
-    document.querySelector('.mcp-copy')?.addEventListener('click', async (e) => {
-      const btn = (e.currentTarget as HTMLElement);
-      const copyIcon = btn.querySelector('.mcp-copy-icon') as HTMLElement;
-      const checkIcon = btn.querySelector('.mcp-check-icon') as HTMLElement;
-      await navigator.clipboard.writeText('https://leporello.app/mcp');
-      copyIcon.style.display = 'none';
-      checkIcon.style.display = 'block';
-      setTimeout(() => {
-        copyIcon.style.display = 'block';
-        checkIcon.style.display = 'none';
-      }, 2000);
+    // Language switcher (segmented)
+    const currentLang = getLang();
+    document.querySelectorAll<HTMLButtonElement>('.lang-btn').forEach((btn) => {
+      const isActive = btn.dataset.lang === currentLang;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
+      btn.addEventListener('click', () => {
+        if (btn.dataset.lang === currentLang) return;
+        localStorage.setItem('lang', btn.dataset.lang!);
+        location.reload();
+      });
+    });
+
+    // Copy endpoint
+    document.querySelector('.copy-btn')?.addEventListener('click', async (e) => {
+      const btn = e.currentTarget as HTMLElement;
+      const copyIcon = btn.querySelector('.icon-copy') as HTMLElement;
+      const checkIcon = btn.querySelector('.icon-check') as HTMLElement;
+      try {
+        await navigator.clipboard.writeText('https://leporello.app/mcp');
+        copyIcon.style.display = 'none';
+        checkIcon.style.display = 'block';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          copyIcon.style.display = 'block';
+          checkIcon.style.display = 'none';
+          btn.classList.remove('copied');
+        }, 1800);
+      } catch { /* clipboard unavailable */ }
     });
   </script>
 </Base>
 
 <style>
-  .page-wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  /* ── Sticky translucent header ── */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(246, 247, 249, 0.72);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    backdrop-filter: saturate(180%) blur(18px);
+    border-bottom: 1px solid rgba(226, 230, 236, 0.9);
   }
-
-  /* ── Header ── */
-  .site-header {
-    background: var(--bg);
-  }
-
-  .header-inner {
-    max-width: 1400px;
+  .topbar-inner {
+    max-width: var(--maxw);
     margin: 0 auto;
-    padding: 0.5rem 2.5rem 0.5rem;
+    padding: 14px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 20px;
   }
-
-  .lang-select {
-    appearance: none;
-    -webkit-appearance: none;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 4px;
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex: none;
+  }
+  .topbar-link {
+    font-size: 14px;
+    font-weight: 500;
     color: var(--text-muted);
-    font-family: var(--sans);
-    font-size: 0.8rem;
-    font-weight: 400;
-    padding: 0.35rem 0.6rem;
-    cursor: pointer;
-    outline: none;
-    align-self: flex-start;
-    margin-top: 0.5rem;
+    transition: color 0.15s ease;
   }
-
-  .lang-select:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-
-  .header-brand {
-    position: relative;
-    width: fit-content;
-  }
-
-  .site-logo {
-    display: block;
-    height: 120px;
-    width: auto;
-  }
-
-  .header-text {
-    position: absolute;
-    left: 72px;
-    top: 36px;
-    white-space: nowrap;
-  }
-
-  .site-tagline {
-    margin-top: 0.1rem;
-  }
-
-  .site-title {
-    font-family: var(--serif);
-    font-size: 2.2rem;
-    font-weight: 400;
-    letter-spacing: 0.02em;
+  .topbar-link:hover { color: var(--accent-text); }
+  .brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  .logo-mark { width: 40px; height: 40px; flex: none; display: block; border-radius: 10px; }
+  .brand-text { display: flex; flex-direction: column; min-width: 0; }
+  .wordmark {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.022em;
     color: var(--text);
-    line-height: 1;
-    margin-bottom: 0.4rem;
+    line-height: 1.1;
   }
-
-  .site-tagline {
-    font-family: var(--sans);
-    font-size: 0.9rem;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+  .tagline {
+    font-size: 12.5px;
     color: var(--text-muted);
+    font-weight: 450;
+    margin-top: 2px;
   }
-
-  /* ── MCP Banner ── */
-  .mcp-banner {
-    background: var(--text);
-    color: var(--bg);
-  }
-
-  .mcp-banner-inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 1rem 3rem;
-    display: flex;
+  .langswitch {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
+    background: var(--surface-2);
+    border-radius: var(--pill);
+    padding: 3px;
+    flex: none;
   }
-
-  .mcp-info {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .mcp-badge {
-    font-family: var(--sans);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: var(--accent);
-    color: #fff;
-    padding: 0.3rem 0.7rem;
-    border-radius: 3px;
-    white-space: nowrap;
-  }
-
-  .mcp-text {
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: rgba(250, 247, 242, 0.7);
-  }
-
-  .mcp-url {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-shrink: 0;
-  }
-
-  .mcp-url-label {
-    font-family: var(--sans);
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(250, 247, 242, 0.4);
-  }
-
-  .mcp-url-value {
-    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-    font-size: 0.9rem;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.35rem 0.85rem;
-    border-radius: 4px;
-    color: var(--bg);
-    user-select: all;
-    letter-spacing: 0.01em;
-  }
-
-  .mcp-copy {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 4px;
-    color: rgba(250, 247, 242, 0.6);
+  .lang-btn {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 550;
+    color: var(--text-muted);
+    padding: 5px 13px;
+    border-radius: var(--pill);
     cursor: pointer;
-    padding: 0.35rem;
+    letter-spacing: 0.01em;
+    transition: color 0.15s ease;
+  }
+  .lang-btn.is-active {
+    background: var(--surface);
+    color: var(--accent-text);
+    box-shadow: var(--shadow-sm);
+  }
+  .lang-btn:not(.is-active):hover { color: var(--text-mid); }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+  main.wrap { padding-top: 28px; }
+
+  /* ── MCP callout ── */
+  .mcp {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 14px 20px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: color 0.15s, background 0.15s;
+    gap: 18px;
   }
-
-  .mcp-copy:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.18);
+  .mcp-glyph {
+    width: 34px; height: 34px; flex: none;
+    border-radius: 10px;
+    background: var(--accent-soft);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
   }
+  .mcp-text { flex: 1 1 auto; min-width: 0; }
+  .mcp-label {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+  }
+  .mcp-pitch {
+    font-size: 14.5px;
+    color: var(--text-mid);
+    margin: 3px 0 0;
+    font-weight: 450;
+  }
+  .endpoint {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface-2);
+    border-radius: var(--pill);
+    padding: 8px 8px 8px 18px;
+    flex: none;
+  }
+  .endpoint code {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    user-select: all;
+  }
+  .copy-btn {
+    width: 32px; height: 32px; flex: none;
+    border: 0;
+    border-radius: var(--pill);
+    background: var(--surface);
+    color: var(--text-mid);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow-sm);
+    transition: color 0.15s ease, transform 0.1s ease;
+  }
+  .copy-btn:hover { color: var(--accent); }
+  .copy-btn:active { transform: scale(0.94); }
+  .copy-btn.copied { color: var(--accent); }
 
   /* ── Footer ── */
   .site-footer {
-    margin-top: auto;
-    background: var(--bg-warm);
-    border-top: 1px solid var(--border);
+    margin-top: 72px;
+    border-top: 1px solid var(--border-light);
+    padding: 48px 0 56px;
   }
-
-  .footer-inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 2.5rem 2.5rem 3rem;
-  }
-
-  .footer-grid {
+  .foot-inner {
     display: flex;
-    gap: 4rem;
-    align-items: flex-start;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 32px 48px;
+    flex-wrap: wrap;
   }
-
-  .footer-section {
-    flex: 1;
-  }
-
-  .footer-about {
-    flex: 0 0 auto;
-    max-width: 300px;
-  }
-
-  .footer-heading {
-    font-family: var(--sans);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 1rem;
-  }
-
-  .footer-venues {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .footer-venue-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-  }
-
-  .footer-venue-name {
-    font-family: var(--serif);
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--text);
-    transition: color 0.1s ease;
-  }
-
-  .footer-venue-name:hover {
-    color: var(--accent);
-  }
-
-  .footer-venue-meta {
-    font-family: var(--sans);
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-weight: 400;
-  }
-
-  .footer-note {
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    font-weight: 400;
+  .foot-note {
+    font-size: 13.5px;
+    color: var(--text-mid);
     line-height: 1.6;
+    font-weight: 450;
+    max-width: 420px;
   }
-
-  .footer-legal {
+  .foot-nav {
     display: flex;
-    gap: 1.25rem;
-    margin-top: 1rem;
-    font-family: var(--sans);
-    font-size: 0.8rem;
+    flex-wrap: wrap;
+    gap: 22px;
   }
-
-  .footer-legal a {
+  .foot-nav a {
+    font-size: 13.5px;
+    font-weight: 500;
     color: var(--text-muted);
-    transition: color 0.15s;
+    transition: color 0.15s ease;
+  }
+  .foot-nav a:hover { color: var(--accent-text); }
+  .colophon {
+    margin-top: 44px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    font-weight: 450;
   }
 
-  .footer-legal a:hover {
-    color: var(--accent);
+  /* ── Responsive ── */
+  @media (max-width: 880px) {
+    .mcp { flex-wrap: wrap; gap: 16px; }
+    .mcp-text { flex: 1 1 240px; }
+    .endpoint { flex: 1 1 100%; justify-content: space-between; }
   }
 
-  @media (max-width: 700px) {
-    .header-inner {
-      padding: 2rem 1.5rem 1.25rem;
-    }
-
-    .site-title {
-      font-size: 2.2rem;
-    }
-
-    .footer-inner {
-      padding: 2rem 1.5rem;
-    }
-
-    .mcp-banner-inner {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.75rem;
-      padding: 1rem 1.5rem;
-    }
-
-    .mcp-info {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-
-    .mcp-url {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.3rem;
-    }
-
-    .mcp-url-value {
-      font-size: 0.8rem;
-    }
-
-    .footer-grid {
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .footer-about {
-      max-width: none;
-    }
+  @media (max-width: 560px) {
+    .topbar-inner { padding: 12px 18px; gap: 14px; }
+    .topbar-actions { gap: 12px; }
+    .wrap { padding: 0 18px; }
+    main.wrap { padding-top: 20px; }
+    .tagline { display: none; }
+    .mcp { padding: 16px; }
+    .mcp-glyph { display: none; }
+    .endpoint code { font-size: 12px; }
   }
 </style>

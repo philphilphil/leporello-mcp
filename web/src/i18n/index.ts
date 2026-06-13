@@ -35,6 +35,10 @@ export function getLegalPageHref(page: LegalPageSlug, lang?: string | null): str
   return resolvedLang === "de" ? `/de/${page}` : `/${page}`;
 }
 
+export function getSourcesHref(lang?: string | null): string {
+  return resolveLang(lang) === "de" ? "/de/sources" : "/sources";
+}
+
 export function applyTranslations(): void {
   document.querySelectorAll<HTMLElement>("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n")!;
@@ -58,5 +62,17 @@ export function applyTranslations(): void {
   document.querySelectorAll<HTMLElement>("[data-i18n-placeholder]").forEach((el) => {
     const key = el.getAttribute("data-i18n-placeholder")!;
     (el as HTMLInputElement).placeholder = t(key);
+  });
+
+  document.querySelectorAll<HTMLElement>("[data-i18n-aria-label]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-aria-label")!;
+    const varsAttr = el.getAttribute("data-i18n-vars");
+    const vars = varsAttr ? JSON.parse(varsAttr) : undefined;
+    el.setAttribute("aria-label", t(key, vars));
+  });
+
+  document.querySelectorAll<HTMLElement>("[data-i18n-title]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-title")!;
+    el.setAttribute("title", t(key));
   });
 }

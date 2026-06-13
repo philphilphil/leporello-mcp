@@ -1,14 +1,11 @@
 <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Leporello">
   <defs>
-    <linearGradient id="lepBg" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="lepFav" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#2F6DF0"/>
       <stop offset="1" stop-color="#1C4FC4"/>
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="116" fill="url(#lepBg)"/>
-  <!-- Edge-on accordion fold: a continuous zigzag ribbon of 4 alternating panels.
-       Lit faces (white) catch the light; shadow faces (a tint of the brand azure)
-       recede, so the strip reads as one folded leaflet — a leporello — even at favicon size. -->
+  <rect width="512" height="512" rx="116" fill="url(#lepFav)"/>
   <path d="M148 132 L202 160 L202 352 L148 380 Z" fill="#ffffff"/>
   <path d="M202 160 L256 132 L256 380 L202 352 Z" fill="#9CBBF7"/>
   <path d="M256 132 L310 160 L310 352 L256 380 Z" fill="#ffffff"/>

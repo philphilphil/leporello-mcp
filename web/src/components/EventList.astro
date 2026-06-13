@@ -1,10 +1,12 @@
 ---
-// EventList is a pure shell — filter.ts populates #event-list at runtime.
+// EventList is a shell — filter.ts populates #event-list at runtime.
+// Styles are global because the day/event markup is injected client-side.
 ---
 
-<section class="events-section">
-  <div class="events-header">
-    <span id="event-count" class="events-count"></span>
+<section class="events-section" aria-label="Performances">
+  <div class="listhead">
+    <h1 class="list-h" data-i18n="events.heading">Upcoming performances</h1>
+    <span id="event-count" class="count"></span>
   </div>
 
   <div id="event-list" class="event-list">
@@ -13,168 +15,175 @@
 </section>
 
 <style is:global>
-  .events-section {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 3rem 4rem;
-  }
+  .events-section { margin-top: 44px; }
 
-  .events-header {
-    padding: 0.75rem 0 0.25rem;
+  .listhead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 8px;
   }
-
-  .events-count {
-    font-family: var(--sans);
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: var(--text-muted);
-  }
-
-  /* ── Table ── */
-  .event-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-  }
-
-  /* ── Date header row ── */
-  .date-row td {
-    padding: 0;
-  }
-
-  .date-header {
-    font-family: var(--serif);
-    font-size: 1.1rem;
+  .list-h {
+    margin: 0;
+    font-size: 21px;
     font-weight: 600;
-    color: var(--accent);
-    padding: 1.25rem 0 0.3rem !important;
-    letter-spacing: 0.01em;
-    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text);
   }
-
-  .date-row:first-child .date-header {
-    padding-top: 0.5rem !important;
-  }
-
-  /* ── Event rows ── */
-  .event-row td {
-    padding: 0.5rem 0.75rem 0.5rem 0;
-    border-bottom: 1px solid var(--border-light);
-    vertical-align: baseline;
-  }
-
-  .event-row td:last-child {
-    padding-right: 0;
-  }
-
-  .event-row:hover td {
-    background: var(--accent-faint);
-  }
-
-  /* ── Columns ── */
-  .event-time {
-    font-family: var(--sans);
-    font-size: 0.9rem;
-    font-weight: 400;
+  .count {
+    font-size: 13.5px;
+    font-weight: 450;
     color: var(--text-muted);
-    width: 4rem;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
   }
 
-  .event-title {
-    font-family: var(--serif);
-    font-size: 1.15rem;
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1.35;
-  }
-
-  .event-link {
-    color: var(--text);
-    text-decoration: none;
-    transition: color 0.1s ease;
-  }
-
-  .event-link:hover {
-    color: var(--accent);
-  }
-
-  .event-venue {
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    color: var(--text-mid);
-    font-weight: 400;
-    width: 15rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .event-location {
-    color: var(--text-muted);
-    font-weight: 300;
-  }
-
-  .event-people {
-    font-family: var(--sans);
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    font-weight: 400;
-    width: 16rem;
-    text-align: right;
-    line-height: 1.4;
-  }
-
-  .people-label {
-    font-size: 0.7rem;
+  /* ── Day groups ── */
+  .day { margin-top: 28px; }
+  .day-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11.5px;
     font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
     color: var(--text-muted);
-    opacity: 0.6;
-    margin-right: 0.25em;
+    margin: 0 0 12px;
+    padding: 0 4px;
   }
+  .day-today,
+  .day-tomorrow {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: var(--pill);
+  }
+  .day-today {
+    color: var(--accent-text);
+    background: var(--accent-soft);
+  }
+  .day-tomorrow {
+    color: var(--text-mid);
+    background: var(--surface-2);
+  }
+
+  .events {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+  }
+
+  .event {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 0 24px;
+    align-items: baseline;
+    padding: 18px 26px;
+    position: relative;
+    transition: background 0.12s ease;
+  }
+  .event + .event::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 26px;
+    right: 26px;
+    height: 1px;
+    background: var(--border-light);
+  }
+  .event:hover { background: var(--surface-hover); }
+
+  .ev-time {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+  .ev-time.is-tba { color: var(--text-muted); font-weight: 500; }
+
+  .ev-main { min-width: 0; }
+  .ev-title {
+    font-size: 16.5px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.017em;
+    line-height: 1.32;
+    overflow-wrap: anywhere;
+  }
+  .ev-link {
+    color: inherit;
+    transition: color 0.12s ease;
+  }
+  .ev-link:hover { color: var(--accent-text); }
+  .ev-sub {
+    margin-top: 4px;
+    font-size: 14px;
+    color: var(--text-mid);
+    font-weight: 450;
+    overflow-wrap: anywhere;
+  }
+  .ev-sub .venue { color: var(--text); font-weight: 500; }
+  .ev-sub .sep { color: var(--text-faint); margin: 0 7px; }
+  .ev-cast {
+    margin-top: 6px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-weight: 450;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+  .ev-cast .ev-role {
+    font-weight: 600;
+    color: var(--text-mid);
+    margin-right: 5px;
+  }
+  .ev-cast .sep { color: var(--text-faint); margin: 0 8px; }
+  .ev-city {
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-align: right;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .ev-city .flag { font-size: 12px; }
 
   /* ── No results ── */
   .no-results {
-    font-family: var(--serif);
-    font-size: 1.1rem;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--text-muted);
-    padding: 3rem 0;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 56px 24px;
     text-align: center;
+    color: var(--text-muted);
+    font-size: 15px;
+    font-weight: 450;
   }
 
   /* ── Mobile ── */
-  @media (max-width: 900px) {
-    .event-people {
-      display: none;
+  @media (max-width: 560px) {
+    .events-section { margin-top: 32px; }
+    .event {
+      grid-template-columns: 60px 1fr;
+      gap: 3px 16px;
+      padding: 16px 18px;
     }
-  }
-
-  @media (max-width: 700px) {
-    .events-section {
-      padding: 0 1.5rem 3rem;
+    .event + .event::before { left: 18px; right: 18px; }
+    .ev-city {
+      grid-column: 2;
+      justify-self: start;
+      text-align: left;
+      margin-top: 6px;
     }
-
-    .event-table {
-      table-layout: auto;
-    }
-
-    .event-time {
-      width: auto;
-      font-size: 0.85rem;
-    }
-
-    .event-title {
-      font-size: 1.05rem;
-    }
-
-    .event-venue {
-      width: auto;
-      font-size: 0.8rem;
-    }
+    .listhead { flex-direction: column; align-items: flex-start; gap: 2px; }
   }
 </style>

@@ -1,0 +1,248 @@
+---
+import Base from '../layouts/Base.astro';
+import { getVenues, getEvents } from '../lib/data.ts';
+import { translate, getLegalPageHref, type SupportedLang } from '../i18n/index.ts';
+
+interface Props {
+  lang: SupportedLang;
+}
+const { lang } = Astro.props;
+
+const venues = getVenues();
+const events = getEvents(90);
+
+const countByVenue: Record<string, number> = {};
+for (const e of events) {
+  countByVenue[e.venue_id] = (countByVenue[e.venue_id] ?? 0) + 1;
+}
+
+const countryNames = new Intl.DisplayNames([lang], { type: 'region' });
+
+// Group venues by country
+const byCountry = new Map<string, typeof venues>();
+for (const v of venues) {
+  const list = byCountry.get(v.country) ?? [];
+  list.push(v);
+  byCountry.set(v.country, list);
+}
+const groups = [...byCountry.entries()]
+  .map(([code, vs]) => ({
+    code,
+    name: countryNames.of(code) ?? code,
+    venues: vs.slice().sort((a, b) => a.name.localeCompare(b.name)),
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+function flagClass(country: string): string | null {
+  return /^[A-Za-z]{2}$/.test(country) ? `fi fi-${country.toLowerCase()} flag` : null;
+}
+function formatAge(iso: string | null): string {
+  if (!iso) return translate(lang, 'footer.updated_never');
+  const d = new Date(iso).toLocaleDateString(lang, { day: 'numeric', month: 'short', year: 'numeric' });
+  return translate(lang, 'footer.updated', { date: d });
+}
+
+const t = (key: string, vars?: Record<string, string | number>) => translate(lang, key, vars);
+const total = venues.length;
+---
+
+<Base title={`${t('sources.title')} — Leporello`} lang={lang}>
+  <div class="src-page">
+    <header class="src-header">
+      <a href="/" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Leporello
+      </a>
+    </header>
+
+    <main class="src-main">
+      <div class="src-intro">
+        <h1>{t('sources.title')}</h1>
+        <p class="src-stats">{t('sources.stats', { venues: total, countries: groups.length })}</p>
+        <p class="src-lede">{t('sources.intro')}</p>
+      </div>
+
+      {groups.map(group => (
+        <section class="src-group">
+          <h2 class="src-country">
+            {flagClass(group.code) && <span class={flagClass(group.code)} aria-hidden="true"></span>}
+            <span>{group.name}</span>
+            <span class="src-country-count">{group.venues.length}</span>
+          </h2>
+          <ul class="src-list">
+            {group.venues.map(v => (
+              <li class="src-row">
+                <a href={v.url} target="_blank" rel="noopener" class="src-venue">{v.name}</a>
+                <span class="src-city">{v.city_name}</span>
+                <span class="src-meta">
+                  <span class="src-count">{(countByVenue[v.id] ?? 0) === 1 ? t('footer.event_one') : t('footer.events', { n: countByVenue[v.id] ?? 0 })}</span>
+                  <span class="dot">&middot;</span>
+                  {formatAge(v.last_scraped)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </main>
+
+    <footer class="src-footer">
+      <nav class="src-footer-nav" aria-label="Legal">
+        <a href="/">Leporello</a>
+        <a href={getLegalPageHref('terms', lang)}>{t('legal.terms')}</a>
+        <a href={getLegalPageHref('privacy', lang)}>{t('legal.privacy')}</a>
+        <a href={getLegalPageHref('impressum', lang)}>{t('legal.impressum')}</a>
+      </nav>
+    </footer>
+  </div>
+</Base>
+
+<style>
+  .src-page {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .src-header { padding: 18px 0; }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color 0.15s ease;
+  }
+  .back-link:hover { color: var(--accent-text); }
+
+  .src-main { flex: 1; }
+  .src-intro { margin: 12px 0 36px; }
+  .src-intro h1 {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin: 0;
+  }
+  .src-stats {
+    margin: 8px 0 0;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--accent-text);
+    font-variant-numeric: tabular-nums;
+  }
+  .src-lede {
+    margin: 10px 0 0;
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.5;
+    max-width: 560px;
+  }
+
+  .src-group { margin-top: 28px; }
+  .src-country {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 10px;
+    padding: 0 4px;
+  }
+  .src-country .flag { font-size: 14px; }
+  .src-country-count {
+    margin-left: auto;
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .src-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+  }
+  .src-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 4px 16px;
+    padding: 14px 22px;
+    position: relative;
+  }
+  .src-row + .src-row::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 22px; right: 22px;
+    height: 1px;
+    background: var(--border-light);
+  }
+  .src-venue {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.012em;
+    transition: color 0.12s ease;
+    overflow-wrap: anywhere;
+  }
+  .src-venue:hover { color: var(--accent-text); }
+  .src-city {
+    grid-row: 2;
+    grid-column: 1;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 450;
+  }
+  .src-meta {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    align-self: center;
+    text-align: right;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .src-meta .src-count { color: var(--text-mid); font-weight: 600; }
+  .src-meta .dot { margin: 0 6px; color: var(--text-faint); }
+
+  .src-footer {
+    margin-top: 56px;
+    padding: 24px 0 48px;
+    border-top: 1px solid var(--border-light);
+  }
+  .src-footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+  .src-footer-nav a { transition: color 0.15s ease; }
+  .src-footer-nav a:hover { color: var(--accent-text); }
+
+  @media (max-width: 560px) {
+    .src-page { padding: 0 18px; }
+    .src-intro h1 { font-size: 25px; }
+    .src-row { padding: 14px 18px; }
+    .src-row + .src-row::before { left: 18px; right: 18px; }
+    .src-meta {
+      grid-row: 3;
+      grid-column: 1;
+      text-align: left;
+      align-self: start;
+      margin-top: 4px;
+      white-space: normal;
+    }
+  }
+</style>
