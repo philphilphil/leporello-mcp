@@ -42,10 +42,26 @@ correctness beats speed.
      site; if you still cannot find a real schedule/Spielplan/programme
      page, STOP and ask the user — do not invent one.
 4. Derive `venue-id` (kebab-case of the venue, matching the issue's
-   `src/scrapers/<venue-id>.ts` checklist item if present). Confirm it does
-   **not** already exist: `src/scrapers/<venue-id>.ts` absent and the venue
-   not already in the README Supported Venues table. If it exists → STOP:
-   "Venue already has a scraper."
+   `src/scrapers/<venue-id>.ts` checklist item if present). Confirm **no
+   prior work** for this venue exists — check all three, STOP at the first
+   hit:
+   - **Scraper on main:** `src/scrapers/<venue-id>.ts` present, or the venue
+     already in the README Supported Venues table → STOP: "Venue already has
+     a scraper."
+   - **Existing branch:** `git ls-remote --heads origin 'scraper/<venue-id>*'`
+     or `git branch --list 'scraper/<venue-id>*'` returns anything → STOP:
+     "Branch <name> already exists for this venue — finish/review it instead."
+   - **Existing PR:** enumerate open PRs and match by head branch — STOP if
+     `scraper/<venue-id>` (or the venue name in the title) appears:
+     "PR #<n> already exists — use `/review-scraper-pr <n>`."
+     ```bash
+     gh pr list --state open --json number,title,headRefName
+     ```
+     **Never use `gh pr list --search` / a `--search` filter for this.** A
+     repo's GitHub PR **search index can be stale or empty** (e.g. when PRs
+     were bulk-created and left with `mergeable: UNKNOWN`), so `--search`
+     returns false negatives — it will say "no PR" when one exists. Always
+     enumerate plainly with `--json` and match `headRefName`/`title` in code.
 5. If any precondition fails, STOP. Do not touch git state.
 
 ## Flow
@@ -226,6 +242,7 @@ Every finding line keeps `claim:` / `evidence:` / `fix:`.
 | Issue isn't a scraper request | STOP at preconditions. "Issue #<n> is not a scraper request." |
 | Issue body has no schedule URL | Try the venue's official site; if none found, STOP and ask. Never invent one. |
 | Venue already scraped | STOP. "Venue already has a scraper." |
+| Branch/PR already exists for the venue | STOP. Point at `/review-scraper-pr <n>` (or the branch). Don't rebuild. Enumerate PRs with plain `gh pr list --json`, never `--search`. |
 | Site only has stale/past events | STOP the build at CONTRIBUTING §3 — find a current-season URL/endpoint first. No scraper against stale data. |
 | Cloudflare / JS-rendered | Use `fetchJsonViaBrowser` / `fetchRenderedHtml` per Recon; refetch in Playwright for the gate. |
 | Detail URLs unavailable | Fall back to `scheduleUrl`; check 7 runs against the schedule page for those events. |
@@ -241,4 +258,7 @@ Every finding line keeps `claim:` / `evidence:` / `fix:`.
 - Calling a field correct without having opened the page in Playwright
 - Looping forever on a soft finding instead of proving it a true negative
 - Making a finding without an `evidence:` line you can fill in
+- Using `gh pr list --search` (or any `--search` filter) to check for an
+  existing PR — the search index lies; enumerate plainly and match in code
+- Building a scraper for a venue that already has a branch or open PR
 - Returning to `main` before the user has reviewed
