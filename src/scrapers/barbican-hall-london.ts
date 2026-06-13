@@ -2,9 +2,11 @@ import { load } from 'cheerio';
 import type { Event } from '../types.js';
 import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
 
-type FetchHtml = () => Promise<string>;
+type FetchHtml = (url: string) => Promise<string>;
 
 const BASE_URL = 'https://www.barbican.org.uk';
+const DAYS_AHEAD = 90; // stop paginating once events run past this window
+const MAX_PAGES = 10; // safety cap; the 90-day cutoff normally stops sooner
 
 const MONTH_MAP: Record<string, string> = {
   Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
@@ -25,16 +27,44 @@ export class BarbicanHallLondonScraper implements Scraper {
 
   constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
 
+  private async fetchPage(url: string): Promise<string> {
+    if (this.opts.fetchHtml) return this.opts.fetchHtml(url);
+    const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+    if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
+    return res.text();
+  }
+
   async scrape(): Promise<Event[]> {
-    const html = this.opts.fetchHtml
-      ? await this.opts.fetchHtml()
-      : await fetch(this.venue.scheduleUrl, {
-          headers: { 'User-Agent': USER_AGENT },
-        }).then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
-          return r.text();
-        });
-    return this.parse(html);
+    // The classical-music listing is chronological and paginated via ?page=N
+    // (page 0 = default URL, then page=1, page=2, …). Walk forward until events
+    // run past the 90-day window so we don't stop at the first page's ~2-month
+    // horizon and miss upcoming concerts.
+    const cutoff = new Date(Date.now() + DAYS_AHEAD * 86_400_000).toISOString().slice(0, 10);
+    const events: Event[] = [];
+    const seen = new Set<string>();
+
+    for (let page = 0; page < MAX_PAGES; page++) {
+      const url = page === 0
+        ? this.venue.scheduleUrl
+        : `${this.venue.scheduleUrl}?page=${page}`;
+
+      const pageEvents = this.parse(await this.fetchPage(url));
+      if (pageEvents.length === 0) break; // no more event rows
+
+      let reachedCutoff = false;
+      for (const event of pageEvents) {
+        if (event.date > cutoff) {
+          reachedCutoff = true; // events are chronological — past the window
+          continue;
+        }
+        if (seen.has(event.id)) continue; // page boundaries may overlap
+        seen.add(event.id);
+        events.push(event);
+      }
+      if (reachedCutoff) break;
+    }
+
+    return events;
   }
 
   parse(html: string): Event[] {
