@@ -17,7 +17,7 @@ npm run build --prefix web  # Build Astro frontend to web/dist/
 Two Docker containers sharing a SQLite volume:
 
 - **Web container** (`Dockerfile.web`, entry: `src/index.ts`) — HTTP server (MCP + static Astro frontend), rebuilds frontend on every container start
-- **Scraper container** (`Dockerfile.scraper`, entry: `src/scrape.ts`) — runs all scrapers once and exits. Scheduled via host cron or `docker compose run --rm scraper`
+- **Scraper container** (`Dockerfile.scraper`, entry: `src/scrape.ts`) — runs all scrapers once and exits. One-shot job defined in `docker-compose.scrape.yml` (own compose project), scheduled via host cron or `docker compose -f docker-compose.scrape.yml run --rm scraper`
 - **Scrapers** (`src/scrapers/`) — Cheerio/Playwright-based, one file per venue
 - **Frontend** (`web/`) — Astro static site, reads SQLite at build time, client-side filtering/search
 
@@ -100,7 +100,7 @@ Env vars (see `.env.sample`):
 - `SEQ_URL` — Seq server URL, e.g. `https://seq.phib.io` (optional; absent = stdout only)
 - `SEQ_API_KEY` — Seq API key for ingestion
 - `HASH_SALT` — secret for hashing client IPs in MCP usage events; rotate yearly
-- `SERVICE_NAME` — `web` or `scraper`, set per container in `docker-compose.yml` (and per `npm` script for local dev)
+- `SERVICE_NAME` — `web` or `scraper`, set per container in the compose files (`docker-compose.yml` / `docker-compose.scrape.yml`, and per `npm` script for local dev)
 - `LEPORELLO_ENV` — set in `.env` on each host: `dev` locally, `production` on the deploy host. Tagged on every Seq event as `env` so you can filter dev vs prod.
 
 Events:
@@ -134,14 +134,16 @@ Save all Playwright screenshots into `.playwright-mcp/` (already gitignored), no
 
 Docker Compose + Traefik at `leporello.app`.
 
+The web stack (`docker-compose.yml`) is always-running; the scraper is a one-shot job in `docker-compose.scrape.yml` under its own project (`leporello-scrape`) so its exited run container isn't folded into the web stack's health by Komodo.
+
 ```bash
-docker compose up -d                          # Start web server
-docker compose run --rm scraper               # Run all scrapers (exits when done)
-docker compose run --rm scraper node dist/scrape.js wiener-staatsoper  # Single venue
-docker compose logs -f web                    # Tail web logs
+docker compose up -d                                                   # Start web server (web stack)
+docker compose -f docker-compose.scrape.yml run --rm scraper           # Run all scrapers (exits when done)
+docker compose -f docker-compose.scrape.yml run --rm scraper node dist/scrape.js wiener-staatsoper  # Single venue
+docker compose logs -f web                                             # Tail web logs
 ```
 
 Schedule scrapers via host cron (scrape then restart web to rebuild frontend):
 ```cron
-0 3 * * * cd /home/phil/docker/lep && docker compose --profile scrape build scraper && docker compose run --rm scraper && docker compose restart web
+0 3 * * * cd /home/phil/docker/lep && docker compose -f docker-compose.scrape.yml build && docker compose -f docker-compose.scrape.yml run --rm scraper && docker compose restart web
 ```

@@ -1,0 +1,23 @@
+# One-shot scraper job — kept in its own compose project (`leporello-scrape`)
+# so its short-lived run containers are NOT labeled as part of the `leporello`
+# web stack. Otherwise a monitor like Komodo folds the exited container into the
+# web stack and reports the whole stack as unhealthy.
+#
+# Usage (shares ./data with the web stack via the same bind mount):
+#   docker compose -f docker-compose.scrape.yml build
+#   docker compose -f docker-compose.scrape.yml run --rm scraper                         # all venues
+#   docker compose -f docker-compose.scrape.yml run --rm scraper node dist/scrape.js wiener-staatsoper
+name: leporello-scrape
+
+services:
+  scraper:
+    build:
+      context: .
+      dockerfile: Dockerfile.scraper
+    restart: "no"
+    volumes:
+      - ./data:/app/data
+    env_file:
+      - .env
+    environment:
+      - SERVICE_NAME=scraper

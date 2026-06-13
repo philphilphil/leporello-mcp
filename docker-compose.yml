@@ -23,19 +23,9 @@ services:
       - "traefik.http.routers.leporello.tls.certresolver=myresolver"
       - "traefik.http.services.leporello.loadbalancer.server.port=3000"
 
-  scraper:
-    build:
-      context: .
-      dockerfile: Dockerfile.scraper
-    restart: "no"
-    volumes:
-      - ./data:/app/data
-    env_file:
-      - .env
-    environment:
-      - SERVICE_NAME=scraper
-    profiles:
-      - scrape
+# The scraper is a one-shot batch job — it lives in docker-compose.scrape.yml
+# under its own project name so an exited run container is never folded into
+# this (always-running) stack's health by Komodo et al.
 
 networks:
   gateway:

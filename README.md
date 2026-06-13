@@ -79,17 +79,17 @@ Scrapes daily at 03:00 UTC. Run `npm run scrape` to populate the database on fir
 
 ## Docker
 
-Two containers: **web** (HTTP server + MCP + static frontend) and **scraper** (fetches venue data into SQLite). They share a data volume. The scraper runs once and exits — schedule it with a host cron job.
+Two containers: **web** (HTTP server + MCP + static frontend) and **scraper** (fetches venue data into SQLite). They share a data volume. The web stack is `docker-compose.yml`; the scraper is a one-shot job in `docker-compose.scrape.yml` under its own compose project (`leporello-scrape`) so its exited container is never counted against the web stack's health. Schedule it with a host cron job.
 
 ```bash
 # Start the web server
 docker compose up -d
 
 # Run all scrapers (one-off, container stops when done)
-docker compose run --rm scraper
+docker compose -f docker-compose.scrape.yml run --rm scraper
 
 # Scrape a single venue
-docker compose run --rm scraper node dist/scrape.js wiener-staatsoper
+docker compose -f docker-compose.scrape.yml run --rm scraper node dist/scrape.js wiener-staatsoper
 
 # Rebuild the Astro frontend (e.g. after a manual scrape)
 docker compose exec web node -e "
@@ -106,5 +106,5 @@ docker compose logs -f web
 The web container rebuilds the Astro frontend on every start. To run scrapers on a schedule, add a host cron job that scrapes then restarts web:
 
 ```cron
-0 3 * * * cd /home/phil/docker/lep && docker compose run --rm scraper && docker compose restart web
+0 3 * * * cd /home/phil/docker/lep && docker compose -f docker-compose.scrape.yml build && docker compose -f docker-compose.scrape.yml run --rm scraper && docker compose restart web
 ```
