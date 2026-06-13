@@ -1,9 +1,10 @@
 import { getDb } from './db.js';
-import { scrapers, runScrapers } from './scheduler.js';
+import { loadScrapers, runScrapers } from './scheduler.js';
 import { logError, flush } from './logger.js';
 
 getDb();
 
+const scrapers = await loadScrapers();
 const venueArg = process.argv[2];
 
 try {

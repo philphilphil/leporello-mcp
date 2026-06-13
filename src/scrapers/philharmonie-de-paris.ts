@@ -92,3 +92,5 @@ export class PhilharmonieDeParisScraper implements Scraper {
     return events;
   }
 }
+
+export default new PhilharmonieDeParisScraper();

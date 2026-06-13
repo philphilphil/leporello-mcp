@@ -126,3 +126,5 @@ export class TeatroRealMadridScraper implements Scraper {
     return events;
   }
 }
+
+export default new TeatroRealMadridScraper();

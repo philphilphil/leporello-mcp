@@ -43,7 +43,41 @@ take 1-3 minutes per PR; confidence beats speed.
    ```
    This puts you on the PR's branch directly. No worktree.
 
-2. **Identify the scraper.** From the PR file list, find the new
+2. **Reconcile with `main` and migrate to auto-discovery.** Scrapers are
+   now auto-discovered — `src/scheduler.ts` is a loader that registers
+   every `scrapers/*.ts` module with a `export default new XScraper()`.
+   **PRs opened before this change still hand-edit `src/scheduler.ts`
+   (import + array entry) and lack the default export, so they will
+   conflict on merge and won't be discovered.** Fix the branch before
+   reviewing:
+
+   ```bash
+   git merge origin/main          # surfaces the conflict; brings branch current
+   ```
+
+   - If `src/scheduler.ts` conflicts: the PR's only change was additive
+     (import + array entry), and `main`'s loader makes both obsolete.
+     Take `main`'s version wholesale:
+     ```bash
+     git checkout --theirs src/scheduler.ts && git add src/scheduler.ts
+     ```
+   - If `README.md` conflicts: keep **both** sides — re-add the PR's new
+     row to the Supported Venues table by hand, then `git add README.md`.
+   - Add the default export to the bottom of the scraper file (derive the
+     class name from its `export class <X> implements Scraper`), unless it
+     is already there:
+     ```typescript
+     export default new <ScraperClass>();
+     ```
+   - `git add` the scraper file and `git commit` to finish the merge.
+
+   If the PR already follows the new convention (has the default export,
+   does **not** touch `src/scheduler.ts`), skip this step — just run
+   `git merge origin/main` to get current. Discovery is verified later by
+   check 8 (`npm run scrape -- <venue-id>` logs `unknown_venue` if the
+   default export is missing or wrong).
+
+3. **Identify the scraper.** From the PR file list, find the new
    `src/scrapers/<venue-id>.ts` file. Read it. Capture:
    - `venue-id` (from `venueId:` in the `VenueMeta`)
    - `scheduleUrl`
@@ -51,19 +85,19 @@ take 1-3 minutes per PR; confidence beats speed.
      scraper) — grep the constructor signature
    - Whether it uses `fetchRenderedHtml` (Playwright fetch) — grep imports
 
-3. **Run the 11 checks below in order.** Cheap mechanical checks first
+4. **Run the 11 checks below in order.** Cheap mechanical checks first
    so a broken PR fails fast; expensive Playwright checks last. Record
    the result of each check as you go — you will collate them into the
    report at the end.
 
-4. **Print the report into the conversation** in the format specified
+5. **Print the report into the conversation** in the format specified
    below.
 
-5. **Stay on the PR branch.** Do NOT `git checkout main`. The user is
+6. **Stay on the PR branch.** Do NOT `git checkout main`. The user is
    expected to either tell you to address findings (you are already on
    the right branch), to merge, or to bail manually.
 
-6. **On unexpected mid-review errors:** print whatever you gathered,
+7. **On unexpected mid-review errors:** print whatever you gathered,
    name the failure clearly, and leave the user on the PR branch. No
    silent rollback.
 
@@ -113,7 +147,9 @@ Read the new scraper file and grep for:
 - [ ] Uses `new URL(href, BASE_URL)` (or equivalent) to build absolute
       URLs — flag any manual string concatenation
 - [ ] Throws on non-2xx responses (`if (!res.ok) throw ...`)
-- [ ] Registered in `src/scheduler.ts` `scrapers` array
+- [ ] Has `export default new XScraper()` at the bottom (auto-discovery).
+      The PR must **not** add itself to `src/scheduler.ts` — if it does,
+      that's the pre-migration form; step 2 should have stripped it.
 - [ ] Listed in the README's Supported Venues table
 - [ ] PR description (from `gh pr view`) contains a clickable URL to the
       schedule page

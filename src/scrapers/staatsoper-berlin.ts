@@ -124,3 +124,5 @@ export class StaatsoperBerlinScraper implements Scraper {
     return { parsed: events, nextUrl };
   }
 }
+
+export default new StaatsoperBerlinScraper();

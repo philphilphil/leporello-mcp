@@ -94,3 +94,5 @@ export class BayerischeStaatsoperScraper implements Scraper {
     return events;
   }
 }
+
+export default new BayerischeStaatsoperScraper();

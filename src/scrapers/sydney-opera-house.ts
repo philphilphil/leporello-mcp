@@ -163,3 +163,5 @@ export class SydneyOperaHouseScraper implements Scraper {
     return events;
   }
 }
+
+export default new SydneyOperaHouseScraper();

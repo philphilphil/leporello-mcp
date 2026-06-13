@@ -182,16 +182,21 @@ The `testDbIntegration` helper checks for duplicate event IDs and inserts all pa
 
 ## 5. Register the scraper
 
-In `src/scheduler.ts`, add to the `scrapers` array:
+Scrapers are **auto-discovered** — there is no central registry to edit (this
+keeps parallel scraper PRs from conflicting). Just add a default export at the
+bottom of your `src/scrapers/<venue-id>.ts` file:
 
 ```typescript
-import { MyVenueScraper } from './scrapers/<venue-id>.js';
+export class MyVenueScraper implements Scraper {
+  // ...
+}
 
-const scrapers: Scraper[] = [
-  // existing scrapers...
-  new MyVenueScraper(),
-];
+export default new MyVenueScraper();
 ```
+
+`src/scheduler.ts` loads every `scrapers/*.ts` module that has a valid
+`export default new XScraper()` at startup. Keep the named `export class` too —
+the tests import it directly.
 
 ## 6. Update the venue list
 

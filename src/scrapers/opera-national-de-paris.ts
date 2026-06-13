@@ -180,3 +180,5 @@ export class OperaNationalDeParisScraper implements Scraper {
     return events;
   }
 }
+
+export default new OperaNationalDeParisScraper();
