@@ -56,11 +56,34 @@ describe('ElbphilharmonieHamburgScraper', () => {
     expect(laeiszhalle).toBeDefined();
   });
 
-  it('extracts cast from subtitle with slashes', async () => {
+  it('does not populate cast from the program/works subtitle', async () => {
+    // The listing card's `p.event-subtitle` is a program/works summary
+    // (program title + composer surnames), not performers. We must not
+    // surface it as cast. The BESETZUNG only exists on detail pages.
     const events = await makeScraper().scrape();
+
+    // Every event on the listing page has cast=null — the page exposes no
+    // real performers.
+    for (const event of events) {
+      expect(event.cast).toBeNull();
+    }
+
+    // Spot-check events whose subtitle previously leaked into cast as
+    // composer/works text. They must now be null.
     const junge = events.find(e => e.title.includes('Junge Symphoniker'));
     expect(junge).toBeDefined();
-    expect(junge!.cast).toContain('Zemlinsky');
+    expect(junge!.cast).toBeNull();
+
+    const ndr = events.find(e => e.title.includes('Ryan Bancroft'));
+    expect(ndr).toBeDefined();
+    expect(ndr!.cast).toBeNull();
+
+    // Composer/works tokens must never appear in any cast value.
+    const composerTokens = ['Zemlinsky', 'Dvořák', 'Elgar', 'Hillborg', 'Schumann'];
+    const allCast = events.flatMap(e => e.cast ?? []);
+    for (const token of composerTokens) {
+      expect(allCast.some(c => c.includes(token))).toBe(false);
+    }
   });
 
   it('deduplicates events by id', async () => {

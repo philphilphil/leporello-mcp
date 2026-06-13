@@ -99,14 +99,12 @@ export class ElbphilharmonieHamburgScraper implements Scraper {
         const hall = hallText.replace(building, '').trim();
         const location = hall ? `${building} ${hall}` : building || null;
 
-        // Subtitle — used as description (performers, program info)
-        const subtitle = $el.find('p.event-subtitle').first().text().trim() || null;
-
-        // Build cast from subtitle — split performers by " / "
-        let cast: string[] | null = null;
-        if (subtitle && subtitle.includes(' / ')) {
-          cast = subtitle.split(' / ').map(s => s.trim()).filter(Boolean);
-        }
+        // No real cast on the listing page. The `p.event-subtitle` line is a
+        // program/works summary (program title + composer surnames, e.g.
+        // "»Unter Wasser«: Dvořák / Zemlinsky"), NOT performers. The actual
+        // BESETZUNG lives only on per-event detail pages, which are out of
+        // scope here, so we leave cast null rather than mislabel program text.
+        const cast: string[] | null = null;
 
         const url = href ? new URL(href, BASE_URL + '/').href : null;
 
