@@ -106,3 +106,5 @@ export class WienerKonzerthausScraper implements Scraper {
     return events;
   }
 }
+
+export default new WienerKonzerthausScraper();
