@@ -3,9 +3,10 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const DB_PATH =
-  process.env.DB_PATH ??
-  path.join(fileURLToPath(import.meta.url), '..', '..', '..', '..', 'data', 'leporello.db');
+const PROJECT_ROOT = path.join(fileURLToPath(import.meta.url), '..', '..', '..', '..');
+const DB_PATH = process.env.DB_PATH
+  ? path.resolve(PROJECT_ROOT, process.env.DB_PATH)
+  : path.join(PROJECT_ROOT, 'data', 'leporello.db');
 
 function openDb(): Database.Database | null {
   if (!existsSync(DB_PATH)) return null;

@@ -91,3 +91,5 @@ export class AuditorioNacionalMadridScraper implements Scraper {
     return events;
   }
 }
+
+export default new AuditorioNacionalMadridScraper();
