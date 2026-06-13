@@ -119,3 +119,5 @@ export class SalzburgerFestspieleScraper implements Scraper {
     return events;
   }
 }
+
+export default new SalzburgerFestspieleScraper();
