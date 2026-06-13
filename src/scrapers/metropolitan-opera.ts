@@ -108,3 +108,5 @@ export class MetropolitanOperaScraper implements Scraper {
     return events;
   }
 }
+
+export default new MetropolitanOperaScraper();
