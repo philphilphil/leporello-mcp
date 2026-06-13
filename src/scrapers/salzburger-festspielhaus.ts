@@ -9,6 +9,11 @@ const API_URL = 'https://www.salzburgerfestspiele.at/vue/calendar/de/events';
 const CREDIT_COMPOSER = 1;
 const CREDIT_CONDUCTOR = 18;
 
+/** Strip inline HTML tags and collapse whitespace. */
+function stripHtml(s: string): string {
+  return s.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
 interface SffEvent {
   id: number;
   title: string;
@@ -92,11 +97,11 @@ export class SalzburgerFestspieleScraper implements Scraper {
           ?.find(h => h.credit_type_id === CREDIT_CONDUCTOR)?.full_name ?? null;
 
         // Clean location: strip HTML tags (some contain <br>)
-        const location = e.location
-          ? e.location.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
-          : null;
+        const location = e.location ? stripHtml(e.location) : null;
 
-        const title = composer ? `${e.title} (${composer})` : e.title;
+        // Some titles contain inline HTML (<i>…</i>, <br>) — strip it too.
+        const cleanTitle = stripHtml(e.title);
+        const title = composer ? `${cleanTitle} (${composer})` : cleanTitle;
         const url = e.link ? new URL(e.link, 'https://www.salzburgerfestspiele.at/').href : null;
 
         events.push({

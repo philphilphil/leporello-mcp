@@ -42,6 +42,13 @@ describe('SalzburgerFestspieleScraper', () => {
     }
   });
 
+  it('strips inline HTML from titles', async () => {
+    const events = await scraper.scrape();
+    for (const e of events) {
+      expect(e.title).not.toMatch(/<[^>]+>/);
+    }
+  });
+
   it('extracts conductor when available', async () => {
     const events = await scraper.scrape();
     const withConductor = events.filter(e => e.conductor !== null);
