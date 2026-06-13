@@ -94,7 +94,9 @@ export class BerlinerPhilharmonieBerlinScraper implements Scraper {
     for (const hit of data.hits) {
       try {
         const doc = hit.document;
-        if (!doc.title || !doc.time_start) continue;
+        // The effective title falls back to super_title below, so an empty
+        // `title` is fine as long as `super_title` is present (e.g. Lunchkonzert).
+        if ((!doc.title && !doc.super_title) || !doc.time_start) continue;
 
         // Parse date and time from Unix timestamp
         const dt = new Date(doc.time_start * 1000);

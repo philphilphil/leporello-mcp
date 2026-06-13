@@ -11,8 +11,36 @@ const scraper = new BerlinerPhilharmonieBerlinScraper({ fetchJson: async () => f
 describe('BerlinerPhilharmonieBerlinScraper', () => {
   it('parses events from fixture', async () => {
     const events = await scraper.scrape();
-    expect(events.length).toBeGreaterThan(0);
-    expect(events.length).toBe(20);
+    // The live feed carries hundreds of events; assert a robust lower bound
+    // rather than an exact count that breaks on every fixture refresh.
+    expect(events.length).toBeGreaterThan(50);
+  });
+
+  it('parses events that have super_title but no title (e.g. Lunchkonzert)', () => {
+    // The feed delivers some events (free lunch concerts) with an empty
+    // `title` but a populated `super_title`. They must not be dropped — the
+    // parser already falls back to super_title when building the title.
+    const events = scraper.parse({
+      found: 1,
+      hits: [
+        {
+          document: {
+            title: '',
+            super_title: 'Lunchkonzert',
+            place: 'Foyer Großer Saal',
+            detail_url: '/konzerte/kalender/99999/',
+            time_start: 1788346800,
+            time_start_formatted: '13.00 Uhr',
+            date_string: '',
+            artists: [],
+            works_overview_formatted: '',
+            is_guest_event: false,
+          },
+        },
+      ],
+    });
+    expect(events).toHaveLength(1);
+    expect(events[0].title).toBe('Lunchkonzert');
   });
 
   it('parses date and time correctly', async () => {
@@ -30,8 +58,43 @@ describe('BerlinerPhilharmonieBerlinScraper', () => {
     const events = await scraper.scrape();
     const withConductor = events.filter(e => e.conductor !== null);
     expect(withConductor.length).toBeGreaterThan(0);
-    // Second event (Kirill Petrenko conducting)
-    expect(withConductor[0].conductor).toBe('Kirill Petrenko');
+    // Conductor is a non-empty string (avoid asserting a specific name, which
+    // changes whenever the schedule does).
+    expect(typeof withConductor[0].conductor).toBe('string');
+    expect((withConductor[0].conductor as string).length).toBeGreaterThan(0);
+  });
+
+  // Field-mapping canary: exact values against a controlled input. Unlike the
+  // live fixture (whose contents roll forward with the schedule), this fails
+  // only if the artist-role mapping logic or the feed's field names change —
+  // not when the venue simply reschedules concerts.
+  it('maps the Dirigent/-in role to conductor and other soloists to cast', () => {
+    const events = scraper.parse({
+      found: 1,
+      hits: [
+        {
+          document: {
+            title: 'Testkonzert',
+            super_title: '',
+            place: 'Großer Saal',
+            detail_url: '/konzerte/kalender/12345/',
+            time_start: 1788346800,
+            time_start_formatted: '20.00 Uhr',
+            date_string: '',
+            works_overview_formatted: '',
+            is_guest_event: false,
+            artists: [
+              { name: 'Jane Conductor', role: 'Dirigentin' },
+              { name: 'Sam Soloist', role: 'Violine' },
+              { name: 'The Orchestra', role: 'Orchester' },
+            ],
+          },
+        },
+      ],
+    });
+    expect(events).toHaveLength(1);
+    expect(events[0].conductor).toBe('Jane Conductor');
+    expect(events[0].cast).toEqual(['Sam Soloist']); // soloist in, orchestra out
   });
 
   it('extracts cast (soloists) from artists', async () => {
