@@ -31,6 +31,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Tonhalle-Orchester Zürich | Zürich |
 | Lyric Opera of Chicago | Chicago |
 | Palau de la Música Catalana | Barcelona |
+| Royal Opera House | London |
 
 ## How it works
 
