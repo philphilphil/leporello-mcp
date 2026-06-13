@@ -5,6 +5,12 @@ type FetchJson = () => Promise<JsonApiResponse>;
 
 const BASE_URL = 'https://www.rbo.org.uk';
 
+// The calendar API returns titles that occasionally embed HTML markup
+// (e.g. "<h4>SATURDAY/EARLY SHIFT</h4>"). Strip tags and collapse whitespace.
+function stripHtml(s: string | null | undefined): string {
+  return (s ?? '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+}
+
 interface JsonApiResponse {
   data: {
     type: string;
@@ -106,7 +112,12 @@ export class RoyalOperaHouseLondonScraper implements Scraper {
         const calEvent = eventsMap.get(eventRef);
         if (!calEvent) continue;
 
-        const title = calEvent.title;
+        // "Event card" entries are aggregator/promo cards (e.g. SHIFT sub-shifts,
+        // category links). Their titles carry raw HTML and they have no real
+        // detail page — skip them; the underlying performances appear separately.
+        if (calEvent.sourceType === 'prismic-only-event-card') continue;
+
+        const title = stripHtml(calEvent.title);
         if (!title) continue;
 
         // Parse date and time from ISO 8601 string
@@ -122,15 +133,11 @@ export class RoyalOperaHouseLondonScraper implements Scraper {
         const locationNames = locIds.map(l => locationsMap.get(l.id)).filter(Boolean);
         const location = locationNames.length > 0 ? locationNames[0]! : null;
 
-        // Build URL from slug
-        const url = calEvent.slug
-          ? `${BASE_URL}/tickets-and-events/${calEvent.slug}`
-          : null;
+        const url = this.buildEventUrl(calEvent);
 
         // Build full title with subtitle if present (e.g. ballet programme details)
-        const fullTitle = activity.subtitle
-          ? `${title} — ${activity.subtitle}`
-          : title;
+        const subtitle = stripHtml(activity.subtitle);
+        const fullTitle = subtitle ? `${title} — ${subtitle}` : title;
 
         events.push({
           id: generateEventId(this.venueId, date, time, title),
@@ -150,6 +157,37 @@ export class RoyalOperaHouseLondonScraper implements Scraper {
     }
 
     return events;
+  }
+
+  // Resolve the public detail-page URL for an event. The RBO calendar API does
+  // not return a usable URL for productions, and the bare `/tickets-and-events/
+  // {slug}` path 500s — the real path depends on the event's sourceType. Prefer
+  // an explicit `link` when the API provides one; otherwise build per type.
+  // Falls back to the calendar page rather than emit a dead link.
+  private buildEventUrl(calEvent: CalendarEvent): string {
+    if (calEvent.link) {
+      try {
+        return new URL(calEvent.link, BASE_URL).toString();
+      } catch {
+        // fall through to slug-based construction
+      }
+    }
+
+    const { slug, sourceType } = calEvent;
+    if (slug) {
+      switch (sourceType) {
+        case 'single-production-page':
+          return new URL(`/production/${slug}`, BASE_URL).toString();
+        case 'event-detail':
+          return new URL(`/tickets-and-events/${slug}-dates`, BASE_URL).toString();
+        case 'prismic-only-event-detail':
+          return new URL(`/tickets-and-events/${slug}-details`, BASE_URL).toString();
+        case 'festival':
+          return new URL(`/tickets-and-events/festival/${slug}-details`, BASE_URL).toString();
+      }
+    }
+
+    return this.venue.scheduleUrl;
   }
 }
 
