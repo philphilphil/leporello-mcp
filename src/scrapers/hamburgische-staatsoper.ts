@@ -119,3 +119,5 @@ export class HamburgischeStaatsoperScraper implements Scraper {
     return events;
   }
 }
+
+export default new HamburgischeStaatsoperScraper();
