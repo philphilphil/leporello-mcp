@@ -1,16 +1,26 @@
-import { load } from 'cheerio';
 import type { Event } from '../types.js';
-import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
+import { generateEventId, fetchJsonViaBrowser, type Scraper, type VenueMeta } from './base.js';
 
-type FetchHtml = () => Promise<string>;
+type FetchJson = () => Promise<unknown[]>;
 
 const BASE_URL = 'https://www.lyricopera.org';
+const API_URL = 'https://www.lyricopera.org/ace-api/events';
 
-const MONTH_MAP: Record<string, string> = {
-  January: '01', February: '02', March: '03', April: '04',
-  May: '05', June: '06', July: '07', August: '08',
-  September: '09', October: '10', November: '11', December: '12',
-};
+// How far ahead to request events. The calendar API ignores its startDate
+// param and returns everything up to endDate (including past seasons), so we
+// fetch a wide window and filter to upcoming events in parse(). 400 days
+// comfortably covers the full announced season.
+const HORIZON_DAYS = 400;
+
+interface LyricApiEvent {
+  id?: string;
+  name?: string;
+  eventDate?: string; // local Chicago wall time, e.g. "2026-10-10T19:30:00"
+  location?: string;
+  viewDetailCtaUrl?: string; // site-relative, e.g. "/shows/upcoming/2026-27/don-giovanni/"
+  hideFromCalendar?: boolean;
+  hidePerfFromCal?: boolean;
+}
 
 export class LyricOperaChicagoScraper implements Scraper {
   readonly venue: VenueMeta = {
@@ -24,102 +34,97 @@ export class LyricOperaChicagoScraper implements Scraper {
 
   get venueId(): string { return this.venue.venueId; }
 
-  constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
+  constructor(
+    private readonly opts: { fetchJson?: FetchJson; now?: () => Date } = {},
+  ) {}
 
-  async scrape(): Promise<Event[]> {
-    const html = this.opts.fetchHtml
-      ? await this.opts.fetchHtml()
-      : await fetch(this.venue.scheduleUrl, {
-          headers: { 'User-Agent': USER_AGENT },
-        }).then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
-          return r.text();
-        });
-    return this.parse(html);
+  private now(): Date {
+    return this.opts.now ? this.opts.now() : new Date();
   }
 
-  parse(html: string): Event[] {
-    const $ = load(html);
+  async scrape(): Promise<Event[]> {
+    const raw = this.opts.fetchJson
+      ? await this.opts.fetchJson()
+      : await this.fetchFromApi();
+    return this.parse(raw);
+  }
+
+  private async fetchFromApi(): Promise<unknown[]> {
+    const start = this.now();
+    const end = new Date(start);
+    end.setDate(end.getDate() + HORIZON_DAYS);
+    const params = new URLSearchParams({
+      startDate: start.toISOString().slice(0, 10),
+      endDate: end.toISOString().slice(0, 10),
+    });
+    // The site is behind Cloudflare; plain fetch() 403s, so the JSON endpoint
+    // is requested through a headless browser that clears the challenge.
+    const json = await fetchJsonViaBrowser(
+      this.venue.scheduleUrl,
+      `${API_URL}?${params}`,
+    );
+    return Array.isArray(json) ? json : [];
+  }
+
+  parse(data: unknown[]): Event[] {
     const events: Event[] = [];
-    const now = new Date().toISOString();
+    const scrapedAt = this.now().toISOString();
+    const todayStr = this.now().toISOString().slice(0, 10);
+    const seen = new Set<string>();
 
-    $('li.ace-cal-list-day').each((_, dayEl) => {
+    for (const item of data) {
       try {
-        const $day = $(dayEl);
+        const e = item as LyricApiEvent;
 
-        // Extract year from aria-labelledby="List-Day-{unix_timestamp}"
-        // Timestamps represent local midnight in Chicago (CDT/CST), so add
-        // 12 h before converting to UTC to land on the correct calendar day.
-        const labelledBy = $day.attr('aria-labelledby') ?? '';
-        const tsMatch = labelledBy.match(/List-Day-(\d+)/);
-        if (!tsMatch) return;
-        const timestamp = parseInt(tsMatch[1], 10);
-        const dateObj = new Date((timestamp + 43200) * 1000); // +12 h
-        const year = dateObj.getUTCFullYear();
+        // Respect the site's own calendar-hiding flags.
+        if (e.hideFromCalendar || e.hidePerfFromCal) continue;
 
-        // Parse month and day from the heading text: "Wednesday, April 1"
-        const heading = $day.find('.ace-cal-list-day-date').first().text().trim();
-        const dateMatch = heading.match(/(\w+),\s+(\w+)\s+(\d{1,2})/);
-        if (!dateMatch) return;
-        const mm = MONTH_MAP[dateMatch[2]];
-        if (!mm) return;
-        const dd = dateMatch[3].padStart(2, '0');
-        const date = `${year}-${mm}-${dd}`;
+        const title = e.name?.trim();
+        if (!title || !e.eventDate) continue;
 
-        $day.find('li.ace-cal-list-event').each((_, eventEl) => {
-          try {
-            const $event = $(eventEl);
+        const date = e.eventDate.slice(0, 10);
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) continue;
+        // The API returns past seasons too; keep only upcoming events.
+        if (date < todayStr) continue;
 
-            const title = $event.find('.ace-cal-list-event-name a').first().text().trim();
-            if (!title) return;
+        const time = parseTime(e.eventDate);
+        const location = e.location?.trim() || null;
+        const url = e.viewDetailCtaUrl
+          ? new URL(e.viewDetailCtaUrl, BASE_URL + '/').href
+          : null;
 
-            // Parse time: "7:00 PM" → "19:00"
-            const timeText = $event.find('.ace-cal-list-event-time').first().text().trim();
-            const time = parseTime(timeText);
+        const id = generateEventId(this.venueId, date, time, title);
+        if (seen.has(id)) continue; // dedupe within a single scrape
+        seen.add(id);
 
-            const location = $event.find('.ace-cal-list-event-venue').first().text().trim() || null;
-
-            const href = $event.find('.ace-cal-list-event-name a').first().attr('href') ?? '';
-            const url = href ? new URL(href, BASE_URL + '/').href : null;
-
-            events.push({
-              id: generateEventId(this.venueId, date, time, title),
-              venue_id: this.venueId,
-              title,
-              date,
-              time,
-              conductor: null,
-              cast: null,
-              location,
-              url,
-              scraped_at: now,
-            });
-          } catch {
-            // skip malformed entries silently
-          }
+        events.push({
+          id,
+          venue_id: this.venueId,
+          title,
+          date,
+          time,
+          conductor: null, // not exposed on the calendar listing
+          cast: null, // not exposed on the calendar listing
+          location,
+          url,
+          scraped_at: scrapedAt,
         });
       } catch {
-        // skip malformed day entries silently
+        // skip malformed entries silently
       }
-    });
+    }
 
     return events;
   }
 }
 
 /**
- * Convert "7:00 PM" or "2:00 PM" to "19:00" or "14:00".
- * Returns null if the format is unrecognised.
+ * Extract "HH:MM" (local wall time) from an ISO-like datetime such as
+ * "2026-10-10T19:30:00". Returns null if no time component is present.
  */
-function parseTime(text: string): string | null {
-  const m = text.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-  if (!m) return null;
-  let hours = parseInt(m[1], 10);
-  const minutes = m[2];
-  const meridian = m[3].toUpperCase();
-  if (meridian === 'PM' && hours < 12) hours += 12;
-  if (meridian === 'AM' && hours === 12) hours = 0;
-  return `${String(hours).padStart(2, '0')}:${minutes}`;
+function parseTime(eventDate: string): string | null {
+  const m = eventDate.match(/T(\d{2}):(\d{2})/);
+  return m ? `${m[1]}:${m[2]}` : null;
 }
 
 export default new LyricOperaChicagoScraper();

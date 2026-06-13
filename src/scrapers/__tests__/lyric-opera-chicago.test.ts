@@ -3,8 +3,16 @@ import { describe, it, expect } from 'vitest';
 import { LyricOperaChicagoScraper } from '../lyric-opera-chicago.js';
 import { testDbIntegration } from './helpers/db-integration.js';
 
-const fixture = readFileSync(new URL('../__fixtures__/lyric-opera-chicago.html', import.meta.url), 'utf8');
-const scraper = new LyricOperaChicagoScraper({ fetchHtml: async () => fixture });
+const fixtureJson = JSON.parse(
+  readFileSync(new URL('../__fixtures__/lyric-opera-chicago.json', import.meta.url), 'utf8'),
+);
+// Fixed reference date matching the fixture's capture window, so the
+// past/upcoming filter is deterministic regardless of when the test runs.
+const NOW = new Date('2026-06-13T12:00:00Z');
+const scraper = new LyricOperaChicagoScraper({
+  fetchJson: async () => fixtureJson,
+  now: () => NOW,
+});
 
 describe('LyricOperaChicagoScraper', () => {
   it('parses events from fixture', async () => {
@@ -12,24 +20,48 @@ describe('LyricOperaChicagoScraper', () => {
     expect(events.length).toBeGreaterThan(0);
   });
 
-  it('parses date and time correctly', async () => {
+  it('drops past events, keeps only upcoming', async () => {
     const events = await scraper.scrape();
-    // First event should be April 1, 2026
-    expect(events[0].date).toBe('2026-04-01');
-    expect(events[0].time).toBe('14:00');
+    for (const e of events) {
+      expect(e.date >= '2026-06-13').toBe(true);
+    }
+    // The fixture contains old seasons (e.g. Andrea Bocelli, 2017) that must
+    // be filtered out.
+    expect(events.some(e => e.title === 'Andrea Bocelli in Concert')).toBe(false);
+    // A known upcoming performance is present.
+    expect(events.some(e => e.title === 'Don Giovanni')).toBe(true);
   });
 
-  it('parses event title and URL', async () => {
+  it('parses date and time correctly', async () => {
     const events = await scraper.scrape();
-    expect(events[0].title).toBeTruthy();
-    expect(events[0].url).toMatch(/^https:\/\/www\.lyricopera\.org\//);
+    for (const e of events) {
+      expect(e.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      if (e.time) expect(e.time).toMatch(/^\d{2}:\d{2}$/);
+    }
+    const donGiovanni = events.find(e => e.title === 'Don Giovanni');
+    expect(donGiovanni).toBeDefined();
+    expect(donGiovanni!.date).toBe('2026-10-10');
+    expect(donGiovanni!.time).toBe('19:30');
+  });
+
+  it('builds absolute URLs', async () => {
+    const events = await scraper.scrape();
+    for (const e of events) {
+      if (e.url) expect(e.url).toMatch(/^https:\/\/www\.lyricopera\.org\//);
+    }
   });
 
   it('parses location', async () => {
     const events = await scraper.scrape();
     const withLocation = events.filter(e => e.location);
     expect(withLocation.length).toBeGreaterThan(0);
-    expect(withLocation[0].location).toBe('Lyric Opera House');
+    expect(withLocation.some(e => e.location === 'Lyric Opera House')).toBe(true);
+  });
+
+  it('produces no duplicate ids', async () => {
+    const events = await scraper.scrape();
+    const ids = events.map(e => e.id);
+    expect(new Set(ids).size).toBe(ids.length);
   });
 
   it('sets all required event fields', async () => {
