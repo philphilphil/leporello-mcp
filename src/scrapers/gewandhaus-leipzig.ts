@@ -157,3 +157,5 @@ export class GewandhausLeipzigScraper implements Scraper {
     return events;
   }
 }
+
+export default new GewandhausLeipzigScraper();

@@ -100,3 +100,5 @@ function parseTime(isoString: string): string | null {
   const m = isoString.match(/T(\d{2}):(\d{2})/);
   return m ? `${m[1]}:${m[2]}` : null;
 }
+
+export default new StaatsoperStuttgartScraper();
