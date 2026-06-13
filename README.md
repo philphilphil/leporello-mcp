@@ -30,6 +30,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Gewandhaus | Leipzig |
 | Tonhalle-Orchester Zürich | Zürich |
 | Lyric Opera of Chicago | Chicago |
+| Palau de la Música Catalana | Barcelona |
 
 ## How it works
 
