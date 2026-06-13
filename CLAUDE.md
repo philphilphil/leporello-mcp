@@ -1,6 +1,6 @@
 # Leporello — Codebase Guide
 
-Remote MCP server for classical music / opera event schedules. Node.js 22, TypeScript ESM, SQLite, Cheerio scrapers, node-cron scheduler. Static Astro frontend.
+Remote MCP server for classical music / opera event schedules. Node.js 22, TypeScript ESM, SQLite, Cheerio scrapers. Static Astro frontend. Two Docker containers: web (server + frontend) and scraper (fills DB, runs once and exits).
 
 ## Commands
 
@@ -14,13 +14,12 @@ npm run build --prefix web  # Build Astro frontend to web/dist/
 
 ## Architecture
 
-One process, four responsibilities:
-- **HTTP server** (`src/server.ts`) — Streamable HTTP MCP endpoint at `POST /mcp`, health check at `GET /health`, static frontend for everything else
-- **Scheduler** (`src/scheduler.ts`) — node-cron runs `runAllScrapers()` daily at 03:00 UTC, then rebuilds the frontend
-- **Scrapers** (`src/scrapers/`) — Cheerio-based, one file per venue
-- **Frontend** (`web/`) — Astro static site, reads SQLite at build time, client-side filtering/search
+Two Docker containers sharing a SQLite volume:
 
-Entry point is `src/index.ts`: initializes DB → starts HTTP server → starts scheduler → triggers initial scrape if DB is empty.
+- **Web container** (`Dockerfile.web`, entry: `src/index.ts`) — HTTP server (MCP + static Astro frontend), rebuilds frontend on every container start
+- **Scraper container** (`Dockerfile.scraper`, entry: `src/scrape.ts`) — runs all scrapers once and exits. Scheduled via host cron or `docker compose run --rm scraper`
+- **Scrapers** (`src/scrapers/`) — Cheerio/Playwright-based, one file per venue
+- **Frontend** (`web/`) — Astro static site, reads SQLite at build time, client-side filtering/search
 
 ## File map
 
@@ -28,7 +27,7 @@ Entry point is `src/index.ts`: initializes DB → starts HTTP server → starts 
 src/
   index.ts                    Entry point
   server.ts                   McpServer (4 tools) + HTTP server + static file serving
-  scheduler.ts                node-cron + runAllScrapers() + rebuildWeb()
+  scheduler.ts                Scraper registry + runScrapers()
   scrape.ts                   One-shot scrape script (npm run scrape)
   db.ts                       SQLite singleton, schema, queries
   types.ts                    City, Venue, Event interfaces
@@ -72,6 +71,8 @@ SQLite at `DB_PATH` env var (default `./data/leporello.db`). Initialized on `get
 | `list_venues` | `country?`, `city?` | Cascading filter: country → city |
 | `list_events` | `country?`, `city?`, `venue_id?`, `days_ahead?` | `days_ahead` default 30, max 90; returns `data_age` map |
 
+When a filter value isn't in the catalog (e.g. `city: "paris"`), `list_cities` / `list_venues` / `list_events` add a `note` field to the response telling the agent which filter is uncovered and which tool to call to discover what's available. The same miss is also logged on the `mcp_tool_call` event as `unmatched: {city: "paris"}` for Seq monitoring — useful to see which cities/countries agents are asking for so we can prioritize new scrapers.
+
 ## Scraper pattern
 
 Each scraper:
@@ -93,19 +94,37 @@ npm test -- philharmoniker  # Run one scraper
 
 ## Logging
 
-All logs are structured JSON on stdout/stderr:
+All logs are structured JSON on stdout/stderr via `src/logger.ts`. When `SEQ_URL` and `SEQ_API_KEY` are set, events are also shipped to Seq as CLEF (buffered, flushed on shutdown). When unset, Seq is a no-op — local dev and tests need no config.
+
+Env vars (see `.env.sample`):
+- `SEQ_URL` — Seq server URL, e.g. `https://seq.phib.io` (optional; absent = stdout only)
+- `SEQ_API_KEY` — Seq API key for ingestion
+- `HASH_SALT` — secret for hashing client IPs in MCP usage events; rotate yearly
+- `SERVICE_NAME` — `web` or `scraper`, set per container in `docker-compose.yml` (and per `npm` script for local dev)
+- `LEPORELLO_ENV` — set in `.env` on each host: `dev` locally, `production` on the deploy host. Tagged on every Seq event as `env` so you can filter dev vs prod.
+
+Events:
 
 ```json
 {"event":"server_start","port":3000}
-{"event":"scheduler_start","cron":"0 3 * * *"}
 {"event":"scrape_start","venue":"staatsoper-stuttgart"}
 {"event":"scrape_success","venue":"staatsoper-stuttgart","count":77,"duration_ms":214}
 {"event":"scrape_error","venue":"...","error":"...","duration_ms":...}
+{"event":"scrape_validation_error","venue":"...","errors":[...],"attempt":2,"final":true}
 {"event":"web_build_start"}
 {"event":"web_build_success","duration_ms":...}
-{"event":"initial_scrape_triggered"}
+{"event":"web_build_error","error":"...","duration_ms":...}
+{"event":"shutdown"}
 {"event":"mcp_request_error","error":"..."}
+{"event":"mcp_tool_call","tool":"list_events","duration_ms":12,"result_count":47,"args":{"country":"DE"},"client_ua":"Claude/1.2.3","client_ip_hash":"a3f1b2c4d5e6f708"}
+{"event":"mcp_tool_call","tool":"list_events","duration_ms":3,"result_count":0,"unmatched":{"city":"paris"},"args":{"city":"paris"},"client_ua":"...","client_ip_hash":"..."}
+{"event":"mcp_tool_error","tool":"list_events","duration_ms":3,"args":{...},"error":"..."}
+{"event":"seq_disabled","reason":"no_url"}
+{"event":"seq_ingest_error","error":"..."}
+{"event":"seq_flush_error","error":"..."}
 ```
+
+To add a new logger call: import `log` / `logError` from `./logger.js` (or `../logger.js`) — never use `console.log(JSON.stringify(...))` directly.
 
 ## Playwright screenshots
 
@@ -116,6 +135,13 @@ Save all Playwright screenshots into `.playwright-mcp/` (already gitignored), no
 Docker Compose + Traefik at `leporello.app`.
 
 ```bash
-docker compose up -d
-docker compose logs -f leporello
+docker compose up -d                          # Start web server
+docker compose run --rm scraper               # Run all scrapers (exits when done)
+docker compose run --rm scraper node dist/scrape.js wiener-staatsoper  # Single venue
+docker compose logs -f web                    # Tail web logs
+```
+
+Schedule scrapers via host cron (scrape then restart web to rebuild frontend):
+```cron
+0 3 * * * cd /home/phil/docker/lep && docker compose --profile scrape build scraper && docker compose run --rm scraper && docker compose restart web
 ```

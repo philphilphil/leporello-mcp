@@ -99,3 +99,5 @@ export class ElbphilharmonieHamburgScraper implements Scraper {
     return events;
   }
 }
+
+export default new ElbphilharmonieHamburgScraper();

@@ -1,12 +1,18 @@
+name: leporello
+
 services:
-  leporello:
-    build: .
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
     restart: unless-stopped
     volumes:
-      - leporello-data:/app/data
+      - ./data:/app/data
+    env_file:
+      - .env
     environment:
-      - SCRAPE_CRON=0 3 * * *
       - PORT=3000
+      - SERVICE_NAME=web
     networks:
       - gateway
     labels:
@@ -17,8 +23,19 @@ services:
       - "traefik.http.routers.leporello.tls.certresolver=myresolver"
       - "traefik.http.services.leporello.loadbalancer.server.port=3000"
 
-volumes:
-  leporello-data:
+  scraper:
+    build:
+      context: .
+      dockerfile: Dockerfile.scraper
+    restart: "no"
+    volumes:
+      - ./data:/app/data
+    env_file:
+      - .env
+    environment:
+      - SERVICE_NAME=scraper
+    profiles:
+      - scrape
 
 networks:
   gateway:
