@@ -1,15 +1,21 @@
-import { load, type CheerioAPI, type Element } from 'cheerio';
+import { load, type CheerioAPI } from 'cheerio';
+import type { Element } from 'domhandler';
 import type { Event } from '../types.js';
 import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
 
-type FetchHtml = () => Promise<string>;
+type FetchHtml = (url: string) => Promise<string>;
 
 const BASE_URL = 'https://tonhalle-orchester.ch';
+const DAYS_AHEAD = 90; // stop paginating once events run past this window
+const MAX_PAGES = 15; // safety cap; the 90-day cutoff normally stops sooner
 
 const MONTH_ABBR: Record<string, string> = {
   Jan: '01', Feb: '02', Mär: '03', Mar: '03', Apr: '04', Mai: '05', May: '05',
   Jun: '06', Jul: '07', Aug: '08', Sep: '09', Okt: '10', Oct: '10', Nov: '11', Dez: '12', Dec: '12',
 };
+
+/** Rolling date context carried across paginated pages. */
+type ParseState = { year: number; lastMonthNum: number };
 
 export class TonhalleZuerichScraper implements Scraper {
   readonly venue: VenueMeta = {
@@ -25,27 +31,54 @@ export class TonhalleZuerichScraper implements Scraper {
 
   constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
 
-  async scrape(): Promise<Event[]> {
-    const html = this.opts.fetchHtml
-      ? await this.opts.fetchHtml()
-      : await fetch(this.venue.scheduleUrl, {
-          headers: { 'User-Agent': USER_AGENT },
-        }).then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
-          return r.text();
-        });
-    return this.parse(html);
+  private async fetchPage(url: string): Promise<string> {
+    if (this.opts.fetchHtml) return this.opts.fetchHtml(url);
+    const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+    if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
+    return res.text();
   }
 
-  parse(html: string): Event[] {
+  async scrape(): Promise<Event[]> {
+    const cutoff = new Date(Date.now() + DAYS_AHEAD * 86_400_000).toISOString().slice(0, 10);
+    const events: Event[] = [];
+    const seen = new Set<string>();
+    // Year must roll forward across pages: page 2+ month headers drop the year
+    // (e.g. "Juli", "August"), so we infer it from the month sequence.
+    const state: ParseState = { year: new Date().getFullYear(), lastMonthNum: 0 };
+
+    for (let page = 1; page <= MAX_PAGES; page++) {
+      const url = page === 1
+        ? this.venue.scheduleUrl
+        : `${BASE_URL}/konzerte/kalender/page${page}?action=filtercalendar`;
+
+      const pageEvents = this.parse(await this.fetchPage(url), state);
+      if (pageEvents.length === 0) break; // no more event rows
+
+      let reachedCutoff = false;
+      for (const event of pageEvents) {
+        if (event.date > cutoff) {
+          reachedCutoff = true; // events are chronological — past the window
+          continue;
+        }
+        if (seen.has(event.id)) continue; // page boundaries overlap by one date
+        seen.add(event.id);
+        events.push(event);
+      }
+      if (reachedCutoff) break;
+    }
+
+    return events;
+  }
+
+  parse(html: string, state: ParseState = { year: new Date().getFullYear(), lastMonthNum: 0 }): Event[] {
     const $ = load(html);
     const events: Event[] = [];
     const now = new Date().toISOString();
 
     // The calendar list contains interleaved month headers and event rows.
     // Month headers: <div data-month="04" class="row month">April 2026</div>
+    //                (page 2+ omit the year: <div data-month="07" ...>Juli</div>)
     // Event rows:    <div class="row data ...">...</div>
-    let currentYear = String(new Date().getFullYear());
     let currentMonth = '';
 
     const allRows = $('div.js-calendarlist-list').children().toArray();
@@ -56,9 +89,15 @@ export class TonhalleZuerichScraper implements Scraper {
       // Month header
       if ($row.hasClass('month') && $row.attr('data-month')) {
         currentMonth = $row.attr('data-month')!;
-        const monthText = $row.text().trim(); // "April 2026"
+        const monthNum = parseInt(currentMonth, 10);
+        const monthText = $row.text().trim(); // "April 2026" or just "Juli"
         const yearMatch = monthText.match(/(\d{4})/);
-        if (yearMatch) currentYear = yearMatch[1];
+        if (yearMatch) {
+          state.year = parseInt(yearMatch[1], 10);
+        } else if (state.lastMonthNum && monthNum < state.lastMonthNum) {
+          state.year += 1; // wrapped past December into the next year
+        }
+        if (monthNum) state.lastMonthNum = monthNum;
         continue;
       }
 
@@ -66,7 +105,7 @@ export class TonhalleZuerichScraper implements Scraper {
       if (!$row.hasClass('data')) continue;
 
       try {
-        const event = this.parseRow($, row, currentYear, currentMonth, now);
+        const event = this.parseRow($, row, String(state.year), currentMonth, now);
         if (event) events.push(event);
       } catch {
         // skip malformed entries silently
