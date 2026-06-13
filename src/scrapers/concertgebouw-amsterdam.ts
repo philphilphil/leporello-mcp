@@ -106,3 +106,5 @@ export class ConcertgebouwAmsterdamScraper implements Scraper {
     return events;
   }
 }
+
+export default new ConcertgebouwAmsterdamScraper();
