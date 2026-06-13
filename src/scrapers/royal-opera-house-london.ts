@@ -152,3 +152,5 @@ export class RoyalOperaHouseLondonScraper implements Scraper {
     return events;
   }
 }
+
+export default new RoyalOperaHouseLondonScraper();

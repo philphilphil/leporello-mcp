@@ -80,6 +80,50 @@ export class MyVenueScraper implements Scraper {
 }
 ```
 
+### Fetching data — three approaches
+
+Choose the right approach based on the venue's site:
+
+**1. Plain `fetch()` (default)** — use when `curl` returns the schedule HTML with event data. This is the simplest and fastest approach. Most scrapers use this.
+
+**2. `fetchRenderedHtml()` (Playwright)** — use when the site is JS-rendered and `curl`/`fetch()` returns empty HTML with no event data. Import the helper from `base.ts`:
+
+```typescript
+import { fetchRenderedHtml, type Scraper, type VenueMeta } from './base.js';
+
+// In scrape():
+const html = this.opts.fetchHtml
+  ? await this.opts.fetchHtml()
+  : await fetchRenderedHtml(this.venue.scheduleUrl, {
+      waitForSelector: '.event-card',  // CSS selector to wait for before extracting HTML
+    });
+```
+
+The `waitForSelector` option waits for JS-rendered content to appear in the DOM (up to 15s). Always specify it — without it the page may be captured before events load. See `bayerische-staatsoper.ts` for a working example.
+
+**3. JSON API** — some sites serve schedule data via AJAX/API endpoints (check the browser Network tab). Fetch the JSON directly and parse it — no Cheerio needed for extraction, though the response may contain HTML fragments. See `philharmonie-de-paris.ts` for an example.
+
+**4. JSON API behind bot protection (Cloudflare etc.)** — some sites serve a clean JSON API but sit behind Cloudflare, which `403`s plain `fetch()`/`curl` — even with a browser User-Agent, and including the JSON endpoint itself. A real headless browser clears the challenge. Use `fetchJsonViaBrowser(warmupUrl, apiUrl)` from `base.ts`: it navigates to `warmupUrl` (the human-facing schedule page) so Chromium solves the challenge and holds the clearance cookie, then performs the JSON request from the page context (same origin, so the cookie is sent).
+
+```typescript
+import { fetchJsonViaBrowser, type Scraper, type VenueMeta } from './base.js';
+
+type FetchJson = () => Promise<unknown[]>;
+
+// constructor(private readonly opts: { fetchJson?: FetchJson } = {}) {}
+
+// In scrape():
+const raw = this.opts.fetchJson
+  ? await this.opts.fetchJson()
+  : ((await fetchJsonViaBrowser(this.venue.scheduleUrl, apiUrl)) as unknown[]);
+return this.parse(raw);
+```
+
+Heads-up: such APIs often **ignore their date params** and return every season (including events from years ago), so filter `parse()` down to upcoming events (`date >= today`) and dedupe by `generateEventId`. See `lyric-opera-chicago.ts` for a working example.
+
+**How to decide:** Try `curl -s -A "Mozilla/5.0 ..." <url> | grep <known-event-title>`. If it finds events, use plain `fetch()`. If `curl` returns **HTTP 403 / a Cloudflare "Attention Required" page**, the site is bot-protected — check the Network tab for a JSON API and use `fetchJsonViaBrowser()`, otherwise use `fetchRenderedHtml()` for the rendered HTML. If `curl` returns empty HTML with no event data (JS-rendered), use `fetchRenderedHtml()`.
+```
+
 Rules:
 - All 9 `Event` fields must be set (`null` is fine for optional ones)
 - Use `generateEventId(venueId, date, time, title)` — never invent IDs
@@ -91,23 +135,29 @@ Rules:
 
 ## 2. Save an HTML fixture
 
+**For sites that work with plain fetch:**
 ```bash
 curl -s -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" \
   <schedule-url> -o src/scrapers/__fixtures__/<venue-id>.html
 ```
 
-If curl is blocked (403/empty), use Playwright:
-
+**For JS-rendered sites** (when curl returns empty/no events), use Playwright MCP or a script:
 ```typescript
 // fetch-fixture.ts (run once, then delete)
 import { chromium } from 'playwright';
 import { writeFileSync } from 'node:fs';
 const browser = await chromium.launch();
-const page = await browser.newPage();
+const ctx = await browser.newContext({
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+});
+const page = await ctx.newPage();
 await page.goto('<schedule-url>');
+await page.waitForSelector('<event-selector>');
 writeFileSync('src/scrapers/__fixtures__/<venue-id>.html', await page.content());
 await browser.close();
 ```
+
+**For JSON API sites**, save the API response content as the fixture (the HTML fragment or JSON body), named `<venue-id>.json`. If the API is bot-protected (approach 4), capture it through the Playwright MCP browser: `browser_navigate` to the schedule page, then run the `fetch()` inside `browser_evaluate` and save its result. Commit the **raw** API array (including any past-season entries) so the test exercises the upcoming-events filter.
 
 ## 3. Verify fixture data is current
 
@@ -150,16 +200,21 @@ The `testDbIntegration` helper checks for duplicate event IDs and inserts all pa
 
 ## 5. Register the scraper
 
-In `src/scheduler.ts`, add to the `scrapers` array:
+Scrapers are **auto-discovered** — there is no central registry to edit (this
+keeps parallel scraper PRs from conflicting). Just add a default export at the
+bottom of your `src/scrapers/<venue-id>.ts` file:
 
 ```typescript
-import { MyVenueScraper } from './scrapers/<venue-id>.js';
+export class MyVenueScraper implements Scraper {
+  // ...
+}
 
-const scrapers: Scraper[] = [
-  // existing scrapers...
-  new MyVenueScraper(),
-];
+export default new MyVenueScraper();
 ```
+
+`src/scheduler.ts` loads every `scrapers/*.ts` module that has a valid
+`export default new XScraper()` at startup. Keep the named `export class` too —
+the tests import it directly.
 
 ## 6. Update the venue list
 

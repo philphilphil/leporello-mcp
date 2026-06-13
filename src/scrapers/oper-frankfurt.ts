@@ -126,3 +126,5 @@ function parseLocation(meta: string): string | null {
   const loc = meta.slice(idx + 1).trim();
   return loc || null;
 }
+
+export default new OperFrankfurtScraper();
