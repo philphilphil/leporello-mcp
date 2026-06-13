@@ -29,6 +29,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Berliner Philharmonie | Berlin |
 | Gewandhaus | Leipzig |
 | Tonhalle-Orchester Zürich | Zürich |
+| Lyric Opera of Chicago | Chicago |
 
 ## How it works
 

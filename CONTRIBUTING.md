@@ -103,7 +103,25 @@ The `waitForSelector` option waits for JS-rendered content to appear in the DOM 
 
 **3. JSON API** — some sites serve schedule data via AJAX/API endpoints (check the browser Network tab). Fetch the JSON directly and parse it — no Cheerio needed for extraction, though the response may contain HTML fragments. See `philharmonie-de-paris.ts` for an example.
 
-**How to decide:** Try `curl -s -A "Mozilla/5.0 ..." <url> | grep <known-event-title>`. If it finds events, use plain `fetch()`. If not, check the Network tab for JSON APIs. If neither works, use `fetchRenderedHtml()`.
+**4. JSON API behind bot protection (Cloudflare etc.)** — some sites serve a clean JSON API but sit behind Cloudflare, which `403`s plain `fetch()`/`curl` — even with a browser User-Agent, and including the JSON endpoint itself. A real headless browser clears the challenge. Use `fetchJsonViaBrowser(warmupUrl, apiUrl)` from `base.ts`: it navigates to `warmupUrl` (the human-facing schedule page) so Chromium solves the challenge and holds the clearance cookie, then performs the JSON request from the page context (same origin, so the cookie is sent).
+
+```typescript
+import { fetchJsonViaBrowser, type Scraper, type VenueMeta } from './base.js';
+
+type FetchJson = () => Promise<unknown[]>;
+
+// constructor(private readonly opts: { fetchJson?: FetchJson } = {}) {}
+
+// In scrape():
+const raw = this.opts.fetchJson
+  ? await this.opts.fetchJson()
+  : ((await fetchJsonViaBrowser(this.venue.scheduleUrl, apiUrl)) as unknown[]);
+return this.parse(raw);
+```
+
+Heads-up: such APIs often **ignore their date params** and return every season (including events from years ago), so filter `parse()` down to upcoming events (`date >= today`) and dedupe by `generateEventId`. See `lyric-opera-chicago.ts` for a working example.
+
+**How to decide:** Try `curl -s -A "Mozilla/5.0 ..." <url> | grep <known-event-title>`. If it finds events, use plain `fetch()`. If `curl` returns **HTTP 403 / a Cloudflare "Attention Required" page**, the site is bot-protected — check the Network tab for a JSON API and use `fetchJsonViaBrowser()`, otherwise use `fetchRenderedHtml()` for the rendered HTML. If `curl` returns empty HTML with no event data (JS-rendered), use `fetchRenderedHtml()`.
 ```
 
 Rules:
@@ -139,7 +157,7 @@ writeFileSync('src/scrapers/__fixtures__/<venue-id>.html', await page.content())
 await browser.close();
 ```
 
-**For JSON API sites**, save the API response content as the fixture (the HTML fragment or JSON body).
+**For JSON API sites**, save the API response content as the fixture (the HTML fragment or JSON body), named `<venue-id>.json`. If the API is bot-protected (approach 4), capture it through the Playwright MCP browser: `browser_navigate` to the schedule page, then run the `fetch()` inside `browser_evaluate` and save its result. Commit the **raw** API array (including any past-season entries) so the test exercises the upcoming-events filter.
 
 ## 3. Verify fixture data is current
 
