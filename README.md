@@ -33,6 +33,16 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Palau de la Música Catalana | Barcelona |
 | Royal Opera House | London |
 | Teatro alla Scala | Milano |
+| Auditorio Nacional de Música | Madrid |
+| Salzburger Festspiele | Salzburg |
+| Elbphilharmonie | Hamburg |
+| Opernhaus Zürich | Zürich |
+| Concertgebouw | Amsterdam |
+| Kölner Philharmonie | Köln |
+| Musikverein | Wien |
+| Wiener Konzerthaus | Wien |
+| Barbican Hall | London |
+| Hamburgische Staatsoper | Hamburg |
 
 ## How it works
 
