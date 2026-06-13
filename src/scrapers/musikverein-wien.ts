@@ -15,6 +15,25 @@ function monthKey(from: Date, offset: number): string {
   return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
 }
 
+// Dedication / intro lines that sometimes occupy the first p.text slot instead
+// of performers (e.g. "In memoriam …", concert-introduction blurbs).
+const NON_PERFORMER_PREFIX = /^(in memoriam|klingende konzerteinf[üu]hrung|konzerteinf[üu]hrung|passwort)/i;
+
+/**
+ * True when `text` is a composer/works line rather than performers. On recital
+ * listings the performer lives in the h3 heading and the first p.text holds a
+ * list of bare composer surnames ("Beethoven • Schumann • Strauss",
+ * "Haydn • Mozart • Dvořák"). Heuristic: >=2 tokens split on "•"/"," where every
+ * token is a single capitalized word (no internal whitespace). This leaves real
+ * performer lists intact — multi-word names ("Zoltán Despond • Vesselin Stanev")
+ * and ensembles ("Wiener Philharmoniker", "Haydn-Quartett") all fail the test.
+ */
+function isComposerList(text: string): boolean {
+  const tokens = text.split(/\s*[•,]\s*/).map(s => s.trim()).filter(Boolean);
+  if (tokens.length < 2) return false;
+  return tokens.every(t => !/\s/.test(t) && /^\p{Lu}/u.test(t));
+}
+
 export class MusikvereinWienScraper implements Scraper {
   readonly venue: VenueMeta = {
     venueId: 'musikverein-wien',
@@ -116,9 +135,16 @@ export class MusikvereinWienScraper implements Scraper {
         // Second text paragraph: composers (e.g. "Gustav Mahler" or "Rachmaninow • Hindemith")
         const composersText = textParagraphs.eq(1).text().trim();
 
-        // Parse performers into cast array (split by bullet separator)
+        // Parse performers into cast array (split by bullet separator).
+        // Guard: on recital listings the performer is in the h3 heading and this
+        // first p.text is actually a composer/works line or a dedication/intro
+        // line — never assign those to cast (keep cast null rather than mislabel).
         let cast: string[] | null = null;
-        if (performersText) {
+        if (
+          performersText &&
+          !NON_PERFORMER_PREFIX.test(performersText) &&
+          !isComposerList(performersText)
+        ) {
           cast = performersText
             .split(/\s*[•|]\s*/)
             .map(s => s.trim())

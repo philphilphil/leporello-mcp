@@ -89,6 +89,49 @@ describe('MusikvereinWienScraper', () => {
     expect(withComposer).toBeDefined();
   });
 
+  it('does not mislabel composer/works or dedication lines as cast', async () => {
+    servedPage2 = false;
+    const events = await scraper.scrape();
+    const byKonzertId = (id: string) => events.find(e => e.url?.includes(`id=${id}`));
+
+    // Recital listings: the performer is in the h3 heading, so the first p.text
+    // is a composer/works or dedication line — cast must be null, not those.
+    const composerLine = byKonzertId('0006ba0d'); // h3: "Zoltán Despond • Vesselin Stanev"
+    expect(composerLine).toBeDefined();
+    expect(composerLine!.cast).toBeNull();
+
+    const composerLine2 = byKonzertId('00117a08'); // h3: "Haydn-Quartett"
+    expect(composerLine2).toBeDefined();
+    expect(composerLine2!.cast).toBeNull();
+
+    const dedication = byKonzertId('0011ea22'); // "In memoriam Tobias Stork"
+    expect(dedication).toBeDefined();
+    expect(dedication!.cast).toBeNull();
+
+    const intro = byKonzertId('000e0b0f'); // "Klingende Konzerteinführung"
+    expect(intro).toBeDefined();
+    expect(intro!.cast).toBeNull();
+
+    // No surviving cast entry should be a single bare composer surname list.
+    for (const e of events) {
+      if (!e.cast) continue;
+      const allSingleWordSurnames =
+        e.cast.length >= 2 && e.cast.every(c => !/\s/.test(c) && /^\p{Lu}/u.test(c));
+      expect(allSingleWordSurnames).toBe(false);
+    }
+  });
+
+  it('keeps real performers as cast (incl. multi-word and hyphenated names)', async () => {
+    servedPage2 = false;
+    const events = await scraper.scrape();
+    const byKonzertId = (id: string) => events.find(e => e.url?.includes(`id=${id}`));
+
+    // A genuine multi-performer recital — performers in the first p.text slot.
+    const recital = byKonzertId('0006a3cb'); // "Topolina macht Pizza" → "Topolina"
+    expect(recital).toBeDefined();
+    expect(recital!.cast).toEqual(['Topolina']);
+  });
+
   it('has absolute musikverein URLs for events', async () => {
     servedPage2 = false;
     const events = await scraper.scrape();
