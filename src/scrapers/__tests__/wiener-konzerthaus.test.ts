@@ -11,26 +11,28 @@ const scraper = new WienerKonzerthausScraper({ fetchJson: async () => fixtureJso
 describe('WienerKonzerthausScraper', () => {
   it('parses events from fixture', async () => {
     const events = await scraper.scrape();
-    expect(events.length).toBe(30);
+    expect(events.length).toBe(50);
   });
 
   it('extracts date and time from ISO datetime', async () => {
     const events = await scraper.scrape();
     const first = events[0];
-    expect(first.date).toBe('2026-04-07');
-    expect(first.time).toBe('19:30');
+    expect(first.date).toBe('2026-06-13');
+    expect(first.time).toBe('18:30');
   });
 
   it('extracts room as location', async () => {
     const events = await scraper.scrape();
     const first = events[0];
-    expect(first.location).toBe('Großer Saal');
+    expect(first.location).toBe('Mozart-Saal');
   });
 
   it('builds event detail URL from slug', async () => {
     const events = await scraper.scrape();
     const first = events[0];
-    expect(first.url).toBe('https://konzerthaus.at/de/programm-und-karten/philharmonix-funk/62911');
+    expect(first.url).toBe(
+      'https://konzerthaus.at/de/programm-und-karten/symphonisches-schrammelquintett-wien/63311',
+    );
   });
 
   it('sets all required Event fields', async () => {
