@@ -109,20 +109,13 @@ export class ConcertgebouwAmsterdamScraper implements Scraper {
           location = text;
         });
 
-        // Program — composer and work from content list items
-        const programParts: string[] = [];
-        $el.find('li.c-content-list-item').each((_, li) => {
-          const composer = $(li).find('span.font-medium').text().trim();
-          const work = $(li).find('span.italic').text().trim();
-          if (composer && work) {
-            programParts.push(`${composer}: ${work}`);
-          } else if (composer) {
-            programParts.push(composer);
-          } else if (work) {
-            programParts.push(work);
-          }
-        });
-        const cast = programParts.length > 0 ? programParts : null;
+        // No cast on the listing. The "met onder andere" content list
+        // (li.c-content-list-item) holds the PROGRAM — composer + work
+        // (e.g. "Beethoven: Pianoconcert nr. 3") — not performers. The real
+        // performers/soloists live under a separate "Musici" label that only
+        // appears on detail pages, which we don't fetch. Leave cast null rather
+        // than mislabel works as cast.
+        const cast = null;
 
         // URL from the main link
         const href = $el.find('a[data-component="Link[NuxtLink]"]').first().attr('href') ?? '';

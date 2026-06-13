@@ -55,10 +55,35 @@ describe('ConcertgebouwAmsterdamScraper', () => {
     expect(halls.has('Grote Zaal') || halls.has('Kleine Zaal')).toBe(true);
   });
 
-  it('parses program as cast', async () => {
+  it('never stores program/works text as cast', async () => {
+    // The listing's "met onder andere" block is the PROGRAM (composer: work),
+    // not performers. Performers ("Musici") only exist on detail pages, which
+    // this scraper does not fetch — so listing-derived cast must be null rather
+    // than mislabel works as cast. Regression guard for PR #45 / issue #47.
     const events = await scraper.scrape();
-    const withCast = events.filter((e) => e.cast);
-    expect(withCast.length).toBeGreaterThan(0);
+    for (const e of events) {
+      expect(e.cast).toBeNull();
+    }
+  });
+
+  it('nulls cast for events whose listing only had program text (issue #47)', async () => {
+    // These ids previously got cast populated from the program block (e.g.
+    // "Beethoven: Pianoconcert nr. 3", "Vivaldi: Sinfonia ...") — pure works,
+    // no performers. After the fix they must be null.
+    const knownBadIds = [
+      '0e552a25881ac1a8', // Arooj Aftab & Daniel Wohl ... (had "Aftab: Songs ...")
+      '820d17b42175122d', // Beethovens Pianoconcert nr. 3 (had "Dvořák: Symfonie nr. 8 ...")
+      '07942a9587080288', // Stabat mater en Nisi Dominus (had "Vivaldi: Sinfonia ...")
+      'fc82fdda6b451b46', // Beethovens Pianoconcert nr. 3 (page 2 dup-title, had Dvořák/Beethoven)
+      'c7748609276a85ad', // Festival Mind the Gap! ... (had "Price: The Moon Bridge")
+    ];
+    const events = await scraper.scrape();
+    const byId = new Map(events.map((e) => [e.id, e]));
+    for (const id of knownBadIds) {
+      const e = byId.get(id);
+      expect(e, `event ${id} should be present in the fixture`).toBeDefined();
+      expect(e!.cast, `event ${id} should no longer carry program text as cast`).toBeNull();
+    }
   });
 
   it('generates absolute URLs', async () => {
