@@ -47,6 +47,10 @@ export class WienerStaatsoperScraper implements Scraper {
       const res = await fetch(url, {
         headers: { 'User-Agent': USER_AGENT },
       });
+      // Months with no performances (e.g. the July/August summer break) have no
+      // calendar page and return 404 — that's a legitimate empty month, not a
+      // failure, so skip it. Any other non-2xx is a real error.
+      if (res.status === 404) continue;
       if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
       const html = await res.text();
       allEvents.push(...this.parse(html));

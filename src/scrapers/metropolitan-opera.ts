@@ -1,5 +1,5 @@
 import type { Event } from '../types.js';
-import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
+import { generateEventId, fetchJsonBatchViaBrowser, type Scraper, type VenueMeta } from './base.js';
 
 type FetchJson = () => Promise<unknown[]>;
 
@@ -38,23 +38,21 @@ export class MetropolitanOperaScraper implements Scraper {
 
   private async fetchFromApi(): Promise<unknown[]> {
     const now = new Date();
-    const results: unknown[] = [];
 
-    // Fetch current month + next 2 months
+    // Current month + next 2 months. The whole metopera.org domain sits behind
+    // a Cloudflare challenge that 403s plain fetch(), so the JSON API is
+    // requested through a headless browser that clears the challenge once and
+    // reuses the clearance cookie for all three monthly requests.
+    const urls: string[] = [];
     for (let i = 0; i < 3; i++) {
       const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
       const month = d.getMonth() + 1;
       const year = d.getFullYear();
-      const url = `${API_BASE}?month=${month}&year=${year}&eventType=on-stage`;
-      const res = await fetch(url, {
-        headers: { 'User-Agent': USER_AGENT, Accept: 'application/json' },
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
-      const data = await res.json();
-      if (Array.isArray(data)) results.push(...data);
+      urls.push(`${API_BASE}?month=${month}&year=${year}&eventType=on-stage`);
     }
 
-    return results;
+    const months = await fetchJsonBatchViaBrowser(this.venue.scheduleUrl, urls);
+    return months.filter(Array.isArray).flat();
   }
 
   parse(data: unknown[]): Event[] {
@@ -86,7 +84,10 @@ export class MetropolitanOperaScraper implements Scraper {
 
         const url = e.eventUrl ? new URL(e.eventUrl, SITE_BASE).href : null;
 
-        const title = e.composer ? `${e.title} (${e.composer})` : e.title;
+        // Composer is blank/whitespace for non-opera shows (e.g. musicals) —
+        // treat it as absent so the title isn't rendered as "Show ( )".
+        const composer = e.composer?.trim() || null;
+        const title = composer ? `${e.title} (${composer})` : e.title;
 
         events.push({
           id: generateEventId(this.venueId, date, time, e.title),
