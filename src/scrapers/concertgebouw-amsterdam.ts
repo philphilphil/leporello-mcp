@@ -2,9 +2,11 @@ import { load } from 'cheerio';
 import type { Event } from '../types.js';
 import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
 
-type FetchHtml = () => Promise<string>;
+type FetchHtml = (url: string) => Promise<string>;
 
 const BASE_URL = 'https://www.concertgebouw.nl';
+const DAYS_AHEAD = 90; // stop paginating once events run past this window
+const MAX_PAGES = 15; // safety cap; the 90-day cutoff normally stops sooner
 
 export class ConcertgebouwAmsterdamScraper implements Scraper {
   readonly venue: VenueMeta = {
@@ -20,16 +22,46 @@ export class ConcertgebouwAmsterdamScraper implements Scraper {
 
   constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
 
+  private async fetchPage(url: string): Promise<string> {
+    if (this.opts.fetchHtml) return this.opts.fetchHtml(url);
+    const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+    if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
+    return res.text();
+  }
+
   async scrape(): Promise<Event[]> {
-    const html = this.opts.fetchHtml
-      ? await this.opts.fetchHtml()
-      : await fetch(this.venue.scheduleUrl, {
-          headers: { 'User-Agent': USER_AGENT },
-        }).then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
-          return r.text();
-        });
-    return this.parse(html);
+    const cutoff = new Date(Date.now() + DAYS_AHEAD * 86_400_000).toISOString().slice(0, 10);
+    const events: Event[] = [];
+    const seen = new Set<string>();
+
+    // The schedule is a server-rendered Nuxt list paginated via ?page=N
+    // (~15 events per page, chronological). Walk pages until events run past
+    // the 90-day window, a page yields nothing new, or the safety cap is hit.
+    for (let page = 1; page <= MAX_PAGES; page++) {
+      const url = page === 1
+        ? this.venue.scheduleUrl
+        : `${this.venue.scheduleUrl}?page=${page}`;
+
+      const pageEvents = this.parse(await this.fetchPage(url));
+      if (pageEvents.length === 0) break; // no more event rows
+
+      let reachedCutoff = false;
+      let addedNew = false;
+      for (const event of pageEvents) {
+        if (event.date > cutoff) {
+          reachedCutoff = true; // events are chronological — past the window
+          continue;
+        }
+        if (seen.has(event.id)) continue; // guard against duplicate/overlap
+        seen.add(event.id);
+        events.push(event);
+        addedNew = true;
+      }
+      if (reachedCutoff) break;
+      if (!addedNew) break; // page repeated previous content — stop paging
+    }
+
+    return events;
   }
 
   parse(html: string): Event[] {
@@ -61,11 +93,21 @@ export class ConcertgebouwAmsterdamScraper implements Scraper {
         const timeMatch = timeText.match(/(\d{2}:\d{2})/);
         const time = timeMatch ? timeMatch[1] : null;
 
-        // Location (hall name) — second metadata <li> after the time separator
-        const metaItems = $el.find('ul.flex.flex-wrap li.py-1 span').toArray();
-        const location = metaItems.length > 0
-          ? $(metaItems[0]).text().trim() || null
-          : null;
+        // Location (hall name). The metadata <ul> lists, in order: the <time>
+        // (inside li.py-1.inline-flex), a presentation separator, then the hall
+        // name (li.py-1 > span), another separator, then a price (li.py-1 >
+        // span starting with "v.a." / "€"). Pick the first plain li.py-1 span
+        // that isn't the time and isn't a price.
+        let location: string | null = null;
+        $el.find('li.py-1').each((_, li) => {
+          if (location) return;
+          const $li = $(li);
+          if ($li.find('time').length > 0) return; // the time cell
+          const text = $li.find('span').first().text().trim();
+          if (!text) return;
+          if (/^v\.a\.|€|gratis/i.test(text)) return; // price cell
+          location = text;
+        });
 
         // Program — composer and work from content list items
         const programParts: string[] = [];
