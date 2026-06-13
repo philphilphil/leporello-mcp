@@ -30,10 +30,10 @@ describe('HamburgischeStaatsoperScraper', () => {
 
   it('extracts conductor and cast', async () => {
     const events = await scraper.scrape();
-    const lohengrin = events.find(e => e.title.includes('Lohengrin'));
-    expect(lohengrin).toBeDefined();
-    expect(lohengrin!.conductor).toBe('Omer Meir Wellber');
-    expect(lohengrin!.cast).toContain('Klaus Florian Vogt');
+    const traviata = events.find(e => e.title.includes('La traviata'));
+    expect(traviata).toBeDefined();
+    expect(traviata!.conductor).toBe('Sesto Quatrini');
+    expect(traviata!.cast).toContain('Yaritza Véliz');
   });
 
   it('includes composer in title', async () => {
