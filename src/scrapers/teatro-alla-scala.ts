@@ -115,3 +115,5 @@ export class TeatroAllaScalaScraper implements Scraper {
     return events;
   }
 }
+
+export default new TeatroAllaScalaScraper();

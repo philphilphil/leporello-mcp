@@ -146,3 +146,5 @@ function parseCast(details: string): string[] | null {
     .filter((s) => s.length > 0);
   return names.length > 0 ? names : null;
 }
+
+export default new PhilharmonikerStuttgartScraper();
