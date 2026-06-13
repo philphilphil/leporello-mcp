@@ -36,7 +36,11 @@ export class TeatroAllaScalaScraper implements Scraper {
 
   get venueId(): string { return this.venue.venueId; }
 
-  constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
+  constructor(private readonly opts: { fetchHtml?: FetchHtml; now?: () => Date } = {}) {}
+
+  private now(): Date {
+    return this.opts.now ? this.opts.now() : new Date();
+  }
 
   async scrape(): Promise<Event[]> {
     const html = this.opts.fetchHtml
@@ -53,7 +57,8 @@ export class TeatroAllaScalaScraper implements Scraper {
   parse(html: string): Event[] {
     const $ = load(html);
     const events: Event[] = [];
-    const now = new Date().toISOString();
+    const scrapedAt = this.now().toISOString();
+    const todayStr = this.now().toISOString().slice(0, 10);
     const seen = new Set<string>();
 
     $('article.mcl-evt').each((_, el) => {
@@ -71,6 +76,11 @@ export class TeatroAllaScalaScraper implements Scraper {
         if (!dtMatch) return;
         const date = dtMatch[1];
         const time = dtMatch[2];
+
+        // The calendario page is an archive going back ~2.5 years; the MCP
+        // and frontend only serve upcoming events, so drop anything in the
+        // past to avoid storing thousands of dead rows.
+        if (date < todayStr) return;
 
         // Composer / choreographer from first address.mcl-evt-author
         // (second is subscription type — skip it)
@@ -105,7 +115,7 @@ export class TeatroAllaScalaScraper implements Scraper {
           cast: null,
           location: null,
           url,
-          scraped_at: now,
+          scraped_at: scrapedAt,
         });
       } catch {
         // skip malformed entries silently
