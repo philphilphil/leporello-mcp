@@ -32,6 +32,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Lyric Opera of Chicago | Chicago |
 | Palau de la Música Catalana | Barcelona |
 | Royal Opera House | London |
+| Teatro alla Scala | Milano |
 
 ## How it works
 
