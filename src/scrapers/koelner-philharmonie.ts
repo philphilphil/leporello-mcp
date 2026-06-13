@@ -1,10 +1,30 @@
-import { load } from 'cheerio';
 import type { Event } from '../types.js';
 import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
 
-type FetchHtml = () => Promise<string>;
+type FetchJson = () => Promise<EventsResponse>;
 
 const BASE_URL = 'https://www.koelner-philharmonie.de';
+const API_URL = `${BASE_URL}/de/api/events/`;
+// The feed is paginated (~10 events/page) and runs ~13 months ahead. Stop once
+// events pass the ~90-day window we care about; MAX_PAGES is a hard safety cap.
+const MAX_PAGES = 20;
+const DAYS_AHEAD = 90;
+
+interface ApiEvent {
+  id: number;
+  name: string;
+  date_start: string; // ISO 8601 with offset, e.g. "2026-06-13T20:00:00+02:00"
+  cast_names: string | null; // pipe-separated performers, e.g. "Ensemble | Conductor"
+  room: { name: string } | null;
+  slug: { de: string } | null;
+  status: string | null; // "sale" | "soldout" | "past" | ...
+}
+
+interface EventsResponse {
+  count: number;
+  next: string | null;
+  results: ApiEvent[];
+}
 
 export class KoelnerPhilharmonieScraper implements Scraper {
   readonly venue: VenueMeta = {
@@ -18,68 +38,85 @@ export class KoelnerPhilharmonieScraper implements Scraper {
 
   get venueId(): string { return this.venue.venueId; }
 
-  constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
+  constructor(private readonly opts: { fetchJson?: FetchJson } = {}) {}
 
   async scrape(): Promise<Event[]> {
-    const html = this.opts.fetchHtml
-      ? await this.opts.fetchHtml()
-      : await fetch(this.venue.scheduleUrl, {
-          headers: { 'User-Agent': USER_AGENT },
-        }).then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
-          return r.text();
-        });
-    return this.parse(html);
+    const data = this.opts.fetchJson
+      ? await this.opts.fetchJson()
+      : await this.fetchFromApi();
+    return this.parse(data);
   }
 
-  parse(html: string): Event[] {
-    const $ = load(html);
+  private async fetchFromApi(): Promise<EventsResponse> {
+    const today = new Date().toISOString().slice(0, 10);
+    const cutoff = new Date(Date.now() + DAYS_AHEAD * 86_400_000)
+      .toISOString()
+      .slice(0, 10);
+
+    const all: ApiEvent[] = [];
+    let count = 0;
+    // Results are returned in ascending date order, so we can stop paging once a
+    // page's last event is past the cutoff.
+    let url: string | null = `${API_URL}?date=${today}&page=1`;
+
+    for (let page = 0; page < MAX_PAGES && url; page++) {
+      const res: Response = await fetch(url, {
+        headers: { 'User-Agent': USER_AGENT, Accept: 'application/json' },
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
+      const json = (await res.json()) as EventsResponse;
+      count = json.count;
+      all.push(...json.results);
+
+      const lastDate = json.results.at(-1)?.date_start?.slice(0, 10);
+      if (lastDate && lastDate > cutoff) break;
+      url = json.next;
+    }
+
+    return { count, next: null, results: all };
+  }
+
+  parse(data: EventsResponse): Event[] {
     const events: Event[] = [];
     const now = new Date().toISOString();
+    const nowMs = Date.now();
+    const cutoffMs = nowMs + DAYS_AHEAD * 86_400_000;
 
-    $('li.event-item').each((_, el) => {
+    for (const ev of data.results ?? []) {
       try {
-        const $el = $(el);
+        const title = ev.name?.trim();
+        if (!title || !ev.date_start) continue;
 
-        // Title from .event-item__title
-        const title = $el.find('.event-item__title').first().text().trim();
-        if (!title) return;
+        const start = new Date(ev.date_start);
+        const startMs = start.getTime();
+        if (Number.isNaN(startMs)) continue;
 
-        // Date from .event-item__date-full — format "DD.MM.YYYY"
-        const dateRaw = $el.find('.event-item__date-full').first().text().trim();
-        const dateMatch = dateRaw.match(/(\d{2})\.(\d{2})\.(\d{4})/);
-        if (!dateMatch) return;
-        const date = `${dateMatch[3]}-${dateMatch[2]}-${dateMatch[1]}`;
+        // Drop events in the past or beyond the ~90-day window.
+        if (startMs < nowMs || startMs > cutoffMs) continue;
 
-        // Time from .event-item__date-time — format "HH:MM"
-        const timeRaw = $el.find('.event-item__date-time').first().text().trim();
-        const timeMatch = timeRaw.match(/(\d{2}:\d{2})/);
-        const time = timeMatch ? timeMatch[1] : null;
+        // date_start carries an explicit offset; derive the local Köln wall-clock
+        // date/time straight from the ISO string to avoid TZ drift.
+        const m = ev.date_start.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);
+        if (!m) continue;
+        const date = `${m[1]}-${m[2]}-${m[3]}`;
+        const time = `${m[4]}:${m[5]}`;
 
-        // Subtitle contains performers separated by " | "
-        const subtitle = $el.find('.event-item__subtitle').first().text().trim() || null;
-
-        // Parse conductor and cast from subtitle
-        // Pattern: "Ensemble | Orchestra | Conductor" (pipe-separated)
-        let conductor: string | null = null;
+        // cast_names is a flat pipe-separated list with no role markers, so we
+        // cannot reliably tell a conductor from a soloist. Put everyone in cast
+        // and leave conductor null rather than guessing (and mislabeling soloist
+        // recitals).
         let cast: string[] | null = null;
-
-        if (subtitle) {
-          const parts = subtitle.split('|').map(s => s.trim()).filter(Boolean);
-          if (parts.length > 1) {
-            // Last part is typically the conductor/director
-            conductor = parts[parts.length - 1];
-            // Remaining parts are ensembles/performers
-            cast = parts.slice(0, -1);
-          } else if (parts.length === 1) {
-            // Single entry — could be an ensemble or a description, put in cast
-            cast = parts;
-          }
+        if (ev.cast_names) {
+          const parts = ev.cast_names.split('|').map((s) => s.trim()).filter(Boolean);
+          cast = parts.length > 0 ? parts : null;
         }
 
-        // URL from .event-item__title href
-        const href = $el.find('.event-item__title').first().attr('href') ?? '';
-        const url = href ? new URL(href, BASE_URL + '/').href : null;
+        const location = ev.room?.name?.trim() || null;
+
+        const slug = ev.slug?.de;
+        const url = slug
+          ? new URL(`/de/konzerte/${slug}/${ev.id}`, BASE_URL + '/').href
+          : null;
 
         events.push({
           id: generateEventId(this.venueId, date, time, title),
@@ -87,16 +124,16 @@ export class KoelnerPhilharmonieScraper implements Scraper {
           title,
           date,
           time,
-          conductor,
-          cast: cast && cast.length > 0 ? cast : null,
-          location: null,
+          conductor: null,
+          cast,
+          location,
           url,
           scraped_at: now,
         });
       } catch {
         // skip malformed entries silently
       }
-    });
+    }
 
     return events;
   }
