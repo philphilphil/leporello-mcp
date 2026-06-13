@@ -151,3 +151,5 @@ export class TonhalleZuerichScraper implements Scraper {
     };
   }
 }
+
+export default new TonhalleZuerichScraper();
