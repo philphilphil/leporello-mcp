@@ -28,6 +28,7 @@ Missing your favorite venue? PRs welcome! Read **[CONTRIBUTING.md](CONTRIBUTING.
 | Bayerische Staatsoper | München |
 | Berliner Philharmonie | Berlin |
 | Gewandhaus | Leipzig |
+| Tonhalle-Orchester Zürich | Zürich |
 
 ## How it works
 
