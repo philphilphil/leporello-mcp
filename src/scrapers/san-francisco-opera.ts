@@ -93,3 +93,5 @@ export class SanFranciscoOperaScraper implements Scraper {
     return events;
   }
 }
+
+export default new SanFranciscoOperaScraper();

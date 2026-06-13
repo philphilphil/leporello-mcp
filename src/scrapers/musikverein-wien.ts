@@ -111,3 +111,5 @@ export class MusikvereinWienScraper implements Scraper {
     return events;
   }
 }
+
+export default new MusikvereinWienScraper();
