@@ -175,3 +175,5 @@ export class WienerStaatsoperScraper implements Scraper {
     return events;
   }
 }
+
+export default new WienerStaatsoperScraper();

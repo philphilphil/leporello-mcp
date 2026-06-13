@@ -121,3 +121,5 @@ function parseTime(text: string): string | null {
   if (meridian === 'AM' && hours === 12) hours = 0;
   return `${String(hours).padStart(2, '0')}:${minutes}`;
 }
+
+export default new LyricOperaChicagoScraper();
