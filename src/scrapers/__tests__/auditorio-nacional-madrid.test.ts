@@ -3,13 +3,36 @@ import { describe, it, expect } from 'vitest';
 import { AuditorioNacionalMadridScraper } from '../auditorio-nacional-madrid.js';
 import { testDbIntegration } from './helpers/db-integration.js';
 
-const fixture = readFileSync(new URL('../__fixtures__/auditorio-nacional-madrid.html', import.meta.url), 'utf8');
-const scraper = new AuditorioNacionalMadridScraper({ fetchHtml: async () => fixture });
+const page1 = readFileSync(new URL('../__fixtures__/auditorio-nacional-madrid.html', import.meta.url), 'utf8');
+const page2 = readFileSync(new URL('../__fixtures__/auditorio-nacional-madrid-page2.html', import.meta.url), 'utf8');
+
+// The listing paginates 12 events per page via ?b_start:int=N. Serve page 1 for
+// the base URL, page 2 for ?b_start:int=12, and an empty page for anything else
+// so the pagination loop terminates the same way it would against the live site.
+const emptyPage = '<html><body></body></html>';
+const fetchHtml = async (url: string): Promise<string> => {
+  if (url.includes('b_start:int=12')) return page2;
+  if (url.includes('b_start:int=')) return emptyPage;
+  return page1;
+};
+const scraper = new AuditorioNacionalMadridScraper({ fetchHtml });
 
 describe('AuditorioNacionalMadridScraper', () => {
   it('parses events from fixture', async () => {
     const events = await scraper.scrape();
     expect(events.length).toBeGreaterThan(0);
+  });
+
+  it('paginates across pages and accumulates more than one page of events', async () => {
+    const events = await scraper.scrape();
+    // Page 1 alone has 12 events; pagination must pull in some of page 2 too.
+    expect(events.length).toBeGreaterThan(12);
+  });
+
+  it('produces unique event ids across paginated pages', async () => {
+    const events = await scraper.scrape();
+    const ids = new Set(events.map((e) => e.id));
+    expect(ids.size).toBe(events.length);
   });
 
   it('extracts date and time correctly', async () => {

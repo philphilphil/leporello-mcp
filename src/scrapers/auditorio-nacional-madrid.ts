@@ -2,9 +2,12 @@ import { load } from 'cheerio';
 import type { Event } from '../types.js';
 import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
 
-type FetchHtml = () => Promise<string>;
+type FetchHtml = (url: string) => Promise<string>;
 
 const BASE_URL = 'https://auditorionacional.inaem.gob.es';
+const DAYS_AHEAD = 90; // stop paginating once a page runs entirely past this window
+const PAGE_SIZE = 12; // events per listing page (?b_start:int=N steps by 12)
+const MAX_PAGES = 16; // safety cap; the site currently has 16 pages of upcoming events
 
 export class AuditorioNacionalMadridScraper implements Scraper {
   readonly venue: VenueMeta = {
@@ -20,16 +23,46 @@ export class AuditorioNacionalMadridScraper implements Scraper {
 
   constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
 
+  private async fetchPage(url: string): Promise<string> {
+    if (this.opts.fetchHtml) return this.opts.fetchHtml(url);
+    const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+    if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
+    return res.text();
+  }
+
   async scrape(): Promise<Event[]> {
-    const html = this.opts.fetchHtml
-      ? await this.opts.fetchHtml()
-      : await fetch(this.venue.scheduleUrl, {
-          headers: { 'User-Agent': USER_AGENT },
-        }).then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
-          return r.text();
-        });
-    return this.parse(html);
+    const cutoff = new Date(Date.now() + DAYS_AHEAD * 86_400_000).toISOString().slice(0, 10);
+    const events: Event[] = [];
+    const seen = new Set<string>();
+
+    // The /es/programacion listing paginates 12 events per page via ?b_start:int=N.
+    // Events are ordered chronologically, so we keep fetching pages until a page
+    // is empty or every event on it falls past the 90-day cutoff window.
+    for (let page = 0; page < MAX_PAGES; page++) {
+      const url = page === 0
+        ? this.venue.scheduleUrl
+        : `${this.venue.scheduleUrl}?b_start:int=${page * PAGE_SIZE}`;
+
+      const pageEvents = this.parse(await this.fetchPage(url));
+      if (pageEvents.length === 0) break; // ran past the last page
+
+      let anyWithinWindow = false;
+      let anyNew = false;
+      for (const event of pageEvents) {
+        if (event.date > cutoff) continue; // beyond the window — skip
+        anyWithinWindow = true;
+        if (seen.has(event.id)) continue; // page boundaries can overlap
+        seen.add(event.id);
+        events.push(event);
+        anyNew = true;
+      }
+      // Stop if an entire page is past the cutoff (later pages will be too),
+      // or if a page yields no new events (e.g. an out-of-range offset that the
+      // site silently serves as page 1, or a single-page fixture in tests).
+      if (!anyWithinWindow || !anyNew) break;
+    }
+
+    return events;
   }
 
   parse(html: string): Event[] {
