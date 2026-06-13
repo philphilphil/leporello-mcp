@@ -36,7 +36,7 @@
 	
 	<link rel="alternate" hreflang="x-default" href="https://www.elbphilharmonie.de/de/programm/">
 
-	<link href="https://d3c80vss50ue25.cloudfront.net/static/css/build/app.min.d8dff70d59ff.css" rel="stylesheet">
+	<link href="https://d3c80vss50ue25.cloudfront.net/static/css/build/app.min.17764464bcf3.css" rel="stylesheet">
 
 	
 
@@ -253,24 +253,24 @@
 					<a href="/de/besuch" class="">Besuch</a>
 				</li>
 			
+				<li class="header__menu-item " data-name="Musik für alle">
+					<a href="/de/musik-fuer-alle" class="">Musik für alle</a>
+				</li>
+			
+				<li class="header__menu-item " data-name="Die Häuser">
+					<a href="/de/die-haeuser-2026" class="">Die Häuser</a>
+				</li>
+			
 				<li class="header__menu-item " data-name="Mediathek">
 					<a href="/de/mediathek" class="">Mediathek</a>
 				</li>
 			
-				<li class="header__menu-item " data-name="Die Häuser">
-					<a href="/de/die-haeuser" class="">Die Häuser</a>
-				</li>
-			
-				<li class="header__menu-item " data-name="Kinder &amp; Familie">
-					<a href="/de/kinder-und-familie" class="">Kinder &amp; Familie</a>
+				<li class="header__menu-item " data-name="Unterstützen">
+					<a href="/de/unterstuetzen" class="">Unterstützen</a>
 				</li>
 			
 				<li class="header__menu-item " data-name="Shop">
 					<a href="https://shop.elbphilharmonie.de/ep/de" class="">Shop</a>
-				</li>
-			
-				<li class="header__menu-item " data-name="Engagement">
-					<a href="/de/engagement" class="">Engagement</a>
 				</li>
 			
 		</ul>
@@ -386,9 +386,11 @@
 
 			<div class="header__merklist-wrapper cell small-10 medium-7 large-5" data-merkcontent="loggedout" >
 				<h2 class="header__merklist-title line-center">Merkliste</h2>
-				<p class="header__merklist-text">Um Ihre Merkliste einzusehen, müssen Sie sich anmelden. Wenn Sie noch kein Elbphilharmonie-Kundenkonto haben, können Sie sich schnell und einfach registrieren.</p>
+        <p class="header__merklist-text">Um Ihre Merkliste einzusehen, ist es erforderlich, dass Sie entweder im bisherigen oder im neuen Online-Shop angemeldet sind.<br> Wenn Sie noch kein Elbphilharmonie-Kundenkonto besitzen, registrieren Sie sich bitte im neuen Online-Shop.</p>
 				<div class="header__merklist-button">
-					<a href="#" class="button link link-default header__merklist-account">Anmelden oder registrieren</a>
+        <a href="https://shop.elbphilharmonie.de/de/meine-daten/" class="button link link-default header__merklist-account">Anmelden im bisherigen Online-Shop</a>
+          <br />
+					<a href="https://webshop.elbphilharmonie.de/webshop/webticket/shop?page=myaccount/accountoverview.secure" class="button link link-default header__merklist-account">Anmelden oder registrieren im neuen Online-Shop</a>
 				</div>
 			</div>
 
@@ -438,31 +440,33 @@
 					the tabGenerator() function. as long comment above
 					will explain it better.
 				-->
-        <ul class="event-list events-tab__list merklist-list"></ul>
+        <ul class="event-list events-tab__list merklist-list">
+          <li data-category="Upcoming" class="events-tab__item">
+            <ul class="header__merklist--current-events"></ul>
+            <ul style="display: none;" class="empty-elements">
+              <li class="upcoming events-tab__item--empty">
+                <span class="grid-x grid-margin-x align-center">
+                  <span class="cell large-8">
+                    Sie haben keine aktuellen Veranstaltungen gespeichert. 
+                  </span>
+                </span>
+              </li>
+            </ul>
+          </li>
+          <li data-category="Past" class="events-tab__item">
+            <ul class="header__merklist--past-events"></ul>
+            <ul style="display: none;" class="empty-elements">
+              <li class="past events-tab__item--empty">
+                <span class="grid-x grid-margin-x align-center">
+                  <span class="cell large-8">
+                    Sie haben keine vergangenen Veranstaltungen gespeichert.
+                  </span>
+                </span>
+              </li>
+            </ul>
+          </li>
+        </ul>
 				<!-- /end -->
-
-				<!-- 
-					Empty list DOM
-					-
-					These element insert to "event-list" (the above element)
-					by js so that we can use translate feature
-				-->
-				<ul style="display: none;" class="empty-elements">
-					<li data-category="Past" class="past events-tab__item events-tab__item--empty">
-						<span class="grid-x grid-margin-x align-center">
-							<span class="cell large-8">
-								Sie haben keine vergangenen Veranstaltungen gespeichert.
-							</span>
-						</span>
-					</li>
-					<li data-category="Upcoming" class="upcoming events-tab__item events-tab__item--empty">
-						<span class="grid-x grid-margin-x align-center">
-							<span class="cell large-8">
-								Sie haben keine aktuellen Veranstaltungen gespeichert. 
-							</span>
-						</span>
-					</li>
-				</ul>
 
         <div class="header__merklist-loading">
           <div class="loading-animation"></div>
@@ -527,7 +531,7 @@
 
 				<section id="program-section" class="booking-list-page">
 
-					<aside class="filter" data-has-filter="0" data-has-date="0">
+					<aside class="filter"  data-has-filter="0" data-has-date="0">
 						<div class="filter__fakeblock"></div>
 						<div class="filter__group">
 							
@@ -586,10 +590,10 @@
                                 
 							</div>
               <div id="calendar-filter" aria-hidden="true" class="calendar "
-								 data-last-date="31. Juli 2027 23:59" data-day="2"
-								 data-month="4" data-year="2026"
+								 data-last-date="30. Juli 2028 23:59" data-day="13"
+								 data-month="6" data-year="2026"
 								 data-first_event_date="2025-08-01T00:00:00+02:00"
-								 data-last_event_date="2027-07-31T23:59:00+02:00"
+								 data-last_event_date="2028-07-30T23:59:00+02:00"
 								 data-urlpattern="/de/programm/11-22-3333/">
 								
 <header class="calendar__header">
@@ -601,7 +605,7 @@
 
     <a href="" class="calendar__prev" title="Vormonat"><i class="icon-arrow-left"></i></a>
     <span class="calendar__current">
-      <span class="calendar__current-month bold">April</span>
+      <span class="calendar__current-month bold">Juni</span>
       <span class="calendar__current-year bold">2026</span>
     </span>
     <a id='calendar-next-month' href="" class="calendar__next" title="nächsten Monat"><i class="icon-arrow-right"></i></a>
@@ -639,98 +643,49 @@
             
               <td>
                 
-              </td>
-              
-            
-              <td>
+                <button type="button" data-filter="/de/programm/01-06-2026/" class="past ">01</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/01-04-2026/" class="past ">01</button>
+                <button type="button" data-filter="/de/programm/02-06-2026/" class="past ">02</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/02-04-2026/" class="today current-day ">02</button>
+                <button type="button" data-filter="/de/programm/03-06-2026/" class="past ">03</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/03-04-2026/" class="">03</button>
+                <button type="button" data-filter="/de/programm/04-06-2026/" class="past ">04</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/04-04-2026/" class="">04</button>
+                <button type="button" data-filter="/de/programm/05-06-2026/" class="past ">05</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/05-04-2026/" class="">05</button>
-                
-              </td>
-              
-            
-          </tr>
-        
-          <tr>
-            
-              <td>
-                
-                <button type="button" data-filter="/de/programm/06-04-2026/" class="">06</button>
+                <button type="button" data-filter="/de/programm/06-06-2026/" class="past ">06</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/07-04-2026/" class="">07</button>
-                
-              </td>
-              
-            
-              <td>
-                
-                <button type="button" data-filter="/de/programm/08-04-2026/" class="">08</button>
-                
-              </td>
-              
-            
-              <td>
-                
-                <button type="button" data-filter="/de/programm/09-04-2026/" class="">09</button>
-                
-              </td>
-              
-            
-              <td>
-                
-                <button type="button" data-filter="/de/programm/10-04-2026/" class="">10</button>
-                
-              </td>
-              
-            
-              <td>
-                
-                <button type="button" data-filter="/de/programm/11-04-2026/" class="">11</button>
-                
-              </td>
-              
-            
-              <td>
-                
-                <button type="button" data-filter="/de/programm/12-04-2026/" class="">12</button>
+                <button type="button" data-filter="/de/programm/07-06-2026/" class="past ">07</button>
                 
               </td>
               
@@ -741,102 +696,49 @@
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/13-04-2026/" class="">13</button>
+                <button type="button" data-filter="/de/programm/08-06-2026/" class="past ">08</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/14-04-2026/" class="">14</button>
+                <button type="button" data-filter="/de/programm/09-06-2026/" class="past ">09</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/15-04-2026/" class="">15</button>
+                <button type="button" data-filter="/de/programm/10-06-2026/" class="past ">10</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/16-04-2026/" class="">16</button>
+                <button type="button" data-filter="/de/programm/11-06-2026/" class="past ">11</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/17-04-2026/" class="">17</button>
+                <button type="button" data-filter="/de/programm/12-06-2026/" class="past ">12</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/18-04-2026/" class="">18</button>
+                <button type="button" data-filter="/de/programm/13-06-2026/" class="today current-day ">13</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/19-04-2026/" class="">19</button>
-                
-              </td>
-              
-            
-          </tr>
-        
-          <tr>
-            
-              <td>
-                
-                <button type="button" data-filter="/de/programm/20-04-2026/" class="">20</button>
-                
-              </td>
-              
-            
-              <td>
-                
-                <button type="button" data-filter="/de/programm/21-04-2026/" class="">21</button>
-                
-              </td>
-              
-            
-              <td>
-                
-                <button type="button" data-filter="/de/programm/22-04-2026/" class="">22</button>
-                
-              </td>
-              
-            
-              <td>
-                
-                <button type="button" data-filter="/de/programm/23-04-2026/" class="">23</button>
-                
-              </td>
-              
-            
-              <td>
-                
-                <button type="button" data-filter="/de/programm/24-04-2026/" class="">24</button>
-                
-              </td>
-              
-            
-              <td>
-                
-                <button type="button" data-filter="/de/programm/25-04-2026/" class="">25</button>
-                
-              </td>
-              
-            
-              <td>
-                
-                <button type="button" data-filter="/de/programm/26-04-2026/" class="">26</button>
+                <button type="button" data-filter="/de/programm/14-06-2026/" class="">14</button>
                 
               </td>
               
@@ -847,28 +749,130 @@
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/27-04-2026/" class="">27</button>
+                <button type="button" data-filter="/de/programm/15-06-2026/" class="">15</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/28-04-2026/" class="">28</button>
+                <button type="button" data-filter="/de/programm/16-06-2026/" class="">16</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/29-04-2026/" class="">29</button>
+                <button type="button" data-filter="/de/programm/17-06-2026/" class="">17</button>
                 
               </td>
               
             
               <td>
                 
-                <button type="button" data-filter="/de/programm/30-04-2026/" class="">30</button>
+                <button type="button" data-filter="/de/programm/18-06-2026/" class="">18</button>
+                
+              </td>
+              
+            
+              <td>
+                
+                <button type="button" data-filter="/de/programm/19-06-2026/" class="">19</button>
+                
+              </td>
+              
+            
+              <td>
+                
+                <button type="button" data-filter="/de/programm/20-06-2026/" class="">20</button>
+                
+              </td>
+              
+            
+              <td>
+                
+                <button type="button" data-filter="/de/programm/21-06-2026/" class="">21</button>
+                
+              </td>
+              
+            
+          </tr>
+        
+          <tr>
+            
+              <td>
+                
+                <button type="button" data-filter="/de/programm/22-06-2026/" class="">22</button>
+                
+              </td>
+              
+            
+              <td>
+                
+                <button type="button" data-filter="/de/programm/23-06-2026/" class="">23</button>
+                
+              </td>
+              
+            
+              <td>
+                
+                <button type="button" data-filter="/de/programm/24-06-2026/" class="">24</button>
+                
+              </td>
+              
+            
+              <td>
+                
+                <button type="button" data-filter="/de/programm/25-06-2026/" class="">25</button>
+                
+              </td>
+              
+            
+              <td>
+                
+                <button type="button" data-filter="/de/programm/26-06-2026/" class="">26</button>
+                
+              </td>
+              
+            
+              <td>
+                
+                <button type="button" data-filter="/de/programm/27-06-2026/" class="">27</button>
+                
+              </td>
+              
+            
+              <td>
+                
+                <button type="button" data-filter="/de/programm/28-06-2026/" class="">28</button>
+                
+              </td>
+              
+            
+          </tr>
+        
+          <tr>
+            
+              <td>
+                
+                <button type="button" data-filter="/de/programm/29-06-2026/" class="">29</button>
+                
+              </td>
+              
+            
+              <td>
+                
+                <button type="button" data-filter="/de/programm/30-06-2026/" class="">30</button>
+                
+              </td>
+              
+            
+              <td>
+                
+              </td>
+              
+            
+              <td>
                 
               </td>
               
@@ -1007,6 +1011,12 @@
   
     <li class="filter__item " >
       <button type="button" data-name="Studio Eins" rel="nofollow" data-filter="NDRS/" class="filter__link ">Studio Eins</button>
+      
+      
+    </li>
+  
+    <li class="filter__item " >
+      <button type="button" data-name="Wilhelm Leuschner Seniorenzentrum" rel="nofollow" data-filter="WLSZ/" class="filter__link ">Wilhelm Leuschner Seniorenzentrum</button>
       
       
     </li>
@@ -1353,80 +1363,68 @@
 
 
 
-		<li id="event_id_000000e9001a265b" data-category="Past" data-event-id="2416697" class="event-item past" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-04-02T11:00:00+02:00"><strong class="date nobreak">Do, 2.4.2026</strong><span class="time">11&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
-							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/staatsphilharmonie-nurnberg-elena-bashkirova-nabil-shehata/24222" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/df/a0/dfa0f8e7-ee69-41d9-b9f7-918de4be2dc3/nabil_shehata_c_peter_adamik.jpg__219x164_q85_crop_subject_location-951%2C640_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/df/a0/dfa0f8e7-ee69-41d9-b9f7-918de4be2dc3/nabil_shehata_c_peter_adamik.jpg__392x294_q85_crop_subject_location-951%2C640_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/df/a0/dfa0f8e7-ee69-41d9-b9f7-918de4be2dc3/nabil_shehata_c_peter_adamik.jpg__442x328_q85_crop_subject_location-951%2C640_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/df/a0/dfa0f8e7-ee69-41d9-b9f7-918de4be2dc3/nabil_shehata_c_peter_adamik.jpg__219x164_q85_crop_subject_location-951%2C640_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/df/a0/dfa0f8e7-ee69-41d9-b9f7-918de4be2dc3/nabil_shehata_c_peter_adamik.jpg__392x294_q85_crop_subject_location-951%2C640_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/df/a0/dfa0f8e7-ee69-41d9-b9f7-918de4be2dc3/nabil_shehata_c_peter_adamik.jpg__442x328_q85_crop_subject_location-951%2C640_subsampling-2_upscale.jpg" alt="Nabil Shehata" title="Nabil Shehata © Peter Adamik"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/staatsphilharmonie-nurnberg-elena-bashkirova-nabil-shehata/24222">
-								Staatsphilharmonie Nürnberg / Elena Bashkirova / Nabil Shehata
-							</a></p><p class="event-subtitle">Matinee am Gründonnerstag mit Werken von W.A. Mozart, Robert Schumann und Ludwig van Beethoven</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+		<li id="event_id_000000e90016faeb" data-category="Upcoming" data-event-id="40692" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-13T16:00:00+02:00"><strong class="date nobreak">Sa, 13.6.2026</strong><span class="time">14:30&nbsp;Uhr / 16&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Studio E
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/hasi-konzert/23809" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/3d/c5/3dc5d76d-db7a-4e93-a76d-8ca9a74c407e/hasi_konzerte_symphoniker_hamburg_c_mihaly_andras_4.jpg__219x164_q85_crop_subject_location-667%2C475_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/3d/c5/3dc5d76d-db7a-4e93-a76d-8ca9a74c407e/hasi_konzerte_symphoniker_hamburg_c_mihaly_andras_4.jpg__392x294_q85_crop_subject_location-667%2C475_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/3d/c5/3dc5d76d-db7a-4e93-a76d-8ca9a74c407e/hasi_konzerte_symphoniker_hamburg_c_mihaly_andras_4.jpg__442x328_q85_crop_subject_location-667%2C475_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/3d/c5/3dc5d76d-db7a-4e93-a76d-8ca9a74c407e/hasi_konzerte_symphoniker_hamburg_c_mihaly_andras_4.jpg__219x164_q85_crop_subject_location-667%2C475_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/3d/c5/3dc5d76d-db7a-4e93-a76d-8ca9a74c407e/hasi_konzerte_symphoniker_hamburg_c_mihaly_andras_4.jpg__392x294_q85_crop_subject_location-667%2C475_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/3d/c5/3dc5d76d-db7a-4e93-a76d-8ca9a74c407e/hasi_konzerte_symphoniker_hamburg_c_mihaly_andras_4.jpg__442x328_q85_crop_subject_location-667%2C475_subsampling-2_upscale.jpg" alt="Hasi-Konzert" title="Hasi-Konzert © Mihaly Andras"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/hasi-konzert/23809">
+								Hasi-Konzert
+							</a></p><p class="event-subtitle">Kinderkonzert der Symphoniker Hamburg für 3–6 Jährige</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
                        type="button" 
                        data-alert="false"
-                       data-id="000000e9:001a265b" 
-                       data-name="Do, 2.4.2026 - Staatsphilharmonie Nürnberg / Elena Bashkirova / Nabil Shehata"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                       data-id="000000e9:0016faeb" 
+                       data-name="Sa, 13.6.2026 - Hasi-Konzert"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
                         data-bookmark-text-off='Merken' 
                         data-bookmark-text-on='<strong>Gemerkt</strong>' 
                         data-bookmark-alert-off='Merken / Ticketerinnerung'
                         data-bookmark-alert-one-on='<strong>Gemerkt /</strong> Ticketerinnerung'
                         data-bookmark-alert-two-on='<strong>Gemerkt / Ticketerinnerung aktiviert</strong>'
                    >Merken</span>&nbsp;
-                </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="past-status status-box"><span class="status">Vergangenes Konzert</span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
-	   href="/de/programm/ticket/staatsphilharmonie-nurnberg-elena-bashkirova-nabil-shehata/24222"
-	   data-name="Staatsphilharmonie Nürnberg / Elena Bashkirova / Nabil Shehata - Trotzdem Tickets bestellen"
-
-	
-		
-			target="_blank"
-		
-	
-
-	
-		
-			target="_blank"
-		
-	
-
-	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>10</span></span></a></span></div></div></div></div></div></li>
+                </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="soldout-status status-box"><span class="ticket-and-prices"><span class="status link-sold-out">
+						Ausverkauft
+					</span></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"></span></div></div></div></div></div></li>
 
 
-		<li id="event_id_000000e9001904f9" data-category="Past" data-event-id="1044" class="event-item past" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-04-02T19:00:00+02:00"><strong class="date nobreak">Do, 2.4.2026</strong><span class="time">19&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
-							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/bach-matthaus-passion/23140" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/97/ea/97ea608e-273d-4cad-aee5-74f0cf45429f/philippe_herreweghe-by-michiel-hendryckx.jpg__219x164_q85_crop_subject_location-1024%2C439_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/97/ea/97ea608e-273d-4cad-aee5-74f0cf45429f/philippe_herreweghe-by-michiel-hendryckx.jpg__392x294_q85_crop_subject_location-1024%2C439_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/97/ea/97ea608e-273d-4cad-aee5-74f0cf45429f/philippe_herreweghe-by-michiel-hendryckx.jpg__442x328_q85_crop_subject_location-1024%2C439_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/97/ea/97ea608e-273d-4cad-aee5-74f0cf45429f/philippe_herreweghe-by-michiel-hendryckx.jpg__219x164_q85_crop_subject_location-1024%2C439_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/97/ea/97ea608e-273d-4cad-aee5-74f0cf45429f/philippe_herreweghe-by-michiel-hendryckx.jpg__392x294_q85_crop_subject_location-1024%2C439_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/97/ea/97ea608e-273d-4cad-aee5-74f0cf45429f/philippe_herreweghe-by-michiel-hendryckx.jpg__442x328_q85_crop_subject_location-1024%2C439_subsampling-2_upscale.jpg" alt="Philippe Herreweghe" title="Philippe Herreweghe © Michiel Hendryckx"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/bach-matthaus-passion/23140">
-								Bach: Matthäus-Passion
-							</a></p><p class="event-subtitle">Chor &amp; Orchester des Collegium Vocale Gent / Philippe Herreweghe</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+		<li id="event_id_000000e9001a765d" data-category="Upcoming" data-event-id="44794" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-13T15:00:00+02:00"><strong class="date nobreak">Sa, 13.6.2026</strong><span class="time">15&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong></span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/die-elbphilharmonie-singt/23912" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/9c/e3/9ce379ca-e4b3-410d-9486-a5771a99d201/230701_die_elbphilharmonie_singt_c_claudia_hohne_029.jpg__219x164_q85_crop_subject_location-603%2C722_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/9c/e3/9ce379ca-e4b3-410d-9486-a5771a99d201/230701_die_elbphilharmonie_singt_c_claudia_hohne_029.jpg__392x294_q85_crop_subject_location-603%2C722_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/9c/e3/9ce379ca-e4b3-410d-9486-a5771a99d201/230701_die_elbphilharmonie_singt_c_claudia_hohne_029.jpg__442x328_q85_crop_subject_location-603%2C722_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/9c/e3/9ce379ca-e4b3-410d-9486-a5771a99d201/230701_die_elbphilharmonie_singt_c_claudia_hohne_029.jpg__219x164_q85_crop_subject_location-603%2C722_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/9c/e3/9ce379ca-e4b3-410d-9486-a5771a99d201/230701_die_elbphilharmonie_singt_c_claudia_hohne_029.jpg__392x294_q85_crop_subject_location-603%2C722_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/9c/e3/9ce379ca-e4b3-410d-9486-a5771a99d201/230701_die_elbphilharmonie_singt_c_claudia_hohne_029.jpg__442x328_q85_crop_subject_location-603%2C722_subsampling-2_upscale.jpg" alt="Die Elbphilharmonie singt" title="Die Elbphilharmonie singt © Claudia Höhne"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/die-elbphilharmonie-singt/23912">
+								Die Elbphilharmonie singt
+							</a></p><p class="event-subtitle">Chöre aus Norddeutschland &amp; Singaktionen zum Mitmachen</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
                        type="button" 
                        data-alert="false"
-                       data-id="000000e9:001904f9" 
-                       data-name="Do, 2.4.2026 - Bach: Matthäus-Passion"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                       data-id="000000e9:001a765d" 
+                       data-name="Sa, 13.6.2026 - Die Elbphilharmonie singt"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
                         data-bookmark-text-off='Merken' 
                         data-bookmark-text-on='<strong>Gemerkt</strong>' 
                         data-bookmark-alert-off='Merken / Ticketerinnerung'
                         data-bookmark-alert-one-on='<strong>Gemerkt /</strong> Ticketerinnerung'
                         data-bookmark-alert-two-on='<strong>Gemerkt / Ticketerinnerung aktiviert</strong>'
                    >Merken</span>&nbsp;
-                </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="past-status status-box"><span class="status">Vergangenes Konzert</span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
-	   href="/de/programm/ticket/bach-matthaus-passion/23140"
-	   data-name="Bach: Matthäus-Passion - Trotzdem Tickets bestellen"
+                </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/de/programm/ticket/die-elbphilharmonie-singt/23912"
+	   data-name="Die Elbphilharmonie singt - Trotzdem Tickets bestellen"
 
-	
-		
-			target="_blank"
-		
 	
 
 	
 		
-			target="_blank"
+	
+
+	><!--  --><span>Tickets <span class="price-from">€ </span></span><span class="price-from"><span>24</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/de/programm/ticket/die-elbphilharmonie-singt/23912"
+	   data-name="Die Elbphilharmonie singt - Trotzdem Tickets bestellen"
+
+	
+
+	
 		
 	
 
-	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>28,10</span></span></a></span></div></div></div></div></div></li>
+	><!--  --><span>Tickets <span class="price-from">€ </span></span><span class="price-from"><span>24</span></span></a></span></div></div></div></div></div></li>
 
 
-		<li id="event_id_000000e9001bb8b7" data-category="Upcoming" data-event-id="2458821" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-04-03T19:30:00+02:00"><strong class="date nobreak">Fr, 3.4.2026</strong><span class="time">19:30&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Kleiner Saal
-							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/levisct/27485" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/b2/e7/b2e73a55-e49e-4564-9d4a-b21fe18ac57e/levisct_c_levisct.jpg__219x164_q85_crop_subject_location-960%2C722_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/b2/e7/b2e73a55-e49e-4564-9d4a-b21fe18ac57e/levisct_c_levisct.jpg__392x294_q85_crop_subject_location-960%2C722_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/b2/e7/b2e73a55-e49e-4564-9d4a-b21fe18ac57e/levisct_c_levisct.jpg__442x328_q85_crop_subject_location-960%2C722_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/b2/e7/b2e73a55-e49e-4564-9d4a-b21fe18ac57e/levisct_c_levisct.jpg__219x164_q85_crop_subject_location-960%2C722_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/b2/e7/b2e73a55-e49e-4564-9d4a-b21fe18ac57e/levisct_c_levisct.jpg__392x294_q85_crop_subject_location-960%2C722_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/b2/e7/b2e73a55-e49e-4564-9d4a-b21fe18ac57e/levisct_c_levisct.jpg__442x328_q85_crop_subject_location-960%2C722_subsampling-2_upscale.jpg" alt="LEVI.SCT" title="LEVI.SCT © LEVI.SCT"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/levisct/27485">
-								LEVI.SCT
-							</a></p><p class="event-subtitle"></p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+		<li id="event_id_000000e9001a8c13" data-category="Upcoming" data-event-id="41833" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-13T15:00:00+02:00"><strong class="date nobreak">Sa, 13.6.2026</strong><span class="time">15&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Kultur Palast Hamburg</strong></span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/insight-orchestra/23895" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0f/41/0f416f11-bea5-497a-a3a7-2b4177c13598/240120_insight_orchestra_c_claudia_hohne_047.jpg__219x164_q85_crop_subject_location-1024%2C494_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0f/41/0f416f11-bea5-497a-a3a7-2b4177c13598/240120_insight_orchestra_c_claudia_hohne_047.jpg__392x294_q85_crop_subject_location-1024%2C494_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0f/41/0f416f11-bea5-497a-a3a7-2b4177c13598/240120_insight_orchestra_c_claudia_hohne_047.jpg__442x328_q85_crop_subject_location-1024%2C494_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0f/41/0f416f11-bea5-497a-a3a7-2b4177c13598/240120_insight_orchestra_c_claudia_hohne_047.jpg__219x164_q85_crop_subject_location-1024%2C494_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0f/41/0f416f11-bea5-497a-a3a7-2b4177c13598/240120_insight_orchestra_c_claudia_hohne_047.jpg__392x294_q85_crop_subject_location-1024%2C494_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0f/41/0f416f11-bea5-497a-a3a7-2b4177c13598/240120_insight_orchestra_c_claudia_hohne_047.jpg__442x328_q85_crop_subject_location-1024%2C494_subsampling-2_upscale.jpg" alt="Insight Orchestra" title="Insight Orchestra © Claudia Höhne"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/insight-orchestra/23895">
+								Insight Orchestra
+							</a></p><p class="event-subtitle">Elbphilharmonie PLUS</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
                        type="button" 
                        data-alert="false"
-                       data-id="000000e9:001bb8b7" 
-                       data-name="Fr, 3.4.2026 - LEVI.SCT"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                       data-id="000000e9:001a8c13" 
+                       data-name="Sa, 13.6.2026 - Insight Orchestra"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
                         data-bookmark-text-off='Merken' 
                         data-bookmark-text-on='<strong>Gemerkt</strong>' 
                         data-bookmark-alert-off='Merken / Ticketerinnerung'
@@ -1436,32 +1434,63 @@
                 </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="soldout-status status-box"><span class="ticket-and-prices"><span class="status link-sold-out">
 						Ausverkauft
 					</span></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
-	   href="/de/programm/ticket/levisct/27485"
-	   data-name="LEVI.SCT - Trotzdem Tickets bestellen"
+	   href="/de/programm/ticket/insight-orchestra/23895"
+	   data-name="Insight Orchestra - Trotzdem Tickets bestellen"
 
-	
-		
-			target="_blank"
-		
 	
 
 	
 		
-			target="_blank"
-		
 	
 
-	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>30</span></span></a></span></div></div></div></div></div></li>
+	><!--  --><span>Tickets <span class="price-from">€ </span></span><span class="price-from"><span>16</span></span></a></span></div></div></div></div></div></li>
 
 
-		<li id="event_id_000000e900186722" data-category="Upcoming" data-event-id="41481" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-04-03T20:00:00+02:00"><strong class="date nobreak">Fr, 3.4.2026</strong><span class="time">20&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
-							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/le-concert-des-nations-jordi-savall/23658" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/aa/0e/aa0eb967-7408-4208-bee2-5f2de7de9f58/211205_jordi_savall_beethoven_c_daniel_dittus_23.jpg__219x164_q85_crop_subject_location-960%2C549_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/aa/0e/aa0eb967-7408-4208-bee2-5f2de7de9f58/211205_jordi_savall_beethoven_c_daniel_dittus_23.jpg__392x294_q85_crop_subject_location-960%2C549_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/aa/0e/aa0eb967-7408-4208-bee2-5f2de7de9f58/211205_jordi_savall_beethoven_c_daniel_dittus_23.jpg__442x328_q85_crop_subject_location-960%2C549_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/aa/0e/aa0eb967-7408-4208-bee2-5f2de7de9f58/211205_jordi_savall_beethoven_c_daniel_dittus_23.jpg__219x164_q85_crop_subject_location-960%2C549_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/aa/0e/aa0eb967-7408-4208-bee2-5f2de7de9f58/211205_jordi_savall_beethoven_c_daniel_dittus_23.jpg__392x294_q85_crop_subject_location-960%2C549_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/aa/0e/aa0eb967-7408-4208-bee2-5f2de7de9f58/211205_jordi_savall_beethoven_c_daniel_dittus_23.jpg__442x328_q85_crop_subject_location-960%2C549_subsampling-2_upscale.jpg" alt="Jordi Savall" title="Jordi Savall © Daniel Dittus"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/le-concert-des-nations-jordi-savall/23658">
-								Le Concert des Nations / Jordi Savall
-							</a></p><p class="event-subtitle">Haydn: Die sieben letzten Worte unseres Erlösers am Kreuze / Beethoven: Christus am Ölberge</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+		<li id="event_id_000000e9001bf8c8" data-category="Upcoming" data-event-id="45011" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-13T20:00:00+02:00"><strong class="date nobreak">Sa, 13.6.2026</strong><span class="time">20&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Kleiner Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/8-chopin-festival-hamburg/27638" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/c0/0e/c00e5ba5-673e-4aac-b709-c6a6e7b5f9b0/1_hubert_rutkowski_c_amelie_dahl.jpg__219x164_q85_crop_subject_location-960%2C640_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/c0/0e/c00e5ba5-673e-4aac-b709-c6a6e7b5f9b0/1_hubert_rutkowski_c_amelie_dahl.jpg__392x294_q85_crop_subject_location-960%2C640_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/c0/0e/c00e5ba5-673e-4aac-b709-c6a6e7b5f9b0/1_hubert_rutkowski_c_amelie_dahl.jpg__442x328_q85_crop_subject_location-960%2C640_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/c0/0e/c00e5ba5-673e-4aac-b709-c6a6e7b5f9b0/1_hubert_rutkowski_c_amelie_dahl.jpg__219x164_q85_crop_subject_location-960%2C640_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/c0/0e/c00e5ba5-673e-4aac-b709-c6a6e7b5f9b0/1_hubert_rutkowski_c_amelie_dahl.jpg__392x294_q85_crop_subject_location-960%2C640_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/c0/0e/c00e5ba5-673e-4aac-b709-c6a6e7b5f9b0/1_hubert_rutkowski_c_amelie_dahl.jpg__442x328_q85_crop_subject_location-960%2C640_subsampling-2_upscale.jpg" alt="Hubert Rutkowski" title="Hubert Rutkowski © Amelie Dahl"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/8-chopin-festival-hamburg/27638">
+								8. Chopin Festival Hamburg
+							</a></p><p class="event-subtitle">Hamburger Komponisten – ein Rendezvous mit Chopin</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
                        type="button" 
                        data-alert="false"
-                       data-id="000000e9:00186722" 
-                       data-name="Fr, 3.4.2026 - Le Concert des Nations / Jordi Savall"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                       data-id="000000e9:001bf8c8" 
+                       data-name="Sa, 13.6.2026 - 8. Chopin Festival Hamburg"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Merken' 
+                        data-bookmark-text-on='<strong>Gemerkt</strong>' 
+                        data-bookmark-alert-off='Merken / Ticketerinnerung'
+                        data-bookmark-alert-one-on='<strong>Gemerkt /</strong> Ticketerinnerung'
+                        data-bookmark-alert-two-on='<strong>Gemerkt / Ticketerinnerung aktiviert</strong>'
+                   >Merken</span>&nbsp;
+                </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/de/programm/ticket/8-chopin-festival-hamburg/27638"
+	   data-name="8. Chopin Festival Hamburg - Trotzdem Tickets bestellen"
+
+	
+
+	
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>20</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/de/programm/ticket/8-chopin-festival-hamburg/27638"
+	   data-name="8. Chopin Festival Hamburg - Trotzdem Tickets bestellen"
+
+	
+
+	
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>20</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e90019f896" data-category="Upcoming" data-event-id="44793" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-13T21:00:00+02:00"><strong class="date nobreak">Sa, 13.6.2026</strong><span class="time">21&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/die-elbphilharmonie-singt/23911" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/56/ea/56ea8710-dacd-48a4-9d1e-4e365b8c603d/230702_die_elbphilharmonie_singt_c_claudia_hohne_003.jpg__219x164_q85_crop_subject_location-933%2C613_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/56/ea/56ea8710-dacd-48a4-9d1e-4e365b8c603d/230702_die_elbphilharmonie_singt_c_claudia_hohne_003.jpg__392x294_q85_crop_subject_location-933%2C613_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/56/ea/56ea8710-dacd-48a4-9d1e-4e365b8c603d/230702_die_elbphilharmonie_singt_c_claudia_hohne_003.jpg__442x328_q85_crop_subject_location-933%2C613_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/56/ea/56ea8710-dacd-48a4-9d1e-4e365b8c603d/230702_die_elbphilharmonie_singt_c_claudia_hohne_003.jpg__219x164_q85_crop_subject_location-933%2C613_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/56/ea/56ea8710-dacd-48a4-9d1e-4e365b8c603d/230702_die_elbphilharmonie_singt_c_claudia_hohne_003.jpg__392x294_q85_crop_subject_location-933%2C613_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/56/ea/56ea8710-dacd-48a4-9d1e-4e365b8c603d/230702_die_elbphilharmonie_singt_c_claudia_hohne_003.jpg__442x328_q85_crop_subject_location-933%2C613_subsampling-2_upscale.jpg" alt="Die Elbphilharmonie singt" title="Die Elbphilharmonie singt © Claudia Höhne"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/die-elbphilharmonie-singt/23911">
+								Die Elbphilharmonie singt
+							</a></p><p class="event-subtitle">Das große Mitsingkonzert</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:0019f896" 
+                       data-name="Sa, 13.6.2026 - Die Elbphilharmonie singt"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
                         data-bookmark-text-off='Merken' 
                         data-bookmark-text-on='<strong>Gemerkt</strong>' 
                         data-bookmark-alert-off='Merken / Ticketerinnerung'
@@ -1471,8 +1500,8 @@
                 </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="soldout-status status-box"><span class="ticket-and-prices"><span class="status link-sold-out">
 						Ausverkauft
 					</span></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
-	   href="/de/programm/ticket/le-concert-des-nations-jordi-savall/23658"
-	   data-name="Le Concert des Nations / Jordi Savall - Trotzdem Tickets bestellen"
+	   href="/de/programm/ticket/die-elbphilharmonie-singt/23911"
+	   data-name="Die Elbphilharmonie singt - Trotzdem Tickets bestellen"
 
 	
 
@@ -1483,63 +1512,14 @@
 	><!--  --><span>Tickets</span><span class="price-from"><span></span></span></a></span></div></div></div></div></div></li>
 
 
-		<li id="event_id_000000e9001a4d9d" data-category="Upcoming" data-event-id="2344646" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-04-04T19:00:00+02:00"><strong class="date nobreak">Sa, 4.4.2026</strong><span class="time">19&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
-							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/gondwana-records-presents/24085" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/8d/b1/8db19fe5-7353-40d1-95de-99e7159cadd3/chip_wickham_c_emily_dennison.jpg__219x164_q85_crop_subject_location-1320%2C790_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/8d/b1/8db19fe5-7353-40d1-95de-99e7159cadd3/chip_wickham_c_emily_dennison.jpg__392x294_q85_crop_subject_location-1320%2C790_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/8d/b1/8db19fe5-7353-40d1-95de-99e7159cadd3/chip_wickham_c_emily_dennison.jpg__442x328_q85_crop_subject_location-1320%2C790_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/8d/b1/8db19fe5-7353-40d1-95de-99e7159cadd3/chip_wickham_c_emily_dennison.jpg__219x164_q85_crop_subject_location-1320%2C790_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/8d/b1/8db19fe5-7353-40d1-95de-99e7159cadd3/chip_wickham_c_emily_dennison.jpg__392x294_q85_crop_subject_location-1320%2C790_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/8d/b1/8db19fe5-7353-40d1-95de-99e7159cadd3/chip_wickham_c_emily_dennison.jpg__442x328_q85_crop_subject_location-1320%2C790_subsampling-2_upscale.jpg" alt="Chip Wickham" title="Chip Wickham © Emily Dennison"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/gondwana-records-presents/24085">
-								Gondwana Records presents
-							</a></p><p class="event-subtitle">Chip Wickham / Ancient Infinity Orchestra / Ambre Ciel</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+		<li id="event_id_000000e90019f374" data-category="Upcoming" data-event-id="40740" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-14T11:00:00+02:00"><strong class="date nobreak">So, 14.6.2026</strong><span class="time">11&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/mari-fukumoto-orgel/23444" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/8d/ff/8dff1f91-6ce9-46c8-a8d8-237fada96d83/mari_fukumoto_c_sonja_werner_1.jpg__219x164_q85_crop_subject_location-951%2C823_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/8d/ff/8dff1f91-6ce9-46c8-a8d8-237fada96d83/mari_fukumoto_c_sonja_werner_1.jpg__392x294_q85_crop_subject_location-951%2C823_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/8d/ff/8dff1f91-6ce9-46c8-a8d8-237fada96d83/mari_fukumoto_c_sonja_werner_1.jpg__442x328_q85_crop_subject_location-951%2C823_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/8d/ff/8dff1f91-6ce9-46c8-a8d8-237fada96d83/mari_fukumoto_c_sonja_werner_1.jpg__219x164_q85_crop_subject_location-951%2C823_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/8d/ff/8dff1f91-6ce9-46c8-a8d8-237fada96d83/mari_fukumoto_c_sonja_werner_1.jpg__392x294_q85_crop_subject_location-951%2C823_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/8d/ff/8dff1f91-6ce9-46c8-a8d8-237fada96d83/mari_fukumoto_c_sonja_werner_1.jpg__442x328_q85_crop_subject_location-951%2C823_subsampling-2_upscale.jpg" alt="Mari Fukumoto" title="Mari Fukumoto © Sonja Werner"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/mari-fukumoto-orgel/23444">
+								Mari Fukumoto, Orgel
+							</a></p><p class="event-subtitle">Vierne: Claire de lune &amp; Hymne au soleil / Holst: Die Planeten</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
                        type="button" 
                        data-alert="false"
-                       data-id="000000e9:001a4d9d" 
-                       data-name="Sa, 4.4.2026 - Gondwana Records presents"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
-                        data-bookmark-text-off='Merken' 
-                        data-bookmark-text-on='<strong>Gemerkt</strong>' 
-                        data-bookmark-alert-off='Merken / Ticketerinnerung'
-                        data-bookmark-alert-one-on='<strong>Gemerkt /</strong> Ticketerinnerung'
-                        data-bookmark-alert-two-on='<strong>Gemerkt / Ticketerinnerung aktiviert</strong>'
-                   >Merken</span>&nbsp;
-                </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
-	   href="/de/programm/ticket/gondwana-records-presents/24085"
-	   data-name="Gondwana Records presents - Trotzdem Tickets bestellen"
-
-	
-		
-			target="_blank"
-		
-	
-
-	
-		
-			target="_blank"
-		
-	
-
-	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>30</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
-	   href="/de/programm/ticket/gondwana-records-presents/24085"
-	   data-name="Gondwana Records presents - Trotzdem Tickets bestellen"
-
-	
-		
-			target="_blank"
-		
-	
-
-	
-		
-			target="_blank"
-		
-	
-
-	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>30</span></span></a></span></div></div></div></div></div></li>
-
-
-		<li id="event_id_000000e9001b36a5" data-category="Upcoming" data-event-id="44081" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-04-04T19:30:00+02:00"><strong class="date nobreak">Sa, 4.4.2026</strong><span class="time">19:30&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Kleiner Saal
-							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/hamburg-stage-ensemble/24347" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/24/f7/24f7c810-da6d-409a-a5af-37afc78b9d6c/hamburg_stage_ensemble_c_hamburger_stage_ensemble.jpg__219x164_q85_crop_subject_location-969%2C722_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/24/f7/24f7c810-da6d-409a-a5af-37afc78b9d6c/hamburg_stage_ensemble_c_hamburger_stage_ensemble.jpg__392x294_q85_crop_subject_location-969%2C722_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/24/f7/24f7c810-da6d-409a-a5af-37afc78b9d6c/hamburg_stage_ensemble_c_hamburger_stage_ensemble.jpg__442x328_q85_crop_subject_location-969%2C722_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/24/f7/24f7c810-da6d-409a-a5af-37afc78b9d6c/hamburg_stage_ensemble_c_hamburger_stage_ensemble.jpg__219x164_q85_crop_subject_location-969%2C722_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/24/f7/24f7c810-da6d-409a-a5af-37afc78b9d6c/hamburg_stage_ensemble_c_hamburger_stage_ensemble.jpg__392x294_q85_crop_subject_location-969%2C722_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/24/f7/24f7c810-da6d-409a-a5af-37afc78b9d6c/hamburg_stage_ensemble_c_hamburger_stage_ensemble.jpg__442x328_q85_crop_subject_location-969%2C722_subsampling-2_upscale.jpg" alt="Hamburg Stage Ensemble" title="Hamburg Stage Ensemble © Hamburg Stage Ensemble"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/hamburg-stage-ensemble/24347">
-								Hamburg Stage Ensemble
-							</a></p><p class="event-subtitle">La noche del Tango – Wenn Engel mit dem Teufel Tango tanzen</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
-                       type="button" 
-                       data-alert="false"
-                       data-id="000000e9:001b36a5" 
-                       data-name="Sa, 4.4.2026 - Hamburg Stage Ensemble"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                       data-id="000000e9:0019f374" 
+                       data-name="So, 14.6.2026 - Mari Fukumoto, Orgel"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
                         data-bookmark-text-off='Merken' 
                         data-bookmark-text-on='<strong>Gemerkt</strong>' 
                         data-bookmark-alert-off='Merken / Ticketerinnerung'
@@ -1549,8 +1529,8 @@
                 </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="soldout-status status-box"><span class="ticket-and-prices"><span class="status link-sold-out">
 						Ausverkauft
 					</span></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
-	   href="/de/programm/ticket/hamburg-stage-ensemble/24347"
-	   data-name="Hamburg Stage Ensemble - Trotzdem Tickets bestellen"
+	   href="/de/programm/ticket/mari-fukumoto-orgel/23444"
+	   data-name="Mari Fukumoto, Orgel - Trotzdem Tickets bestellen"
 
 	
 
@@ -1561,60 +1541,118 @@
 	><!--  --><span>Tickets</span><span class="price-from"><span></span></span></a></span></div></div></div></div></div></li>
 
 
-		<li id="event_id_000000e9001bb766" data-category="Upcoming" data-event-id="20708748" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-04-04T19:30:00+02:00"><strong class="date nobreak">Sa, 4.4.2026</strong><span class="time">19:30&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Großer Saal
-							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/professor-brian-cox/27505" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/22/09/2209a2be-83d8-41d7-935f-3f03b6f9e2a4/brian_cox_c_steve_schofield.jpg__219x164_q85_crop_subject_location-960%2C786_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/22/09/2209a2be-83d8-41d7-935f-3f03b6f9e2a4/brian_cox_c_steve_schofield.jpg__392x294_q85_crop_subject_location-960%2C786_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/22/09/2209a2be-83d8-41d7-935f-3f03b6f9e2a4/brian_cox_c_steve_schofield.jpg__442x328_q85_crop_subject_location-960%2C786_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/22/09/2209a2be-83d8-41d7-935f-3f03b6f9e2a4/brian_cox_c_steve_schofield.jpg__219x164_q85_crop_subject_location-960%2C786_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/22/09/2209a2be-83d8-41d7-935f-3f03b6f9e2a4/brian_cox_c_steve_schofield.jpg__392x294_q85_crop_subject_location-960%2C786_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/22/09/2209a2be-83d8-41d7-935f-3f03b6f9e2a4/brian_cox_c_steve_schofield.jpg__442x328_q85_crop_subject_location-960%2C786_subsampling-2_upscale.jpg" alt="Brian Cox" title="Brian Cox © Steve Schofield"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/professor-brian-cox/27505">
-								Professor Brian Cox
-							</a></p><p class="event-subtitle">»Emergence«</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+		<li id="event_id_000000e90016fccf" data-category="Upcoming" data-event-id="45332" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-14T11:00:00+02:00"><strong class="date nobreak">So, 14.6.2026</strong><span class="time">11&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/junge-symphoniker-hamburg/28192" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/88/30/88308cb1-636e-492e-b57d-67edf7b93589/junge_symphoniker_hamburg_c_gesche_jaeger_1.jpg__219x164_q85_crop_subject_location-960%2C640_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/88/30/88308cb1-636e-492e-b57d-67edf7b93589/junge_symphoniker_hamburg_c_gesche_jaeger_1.jpg__392x294_q85_crop_subject_location-960%2C640_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/88/30/88308cb1-636e-492e-b57d-67edf7b93589/junge_symphoniker_hamburg_c_gesche_jaeger_1.jpg__442x328_q85_crop_subject_location-960%2C640_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/88/30/88308cb1-636e-492e-b57d-67edf7b93589/junge_symphoniker_hamburg_c_gesche_jaeger_1.jpg__219x164_q85_crop_subject_location-960%2C640_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/88/30/88308cb1-636e-492e-b57d-67edf7b93589/junge_symphoniker_hamburg_c_gesche_jaeger_1.jpg__392x294_q85_crop_subject_location-960%2C640_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/88/30/88308cb1-636e-492e-b57d-67edf7b93589/junge_symphoniker_hamburg_c_gesche_jaeger_1.jpg__442x328_q85_crop_subject_location-960%2C640_subsampling-2_upscale.jpg" alt="Junge Symphoniker Hamburg" title="Junge Symphoniker Hamburg © Gesche Jäger"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/junge-symphoniker-hamburg/28192">
+								Junge Symphoniker Hamburg
+							</a></p><p class="event-subtitle">»Unter Wasser«: Dvořák / Zemlinsky</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
                        type="button" 
                        data-alert="false"
-                       data-id="000000e9:001bb766" 
-                       data-name="Sa, 4.4.2026 - Professor Brian Cox"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                       data-id="000000e9:0016fccf" 
+                       data-name="So, 14.6.2026 - Junge Symphoniker Hamburg"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
                         data-bookmark-text-off='Merken' 
                         data-bookmark-text-on='<strong>Gemerkt</strong>' 
                         data-bookmark-alert-off='Merken / Ticketerinnerung'
                         data-bookmark-alert-one-on='<strong>Gemerkt /</strong> Ticketerinnerung'
                         data-bookmark-alert-two-on='<strong>Gemerkt / Ticketerinnerung aktiviert</strong>'
                    >Merken</span>&nbsp;
-                </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="unavailable-status status-box"><span class="status">
-				Derzeit keine Tickets verfügbar
-			</span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
-	   href="/de/programm/ticket/professor-brian-cox/27505"
-	   data-name="Professor Brian Cox - Trotzdem Tickets bestellen"
+                </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/de/programm/ticket/junge-symphoniker-hamburg/28192"
+	   data-name="Junge Symphoniker Hamburg - Trotzdem Tickets bestellen"
 
-	
-		
-			target="_blank"
-		
 	
 
 	
 		
-			target="_blank"
+	
+
+	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>9,90</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/de/programm/ticket/junge-symphoniker-hamburg/28192"
+	   data-name="Junge Symphoniker Hamburg - Trotzdem Tickets bestellen"
+
+	
+
+	
 		
 	
 
-	><!--  --><span>Tickets <span class="price-from">€ </span></span><span class="price-from"><span>59,75</span></span></a></span></div></div></div></div></div></li>
+	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>9,90</span></span></a></span></div></div></div></div></div></li>
 
 
-		<li id="event_id_000000e9001bfd41" data-category="Upcoming" data-event-id="43018" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-04-05T16:30:00+02:00"><strong class="date nobreak">So, 5.4.2026</strong><span class="time">16:30&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Kleiner Saal
-							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/mischpoke-familienkonzert/24384" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/59/5c/595c5d77-0b92-4248-a256-8b1d37a7b5bc/mischpoke_c_mischpoke_2.jpg__219x164_q85_crop_subject_location-987%2C494_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/59/5c/595c5d77-0b92-4248-a256-8b1d37a7b5bc/mischpoke_c_mischpoke_2.jpg__392x294_q85_crop_subject_location-987%2C494_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/59/5c/595c5d77-0b92-4248-a256-8b1d37a7b5bc/mischpoke_c_mischpoke_2.jpg__442x328_q85_crop_subject_location-987%2C494_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/59/5c/595c5d77-0b92-4248-a256-8b1d37a7b5bc/mischpoke_c_mischpoke_2.jpg__219x164_q85_crop_subject_location-987%2C494_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/59/5c/595c5d77-0b92-4248-a256-8b1d37a7b5bc/mischpoke_c_mischpoke_2.jpg__392x294_q85_crop_subject_location-987%2C494_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/59/5c/595c5d77-0b92-4248-a256-8b1d37a7b5bc/mischpoke_c_mischpoke_2.jpg__442x328_q85_crop_subject_location-987%2C494_subsampling-2_upscale.jpg" alt="Mischpoke" title="Mischpoke © Mischpoke"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/mischpoke-familienkonzert/24384">
-								Mischpoke / Familienkonzert
-							</a></p><p class="event-subtitle">Eine Stunde Klezmer für Kids</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+		<li id="event_id_000000e90016df22" data-category="Upcoming" data-event-id="40672" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-14T11:00:00+02:00"><strong class="date nobreak">So, 14.6.2026</strong><span class="time">11&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Kleiner Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/kammerkonzert-der-symphoniker-hamburg/23265" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/65/0e659ea0-da8c-4e4f-b8d5-892d51972380/hovhannes_baghdasaryan_c_j_konrad_schmidt.jpg__219x164_q85_crop_subject_location-1115%2C411_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/65/0e659ea0-da8c-4e4f-b8d5-892d51972380/hovhannes_baghdasaryan_c_j_konrad_schmidt.jpg__392x294_q85_crop_subject_location-1115%2C411_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/65/0e659ea0-da8c-4e4f-b8d5-892d51972380/hovhannes_baghdasaryan_c_j_konrad_schmidt.jpg__442x328_q85_crop_subject_location-1115%2C411_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/65/0e659ea0-da8c-4e4f-b8d5-892d51972380/hovhannes_baghdasaryan_c_j_konrad_schmidt.jpg__219x164_q85_crop_subject_location-1115%2C411_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/65/0e659ea0-da8c-4e4f-b8d5-892d51972380/hovhannes_baghdasaryan_c_j_konrad_schmidt.jpg__392x294_q85_crop_subject_location-1115%2C411_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/65/0e659ea0-da8c-4e4f-b8d5-892d51972380/hovhannes_baghdasaryan_c_j_konrad_schmidt.jpg__442x328_q85_crop_subject_location-1115%2C411_subsampling-2_upscale.jpg" alt="Hovhannes Baghdasaryan" title="Hovhannes Baghdasaryan © J. Konrad Schmidt"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/kammerkonzert-der-symphoniker-hamburg/23265">
+								Kammerkonzert der Symphoniker Hamburg
+							</a></p><p class="event-subtitle">»Zwischen Elegie und ländlichem Idyll« – Werke von Giacomo Puccini, Antonín Dvořák und Franz Schubert</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
                        type="button" 
                        data-alert="false"
-                       data-id="000000e9:001bfd41" 
-                       data-name="So, 5.4.2026 - Mischpoke / Familienkonzert"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                       data-id="000000e9:0016df22" 
+                       data-name="So, 14.6.2026 - Kammerkonzert der Symphoniker Hamburg"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
                         data-bookmark-text-off='Merken' 
                         data-bookmark-text-on='<strong>Gemerkt</strong>' 
                         data-bookmark-alert-off='Merken / Ticketerinnerung'
                         data-bookmark-alert-one-on='<strong>Gemerkt /</strong> Ticketerinnerung'
                         data-bookmark-alert-two-on='<strong>Gemerkt / Ticketerinnerung aktiviert</strong>'
                    >Merken</span>&nbsp;
-                </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="soldout-status status-box"><span class="ticket-and-prices"><span class="status link-sold-out">
+                </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/de/programm/ticket/kammerkonzert-der-symphoniker-hamburg/23265"
+	   data-name="Kammerkonzert der Symphoniker Hamburg - Trotzdem Tickets bestellen"
+
+	
+
+	
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>9,90</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/de/programm/ticket/kammerkonzert-der-symphoniker-hamburg/23265"
+	   data-name="Kammerkonzert der Symphoniker Hamburg - Trotzdem Tickets bestellen"
+
+	
+
+	
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>9,90</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e90016fae7" data-category="Upcoming" data-event-id="40690" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-14T16:00:00+02:00"><strong class="date nobreak">So, 14.6.2026</strong><span class="time">11&nbsp;Uhr / 14:30&nbsp;Uhr / 16&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Studio E
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/hasi-konzert/23807" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ce/0f/ce0ffc69-1c97-4365-aa0d-a524fd84794b/hasi_konzerte_symphoniker_hamburg_c_mihaly_andras_3.jpg__219x164_q85_crop_subject_location-750%2C500_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ce/0f/ce0ffc69-1c97-4365-aa0d-a524fd84794b/hasi_konzerte_symphoniker_hamburg_c_mihaly_andras_3.jpg__392x294_q85_crop_subject_location-750%2C500_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ce/0f/ce0ffc69-1c97-4365-aa0d-a524fd84794b/hasi_konzerte_symphoniker_hamburg_c_mihaly_andras_3.jpg__442x328_q85_crop_subject_location-750%2C500_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ce/0f/ce0ffc69-1c97-4365-aa0d-a524fd84794b/hasi_konzerte_symphoniker_hamburg_c_mihaly_andras_3.jpg__219x164_q85_crop_subject_location-750%2C500_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ce/0f/ce0ffc69-1c97-4365-aa0d-a524fd84794b/hasi_konzerte_symphoniker_hamburg_c_mihaly_andras_3.jpg__392x294_q85_crop_subject_location-750%2C500_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ce/0f/ce0ffc69-1c97-4365-aa0d-a524fd84794b/hasi_konzerte_symphoniker_hamburg_c_mihaly_andras_3.jpg__442x328_q85_crop_subject_location-750%2C500_subsampling-2_upscale.jpg" alt="Hasi-Konzert" title="Hasi-Konzert © Mihaly Andras"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/hasi-konzert/23807">
+								Hasi-Konzert
+							</a></p><p class="event-subtitle">Kinderkonzert der Symphoniker Hamburg für 3–6 Jährige</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:0016fae7" 
+                       data-name="So, 14.6.2026 - Hasi-Konzert"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Merken' 
+                        data-bookmark-text-on='<strong>Gemerkt</strong>' 
+                        data-bookmark-alert-off='Merken / Ticketerinnerung'
+                        data-bookmark-alert-one-on='<strong>Gemerkt /</strong> Ticketerinnerung'
+                        data-bookmark-alert-two-on='<strong>Gemerkt / Ticketerinnerung aktiviert</strong>'
+                   >Merken</span>&nbsp;
+                </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="soldout-completely-status status-box"><span class="ticket-and-prices"><span class="status link-sold-out">
+						Ausverkauft
+					</span></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e9001a0343" data-category="Upcoming" data-event-id="43872" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-14T14:00:00+02:00"><strong class="date nobreak">So, 14.6.2026</strong><span class="time">12&nbsp;Uhr / 14&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Kaistudio 2
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/workshop-klassiko-saiteninstrumente/23580" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/26/6a/266aeb3b-e23c-4ba8-b37d-e5e02c51c4e9/20220926_klassiko_orchesterinstrumente_c_sophie_wolter_105.jpg__219x164_q85_crop_subject_location-2971%2C1486_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/26/6a/266aeb3b-e23c-4ba8-b37d-e5e02c51c4e9/20220926_klassiko_orchesterinstrumente_c_sophie_wolter_105.jpg__392x294_q85_crop_subject_location-2971%2C1486_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/26/6a/266aeb3b-e23c-4ba8-b37d-e5e02c51c4e9/20220926_klassiko_orchesterinstrumente_c_sophie_wolter_105.jpg__442x328_q85_crop_subject_location-2971%2C1486_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/26/6a/266aeb3b-e23c-4ba8-b37d-e5e02c51c4e9/20220926_klassiko_orchesterinstrumente_c_sophie_wolter_105.jpg__219x164_q85_crop_subject_location-2971%2C1486_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/26/6a/266aeb3b-e23c-4ba8-b37d-e5e02c51c4e9/20220926_klassiko_orchesterinstrumente_c_sophie_wolter_105.jpg__392x294_q85_crop_subject_location-2971%2C1486_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/26/6a/266aeb3b-e23c-4ba8-b37d-e5e02c51c4e9/20220926_klassiko_orchesterinstrumente_c_sophie_wolter_105.jpg__442x328_q85_crop_subject_location-2971%2C1486_subsampling-2_upscale.jpg" alt="Orchesterinstrumente" title="Orchesterinstrumente © Sophie Wolter"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/workshop-klassiko-saiteninstrumente/23580">
+								Workshop: Klassiko Saiteninstrumente
+							</a></p><p class="event-subtitle">für Familien mit Kindern ab 6 Jahren</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:001a0343" 
+                       data-name="So, 14.6.2026 - Workshop: Klassiko Saiteninstrumente"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Merken' 
+                        data-bookmark-text-on='<strong>Gemerkt</strong>' 
+                        data-bookmark-alert-off='Merken / Ticketerinnerung'
+                        data-bookmark-alert-one-on='<strong>Gemerkt /</strong> Ticketerinnerung'
+                        data-bookmark-alert-two-on='<strong>Gemerkt / Ticketerinnerung aktiviert</strong>'
+                   >Merken</span>&nbsp;
+                </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="soldout-completely-status status-box"><span class="ticket-and-prices"><span class="status link-sold-out">
 						Ausverkauft
 					</span></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
-	   href="/de/programm/ticket/mischpoke-familienkonzert/24384"
-	   data-name="Mischpoke / Familienkonzert - Trotzdem Tickets bestellen"
+	   href="/de/programm/workshop-klassiko-saiteninstrumente/23579?reprised=1"
+	   data-name="Workshop: Klassiko Saiteninstrumente - Trotzdem Tickets bestellen"
 
 	
 
@@ -1625,14 +1663,41 @@
 	><!--  --><span>Tickets</span><span class="price-from"><span></span></span></a></span></div></div></div></div></div></li>
 
 
-		<li id="event_id_000000e9001bfd18" data-category="Upcoming" data-event-id="43017" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-04-05T19:30:00+02:00"><strong class="date nobreak">So, 5.4.2026</strong><span class="time">19:30&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Kleiner Saal
-							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/mischpoke/24383" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/a3/33/a33316b2-d448-4344-b53d-848aaba5a126/mischpoke_c_marion_beckhauser.jpg__219x164_q85_crop_subject_location-960%2C549_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/a3/33/a33316b2-d448-4344-b53d-848aaba5a126/mischpoke_c_marion_beckhauser.jpg__392x294_q85_crop_subject_location-960%2C549_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/a3/33/a33316b2-d448-4344-b53d-848aaba5a126/mischpoke_c_marion_beckhauser.jpg__442x328_q85_crop_subject_location-960%2C549_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/a3/33/a33316b2-d448-4344-b53d-848aaba5a126/mischpoke_c_marion_beckhauser.jpg__219x164_q85_crop_subject_location-960%2C549_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/a3/33/a33316b2-d448-4344-b53d-848aaba5a126/mischpoke_c_marion_beckhauser.jpg__392x294_q85_crop_subject_location-960%2C549_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/a3/33/a33316b2-d448-4344-b53d-848aaba5a126/mischpoke_c_marion_beckhauser.jpg__442x328_q85_crop_subject_location-960%2C549_subsampling-2_upscale.jpg" alt="Mischpoke" title="Mischpoke © Marion Beckhäuser"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/mischpoke/24383">
-								Mischpoke
-							</a></p><p class="event-subtitle">»Tsukunft«</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+		<li id="event_id_000000e9001b2901" data-category="Upcoming" data-event-id="41972" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-14T15:30:00+02:00"><strong class="date nobreak">So, 14.6.2026</strong><span class="time">15:30&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Rolf-Liebermann-Studio</strong></span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/ndr-familienkonzert/24144" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ba/84/ba84f128-fa50-49ac-b7a8-827358bb92b9/rolf_liebermann_studio_c_ndr_gita_mundry_6.jpg__219x164_q85_crop_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ba/84/ba84f128-fa50-49ac-b7a8-827358bb92b9/rolf_liebermann_studio_c_ndr_gita_mundry_6.jpg__392x294_q85_crop_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ba/84/ba84f128-fa50-49ac-b7a8-827358bb92b9/rolf_liebermann_studio_c_ndr_gita_mundry_6.jpg__442x328_q85_crop_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ba/84/ba84f128-fa50-49ac-b7a8-827358bb92b9/rolf_liebermann_studio_c_ndr_gita_mundry_6.jpg__219x164_q85_crop_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ba/84/ba84f128-fa50-49ac-b7a8-827358bb92b9/rolf_liebermann_studio_c_ndr_gita_mundry_6.jpg__392x294_q85_crop_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/ba/84/ba84f128-fa50-49ac-b7a8-827358bb92b9/rolf_liebermann_studio_c_ndr_gita_mundry_6.jpg__442x328_q85_crop_subsampling-2_upscale.jpg" alt="Rolf-Liebermann-Studio" title="Rolf-Liebermann-Studio © NDR/Gita Mundry"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/ndr-familienkonzert/24144">
+								NDR Familienkonzert
+							</a></p><p class="event-subtitle">»Sing &amp; Swing« / Für Kinder ab 6 Jahren</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
                        type="button" 
                        data-alert="false"
-                       data-id="000000e9:001bfd18" 
-                       data-name="So, 5.4.2026 - Mischpoke"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                       data-id="000000e9:001b2901" 
+                       data-name="So, 14.6.2026 - NDR Familienkonzert"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Merken' 
+                        data-bookmark-text-on='<strong>Gemerkt</strong>' 
+                        data-bookmark-alert-off='Merken / Ticketerinnerung'
+                        data-bookmark-alert-one-on='<strong>Gemerkt /</strong> Ticketerinnerung'
+                        data-bookmark-alert-two-on='<strong>Gemerkt / Ticketerinnerung aktiviert</strong>'
+                   >Merken</span>&nbsp;
+                </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="residue-status status-box"><a class="link link-ticket" href="/de/programm/ticket/ndr-familienkonzert/24144" data-name="NDR Familienkonzert - Nur noch wenige Tickets" >
+					Nur noch wenige Tickets
+				</a></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/de/programm/ticket/ndr-familienkonzert/24144"
+	   data-name="NDR Familienkonzert - Trotzdem Tickets bestellen"
+
+	
+
+	
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">€ </span></span><span class="price-from"><span>19</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e90019f521" data-category="Upcoming" data-event-id="43095" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-14T16:00:00+02:00"><strong class="date nobreak">So, 14.6.2026</strong><span class="time">16&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Kultur Palast Hamburg</strong></span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/elbphilharmonie-publikumsorchester/23878" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/57/b6/57b616a3-fdb9-489c-b3da-2e59f1025e32/240127_publikumsorchester_c_claudia_hohne_038.jpg__219x164_q85_crop_subject_location-969%2C768_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/57/b6/57b616a3-fdb9-489c-b3da-2e59f1025e32/240127_publikumsorchester_c_claudia_hohne_038.jpg__392x294_q85_crop_subject_location-969%2C768_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/57/b6/57b616a3-fdb9-489c-b3da-2e59f1025e32/240127_publikumsorchester_c_claudia_hohne_038.jpg__442x328_q85_crop_subject_location-969%2C768_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/57/b6/57b616a3-fdb9-489c-b3da-2e59f1025e32/240127_publikumsorchester_c_claudia_hohne_038.jpg__219x164_q85_crop_subject_location-969%2C768_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/57/b6/57b616a3-fdb9-489c-b3da-2e59f1025e32/240127_publikumsorchester_c_claudia_hohne_038.jpg__392x294_q85_crop_subject_location-969%2C768_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/57/b6/57b616a3-fdb9-489c-b3da-2e59f1025e32/240127_publikumsorchester_c_claudia_hohne_038.jpg__442x328_q85_crop_subject_location-969%2C768_subsampling-2_upscale.jpg" alt="Publikumsorchester" title="Publikumsorchester © Claudia Höhne"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/elbphilharmonie-publikumsorchester/23878">
+								Elbphilharmonie Publikumsorchester
+							</a></p><p class="event-subtitle">Kagel / Elgar / Mussorgsky</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:0019f521" 
+                       data-name="So, 14.6.2026 - Elbphilharmonie Publikumsorchester"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
                         data-bookmark-text-off='Merken' 
                         data-bookmark-text-on='<strong>Gemerkt</strong>' 
                         data-bookmark-alert-off='Merken / Ticketerinnerung'
@@ -1640,8 +1705,8 @@
                         data-bookmark-alert-two-on='<strong>Gemerkt / Ticketerinnerung aktiviert</strong>'
                    >Merken</span>&nbsp;
                 </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
-	   href="/de/programm/ticket/mischpoke/24383"
-	   data-name="Mischpoke - Trotzdem Tickets bestellen"
+	   href="/de/programm/ticket/elbphilharmonie-publikumsorchester/23878"
+	   data-name="Elbphilharmonie Publikumsorchester - Trotzdem Tickets bestellen"
 
 	
 
@@ -1649,9 +1714,9 @@
 		
 	
 
-	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>29,50</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
-	   href="/de/programm/ticket/mischpoke/24383"
-	   data-name="Mischpoke - Trotzdem Tickets bestellen"
+	><!--  --><span>Tickets <span class="price-from">€ </span></span><span class="price-from"><span>12</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/de/programm/ticket/elbphilharmonie-publikumsorchester/23878"
+	   data-name="Elbphilharmonie Publikumsorchester - Trotzdem Tickets bestellen"
 
 	
 
@@ -1659,17 +1724,17 @@
 		
 	
 
-	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>29,50</span></span></a></span></div></div></div></div></div></li>
+	><!--  --><span>Tickets <span class="price-from">€ </span></span><span class="price-from"><span>12</span></span></a></span></div></div></div></div></div></li>
 
 
-		<li id="event_id_000000e9001a8fcb" data-category="Upcoming" data-event-id="20577470" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-04-05T20:00:00+02:00"><strong class="date nobreak">So, 5.4.2026</strong><span class="time">20&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
-							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/till-bronner/27436" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/e4/54/e4545160-a1b2-4595-bc09-f908b39d9f08/till_broenner_italia_2026_c_stef_zinsbacher_joel_heyd_1.jpg__219x164_q85_crop_subject_location-1243%2C603_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/e4/54/e4545160-a1b2-4595-bc09-f908b39d9f08/till_broenner_italia_2026_c_stef_zinsbacher_joel_heyd_1.jpg__392x294_q85_crop_subject_location-1243%2C603_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/e4/54/e4545160-a1b2-4595-bc09-f908b39d9f08/till_broenner_italia_2026_c_stef_zinsbacher_joel_heyd_1.jpg__442x328_q85_crop_subject_location-1243%2C603_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/e4/54/e4545160-a1b2-4595-bc09-f908b39d9f08/till_broenner_italia_2026_c_stef_zinsbacher_joel_heyd_1.jpg__219x164_q85_crop_subject_location-1243%2C603_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/e4/54/e4545160-a1b2-4595-bc09-f908b39d9f08/till_broenner_italia_2026_c_stef_zinsbacher_joel_heyd_1.jpg__392x294_q85_crop_subject_location-1243%2C603_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/e4/54/e4545160-a1b2-4595-bc09-f908b39d9f08/till_broenner_italia_2026_c_stef_zinsbacher_joel_heyd_1.jpg__442x328_q85_crop_subject_location-1243%2C603_subsampling-2_upscale.jpg" alt="Till Brönner" title="Till Brönner © Stef Zinsbacher / Joel Heyd"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/till-bronner/27436">
-								Till Brönner
-							</a></p><p class="event-subtitle">»Italia«</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+		<li id="event_id_000000e900168550" data-category="Upcoming" data-event-id="40585" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-14T18:00:00+02:00"><strong class="date nobreak">So, 14.6.2026</strong><span class="time">18&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Großer Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/ndr-elbphilharmonie-orchester-ryan-bancroft/23312" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/e4/03/e403de57-1126-44aa-8655-480ddd588eab/ryan_bancroft_c_benjamin_ealovega_1.jpg__219x164_q85_crop_subject_location-1020%2C540_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/e4/03/e403de57-1126-44aa-8655-480ddd588eab/ryan_bancroft_c_benjamin_ealovega_1.jpg__392x294_q85_crop_subject_location-1020%2C540_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/e4/03/e403de57-1126-44aa-8655-480ddd588eab/ryan_bancroft_c_benjamin_ealovega_1.jpg__442x328_q85_crop_subject_location-1020%2C540_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/e4/03/e403de57-1126-44aa-8655-480ddd588eab/ryan_bancroft_c_benjamin_ealovega_1.jpg__219x164_q85_crop_subject_location-1020%2C540_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/e4/03/e403de57-1126-44aa-8655-480ddd588eab/ryan_bancroft_c_benjamin_ealovega_1.jpg__392x294_q85_crop_subject_location-1020%2C540_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/e4/03/e403de57-1126-44aa-8655-480ddd588eab/ryan_bancroft_c_benjamin_ealovega_1.jpg__442x328_q85_crop_subject_location-1020%2C540_subsampling-2_upscale.jpg" alt="Ryan Bancroft" title="Ryan Bancroft © Benjamin Ealovega"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/ndr-elbphilharmonie-orchester-ryan-bancroft/23312">
+								NDR Elbphilharmonie Orchester / Ryan Bancroft
+							</a></p><p class="event-subtitle">Hillborg: Sound Atlas / Schumann: Konzertstück für vier Hörner und Orchester / Elgar: Enigma-Variationen</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
                        type="button" 
                        data-alert="false"
-                       data-id="000000e9:001a8fcb" 
-                       data-name="So, 5.4.2026 - Till Brönner"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                       data-id="000000e9:00168550" 
+                       data-name="So, 14.6.2026 - NDR Elbphilharmonie Orchester / Ryan Bancroft"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
                         data-bookmark-text-off='Merken' 
                         data-bookmark-text-on='<strong>Gemerkt</strong>' 
                         data-bookmark-alert-off='Merken / Ticketerinnerung'
@@ -1679,32 +1744,26 @@
                 </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="soldout-status status-box"><span class="ticket-and-prices"><span class="status link-sold-out">
 						Ausverkauft
 					</span></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
-	   href="/de/programm/ticket/till-bronner/27436"
-	   data-name="Till Brönner - Trotzdem Tickets bestellen"
+	   href="/de/programm/ticket/ndr-elbphilharmonie-orchester-ryan-bancroft/23312"
+	   data-name="NDR Elbphilharmonie Orchester / Ryan Bancroft - Trotzdem Tickets bestellen"
 
-	
-		
-			target="_blank"
-		
 	
 
 	
 		
-			target="_blank"
-		
 	
 
-	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>99</span></span></a></span></div></div></div></div></div></li>
+	><!--  --><span>Tickets</span><span class="price-from"><span></span></span></a></span></div></div></div></div></div></li>
 
 
-		<li id="event_id_000000e90018307e" data-category="Upcoming" data-event-id="21335813" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-04-05T20:00:00+02:00"><strong class="date nobreak">So, 5.4.2026</strong><span class="time">20&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Kleiner Saal
-							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/neue-philharmonie-hamburg-jourist-quartett-edouard-tachalow/27768" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/96/63/9663eff6-aef5-4ddf-9a97-868ce78a65d7/kammerorchester_der_neuen_philharmonie_hamburg.jpg__219x164_q85_crop_subject_location-960%2C832_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/96/63/9663eff6-aef5-4ddf-9a97-868ce78a65d7/kammerorchester_der_neuen_philharmonie_hamburg.jpg__392x294_q85_crop_subject_location-960%2C832_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/96/63/9663eff6-aef5-4ddf-9a97-868ce78a65d7/kammerorchester_der_neuen_philharmonie_hamburg.jpg__442x328_q85_crop_subject_location-960%2C832_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/96/63/9663eff6-aef5-4ddf-9a97-868ce78a65d7/kammerorchester_der_neuen_philharmonie_hamburg.jpg__219x164_q85_crop_subject_location-960%2C832_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/96/63/9663eff6-aef5-4ddf-9a97-868ce78a65d7/kammerorchester_der_neuen_philharmonie_hamburg.jpg__392x294_q85_crop_subject_location-960%2C832_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/96/63/9663eff6-aef5-4ddf-9a97-868ce78a65d7/kammerorchester_der_neuen_philharmonie_hamburg.jpg__442x328_q85_crop_subject_location-960%2C832_subsampling-2_upscale.jpg" alt="Kammerorchester der Neuen Philharmonie Hamburg" title="Kammerorchester der Neuen Philharmonie Hamburg © Tigran Mikaelyan"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/neue-philharmonie-hamburg-jourist-quartett-edouard-tachalow/27768">
-								Neue Philharmonie Hamburg / Jourist Quartett / Edouard Tachalow
-							</a></p><p class="event-subtitle">Osterkonzert</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+		<li id="event_id_000000e9001a9edb" data-category="Upcoming" data-event-id="44077" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-14T18:00:00+02:00"><strong class="date nobreak">So, 14.6.2026</strong><span class="time">18&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Elbphilharmonie</strong> Kleiner Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/sachiko-furuhata-klavierabend/27435" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/17/cc/17cc0642-22bb-43d9-b5bf-16251a8ba78c/sachiko_furuhata_c_sachiko_furuhata_2.jpg__219x164_q85_crop_subject_location-1152%2C1381_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/17/cc/17cc0642-22bb-43d9-b5bf-16251a8ba78c/sachiko_furuhata_c_sachiko_furuhata_2.jpg__392x294_q85_crop_subject_location-1152%2C1381_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/17/cc/17cc0642-22bb-43d9-b5bf-16251a8ba78c/sachiko_furuhata_c_sachiko_furuhata_2.jpg__442x328_q85_crop_subject_location-1152%2C1381_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/17/cc/17cc0642-22bb-43d9-b5bf-16251a8ba78c/sachiko_furuhata_c_sachiko_furuhata_2.jpg__219x164_q85_crop_subject_location-1152%2C1381_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/17/cc/17cc0642-22bb-43d9-b5bf-16251a8ba78c/sachiko_furuhata_c_sachiko_furuhata_2.jpg__392x294_q85_crop_subject_location-1152%2C1381_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/17/cc/17cc0642-22bb-43d9-b5bf-16251a8ba78c/sachiko_furuhata_c_sachiko_furuhata_2.jpg__442x328_q85_crop_subject_location-1152%2C1381_subsampling-2_upscale.jpg" alt="Sachiko Furuhata" title="Sachiko Furuhata © Sachiko Furuhata"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/sachiko-furuhata-klavierabend/27435">
+								Sachiko Furuhata / Klavierabend
+							</a></p><p class="event-subtitle">Chopin meets Beethoven</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
                        type="button" 
                        data-alert="false"
-                       data-id="000000e9:0018307e" 
-                       data-name="So, 5.4.2026 - Neue Philharmonie Hamburg / Jourist Quartett / Edouard Tachalow"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                       data-id="000000e9:001a9edb" 
+                       data-name="So, 14.6.2026 - Sachiko Furuhata / Klavierabend"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
                         data-bookmark-text-off='Merken' 
                         data-bookmark-text-on='<strong>Gemerkt</strong>' 
                         data-bookmark-alert-off='Merken / Ticketerinnerung'
@@ -1712,8 +1771,45 @@
                         data-bookmark-alert-two-on='<strong>Gemerkt / Ticketerinnerung aktiviert</strong>'
                    >Merken</span>&nbsp;
                 </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
-	   href="/de/programm/ticket/neue-philharmonie-hamburg-jourist-quartett-edouard-tachalow/27768"
-	   data-name="Neue Philharmonie Hamburg / Jourist Quartett / Edouard Tachalow - Trotzdem Tickets bestellen"
+	   href="/de/programm/ticket/sachiko-furuhata-klavierabend/27435"
+	   data-name="Sachiko Furuhata / Klavierabend - Trotzdem Tickets bestellen"
+
+	
+
+	
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>22</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/de/programm/ticket/sachiko-furuhata-klavierabend/27435"
+	   data-name="Sachiko Furuhata / Klavierabend - Trotzdem Tickets bestellen"
+
+	
+
+	
+		
+	
+
+	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>22</span></span></a></span></div></div></div></div></div></li>
+
+
+		<li id="event_id_000000e90018d67b" data-category="Upcoming" data-event-id="21336593" class="event-item" data-categories="[]"><div class="grid-x grid-margin-x"><div class="cell xlarge-2"><div class="grid-x grid-margin-x date-and-place"><div class="cell small-6 medium-4 xlarge-12 date-cell"><div><span class="indicator-line" data-line></span></div><span class="caption"><time datetime="2026-06-14T18:00:00+02:00"><strong class="date nobreak">So, 14.6.2026</strong><span class="time">18&nbsp;Uhr</span></time></span></div><div class="cell small-6 medium-8 xlarge-12 place-cell"><span class="caption uppercase"><strong>Laeiszhalle</strong> Kleiner Saal
+							</span></div></div></div><div class="cell medium-4 hide-for-small-only image-cell"><a href="/de/programm/neue-philharmonie-hamburg-hovhannes-baghdasaryan/28227" tabindex="-1" class="event-image-link"><picture aria-hidden="true"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/65/0e659ea0-da8c-4e4f-b8d5-892d51972380/hovhannes_baghdasaryan_c_j_konrad_schmidt.jpg__219x164_q85_crop_subject_location-1115%2C411_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/65/0e659ea0-da8c-4e4f-b8d5-892d51972380/hovhannes_baghdasaryan_c_j_konrad_schmidt.jpg__392x294_q85_crop_subject_location-1115%2C411_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/65/0e659ea0-da8c-4e4f-b8d5-892d51972380/hovhannes_baghdasaryan_c_j_konrad_schmidt.jpg__442x328_q85_crop_subject_location-1115%2C411_subsampling-2_upscale.jpg" alt=""></picture><picture class="blurry show-for-medium"><source media="(max-width: 640px)" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="><source media="(max-width: 1024px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/65/0e659ea0-da8c-4e4f-b8d5-892d51972380/hovhannes_baghdasaryan_c_j_konrad_schmidt.jpg__219x164_q85_crop_subject_location-1115%2C411_subsampling-2_upscale.jpg"><source media="(max-width: 1440px)" srcset="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/65/0e659ea0-da8c-4e4f-b8d5-892d51972380/hovhannes_baghdasaryan_c_j_konrad_schmidt.jpg__392x294_q85_crop_subject_location-1115%2C411_subsampling-2_upscale.jpg"><img src="https://d3c80vss50ue25.cloudfront.net/media/filer_public_thumbnails/filer_public/0e/65/0e659ea0-da8c-4e4f-b8d5-892d51972380/hovhannes_baghdasaryan_c_j_konrad_schmidt.jpg__442x328_q85_crop_subject_location-1115%2C411_subsampling-2_upscale.jpg" alt="Hovhannes Baghdasaryan" title="Hovhannes Baghdasaryan © J. Konrad Schmidt"></picture></a></div><div class="cell medium-8 xlarge-6 grid-y align-justify event-main"><div class="cell"><p class="event-title h2 no-line"><a href="/de/programm/neue-philharmonie-hamburg-hovhannes-baghdasaryan/28227">
+								Neue Philharmonie Hamburg / Hovhannes Baghdasaryan
+							</a></p><p class="event-subtitle">Vivaldi: Die vier Jahreszeiten</p></div><div class="cell status-info grid-x align-justify align-bottom"><div class="cell small-12 large-shrink "><button class="event__bookmark" 
+                       type="button" 
+                       data-alert="false"
+                       data-id="000000e9:0018d67b" 
+                       data-name="So, 14.6.2026 - Neue Philharmonie Hamburg / Hovhannes Baghdasaryan"><i class="event__bookmark-icon icon icon-merken-star" data-bookmark-icon-off="icon-merken-star" data-bookmark-icon-on="icon-merken-star-blue"></i><span class="event__bookmark-text " 
+                        data-bookmark-text-off='Merken' 
+                        data-bookmark-text-on='<strong>Gemerkt</strong>' 
+                        data-bookmark-alert-off='Merken / Ticketerinnerung'
+                        data-bookmark-alert-one-on='<strong>Gemerkt /</strong> Ticketerinnerung'
+                        data-bookmark-alert-two-on='<strong>Gemerkt / Ticketerinnerung aktiviert</strong>'
+                   >Merken</span>&nbsp;
+                </button></div><div class="cell small-1 large-auto"></div><div class="cell shrink text-right"><div class="sale-status status-box"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/de/programm/ticket/neue-philharmonie-hamburg-hovhannes-baghdasaryan/28227"
+	   data-name="Neue Philharmonie Hamburg / Hovhannes Baghdasaryan - Trotzdem Tickets bestellen"
 
 	
 		
@@ -1727,9 +1823,9 @@
 		
 	
 
-	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>22,15</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
-	   href="/de/programm/ticket/neue-philharmonie-hamburg-jourist-quartett-edouard-tachalow/27768"
-	   data-name="Neue Philharmonie Hamburg / Jourist Quartett / Edouard Tachalow - Trotzdem Tickets bestellen"
+	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>19,95</span></span></a></span></div><div class="presale sale-status status-box" style="display: none;"><span class="ticket-and-prices"><a class="link link-ticket"
+	   href="/de/programm/ticket/neue-philharmonie-hamburg-hovhannes-baghdasaryan/28227"
+	   data-name="Neue Philharmonie Hamburg / Hovhannes Baghdasaryan - Trotzdem Tickets bestellen"
 
 	
 		
@@ -1743,7 +1839,7 @@
 		
 	
 
-	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>22,15</span></span></a></span></div></div></div></div></div></li>
+	><!--  --><span>Tickets <span class="price-from">ab € </span></span><span class="price-from"><span>19,95</span></span></a></span></div></div></div></div></div></li>
 
 
 
@@ -1755,12 +1851,12 @@
 
 
 
-	<li data-url="/de/programm/06-04-2026/">
+	<li data-url="/de/programm/15-06-2026/">
 		<noscript>
 			<div class="grid-container">
 				<div class="grid-x grid-margin-x">
 					<div class="cell text-center">
-						<a href="/de/programm/06-04-2026/" class="link link-default button secondary">
+						<a href="/de/programm/15-06-2026/" class="link link-default button secondary">
 							Weitere Konzerte
 						</a>
 					</div>
@@ -1990,7 +2086,7 @@
 						</li>
 					
 						<li class="sitemap__submenu-item">
-							<a href="/de/saison" class="">Saison 2025/26</a>
+							<a href="/de/saison" class="">Saison 2026/27</a>
 							<ul class="sitemap__submenu-3 menu3">
 								
 							</ul>
@@ -2084,6 +2180,58 @@
 	
 		
 			<li class="sitemap__item">
+		        <a href="/de/musik-fuer-alle" title="Musik für alle" class="sitemap__title">
+					Musik für alle
+		        </a>
+		        <ul class="sitemap__submenu">
+					
+					
+						<li class="sitemap__submenu-item">
+							<a href="/de/funkelkonzerte" class="">Funkelkonzerte</a>
+							<ul class="sitemap__submenu-3 menu3">
+								
+							</ul>
+						</li>
+					
+				</ul>
+			</li>
+		
+	
+		
+			<li class="sitemap__item">
+		        <a href="/de/die-haeuser-2026" title="Die Häuser" class="sitemap__title">
+					Die Häuser
+		        </a>
+		        <ul class="sitemap__submenu">
+					
+					
+						<li class="sitemap__submenu-item">
+							<a href="/de/elbphilharmonie-das-haus" class="">Elbphilharmonie</a>
+							<ul class="sitemap__submenu-3 menu3">
+								
+							</ul>
+						</li>
+					
+						<li class="sitemap__submenu-item">
+							Laeiszhalle
+							<ul class="sitemap__submenu-3 menu3">
+								
+							</ul>
+						</li>
+					
+						<li class="sitemap__submenu-item">
+							<a href="/de/10-Jahre" class="">Jubiläum: 10 Jahre Elbphilharmonie</a>
+							<ul class="sitemap__submenu-3 menu3">
+								
+							</ul>
+						</li>
+					
+				</ul>
+			</li>
+		
+	
+		
+			<li class="sitemap__item">
 		        <a href="/de/mediathek" title="Mediathek" class="sitemap__title">
 					Mediathek
 		        </a>
@@ -2124,93 +2272,8 @@
 	
 		
 			<li class="sitemap__item">
-		        <a href="/de/die-haeuser" title="Die Häuser" class="sitemap__title">
-					Die Häuser
-		        </a>
-		        <ul class="sitemap__submenu">
-					
-					
-				</ul>
-			</li>
-		
-	
-		
-			<li class="sitemap__item">
-		        <a href="/de/kinder-und-familie" title="Kinder &amp; Familie" class="sitemap__title">
-					Kinder &amp; Familie
-		        </a>
-		        <ul class="sitemap__submenu">
-					
-					
-						<li class="sitemap__submenu-item">
-							<a href="/de/funkelkonzerte" class="">Funkelkonzerte</a>
-							<ul class="sitemap__submenu-3 menu3">
-								
-							</ul>
-						</li>
-					
-						<li class="sitemap__submenu-item">
-							<a href="https://www.youtube.com/watch?v=Eek1vfDs3Bw" class="">Musik für alle</a>
-							<ul class="sitemap__submenu-3 menu3">
-								
-							</ul>
-						</li>
-					
-						<li class="sitemap__submenu-item">
-							<a href="/de/workshops" class="">Workshop</a>
-							<ul class="sitemap__submenu-3 menu3">
-								
-							</ul>
-						</li>
-					
-						<li class="sitemap__submenu-item">
-							<a href="/de/jugendkonzerte" class="">Jugendkonzerte</a>
-							<ul class="sitemap__submenu-3 menu3">
-								
-							</ul>
-						</li>
-					
-						<li class="sitemap__submenu-item">
-							<a href="/de/wir-in-der-stadt" class="">Wir in der Stadt</a>
-							<ul class="sitemap__submenu-3 menu3">
-								
-							</ul>
-						</li>
-					
-						<li class="sitemap__submenu-item">
-							<a href="/de/schule-und-kita" class="">Schule und Kita</a>
-							<ul class="sitemap__submenu-3 menu3">
-								
-							</ul>
-						</li>
-					
-						<li class="sitemap__submenu-item">
-							<a href="/de/mediathek/tag/kinder" class="">Kinder &amp; Familie Digital</a>
-							<ul class="sitemap__submenu-3 menu3">
-								
-							</ul>
-						</li>
-					
-				</ul>
-			</li>
-		
-	
-		
-			<li class="sitemap__item">
-		        <a href="https://shop.elbphilharmonie.de/ep/de" title="Shop" class="sitemap__title">
-					Shop
-		        </a>
-		        <ul class="sitemap__submenu">
-					
-					
-				</ul>
-			</li>
-		
-	
-		
-			<li class="sitemap__item">
-		        <a href="/de/engagement" title="Engagement" class="sitemap__title">
-					Engagement
+		        <a href="/de/unterstuetzen" title="Unterstützen" class="sitemap__title">
+					Unterstützen
 		        </a>
 		        <ul class="sitemap__submenu">
 					
@@ -2256,6 +2319,18 @@
 								
 							</ul>
 						</li>
+					
+				</ul>
+			</li>
+		
+	
+		
+			<li class="sitemap__item">
+		        <a href="https://shop.elbphilharmonie.de/ep/de" title="Shop" class="sitemap__title">
+					Shop
+		        </a>
+		        <ul class="sitemap__submenu">
+					
 					
 				</ul>
 			</li>
@@ -2312,7 +2387,7 @@
   </script>
 
 	
-	<script src="https://d3c80vss50ue25.cloudfront.net/static/js/build/app.min.3b4b55e87899.js"></script>
+	<script src="https://d3c80vss50ue25.cloudfront.net/static/js/build/app.min.af20b8afd7c7.js"></script>
 	<script src="https://d3c80vss50ue25.cloudfront.net/static/js/lib/gsap.min.46162d81d71a.js" async></script>
 	<script src="https://d3c80vss50ue25.cloudfront.net/static/js/lib/ScrollToPlugin.min.21763adc6594.js" async></script>
 	<script src="https://cdn.elbphilharmonie.de/de/webshop/v2/api.js"></script>
@@ -2322,7 +2397,7 @@
 	
 
 	
-	<script src="https://d3c80vss50ue25.cloudfront.net/static/js/build/booking-list-page.min.5b4653f52d14.js"></script>
+	<script src="https://d3c80vss50ue25.cloudfront.net/static/js/build/booking-list-page.min.75ab14ee778b.js"></script>
 	<script>
     Calendar.months = [
       "Januar",

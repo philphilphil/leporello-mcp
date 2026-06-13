@@ -2,9 +2,11 @@ import { load } from 'cheerio';
 import type { Event } from '../types.js';
 import { generateEventId, USER_AGENT, type Scraper, type VenueMeta } from './base.js';
 
-type FetchHtml = () => Promise<string>;
+type FetchHtml = (url: string) => Promise<string>;
 
 const BASE_URL = 'https://www.elbphilharmonie.de';
+const MAX_PAGES = 40; // safety cap; pagination also stops at the date cutoff
+const DAYS_AHEAD = 90; // stop following next-day pages beyond ~90 days
 
 export class ElbphilharmonieHamburgScraper implements Scraper {
   readonly venue: VenueMeta = {
@@ -20,19 +22,48 @@ export class ElbphilharmonieHamburgScraper implements Scraper {
 
   constructor(private readonly opts: { fetchHtml?: FetchHtml } = {}) {}
 
-  async scrape(): Promise<Event[]> {
-    const html = this.opts.fetchHtml
-      ? await this.opts.fetchHtml()
-      : await fetch(this.venue.scheduleUrl, {
-          headers: { 'User-Agent': USER_AGENT },
-        }).then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status} from ${this.venue.scheduleUrl}`);
-          return r.text();
-        });
-    return this.parse(html);
+  private async fetchPage(url: string): Promise<string> {
+    if (this.opts.fetchHtml) return this.opts.fetchHtml(url);
+    const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+    if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
+    return res.text();
   }
 
-  parse(html: string): Event[] {
+  async scrape(): Promise<Event[]> {
+    const events: Event[] = [];
+
+    // The program page paginates via a trailing `<li data-url="/de/programm/DD-MM-YYYY/">`
+    // loader that returns the next chunk of days. Follow it until we pass the date
+    // cutoff, hit the page cap, revisit a URL, or run out of next links.
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() + DAYS_AHEAD);
+    const cutoffStr = cutoff.toISOString().slice(0, 10);
+
+    const visited = new Set<string>();
+    let url: string | null = this.venue.scheduleUrl;
+
+    for (let page = 0; page < MAX_PAGES && url; page++) {
+      if (visited.has(url)) break;
+      visited.add(url);
+
+      const html = await this.fetchPage(url);
+      const { parsed, nextUrl } = this.parsePage(html);
+      events.push(...parsed);
+
+      // Stop once the latest event on this page is past the cutoff.
+      const maxDate = parsed.reduce<string>((m, e) => (e.date > m ? e.date : m), '');
+      if (maxDate && maxDate >= cutoffStr) break;
+
+      url = nextUrl;
+    }
+
+    // Deduplicate by id — pages can overlap on day boundaries.
+    const byId = new Map<string, Event>();
+    for (const e of events) if (!byId.has(e.id)) byId.set(e.id, e);
+    return [...byId.values()];
+  }
+
+  parsePage(html: string): { parsed: Event[]; nextUrl: string | null } {
     const $ = load(html);
     const events: Event[] = [];
     const now = new Date().toISOString();
@@ -96,7 +127,16 @@ export class ElbphilharmonieHamburgScraper implements Scraper {
       }
     });
 
-    return events;
+    // The next chunk is referenced by a trailing loader element.
+    const nextFragment = $('li[data-url]').last().attr('data-url') ?? null;
+    const nextUrl = nextFragment ? new URL(nextFragment, BASE_URL + '/').href : null;
+
+    return { parsed: events, nextUrl };
+  }
+
+  /** Back-compat: parse a single page of HTML into events. */
+  parse(html: string): Event[] {
+    return this.parsePage(html).parsed;
   }
 }
 
