@@ -31,6 +31,8 @@ export class TeatroAllaScalaScraper implements Scraper {
     cityId: 'milano',
     cityName: 'Milano',
     country: 'IT',
+    lat: 45.4642,
+    lng: 9.19,
     scheduleUrl: 'https://www.teatroallascala.org/it/calendario.html',
   };
 

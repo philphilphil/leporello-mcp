@@ -2,6 +2,8 @@ export interface City {
   id: string;      // "stuttgart"
   name: string;    // "Stuttgart"
   country: string; // "DE"
+  lat: number | null; // city-center latitude; null on legacy rows until next scrape
+  lng: number | null; // city-center longitude; null on legacy rows until next scrape
 }
 
 export interface Venue {

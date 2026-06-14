@@ -17,6 +17,8 @@ export interface City {
   id: string;
   name: string;
   country: string;
+  lat: number | null;
+  lng: number | null;
   venue_count: number;
 }
 
@@ -47,13 +49,27 @@ export function getCities(): City[] {
   const db = openDb();
   if (!db) return [];
   try {
-    return db.prepare(`
-      SELECT c.id, c.name, c.country, COUNT(v.id) AS venue_count
-      FROM cities c
-      LEFT JOIN venues v ON v.city_id = c.id
-      GROUP BY c.id
-      ORDER BY c.name
-    `).all() as City[];
+    try {
+      return db.prepare(`
+        SELECT c.id, c.name, c.country, c.lat, c.lng, COUNT(v.id) AS venue_count
+        FROM cities c
+        LEFT JOIN venues v ON v.city_id = c.id
+        GROUP BY c.id
+        ORDER BY c.name
+      `).all() as City[];
+    } catch {
+      // DB predates the lat/lng migration (readonly reader can't migrate) —
+      // serve cities without coordinates; the locate button no-ops until the
+      // next scrape backfills them.
+      const rows = db.prepare(`
+        SELECT c.id, c.name, c.country, COUNT(v.id) AS venue_count
+        FROM cities c
+        LEFT JOIN venues v ON v.city_id = c.id
+        GROUP BY c.id
+        ORDER BY c.name
+      `).all() as Array<Omit<City, 'lat' | 'lng'>>;
+      return rows.map((r) => ({ ...r, lat: null, lng: null }));
+    }
   } finally {
     db.close();
   }

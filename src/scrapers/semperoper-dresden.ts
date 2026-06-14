@@ -34,6 +34,8 @@ export class SemperoperDresdenScraper implements Scraper {
     cityId: 'dresden',
     cityName: 'Dresden',
     country: 'DE',
+    lat: 51.0504,
+    lng: 13.7373,
     scheduleUrl: 'https://www.semperoper.de/spielplan.html',
   };
 

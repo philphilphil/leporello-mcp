@@ -24,7 +24,9 @@ function initSchema(db: Database.Database): void {
     CREATE TABLE IF NOT EXISTS cities (
       id      TEXT PRIMARY KEY,
       name    TEXT NOT NULL,
-      country TEXT NOT NULL
+      country TEXT NOT NULL,
+      lat     REAL,
+      lng     REAL
     );
 
     CREATE TABLE IF NOT EXISTS venues (
@@ -56,6 +58,8 @@ function initSchema(db: Database.Database): void {
     { table: 'events', column: 'location', type: 'TEXT' },
     { table: 'venues', column: 'last_scrape_status', type: "TEXT DEFAULT 'ok'" },
     { table: 'venues', column: 'last_scrape_error', type: 'TEXT' },
+    { table: 'cities', column: 'lat', type: 'REAL' },
+    { table: 'cities', column: 'lng', type: 'REAL' },
   ]) {
     try {
       db.exec(`ALTER TABLE ${col.table} ADD COLUMN ${col.column} ${col.type}`);
@@ -82,7 +86,7 @@ export function getCities(country?: string): Array<City & { venue_count: number 
   const db = getDb();
   if (country) {
     return db.prepare(`
-      SELECT c.id, c.name, c.country, COUNT(v.id) AS venue_count
+      SELECT c.id, c.name, c.country, c.lat, c.lng, COUNT(v.id) AS venue_count
       FROM cities c
       LEFT JOIN venues v ON v.city_id = c.id
       WHERE c.country = ?
@@ -91,7 +95,7 @@ export function getCities(country?: string): Array<City & { venue_count: number 
     `).all(country.toUpperCase()) as Array<City & { venue_count: number }>;
   }
   return db.prepare(`
-    SELECT c.id, c.name, c.country, COUNT(v.id) AS venue_count
+    SELECT c.id, c.name, c.country, c.lat, c.lng, COUNT(v.id) AS venue_count
     FROM cities c
     LEFT JOIN venues v ON v.city_id = c.id
     GROUP BY c.id
@@ -230,10 +234,28 @@ export function updateScrapeError(venueId: string, error: string): void {
     .run(error, venueId);
 }
 
-export function upsertCity(id: string, name: string, country: string): void {
+export function upsertCity(
+  id: string,
+  name: string,
+  country: string,
+  lat: number,
+  lng: number,
+): void {
   getDb()
-    .prepare(`INSERT OR IGNORE INTO cities (id, name, country) VALUES (?, ?, ?)`)
-    .run(sanitizeId(id), sanitizeText(name), sanitizeCountry(country));
+    .prepare(
+      `INSERT INTO cities (id, name, country, lat, lng)
+       VALUES (?, ?, ?, ?, ?)
+       ON CONFLICT(id) DO UPDATE SET
+         name = excluded.name, country = excluded.country,
+         lat = excluded.lat, lng = excluded.lng`,
+    )
+    .run(
+      sanitizeId(id),
+      sanitizeText(name),
+      sanitizeCountry(country),
+      sanitizeCoord(lat, 'lat'),
+      sanitizeCoord(lng, 'lng'),
+    );
 }
 
 export function upsertVenue(
@@ -282,4 +304,12 @@ function sanitizeUrl(value: string): string {
   const url = new URL(value); // throws on invalid URL
   if (!['http:', 'https:'].includes(url.protocol)) throw new Error(`URL must be http/https: "${value}"`);
   return url.href;
+}
+
+function sanitizeCoord(value: number, kind: 'lat' | 'lng'): number {
+  const max = kind === 'lat' ? 90 : 180;
+  if (typeof value !== 'number' || !Number.isFinite(value) || Math.abs(value) > max) {
+    throw new Error(`${kind} must be a finite number within ±${max}, got: "${value}"`);
+  }
+  return value;
 }

@@ -13,6 +13,8 @@ export class HamburgischeStaatsoperScraper implements Scraper {
     cityId: 'hamburg',
     cityName: 'Hamburg',
     country: 'DE',
+    lat: 53.5511,
+    lng: 9.9937,
     scheduleUrl: 'https://www.die-hamburgische-staatsoper.de/de/kalender/oper',
   };
 

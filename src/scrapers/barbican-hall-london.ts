@@ -20,6 +20,8 @@ export class BarbicanHallLondonScraper implements Scraper {
     cityId: 'london',
     cityName: 'London',
     country: 'GB',
+    lat: 51.5074,
+    lng: -0.1278,
     scheduleUrl: 'https://www.barbican.org.uk/whats-on/classical-music',
   };
 

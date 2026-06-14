@@ -33,6 +33,8 @@ export class KoelnerPhilharmonieScraper implements Scraper {
     cityId: 'koeln',
     cityName: 'Köln',
     country: 'DE',
+    lat: 50.9375,
+    lng: 6.9603,
     scheduleUrl: 'https://www.koelner-philharmonie.de/de/konzerte',
   };
 

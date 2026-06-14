@@ -82,6 +82,8 @@ export class SydneyOperaHouseScraper implements Scraper {
     cityId: 'sydney',
     cityName: 'Sydney',
     country: 'AU',
+    lat: -33.8688,
+    lng: 151.2093,
     scheduleUrl: 'https://www.sydneyoperahouse.com/whats-on?genre[]=1436&genre[]=1441',
   };
 

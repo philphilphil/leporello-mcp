@@ -66,8 +66,8 @@ export async function loadScrapers(): Promise<Scraper[]> {
 
 export async function runScrapers(list: Scraper[]): Promise<void> {
   for (const scraper of list) {
-    const { venueId, venueName, cityId, cityName, country, scheduleUrl } = scraper.venue;
-    upsertCity(cityId, cityName, country);
+    const { venueId, venueName, cityId, cityName, country, lat, lng, scheduleUrl } = scraper.venue;
+    upsertCity(cityId, cityName, country, lat, lng);
     upsertVenue(venueId, venueName, cityId, scheduleUrl);
 
     log('scrape_start', { venue: scraper.venueId });

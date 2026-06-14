@@ -22,6 +22,8 @@ export class MetropolitanOperaScraper implements Scraper {
     cityId: 'new-york',
     cityName: 'New York',
     country: 'US',
+    lat: 40.7128,
+    lng: -74.006,
     scheduleUrl: 'https://www.metopera.org/calendar/',
   };
 

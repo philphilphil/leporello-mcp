@@ -38,9 +38,9 @@ async function freshModules(): Promise<{ db: DbModule; server: ServerModule }> {
 }
 
 async function seed(db: DbModule): Promise<void> {
-  db.upsertCity('stuttgart', 'Stuttgart', 'DE');
-  db.upsertCity('berlin', 'Berlin', 'DE');
-  db.upsertCity('wien', 'Wien', 'AT');
+  db.upsertCity('stuttgart', 'Stuttgart', 'DE', 48.7758, 9.1829);
+  db.upsertCity('berlin', 'Berlin', 'DE', 52.52, 13.405);
+  db.upsertCity('wien', 'Wien', 'AT', 48.2082, 16.3738);
 
   db.upsertVenue('staatsoper-stuttgart', 'Staatsoper Stuttgart', 'stuttgart', 'https://example.com/sos');
   db.upsertVenue('staatsoper-berlin', 'Staatsoper Berlin', 'berlin', 'https://example.com/sob');

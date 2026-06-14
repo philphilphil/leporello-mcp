@@ -15,5 +15,9 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            web/package-lock.json
       - run: npm ci
+      - run: npm ci --prefix web   # web/tsconfig extends astro config — needed to transform web/src tests
       - run: npm test
