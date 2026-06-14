@@ -14,6 +14,8 @@ export class BayerischeStaatsoperScraper implements Scraper {
     cityId: 'muenchen',
     cityName: 'München',
     country: 'DE',
+    lat: 48.1351,
+    lng: 11.582,
     scheduleUrl: 'https://www.staatsoper.de/spielplan',
   };
 

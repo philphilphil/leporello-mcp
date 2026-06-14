@@ -13,6 +13,8 @@ export class PhilharmonieDeParisScraper implements Scraper {
     cityId: 'paris',
     cityName: 'Paris',
     country: 'FR',
+    lat: 48.8566,
+    lng: 2.3522,
     scheduleUrl: 'https://philharmoniedeparis.fr/fr/agenda',
   };
 

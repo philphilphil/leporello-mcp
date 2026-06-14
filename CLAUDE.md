@@ -54,7 +54,7 @@ web/
 
 SQLite at `DB_PATH` env var (default `./data/leporello.db`). Initialized on `getDb()` call.
 
-- `cities` — upserted by scrapers via `VenueMeta`
+- `cities` — upserted by scrapers via `VenueMeta`, including `lat`/`lng` city-center coordinates (powers the frontend "use my location" → nearest-city button)
 - `venues` — upserted by scrapers via `VenueMeta`, `last_scraped` updated after each successful scrape
 - `events` — upserted by scrapers, `cast` stored as JSON string
 

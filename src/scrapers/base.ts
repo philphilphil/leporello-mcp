@@ -115,6 +115,8 @@ export interface VenueMeta {
   cityId: string;
   cityName: string;
   country: string; // ISO 3166-1 alpha-2, e.g. "DE"
+  lat: number; // city-center latitude, decimal degrees
+  lng: number; // city-center longitude, decimal degrees
   scheduleUrl: string;
 }
 

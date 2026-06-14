@@ -15,6 +15,8 @@ export class ElbphilharmonieHamburgScraper implements Scraper {
     cityId: 'hamburg',
     cityName: 'Hamburg',
     country: 'DE',
+    lat: 53.5511,
+    lng: 9.9937,
     scheduleUrl: 'https://www.elbphilharmonie.de/de/programm/',
   };
 

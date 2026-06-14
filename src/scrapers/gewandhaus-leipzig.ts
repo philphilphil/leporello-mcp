@@ -33,6 +33,8 @@ export class GewandhausLeipzigScraper implements Scraper {
     cityId: 'leipzig',
     cityName: 'Leipzig',
     country: 'DE',
+    lat: 51.3397,
+    lng: 12.3731,
     scheduleUrl: 'https://www.gewandhausorchester.de/',
   };
 

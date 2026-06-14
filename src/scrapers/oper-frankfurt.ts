@@ -13,6 +13,8 @@ export class OperFrankfurtScraper implements Scraper {
     cityId: 'frankfurt',
     cityName: 'Frankfurt',
     country: 'DE',
+    lat: 50.1109,
+    lng: 8.6821,
     scheduleUrl: 'https://oper-frankfurt.de/de/spielplan/',
   };
 

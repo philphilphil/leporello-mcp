@@ -37,6 +37,8 @@ export class SalzburgerFestspieleScraper implements Scraper {
     cityId: 'salzburg',
     cityName: 'Salzburg',
     country: 'AT',
+    lat: 47.8095,
+    lng: 13.055,
     scheduleUrl: 'https://www.salzburgerfestspiele.at/karten/programm',
   };
 

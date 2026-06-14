@@ -15,6 +15,8 @@ export class ConcertgebouwAmsterdamScraper implements Scraper {
     cityId: 'amsterdam',
     cityName: 'Amsterdam',
     country: 'NL',
+    lat: 52.3676,
+    lng: 4.9041,
     scheduleUrl: 'https://www.concertgebouw.nl/concerten-en-tickets',
   };
 

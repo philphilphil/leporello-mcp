@@ -37,6 +37,8 @@ export class BerlinerPhilharmonieBerlinScraper implements Scraper {
     cityId: 'berlin',
     cityName: 'Berlin',
     country: 'DE',
+    lat: 52.52,
+    lng: 13.405,
     scheduleUrl: 'https://www.berliner-philharmoniker.de/konzerte/kalender/',
   };
 

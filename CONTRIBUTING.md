@@ -21,6 +21,8 @@ export class MyVenueScraper implements Scraper {
     cityId: 'munich',
     cityName: 'Munich',
     country: 'DE',           // ISO 3166-1 alpha-2
+    lat: 48.1351,            // city-center latitude (decimal degrees)
+    lng: 11.582,             // city-center longitude (decimal degrees)
     scheduleUrl: 'https://example.com/schedule/',
   };
 

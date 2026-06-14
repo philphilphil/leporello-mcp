@@ -101,6 +101,8 @@ export class OperaNationalDeParisScraper implements Scraper {
     cityId: 'paris',
     cityName: 'Paris',
     country: 'FR',
+    lat: 48.8566,
+    lng: 2.3522,
     scheduleUrl: 'https://www.operadeparis.fr/programmation/saison-25-26',
   };
 

@@ -41,6 +41,8 @@ export class PalauMusicaBarcelonaScraper implements Scraper {
     cityId: 'barcelona',
     cityName: 'Barcelona',
     country: 'ES',
+    lat: 41.3851,
+    lng: 2.1734,
     scheduleUrl: 'https://www.palaumusica.cat/ca/programacio_1158636',
   };
 

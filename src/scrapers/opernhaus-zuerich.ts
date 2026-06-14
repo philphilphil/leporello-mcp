@@ -21,6 +21,8 @@ export class OpernhausZuerichScraper implements Scraper {
     cityId: 'zuerich',
     cityName: 'Zürich',
     country: 'CH',
+    lat: 47.3769,
+    lng: 8.5417,
     scheduleUrl: 'https://www.opernhaus.ch/spielplan/kalendarium/',
   };
 

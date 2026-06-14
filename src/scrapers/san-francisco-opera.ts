@@ -24,6 +24,8 @@ export class SanFranciscoOperaScraper implements Scraper {
     cityId: 'san-francisco',
     cityName: 'San Francisco',
     country: 'US',
+    lat: 37.7749,
+    lng: -122.4194,
     scheduleUrl: 'https://www.sfopera.com/calendar/',
   };
 

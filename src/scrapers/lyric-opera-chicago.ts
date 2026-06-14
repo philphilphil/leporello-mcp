@@ -29,6 +29,8 @@ export class LyricOperaChicagoScraper implements Scraper {
     cityId: 'chicago',
     cityName: 'Chicago',
     country: 'US',
+    lat: 41.8781,
+    lng: -87.6298,
     scheduleUrl: 'https://www.lyricopera.org/calendar/',
   };
 

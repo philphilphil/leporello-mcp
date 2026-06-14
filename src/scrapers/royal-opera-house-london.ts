@@ -51,6 +51,8 @@ export class RoyalOperaHouseLondonScraper implements Scraper {
     cityId: 'london',
     cityName: 'London',
     country: 'GB',
+    lat: 51.5074,
+    lng: -0.1278,
     scheduleUrl: 'https://www.rbo.org.uk/calendar',
   };
 

@@ -23,6 +23,8 @@ export class WienerStaatsoperScraper implements Scraper {
     cityId: 'wien',
     cityName: 'Wien',
     country: 'AT',
+    lat: 48.2082,
+    lng: 16.3738,
     scheduleUrl: 'https://www.wiener-staatsoper.at/en/calendar/',
   };
 

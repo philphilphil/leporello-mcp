@@ -1,4 +1,5 @@
 import { t, getLang } from '../i18n/index.js';
+import { nearestCity } from './geo.js';
 
 interface Event {
   id: string;
@@ -25,6 +26,8 @@ interface City {
   id: string;
   name: string;
   country: string;
+  lat: number | null;
+  lng: number | null;
 }
 
 interface PageData {
@@ -56,6 +59,8 @@ const venueSelect = document.getElementById('filter-venue') as HTMLSelectElement
 const periodGroup = document.getElementById('filter-days')!;
 const searchInput = document.getElementById('filter-search') as HTMLInputElement;
 const clearBtn = document.getElementById('filter-clear') as HTMLButtonElement;
+const locateBtn = document.getElementById('filter-locate') as HTMLButtonElement | null;
+const locateStatus = document.getElementById('filter-locate-status');
 const eventList = document.getElementById('event-list')!;
 const eventCount = document.getElementById('event-count')!;
 
@@ -208,6 +213,7 @@ function resetFilters(): void {
   venueSelect.value = '';
   setDays('30');
   searchInput.value = '';
+  setLocateStatus('');
   populateCityDropdown();
   populateVenueDropdown();
   render();
@@ -291,6 +297,60 @@ function render(): void {
   eventList.innerHTML = html;
 }
 
+// ── Geolocation: select the nearest city on click ──
+function setLocateStatus(msg: string): void {
+  if (locateStatus) locateStatus.textContent = msg;
+}
+
+function locateNearestCity(): void {
+  if (!locateBtn) return;
+  if (!('geolocation' in navigator)) {
+    setLocateStatus(t('filter.locate_unavailable'));
+    return;
+  }
+
+  locateBtn.disabled = true;
+  locateBtn.classList.add('is-busy');
+  setLocateStatus(t('filter.locating'));
+
+  const finish = (): void => {
+    locateBtn.disabled = false;
+    locateBtn.classList.remove('is-busy');
+  };
+
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      finish();
+      const nearest = nearestCity(
+        { lat: pos.coords.latitude, lng: pos.coords.longitude },
+        data.cities,
+      );
+      if (!nearest) {
+        console.warn('[locate] no city in the dataset has coordinates');
+        setLocateStatus(t('filter.locate_unavailable'));
+        return;
+      }
+      // Clear the country filter so the nearest city is present in the
+      // country-scoped dropdown, then apply it through the normal pipeline.
+      countrySelect.value = '';
+      populateCityDropdown();
+      citySelect.value = nearest.id;
+      populateVenueDropdown();
+      setLocateStatus('');
+      render();
+    },
+    (err) => {
+      finish();
+      console.warn('[locate] geolocation error', err?.code, err?.message);
+      let msg = t('filter.locate_unavailable');
+      if (err.code === err.PERMISSION_DENIED) msg = t('filter.locate_denied');
+      else if (err.code === err.TIMEOUT) msg = t('filter.locate_timeout');
+      setLocateStatus(msg);
+    },
+    { enableHighAccuracy: false, timeout: 10_000, maximumAge: 300_000 },
+  );
+}
+
 // Debounce helper
 function debounce(fn: () => void, ms: number): () => void {
   let timer: ReturnType<typeof setTimeout>;
@@ -319,6 +379,7 @@ periodGroup.addEventListener('click', (e) => {
 });
 searchInput.addEventListener('input', debounce(render, 200));
 clearBtn.addEventListener('click', resetFilters);
+locateBtn?.addEventListener('click', locateNearestCity);
 
 // Initialize
 initFiltersFromUrl();

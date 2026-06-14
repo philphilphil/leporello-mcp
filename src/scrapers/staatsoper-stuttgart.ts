@@ -13,6 +13,8 @@ export class StaatsoperStuttgartScraper implements Scraper {
     cityId: 'stuttgart',
     cityName: 'Stuttgart',
     country: 'DE',
+    lat: 48.7758,
+    lng: 9.1829,
     scheduleUrl: 'https://www.staatsoper-stuttgart.de/spielplan/kalender/',
   };
 

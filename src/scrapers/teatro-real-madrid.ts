@@ -13,6 +13,8 @@ export class TeatroRealMadridScraper implements Scraper {
     cityId: 'madrid',
     cityName: 'Madrid',
     country: 'ES',
+    lat: 40.4168,
+    lng: -3.7038,
     scheduleUrl: 'https://www.teatroreal.es/es/calendario',
   };
 

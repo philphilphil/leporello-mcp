@@ -41,6 +41,8 @@ export class MusikvereinWienScraper implements Scraper {
     cityId: 'wien',
     cityName: 'Wien',
     country: 'AT',
+    lat: 48.2082,
+    lng: 16.3738,
     scheduleUrl: 'https://musikverein.at/spielplan',
   };
 
